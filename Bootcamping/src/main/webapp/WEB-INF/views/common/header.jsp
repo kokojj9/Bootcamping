@@ -18,20 +18,19 @@
 	<style>
 		div {
             box-sizing: border-box;
-            border: 1px solid red;
         } 
 
         #header_wrap {
             width: 1200px;
             height: 100px;
             margin: auto;
-            border-bottom: 1px solid gray;
+            border-bottom: 1px solid #f1f3f5;
         }
 
         #header_status{
             width: 1200px;
             height: 40px;
-            border-bottom: 1px solid gray;
+            border-bottom: 1px solid #f1f3f5;
         }
 
         #header_content {
@@ -54,6 +53,7 @@
         #header_center {
             width: 700px;
             height: 100%;
+            display: flex;
         }
 
         #header_menu{
@@ -61,11 +61,25 @@
             line-height: 60px;
         }
 
+        #header_search {
+            width: 400px;
+            line-height: 60px;
+        }
+
+        #header_search > input{
+            width: 350px;
+            height: 35px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background-color: #f6f6f6;
+        }
+
         #header_menu > ul {
             list-style: none;
             display: flex;
             height: 100%;
             margin: 0;
+            padding-left: 20px;
         }
 
         #header_menu > ul > li {
@@ -74,7 +88,9 @@
 
         #header_menu > ul > li > a {
             text-decoration: none;
-            color: black;
+            color: #4a4a4a;
+            font-weight: 400;
+            font-size: 16px;
         }
 
         #header_menu > ul > li > a:hover{
@@ -95,7 +111,7 @@
         #header_right a{
             line-height: 60px;
             text-decoration: none;
-            color: black;
+            color: #4a4a4a;
         }
 
 
@@ -123,14 +139,20 @@
                         <li><a href="">커뮤니티</a></li>
                     </ul>
                 </div>
+                <div id="header_search">
+                    <input type="text" name="keyword">
+                    <span>
+                        <img src="">                        
+                    </span>
+                </div>
             </div>
             <div id="header_right">
                 <div id="header_memberArea">
                     <c:choose>
                         <c:when test="${ empty sessionScope.loginUser }">
 
-                            <a href="">회원가입</a>
-                            <a href="">로그인</a>
+                            <a href="enrollForm">회원가입</a>
+                            <a href="loginForm">로그인</a>
             
                         </c:when>
                         <c:otherwise>
