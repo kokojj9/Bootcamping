@@ -20,7 +20,6 @@
 	.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
    
     div{
-        border: 1px solid red;
         box-sizing : border-box;
     }
 
@@ -202,7 +201,7 @@
         margin: auto;
     }
     
-    #camp_btn button {
+    #camp_btn a {
         margin: 0 10px; 
     }
     
@@ -289,30 +288,29 @@
   
                 </div>
                 
+                
+           
+                
                     <div id="camp_btn">
 	                	<c:choose>
 	                		<c:when test="${pageInfo.currentPage eq 1}">
-		                    	<li class="btn btn-outline-success disabled"><a class="btn btn-outline-success" href="#"><</a></li>
+		                    	<a class="btn btn-outline-success disabled" href="#"><</a>
 	    					</c:when>
 	    					<c:otherwise>
-	    						<li class="page-item">
 	    							<a class="btn btn-outline-success" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
 	    								<
 	    							</a>
-	    						</li>
 	    					</c:otherwise>				
 	    				</c:choose>
  
 	                	<c:choose>
 	                		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
-		                    	<li class="btn btn-outline-success disabled"><a class="btn btn-outline-success" href="#">></a></li>
+		                    	<a class="btn btn-outline-success disabled" href="#">></a>
 	    					</c:when>
 	    					<c:otherwise>
-	    						<li class="page-item">
 	    							<a class="btn btn-outline-success" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
 	    								>
 	    							</a>
-	    						</li>
 	    					</c:otherwise>				
 	    				</c:choose>   
 
