@@ -249,10 +249,8 @@
             <div id="kind_list">
                 <label><input type="checkbox" class="list">글램핑</label>
                 <label><input type="checkbox" class="list">카라반</label>
-                <label><input type="checkbox" class="list">텐트</label>
-                <label><input type="checkbox" class="list">오토캠핑</label>
-                <label><input type="checkbox" class="list">키즈캠핑</label>
-                <label><input type="checkbox" class="list">애견캠핑</label>
+                <label><input type="checkbox" class="list">일반야영장</label>
+                <label><input type="checkbox" class="list">자동차야영장</label>
             </div>
             <div id="theme"><h4>시설</h4></div>
             <div id="theme_list">
