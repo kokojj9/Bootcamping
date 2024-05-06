@@ -144,7 +144,7 @@
             <div id="header_center">
                 <div id="header_menu">
                     <ul>
-                        <li><a href="">캠핑장</a></li>
+                        <li><a href="camping">캠핑장</a></li>
                         <li><a href="">중고거래</a></li>
                         <li><a href="">커뮤니티</a></li>
                     </ul>
