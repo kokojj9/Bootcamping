@@ -66,10 +66,10 @@
                 <form action="login.member" method="post">
                     <div class="login_form">
                         <label for="userId" class="">아이디 : </label>
-                        <input type="text" class="" placeholder="아이디" id="userId" name="userId"> <br>
+                        <input type="text" class="" placeholder="아이디" id="memberId" name="memberId"> <br>
                         <label for="userPwd" class="">비밀번호 : </label>
-                        <input type="password" class="" placeholder="비밀번호" id="userPwd" name="userPwd"> <br>
-                        <input type="checkbox" name="saveId"> 아이디 저장
+                        <input type="password" class="" placeholder="비밀번호" id="memberPwd" name="memberPwd"> <br>
+                        <input type="checkbox" name="rememberId" value="true"> 아이디 저장
                     </div>
                            
                     <div class="login_btn">
