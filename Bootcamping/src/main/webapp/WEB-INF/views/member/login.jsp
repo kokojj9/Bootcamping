@@ -7,32 +7,74 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+    <style>
+        #login-wrap {
+            width: 500px;
+            height: 500px;
+            margin: 50px auto;
+        }
+
+        .login_title > div {
+            width: 300px;
+            font-size: 36px;
+            font-weight: 500;
+            text-align: center;
+            margin: auto;
+        }
+
+        .login_form {
+            width: 300px;
+            height: 150px;
+            margin: 25px auto;
+        }
+
+        .login_btn {
+            width: 300px;
+            margin: auto;
+        }
+
+        .login_btn > button{
+            width: 120px;
+            border: 0;
+            border-radius: 5px;
+            height: 40px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .login { 
+            margin-left: 20px;
+            margin-right: 20px;
+            background-color: #1dc078;
+            color: #f6f6f6;
+        }
+
+    </style>
+
 </head>
 <body>
 	<jsp:include page="../common/header.jsp"/>
-	<!-- 로그인 클릭 시 뜨는 모달 (기존에는 안보이다가 위의 a 클릭 시 보임) -->
-    <div class="modal fade" id="loginModal">
-        <div class="modal-dialog modal-sm">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <h4 class="modal-title">Login</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+    <div id="login-wrap">
+        <div class="">
+            <div class="">
+                <div class="login_title">
+                    <div class="">부트캠프 로그인</div>
                 </div>
         
                 <form action="login.member" method="post">
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <label for="userId" class="mr-sm-2">ID : </label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Enter ID" id="userId" name="userId"> <br>
-                        <label for="userPwd" class="mr-sm-2">Password : </label>
-                        <input type="password" class="form-control mb-2 mr-sm-2" placeholder="Enter Password" id="userPwd" name="userPwd">
+                    <div class="login_form">
+                        <label for="userId" class="">아이디 : </label>
+                        <input type="text" class="" placeholder="아이디" id="userId" name="userId"> <br>
+                        <label for="userPwd" class="">비밀번호 : </label>
+                        <input type="password" class="" placeholder="비밀번호" id="userPwd" name="userPwd"> <br>
+                        <input type="checkbox" name="saveId"> 아이디 저장
                     </div>
                            
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">로그인</button>
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                    <div class="login_btn">
+                        <button type="submit" class="login">로그인</button>
+                        <button type="button" class="enroll">회원가입</button>
                     </div>
                 </form>
             </div>

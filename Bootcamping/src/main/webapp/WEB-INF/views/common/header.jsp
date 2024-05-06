@@ -18,6 +18,7 @@
 	<style>
 		div {
             box-sizing: border-box;
+            border: 1px solid red;
         } 
 
         #header_wrap {
@@ -66,13 +67,22 @@
             line-height: 60px;
         }
 
-        #header_search > input{
+        #header_search > input {
             width: 350px;
             height: 35px;
-            border-radius: 8px;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
             border: 1px solid transparent;
             background-color: #f6f6f6;
         }
+
+        #header_search > span {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            border: 1px solid transparent;
+            background-color: #f6f6f6;
+        }
+
 
         #header_menu > ul {
             list-style: none;
@@ -142,7 +152,7 @@
                 <div id="header_search">
                     <input type="text" name="keyword">
                     <span>
-                        <img src="">                        
+                        검색<img src="">                        
                     </span>
                 </div>
             </div>
