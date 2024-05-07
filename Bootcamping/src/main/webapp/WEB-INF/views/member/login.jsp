@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부트캠핑 - 로그인</title>
 
     <style>
         #login-wrap {
@@ -74,7 +74,7 @@
                            
                     <div class="login_btn">
                         <button type="submit" class="login">로그인</button>
-                        <button type="button" class="enroll">회원가입</button>
+                        <button type="button" class="enrollForm">회원가입</button>
                     </div>
                 </form>
             </div>
