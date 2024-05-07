@@ -372,24 +372,25 @@
 				
 				for(var i = 0; i < items.length; i++){
 					camping = {
-						'detailAddress' : items[i].addr1,
-						'service' : items[i].caravInnerFclty,
 						'campNo' : items[i].contentId,
-						'address' : items[i].doNm,
 						'campName' : items[i].facltNm,
-						'campImg' : items[i].firstImageUrl,
-						'homepage' : items[i].homepage,
-						'type' : items[i].induty,
-						'intro' : items[i].intro,
-						'campLocation' : items[i].lctCl,
 						'campIntro' : items[i].lineIntro,
-						'status' : items[i].manageSttus,
+						'intro' : items[i].intro,
+						'type' : items[i].induty,
+						'address' : items[i].doNm,
+						'detailAddress' : items[i].addr1,
 						'mapX' : items[i].mapX,
 						'mapY' : items[i].mapY,
+						'campPhone' : items[i].tel,
+						'service' : items[i].caravInnerFclty,
+						'homepage' : items[i].homepage,
+						'reserPage' : items[i].resveUrl,
 						'oper' : items[i].operPdCl,
 						'operDate' : items[i].operDeCl,
-						'campPhone' : items[i].tel,
-						'reserPage' : items[i].resveUrl
+						'campImg' : items[i].firstImageUrl,
+						'campLocation' : items[i].lctCl,
+						'status' : items[i].manageSttus
+						
 						}
 
 					campingList.push(camping);

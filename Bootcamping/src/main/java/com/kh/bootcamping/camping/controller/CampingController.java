@@ -7,16 +7,21 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.bootcamping.camping.model.service.CampingService;
 import com.kh.bootcamping.camping.model.vo.Camping;
 
 @Controller
 public class CampingController {
+	
+	@Autowired
+	private CampingService campinService;
 	
 	public static final String SERVICE_KEY = "jDeUHHxyvx1AmWI1ZXjA7MNVQr1NcdX4pFo9EHtlICl0kGxbtpaEOHAtX2o%2FzWb7Kf4WWAGX%2BfvCl5pmtkbviQ%3D%3D";
 
@@ -95,8 +100,10 @@ public class CampingController {
 	
     @PostMapping(value = "realInsert", consumes = "application/json")
     public void realInsert(@RequestBody List<Camping> campingList) {
-        System.out.println(campingList);
-        // campingList 처리
+       //System.out.println(campingList);
+       
+    	campinService.insertCamping(campingList);
+    	
     }
 
 
