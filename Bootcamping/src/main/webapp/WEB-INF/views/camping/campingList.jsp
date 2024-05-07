@@ -363,6 +363,7 @@
 			url : 'insertCamping',
 			type : 'get',
 			success : result => {
+
 				
 				let items = result.response.body.items.item;
 				
@@ -372,7 +373,7 @@
 				for(var i = 0; i < items.length; i++){
 					camping = {
 						'detailAddress' : items[i].addr1,
-						'service' : items[i].glampInnerFclty,
+						'service' : items[i].caravInnerFclty,
 						'campNo' : items[i].contentId,
 						'address' : items[i].doNm,
 						'campName' : items[i].facltNm,
@@ -415,7 +416,8 @@
 	function realInsertCamping(){
 			$.ajax({
 				url : 'realInsert',
-				data : {'campingList' : campingList},
+				data : JSON.stringify(campingList),
+				 contentType: 'application/json',
 				type : 'post',
 				success : result => {
 					console.log("성공을 한 사건?");

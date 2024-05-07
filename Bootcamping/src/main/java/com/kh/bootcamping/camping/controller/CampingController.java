@@ -93,14 +93,11 @@ public class CampingController {
 			   return responseJson;
 	}
 	
-	
-	@ResponseBody
-	@PostMapping("value=realInsert, produces=application/json; charset=UTF-8")
-	public void realInsert(@RequestBody List<Camping> campingList) {
-		
-		System.out.println(campingList);
-		
-	}
+    @PostMapping(value = "realInsert", consumes = "application/json")
+    public void realInsert(@RequestBody List<Camping> campingList) {
+        System.out.println(campingList);
+        // campingList 처리
+    }
 
 
 }
