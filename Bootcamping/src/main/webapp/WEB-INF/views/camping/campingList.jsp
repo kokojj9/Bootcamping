@@ -5,8 +5,9 @@
 <html lang="en">
 <head>
     <title>Document</title>
+     <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
  	
@@ -226,6 +227,10 @@
 
 	<jsp:include page="../common/header.jsp"/>
 	
+	<button onclick="insert();">버튼</button>
+	
+	<button onclick="realInsertCamping();">버튼</button>
+	
     <div id="content">
     
         <div id="content_1">
@@ -349,10 +354,91 @@
    
 	<script>
 	
+	let camping = {};
+	
+	let campingList = [];
+	function insert(){
+		
+		$.ajax({
+			url : 'insertCamping',
+			type : 'get',
+			success : result => {
+				
+				let items = result.response.body.items.item;
+				
+				
+				
+				
+				for(var i = 0; i < items.length; i++){
+					camping = {
+						'detailAddress' : items[i].addr1,
+						'service' : items[i].glampInnerFclty,
+						'campNo' : items[i].contentId,
+						'address' : items[i].doNm,
+						'campName' : items[i].facltNm,
+						'campImg' : items[i].firstImageUrl,
+						'homepage' : items[i].homepage,
+						'type' : items[i].induty,
+						'intro' : items[i].intro,
+						'campLocation' : items[i].lctCl,
+						'campIntro' : items[i].lineIntro,
+						'status' : items[i].manageSttus,
+						'mapX' : items[i].mapX,
+						'mapY' : items[i].mapY,
+						'oper' : items[i].operPdCl,
+						'operDate' : items[i].operDeCl,
+						'campPhone' : items[i].tel,
+						'reserPage' : items[i].resveUrl
+						}
+
+					campingList.push(camping);
+				
+					};
+				
+					console.log(campingList);
+					
+				}
+				
+				
+		
+		});
+		
+		
+	
+		
+		
+		
+		
+	}
 		
 
+	function realInsertCamping(){
+			$.ajax({
+				url : 'realInsert',
+				data : {'campingList' : campingList},
+				type : 'post',
+				success : result => {
+					console.log("성공을 한 사건?");
+				}
+			})
+		}
 	
-		<%--캠핑장 전체 조회--%>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+		<%--캠핑장 전체 조회
 		var data = ${json}.response.body.items.item;
 		
 		var json = ${json}.response.body;
@@ -367,27 +453,36 @@
 		for(let i in data){
 			const item = data[i];
 			
-			str += '<div class="card" style="width:250px;">'
-				 + '<a href="#">'
+			str += '<div class="card" style="width:250px;" onclick="detailCamping()">'
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
 			     + '<h5 class="card-text">'+item.induty+'</h5>'
 		    	 + '<p>'+item.doNm+'</p>'
-		    	 + '</a>'
 		    	 + '</div>'
 				 + '</div>'
 		}
 		
 		
-		
 		$('.items').html(str);
 		
+		
+		
+		--%>
+		
+		<%--
+		function detailCamping(){
+			
+			$.ajax({
+				url : 'detail.camping',
+				data : {campNo : item.cotentId},
+				success : result => {
+					console.log()
+				}
+			})
+		}
 	
-		
-		
-		
-		<%--지도--%>
+		<%--지도
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
@@ -456,7 +551,7 @@
 		function closeOverlay() {
 		    overlay.setMap(null);     
 		}
-	
+	--%>
 	</script>
 
 
