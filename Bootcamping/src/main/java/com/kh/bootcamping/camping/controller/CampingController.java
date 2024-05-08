@@ -100,9 +100,22 @@ public class CampingController {
 	
     @PostMapping(value = "realInsert", consumes = "application/json")
     public void realInsert(@RequestBody List<Camping> campingList) {
-       //System.out.println(campingList);
-       
-    	campinService.insertCamping(campingList);
+    	
+    	String str = "";
+
+    	for(Camping c : campingList){
+
+	    	str += "INTO TB_CAMP VALUES ('" + c.getCampNo() + "','" +  c.getCampName() + "','" + c.getCampIntro() + "','" + c.getIntro() 
+											+ "','" + c.getType() + "','" + c.getAddress() + "','" + c.getDetailAddress() +
+											"','" + c.getMapX() + "','" + c.getMapY() + "','" + c.getCampPhone() + "','" + c.getService() + 
+											"','" + c.getHomePage() + "','" + c.getReserPage() + "','" + c.getOper() + "','" + c.getOperDate()
+											+ "','" + c.getCampImg() + "','" + c.getCampLocation() + "','" + c.getStatus() + "')";
+	
+    	}
+
+    	System.out.println(str);
+	    
+
     	
     }
 

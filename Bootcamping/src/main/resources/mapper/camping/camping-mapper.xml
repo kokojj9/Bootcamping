@@ -7,9 +7,42 @@
 
 	<resultMap type="camping" id="campingResultMap">
 		<result column="CAMP_NO" property="campNo" />
-	
-	</resultMap>
+		<result column="CAMP_NAME" property="campName" />
+		<result column="CAMP_INTRO" property="campIntro" />
+		<result column="INTRO" property="intro" />
+		<result column="TYPE" property="type" />
+		<result column="ADRRESS" property="address" />
+		<result column="DETAIL_ADDRRESS" property="detailAddress" />
+		<result column="MAP_X" property="mapX"/>
+		<result column="MAP_Y" property="mapY" />
+		<result column="CAPM_PHONE" property="campPhone" />
+		<result column="SERVICE" property="service" />
+		<result column="HOMEPAGE" property="homePage" />
+		<result column="RESERPAGE" property="reserPage" />
+		<result column="OPER" property="oper" />
+		<result column="OPER_DATE" property="operDate" />
+		<result column="CAMP_IMG" property="campImg" />
+		<result column="CAMP_LOCATION" property="campLocation" />
+		<result column="STATUS" property="status" />
+	</resultMap> 
 
+   <insert id="insertCamping" parameterType="java.util.List">
+        INSERT INTO TB_CAMP (
+            CAMP_NO, CAMP_NAME, CAMP_INTRO, INTRO, TYPE, ADRRESS, 
+            DETAIL_ADDRRESS, MAP_X, MAP_Y, CAPM_PHONE, SERVICE, 
+            HOMEPAGE, RESERPAGE, OPER, OPER_DATE, CAMP_IMG, 
+            CAMP_LOCATION, STATUS
+        )
+        VALUES 
+        <foreach collection="list" item="item" separator=",">
+            (
+                #{item.campNo}, #{item.campName}, #{item.campIntro}, #{item.intro}, 
+                #{item.type}, #{item.address}, #{item.detailAddress}, #{item.mapX}, #{item.mapY}, #{item.campPhone}, #{item.service}, 
+                #{item.homepage}, #{item.reserPage}, #{item.oper}, #{item.operDate}, #{item.campImg}, 
+                #{item.campLocation}, #{item.status}
+            )
+        </foreach>
+    </insert>
 
 
 
