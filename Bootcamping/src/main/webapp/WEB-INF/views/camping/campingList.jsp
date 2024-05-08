@@ -370,7 +370,7 @@
 				
 				
 				
-				for(var i = 0; i < items.length; i++){
+				for(var i = 1300; i < 1800; i++){
 					camping = {
 						'campNo' : items[i].contentId,
 						'campName' : items[i].facltNm,
