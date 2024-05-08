@@ -227,10 +227,6 @@
 
 	<jsp:include page="../common/header.jsp"/>
 	
-	<button onclick="insert();">버튼</button>
-	
-	<button onclick="realInsertCamping();">버튼</button>
-	
     <div id="content">
     
         <div id="content_1">
@@ -353,95 +349,8 @@
 		<jsp:include page="../common/footer.jsp"/>
    
 	<script>
-	
-	let camping = {};
-	
-	let campingList = [];
-	function insert(){
-		
-		$.ajax({
-			url : 'insertCamping',
-			type : 'get',
-			success : result => {
 
-				
-				let items = result.response.body.items.item;
-				
-				
-				
-				
-				for(var i = 1300; i < 1800; i++){
-					camping = {
-						'campNo' : items[i].contentId,
-						'campName' : items[i].facltNm,
-						'campIntro' : items[i].lineIntro,
-						'intro' : items[i].intro,
-						'type' : items[i].induty,
-						'address' : items[i].doNm,
-						'detailAddress' : items[i].addr1,
-						'mapX' : items[i].mapX,
-						'mapY' : items[i].mapY,
-						'campPhone' : items[i].tel,
-						'service' : items[i].caravInnerFclty,
-						'homepage' : items[i].homepage,
-						'reserPage' : items[i].resveUrl,
-						'oper' : items[i].operPdCl,
-						'operDate' : items[i].operDeCl,
-						'campImg' : items[i].firstImageUrl,
-						'campLocation' : items[i].lctCl,
-						'status' : items[i].manageSttus
-						
-						}
-
-					campingList.push(camping);
-				
-					};
-				
-					console.log(campingList);
-					
-				}
-				
-				
-		
-		});
-		
-		
-	
-		
-		
-		
-		
-	}
-		
-
-	function realInsertCamping(){
-			$.ajax({
-				url : 'realInsert',
-				data : JSON.stringify(campingList),
-				 contentType: 'application/json',
-				type : 'post',
-				success : result => {
-					console.log("성공을 한 사건?");
-				}
-			})
-		}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-
-		<%--캠핑장 전체 조회
+		<%--캠핑장 전체 조회--%>
 		var data = ${json}.response.body.items.item;
 		
 		var json = ${json}.response.body;
@@ -470,10 +379,6 @@
 		$('.items').html(str);
 		
 		
-		
-		--%>
-		
-		<%--
 		function detailCamping(){
 			
 			$.ajax({
@@ -485,7 +390,7 @@
 			})
 		}
 	
-		<%--지도
+
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
@@ -554,7 +459,7 @@
 		function closeOverlay() {
 		    overlay.setMap(null);     
 		}
-	--%>
+
 	</script>
 
 

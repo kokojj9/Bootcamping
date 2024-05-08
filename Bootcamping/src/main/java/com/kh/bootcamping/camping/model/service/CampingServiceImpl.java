@@ -18,9 +18,5 @@ public class CampingServiceImpl implements CampingService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Override
-	public int insertCamping(List<Camping> campingList) {
-		return campingRepository.insertCamping(sqlSession, campingList);
-	}
 
 }

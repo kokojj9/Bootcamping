@@ -10,7 +10,5 @@ import com.kh.bootcamping.camping.model.vo.Camping;
 @Repository
 public class CampingRepository {
 
-	public int insertCamping(SqlSession sqlSession, List<Camping> campingList) {
-		return sqlSession.insert("campingMapper.insertCamping", campingList);
-	}
+
 }

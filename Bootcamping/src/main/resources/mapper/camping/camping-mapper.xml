@@ -26,24 +26,6 @@
 		<result column="STATUS" property="status" />
 	</resultMap> 
 
-   <insert id="insertCamping" parameterType="java.util.List">
-        INSERT INTO TB_CAMP (
-            CAMP_NO, CAMP_NAME, CAMP_INTRO, INTRO, TYPE, ADRRESS, 
-            DETAIL_ADDRRESS, MAP_X, MAP_Y, CAPM_PHONE, SERVICE, 
-            HOMEPAGE, RESERPAGE, OPER, OPER_DATE, CAMP_IMG, 
-            CAMP_LOCATION, STATUS
-        )
-        VALUES 
-        <foreach collection="list" item="item" separator=",">
-            (
-                #{item.campNo}, #{item.campName}, #{item.campIntro}, #{item.intro}, 
-                #{item.type}, #{item.address}, #{item.detailAddress}, #{item.mapX}, #{item.mapY}, #{item.campPhone}, #{item.service}, 
-                #{item.homepage}, #{item.reserPage}, #{item.oper}, #{item.operDate}, #{item.campImg}, 
-                #{item.campLocation}, #{item.status}
-            )
-        </foreach>
-    </insert>
-
 
 
 
