@@ -385,7 +385,7 @@
 			
 			$.ajax({
 				url : 'detail.camping',
-				data : {campNo : item.cotentId},
+				data : {campNo : item[i].cotentId},
 				success : result => {
 					console.log()
 				}
