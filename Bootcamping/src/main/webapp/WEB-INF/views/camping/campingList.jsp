@@ -366,11 +366,13 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;" onclick="detailCamping()">'
+				 + '<a href="#">'
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
 			     + '<h5 class="card-text">'+item.induty+'</h5>'
 		    	 + '<p>'+item.doNm+'</p>'
+		    	 + '</a>'
 		    	 + '</div>'
 				 + '</div>'
 		}
