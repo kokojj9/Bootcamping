@@ -93,7 +93,7 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
 		
-		if(memberService.insertMember(member)) {
+		if(memberService.insertMember(member) > 0) {
 			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
 			mv.setViewName("ridirect:/");
 		} else {

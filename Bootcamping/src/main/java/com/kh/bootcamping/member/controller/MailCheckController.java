@@ -2,6 +2,8 @@ package com.kh.bootcamping.member.controller;
 
 import java.text.DecimalFormat;
 import java.text.Format;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 
@@ -57,30 +59,38 @@ public class MailCheckController {
 		
 		sender = impl;
 		
-		// 인증코드 만들기 메서드로 따로 빼기
-		
+		// 인증코드 생성
+		String code = getAuthCode();
+		// 신청자 아이피 포트 번호 추출
 		String remoteAddr = request.getRemoteAddr();
 		
-		Random r = new Random();
-		int i = r.nextInt(100000);
-		Format f = new DecimalFormat("000000");	
-		String code = f.format(i);
+		Map<String, String> auth = new HashMap<String, String>();
+		auth.put("code", code);
+		auth.put("email", email);
+		auth.put("who", remoteAddr);
+		
+		// 이메일, 인증코드 DB저장
+		memberService.insertAuthCode(auth);
+		
 		// 메세지 정보 세팅
 		MimeMessage message = sender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 		// 이메일을 조회해서 있는지 확인부터해야하나???
-		// 이메일, 인증코드 DB저장
-		//memberService.insertAuthCode(email, code);
 		
 		// 메세지 생성
-		
 		helper.setTo(email);
 		helper.setSubject("인증번호 전송");
 		helper.setText("인증번호 : " + code);
 		
 		sender.send(message);
-		
-		
+	}
+	
+	// 인증코드 생성 메서드
+	private String getAuthCode() {
+		Random r = new Random();
+		int i = r.nextInt(100000);
+		Format f = new DecimalFormat("000000");	
+		return f.format(i);
 	}
 	
 	/***

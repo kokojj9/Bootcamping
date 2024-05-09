@@ -63,7 +63,7 @@
             <h2>부트캠핑 - 회원가입</h2>
             <br>
 
-            <form action="members" method="post">
+            <form id="insertForm" action="members" method="post">
                 <div class="form-group">
                     <label for="memberId">* 아이디 </label>											<!-- userId == setUserId(value값) -->
                     <input type="text" class="form-control" id="memberId" placeholder="아이디를 입력해주세요" name="memberId" maxlength="12" required> <br>
@@ -211,11 +211,23 @@
         // 이메일 인증
         document.getElementById('checkEmailBtn').onclick = () => {
         	// 코드발송 ajax
-        	// 결과에 따라 인증성공,실패
-        }
+        	$.ajax({
+        		url : 'mail',
+        		type : 'get',
+        		data : {
+        			email : //히든 요소의 밸류값 
+        		},
+        		success : result => {
+		        	// 결과에 따라 인증성공,실패
+        			
+        		}
+        	});
+        };
 		
         // submit
-
+		enrollFormSubmit.onclick = () => {
+			document.getElementById('insertForm').submit();
+		}
 
     </script>
 
