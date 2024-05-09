@@ -8,6 +8,7 @@ import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,6 +63,18 @@ public class CampingController {
 			   return mv;
 		
 	}
+	
+	/**
+	 * 캠핑장 상세조회
+	 */
+	@GetMapping("camping/detail")
+	public String detailCamping(String campNo) {
+		
+		return "camping/detailCamping";
+		
+	}
+
+	
 
  
 

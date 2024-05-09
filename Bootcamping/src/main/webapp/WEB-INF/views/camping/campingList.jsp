@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
  	
 
     <style>
@@ -353,6 +353,8 @@
 		<%--캠핑장 전체 조회--%>
 		var data = ${json}.response.body.items.item;
 		
+		console.log(data);
+		
 		var json = ${json}.response.body;
 		
 		console.log(data);
@@ -366,7 +368,7 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;" onclick="detailCamping()">'
-				 + '<a href="#">'
+				 + '<a href="camping/detail?contentId='+ item.contentId +'">'
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
@@ -385,7 +387,7 @@
 			
 			$.ajax({
 				url : 'detail.camping',
-				data : {campNo : item[i].cotentId},
+				data : {campNo : item[i].contentId},
 				success : result => {
 					console.log()
 				}
