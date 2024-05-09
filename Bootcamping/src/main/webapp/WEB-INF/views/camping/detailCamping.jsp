@@ -127,7 +127,7 @@
     }
 
     .heart {
-        font-size: 30px;
+        font-size: 50px;
         font-weight: 100;
         cursor: pointer;
     }
@@ -234,7 +234,7 @@
         <div id="camp_img">
 
             <div id="camp_thumbnail">
-                <img src="gg.png">
+                <img src="${camping.campImg}">
             </div>
 
         </div>
@@ -243,9 +243,9 @@
         <div id="camp_name">
 
             <div id="campTitle">
-                <h2>보물나라캠프</h2> <br>
-                <p>010-3322-1122</p>
-                <p>경기도어쩌고저쩌고</p>
+                <h2>${camping.campName}</h2> <br>
+                <p>${camping.campPhone }</p>
+                <p>${camping.detailAddress }</p>
             </div>
 
             <div id="camp_heart">
@@ -259,7 +259,7 @@
         <!-- 캠핑장 정보 -->
         <div id="camp_info">
             <h4>캠핑장 소개</h4>
-            <p>연천의 아미천과 보개산 사이 동막골 안쪽에 자리한 보물나라 캠프는 총 50개의 파쇄석 사이트가 있다. 사이트가 7m*3.5m로 일반적인 여타 캠핑장들 보다 넓고, 애견 동반이 가능하다. 최근 리모델링을 해서 1인 샤워실까지 갖추고 있어 편리하다. 캠핑장 옆으로 하천이 흐르고, 뒷산으로 산책로가 있는데, 봄에는 벚꽃이 아름답다. 밤에는 많은 별을 볼 수 있다. 캠장님이 캠핑 전문가로 친절하고 깨끗하게 관리한다는 추천 리뷰가 많다.</p>
+            <p>${camping.intro }</p>
         </div>
 
         <!-- 시설 -->
@@ -284,19 +284,19 @@
                 <tbody>
                     <tr>
                         <th>캠핑장 환경</th>
-                        <td>산, 숲, 계곡, 호수</td>
+                        <td>${camping.campLocation}</td>
                     </tr>
                     <tr>
                         <th>캠핑장 유형</th>
-                        <td>일반야영장, 카라반, 글램핑</td>
+                        <td>${camping.type }</td>
                     </tr>
                     <tr>
                         <th>운영기간</th>
-                        <td>봄, 가을, 겨울</td>
+                        <td>${camping.oper }</td>
                     </tr>
                     <tr>
                         <th>운영일</th>
-                        <td>평일+주말</td>
+                        <td>${camping.operDate }</td>
                     </tr>
                 </tbody>
             </table>

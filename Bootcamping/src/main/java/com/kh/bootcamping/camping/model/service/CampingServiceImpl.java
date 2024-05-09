@@ -17,6 +17,11 @@ public class CampingServiceImpl implements CampingService {
 	
 	@Autowired
 	private SqlSession sqlSession;
+
+	@Override
+	public Camping detailCamping(String campNo) {
+		return campingRepository.detailCamping(sqlSession, campNo);
+	}
 	
 
 }

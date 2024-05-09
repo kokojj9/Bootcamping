@@ -367,8 +367,9 @@
 		for(let i in data){
 			const item = data[i];
 			
-			str += '<div class="card" style="width:250px;" onclick="detailCamping()">'
+			str += '<div class="card" style="width:250px;">'
 				 + '<a href="camping/detail?contentId='+ item.contentId +'">'
+			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
@@ -383,17 +384,6 @@
 		$('.items').html(str);
 		
 		
-		function detailCamping(){
-			
-			$.ajax({
-				url : 'detail.camping',
-				data : {campNo : item[i].contentId},
-				success : result => {
-					console.log()
-				}
-			})
-		}
-	
 
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 

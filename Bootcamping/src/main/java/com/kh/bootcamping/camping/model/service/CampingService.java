@@ -6,5 +6,5 @@ import com.kh.bootcamping.camping.model.vo.Camping;
 
 public interface CampingService {
 	
-
+	Camping detailCamping(String campNo);
 }

@@ -8,6 +8,7 @@ import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ import com.kh.bootcamping.common.template.Pagination;
 public class CampingController {
 	
 	@Autowired
-	private CampingService campinService;
+	private CampingService campingService;
 	
 	public static final String SERVICE_KEY = "jDeUHHxyvx1AmWI1ZXjA7MNVQr1NcdX4pFo9EHtlICl0kGxbtpaEOHAtX2o%2FzWb7Kf4WWAGX%2BfvCl5pmtkbviQ%3D%3D";
 
@@ -68,9 +69,16 @@ public class CampingController {
 	 * 캠핑장 상세조회
 	 */
 	@GetMapping("camping/detail")
-	public String detailCamping(String campNo) {
+	public String detailCamping(@RequestParam("contentId") String campNo, Model model) {
 		
-		return "camping/detailCamping";
+		if(campingService.detailCamping(campNo) != null) {
+			model.addAttribute("camping", campingService.detailCamping(campNo));
+			return "camping/detailCamping";	
+		} else {
+			return "redirect:/";
+		}
+		
+
 		
 	}
 

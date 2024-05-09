@@ -15,7 +15,7 @@
 		<result column="DETAIL_ADDRRESS" property="detailAddress" />
 		<result column="MAP_X" property="mapX"/>
 		<result column="MAP_Y" property="mapY" />
-		<result column="CAPM_PHONE" property="campPhone" />
+		<result column="CAMP_PHONE" property="campPhone" />
 		<result column="SERVICE" property="service" />
 		<result column="HOMEPAGE" property="homePage" />
 		<result column="RESERPAGE" property="reserPage" />
@@ -26,6 +26,23 @@
 		<result column="STATUS" property="status" />
 	</resultMap> 
 
+	<select id="detailCamping" parameterType="string" resultMap="campingResultMap">
+		SELECT
+		        CAMP_NAME,
+		        NVL(CAMP_PHONE, '02-123-1234') "CAMP_PHONE",
+		        DETAIL_ADDRRESS,
+		        NVL(INTRO, '힐링이 되는 캠핑, 아름다운 추억이 될 수 있도록 오시는 모든 고객분들을 정성껏 모시겠습니다.') "INTRO", 
+		        REPLACE(NVL(SERVICE, '침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실'), ',' , '  ' ) "SERVICE",
+		        NVL(CAMP_LOCATION, '산') "CAMP_LOCATION",
+		        TYPE,
+		        CAMP_IMG,
+		        NVL(OPER, '봄, 여름') "OPER",
+		        NVL(OPER_DATE, '주말') "OPER_DATE"
+		  FROM
+		        TB_CAMP
+		 WHERE
+		        CAMP_NO = #{campNo}	
+	</select>
 
 
 
