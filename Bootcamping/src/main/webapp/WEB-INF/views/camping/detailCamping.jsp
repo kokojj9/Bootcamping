@@ -98,6 +98,7 @@
         display: inline-block;
         border-radius: 25px;
         padding-top: 10px;
+        cursor: pointer;
     }
 
     #campTitle{
@@ -123,7 +124,6 @@
         padding-right: 35px;
         display: flex; 
         justify-content: flex-end;
-        padding-top: 20px;
     }
 
     .heart {
@@ -137,6 +137,7 @@
         margin-right: 20px;
         padding-top: 5px;
         cursor: pointer;
+        padding-top : 15px;
     }
 
     .hide {display: none;}
@@ -234,7 +235,7 @@
         <div id="camp_img">
 
             <div id="camp_thumbnail">
-                <img src="${camping.campImg}">
+                <img src="${camping.campImg}" />
             </div>
 
         </div>
@@ -249,7 +250,7 @@
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="free-icon-share-149179.png" width="25px"></a></div>
+                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -424,8 +425,12 @@
         </script>
 
    	<jsp:include page="../common/footer.jsp"/>
-
+   	
+   	
+   	
     </div>
+    
+    
     
 </body>
 </html>

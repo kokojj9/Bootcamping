@@ -29,8 +29,7 @@ public class CampingController {
 	/**
 	 * 캠핑장 전체 조회 + 페이징처리
 	 */
-
-	@RequestMapping(value="camping")
+	@RequestMapping("camping")
 	public ModelAndView camping(@RequestParam(value="page", defaultValue="1") int page,  ModelAndView mv) throws IOException {
 		
 		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 5);
