@@ -38,7 +38,7 @@ public class MemberController {
 	 * @param response
 	 * @return
 	 */
-	@PostMapping("member.login")
+	@PostMapping("members")
 	public ModelAndView login(Member member, String rememberId,
 				              HttpSession session, ModelAndView mv,
 				              HttpServletResponse response) {
@@ -88,6 +88,21 @@ public class MemberController {
 	}
 	
 	//회원 가입 메서드
+	@PostMapping("members")
+	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
+		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setMemberPwd(encPwd);
+		
+		if(memberService.insertMember(member)) {
+			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+			mv.setViewName("ridirect:/");
+		} else {
+			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
 	
 	//마이페이지 메서드
 	
