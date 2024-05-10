@@ -399,7 +399,7 @@
 		var markerPosition = [];
 		for(var i in data){
 			var positions = {
-			    LatLng: new kakao.maps.LatLng(data[i].mapX, data[i].mapY)
+			    LatLng: new kakao.maps.LatLng(data[i].mapY, data[i].mapX)
 			}
 			markerPosition.push(positions);
 		}
@@ -449,7 +449,27 @@
 		    overlay.setMap(map);
 		});
 
-		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
+		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다.
+		
+		
+		/*
+		/*사진
+		let campNo = "${camping.campNo}";
+		
+		window.onload = function(){
+			
+			$.ajax({
+				url : 'camping.img',
+				data : {campNo : campNo},
+				success : result => {
+					console.log(result)
+				}
+				
+			})
+			
+		}
+		*/
+		
 
 	</script>
 

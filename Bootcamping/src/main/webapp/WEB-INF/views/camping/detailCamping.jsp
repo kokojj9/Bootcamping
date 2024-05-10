@@ -51,7 +51,7 @@
 
     #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid black;} 
 
-    #service {width: 70%; height: 3%; margin: auto; padding-left: 50px;padding-top: 20px; border-bottom: 1px solid black;}
+    #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid black;}
 
     #seat {width: 70%; height: 12%; margin: auto; padding-left: 50px;padding-top: 20px; }
 
@@ -165,7 +165,7 @@
 
     #service h4, #seat h4 {font-weight: 700;}
 
-    #seatImg {width: 700px;margin: auto;} 
+    #seatImg {width: 700px; padding-top:10px} 
 
     #reser_info th {font-weight: 400;}
 
@@ -234,7 +234,22 @@
     .review_img{float: left; width: 25%; margin-left: 20px; margin-top: 10px;}
     
     .review_img img {border-radius: 20px;}
+    
+    #service_list > p { width : 550px; }
+    
+    #service > h4 { padding-left: 50px;}
+    
 
+
+  .carousel-inner img {
+    width: 100%;
+    height: 100%;
+  }
+
+   .carousel-inner {
+    	width : 790px;
+    	height : 400px;
+    }
 </style>
 </head>
 <body>
@@ -286,16 +301,38 @@
         <!-- 시설 -->
         <div id="service">
             <h4>시설 환경</h4>
+            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>${camping.service }</p></div>
+            <!-- <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div>
             <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>화장실</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>화장실</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div>
+            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div> -->
         </div>
 
         <!-- 배치도 -->
         <div id="seat">
-            <h4>캠핑 배치도</h4>
-            <div id="seatImg"><img src="55928swWxdFGmfWcOnaOeEZn.jpg" width="600px"></div>
+            <h4>캠핑 이미지</h4>
+            <div id="seatImg">
+
+
+<div id="demo" class="carousel slide" data-ride="carousel">
+
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+
+  </div>
+  
+  <!-- Left and right controls -->
+  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
+  <a class="carousel-control-next" href="#demo" data-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </a>
+</div>
+            
+            
+            
+            
+            </div>
         </div>
 
         <!-- 예약 안내 -->
@@ -468,7 +505,8 @@
             var mapY = ${camping.mapY}
             var campName = "${camping.campName}";
 			var detailAddress = "${camping.detailAddress}";
-			var sitePath = "${camping.sitePath}";
+			var campImg = "${camping.campImg}";
+			var reserPage = "${camping.reserPage}";
 			
             
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -491,17 +529,16 @@
 	        // 별도의 이벤트 메소드를 제공하지 않습니다 
 	        var content = '<div class="wrap">' + 
 	                    '    <div class="info">' + 
-	                    '        <div class="title">' + campName + 
+	                    '        <div class="title">' + campName +  
 	                    '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
 	                    '        </div>' + 
 	                    '        <div class="body">' + 
 	                    '            <div class="img">' +
-	                    '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">' +
+	                    '                <img src="'+campImg+'" width="73" height="70">' +
 	                    '           </div>' + 
 	                    '            <div class="desc">' + 
-	                    '                <div class="ellipsis">'+detailAddress+'</div>' + 
-	                    '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-	                    '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
+	                    '                <div class="ellipsis">'+detailAddress+'</div>' +   
+	                    '                <div><a href="' + reserPage + '" target="_blank" class="link">홈페이지</a></div>' + 
 	                    '            </div>' + 
 	                    '        </div>' + 
 	                    '    </div>' +    
@@ -524,7 +561,26 @@
 	        function closeOverlay() {
 	            overlay.setMap(null);     
 	        }
-		            
+		    
+	        /*이미지*/
+			var data = ${campImg}.response.body.items.item;
+			
+			console.log(data);
+			
+			let str = '';
+			
+			for(let i in data){
+				const item = data[i];
+				
+				str += '<div class="carousel-item active">'
+					 + '<img src="'+ item.imageUrl+'" alt="Los Angeles" width="1100" height="500">'
+			    	 + '</div>';
+
+
+				
+			}
+			
+			$('.carousel-inner').html(str);
 
         </script>
 

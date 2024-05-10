@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,14 +69,34 @@ public class CampingController {
 	 * 캠핑장 상세조회
 	 */
 	@GetMapping("camping/detail")
-	public String detailCamping(@RequestParam("contentId") String campNo, Model model) {
+	public String detailCamping(@RequestParam("contentId") String campNo, Model model) throws IOException {
 		
 		if(campingService.detailCamping(campNo) != null) {
-			model.addAttribute("camping", campingService.detailCamping(campNo));
 			
-			model.addAttribute("site", campingService.siteList(campNo));
-			System.out.println(campingService.siteList(campNo));
+			String url = "http://apis.data.go.kr/B551011/GoCamping/imageList";
+				   url += "?serviceKey=" + SERVICE_KEY;
+				   url += "&MobileOS=ETC";
+				   url += "&MobileApp=TestApp";
+				   url += "&contentId=" + campNo;
+				   url += "&_type=json";
+				   
+				   URL requestUrl = new URL(url);
+				   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+				   BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+				   String responseJson = br.readLine();
+				   
+				   model.addAttribute("campImg", responseJson);
+				   
+				   br.close();
+				   urlConnection.disconnect();
+
+				
+				model.addAttribute("camping", campingService.detailCamping(campNo));
+				model.addAttribute("site", campingService.siteList(campNo));
+				
+				
 			return "camping/detailCamping";	
+			
 		} else {
 			return "redirect:/";
 		}
@@ -84,8 +105,15 @@ public class CampingController {
 
 		
 	}
-
 	
+	
+	/**
+	 * 캠핑장 사진 
+	 
+	@ResponseBody
+	@GetMapping(value="camping.img", produces="application/json; charset=UTF-8")
+	public String campingImgList()
+	*/
 
  
 
