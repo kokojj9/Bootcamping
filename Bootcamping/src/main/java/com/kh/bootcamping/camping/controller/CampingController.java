@@ -72,11 +72,15 @@ public class CampingController {
 		
 		if(campingService.detailCamping(campNo) != null) {
 			model.addAttribute("camping", campingService.detailCamping(campNo));
+			
+			model.addAttribute("site", campingService.siteList(campNo));
+			System.out.println(campingService.siteList(campNo));
 			return "camping/detailCamping";	
 		} else {
 			return "redirect:/";
 		}
 		
+
 
 		
 	}

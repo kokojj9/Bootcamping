@@ -109,7 +109,10 @@
         padding-top: 20px;
     }
 
-    #campTitle h2 {font-weight: 700;}
+    #campTitle h2 {
+    	font-weight: 700;
+    	width : 500px;
+    }
 
     #campTitle p {
         font-size: 20px;
@@ -170,11 +173,14 @@
 
     .siteImg{
         float: left;
+        width : 200px;
         height: 100%;
     }
 
     .siteImg img {
         border-radius: 20px;
+        width : 200px;
+        height: 195px;
     }
 
     .siteName{
@@ -305,42 +311,59 @@
 
         <!-- 예약 객실 -->
         <div id="reser_seat">
+			
+			<c:choose>
+      		  	<c:when test="${ empty requestScope.site}">
+		            <div class="siteList">
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteName">
+		                    <h4>A-10</h4>
+		                    <p>해당 캠핑장 예약하러 가기</p>
+		                    <div class="reserBtn"><a href="${camping.reserPage }">예약하기</a></div>
+		                </div>
+		            </div>	 
+		            <div class="siteList">
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteName">
+		                    <h4>A-11</h4>
+		                    <p>해당 캠핑장 예약하러 가기</p>
+		                    <div class="reserBtn"><a href="${camping.reserPage }">예약하기</a></div>
+		                </div>
+		            </div>			                    		  	
+		            <div class="siteList">
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteName">
+		                    <h4>A-12</h4>
+		                    <p>해당 캠핑장 예약하러 가기</p>
+		                    <div class="reserBtn"><a href="${camping.reserPage }">예약하기</a></div>
+		                </div>
+		            </div>	
+		            <div class="siteList">
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteName">
+		                    <h4>A-13</h4>
+		                    <p>해당 캠핑장 예약하러 가기</p>
+		                    <div class="reserBtn"><a href="${camping.reserPage }">예약하기</a></div>
+		                </div>
+		            </div>			            		            
+      		  	</c:when>			
+			
+				<c:when test="${requestScope.site ne null}">
+					<c:forEach var="site" items="${requestScope.site }">
+			            <div class="siteList">
+			                <div class="siteImg"><img src="../${site.sitePath }" width="255"></div>
+			                <div class="siteName">
+			                    <h4>${site.siteName }</h4>
+			                    <p>${site.sitePrice}원</p>
+			                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
+			                </div>
+			            </div>					
+					</c:forEach>
+				</c:when>
+			</c:choose>
+			
 
-            <div class="siteList">
-                <div class="siteImg"><img src="gg.png" width="255px"></div>
-                <div class="siteName">
-                    <h4>블라블라사이트</h4>
-                    <p>100000원</p>
-                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
-                </div>
-            </div>
 
-            <div class="siteList">
-                <div class="siteImg"><img src="gg.png" width="255px"></div>
-                <div class="siteName">
-                    <h4>블라블라사이트</h4>
-                    <p>100000원</p>
-                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
-                </div>
-            </div>
-
-            <div class="siteList">
-                <div class="siteImg"><img src="gg.png" width="255px"></div>
-                <div class="siteName">
-                    <h4>블라블라사이트</h4>
-                    <p>100000원</p>
-                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
-                </div>
-            </div>
-
-            <div class="siteList">
-                <div class="siteImg"><img src="gg.png" width="255px"></div>
-                <div class="siteName">
-                    <h4>블라블라사이트</h4>
-                    <p>100000원</p>
-                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
-                </div>
-            </div>
 
             
 
@@ -349,6 +372,8 @@
         <!-- 위치 -->
         <div id="camp_location">
             <h4>위치</h4>
+			<!-- 지도를 표시할 div 입니다 -->
+			<div id="map" style="width:100%;height:350px;"></div>
         </div>
 
         <!-- 후기 -->

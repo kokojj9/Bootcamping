@@ -25,6 +25,18 @@
 		<result column="CAMP_LOCATION" property="campLocation" />
 		<result column="STATUS" property="status" />
 	</resultMap> 
+	
+	<resultMap type="site" id="siteResultMap">
+		<result column="SITE_NO" property="siteNo" />
+		<result column="CAMP_NO" property="campNo" />
+		<result column="TYPE_CODE" property="typeCode" />
+		<result column="SITE_NAME" property="siteName" />
+		<result column="SITE_PATH" property="sitePath" />
+		<result column="SITE_YN" property="siteYn" />
+		<result column="SITE_PRICE" property="sitePrice" />
+	</resultMap>
+		
+	
 
 	<select id="detailCamping" parameterType="string" resultMap="campingResultMap">
 		SELECT
@@ -37,7 +49,8 @@
 		        TYPE,
 		        CAMP_IMG,
 		        NVL(OPER, '봄, 여름') "OPER",
-		        NVL(OPER_DATE, '주말') "OPER_DATE"
+		        NVL(OPER_DATE, '주말') "OPER_DATE",
+		        RESERPAGE
 		  FROM
 		        TB_CAMP
 		 WHERE
@@ -45,7 +58,24 @@
 	</select>
 
 
-
+	<select id="siteList" parameterType="list" resultMap="siteResultMap">
+			SELECT
+			        SITE_PATH,
+			        SITE_NAME,
+			        SITE_PRICE
+			  FROM
+			        TB_SITE
+			  LEFT     
+			  JOIN
+			        TB_PRICE ON (TB_PRICE.TYPE_CODE = TB_SITE.TYPE_CODE)
+			  JOIN
+			        TB_CAMP ON (TB_CAMP.CAMP_NO = TB_SITE.CAMP_NO)
+			 WHERE
+			        TB_CAMP.CAMP_NO = #{campNo}
+			ORDER
+			   BY
+			   		SITE_NO ASC
+		</select>
 
 
 </mapper>
