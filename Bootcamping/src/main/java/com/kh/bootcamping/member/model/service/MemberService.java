@@ -12,4 +12,8 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
+	String checkMemberEmail(String email);
+
+	String checkAuthCode(Map<String, String> auth);
+
 }

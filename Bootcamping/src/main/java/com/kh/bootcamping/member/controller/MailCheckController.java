@@ -12,6 +12,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,24 @@ import com.kh.bootcamping.member.model.service.MemberService;
 
 @Controller
 public class MailCheckController {
-
+	
 	@Autowired
 	private MemberService memberService;
 	
 	@Autowired
 	private JavaMailSenderImpl sender;
+	
+	@Value("${username}")
+    private String adminName;
+
+    @Value("${password}")
+    private String adminPassword;
+    
+    @Value("${host}")
+    private String host;
+    
+    @Value("${port}")
+    private String port;
 	
 	/***
 	 * 인증코드 전송 메서드
@@ -38,51 +51,56 @@ public class MailCheckController {
 	 */
 	@ResponseBody
 	@PostMapping("mail")
-	public void sendMail(String email, HttpServletRequest request) throws MessagingException {
-		JavaMailSenderImpl impl = new JavaMailSenderImpl();
-		
-		// 계정 설정
-		/*
-		impl.setHost("smtp.gmail.com");
-		impl.setPort(587);
-		impl.setUsername(username);
-		impl.setPassword(password);
-		외부파일로 관리
-		*/ 
-		
-		// 옵션 설정
-		Properties prop = new Properties();
-		prop.put("mail.smtp.auth", true);
-		prop.put("mail.smtp.starrls.enable", true);
-		
-		impl.setJavaMailProperties(prop);
-		
-		sender = impl;
-		
-		// 인증코드 생성
-		String code = getAuthCode();
-		// 신청자 아이피 포트 번호 추출
-		String remoteAddr = request.getRemoteAddr();
-		
-		Map<String, String> auth = new HashMap<String, String>();
-		auth.put("code", code);
-		auth.put("email", email);
-		auth.put("who", remoteAddr);
-		
-		// 이메일, 인증코드 DB저장
-		memberService.insertAuthCode(auth);
-		
-		// 메세지 정보 세팅
-		MimeMessage message = sender.createMimeMessage();
-		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-		// 이메일을 조회해서 있는지 확인부터해야하나???
-		
-		// 메세지 생성
-		helper.setTo(email);
-		helper.setSubject("인증번호 전송");
-		helper.setText("인증번호 : " + code);
-		
-		sender.send(message);
+	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
+		// 이메일 중복 확인
+		if(memberService.checkMemberEmail(email) == null) {
+			return "fail";
+		} else {
+
+			JavaMailSenderImpl impl = new JavaMailSenderImpl();
+			
+			impl.setHost(host);
+			impl.setPort(Integer.parseInt(port));
+			impl.setUsername(adminName);
+			impl.setPassword(adminPassword);
+			
+			// 옵션 설정
+			Properties prop = new Properties();
+			prop.put("mail.smtp.auth", true);
+			prop.put("mail.smtp.starrls.enable", true);
+			
+			impl.setJavaMailProperties(prop);
+			
+			sender = impl;
+			
+			// 인증코드 생성
+			String code = getAuthCode();
+			// 신청자 아이피 포트 번호 추출
+			String remoteAddr = request.getRemoteAddr();
+			
+			Map<String, String> auth = new HashMap<String, String>();
+			auth.put("code", code);
+			auth.put("email", email);
+			auth.put("remoteAddr", remoteAddr);
+			
+			// 이메일, 인증코드 DB저장
+			if(memberService.insertAuthCode(auth) > 0) {
+				return "fail";
+			}
+			
+			// 메세지 정보 세팅
+			MimeMessage message = sender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+			
+			// 메세지 생성
+			helper.setTo(email);
+			helper.setSubject("인증번호 전송");
+			helper.setText("인증번호 : " + code);
+			
+			sender.send(message);
+			
+			return "success";
+		}
 	}
 	
 	// 인증코드 생성 메서드
@@ -90,6 +108,7 @@ public class MailCheckController {
 		Random r = new Random();
 		int i = r.nextInt(100000);
 		Format f = new DecimalFormat("000000");	
+		
 		return f.format(i);
 	}
 	
@@ -100,14 +119,19 @@ public class MailCheckController {
 	 */
 	@ResponseBody
 	@GetMapping("mail")
-	public void checkCode(String email, int authCode) {
-		/*
-		if(authCode.equals(memberService.checkEmail())) {
-			//이메일 인증성공
+	public String checkCode(String email, String authCode, HttpServletRequest request) {
+		String remoteAddr = request.getRemoteAddr();
+		
+		Map<String, String> auth = new HashMap<String, String>();
+		auth.put("authCode", authCode);
+		auth.put("email", email);
+		auth.put("remoteAddr", remoteAddr);
+		
+		if(authCode.equals(memberService.checkAuthCode(auth))) {
+			return "인증 성공";
 		} else {
-			//인증 실패
+			return "인증 실패";
 		}
-		*/
 	}
 	
 	

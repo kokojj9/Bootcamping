@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bootcamping.member.model.service.MemberService;
@@ -38,7 +37,7 @@ public class MemberController {
 	 * @param response
 	 * @return
 	 */
-	@PostMapping("members")
+	@PostMapping("members/login")
 	public ModelAndView login(Member member, String rememberId,
 				              HttpSession session, ModelAndView mv,
 				              HttpServletResponse response) {

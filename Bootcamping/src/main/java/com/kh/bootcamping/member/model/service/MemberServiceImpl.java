@@ -33,4 +33,14 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.insertMember(sqlSession, member);
 	}
 
+	@Override
+	public String checkMemberEmail(String email) {
+		return memberRepository.checkMemberEmail(sqlSession, email);
+	}
+
+	@Override
+	public String checkAuthCode(Map<String, String> auth) {
+		return memberRepository.checkAuthCode(sqlSession, auth);
+	}
+
 }

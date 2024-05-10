@@ -79,6 +79,7 @@
                     <label for="email"> &nbsp; 이메일 </label>
                     <button id="checkEmailBtn">메일 인증</button>
                     <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email"> <br>
+                    <input type="text" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" hidden> <br>
 
                     <label for="phone"> &nbsp; 전화번호 </label>
                     <input type="tel" class="form-control" id="phone" placeholder="전화번호를 입력해주세요 (-없이)" name="phone"> <br>
@@ -105,10 +106,9 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
     <script>
-        // 주소입력 API
         var themeObj = {
-            searchBgColor: "#1DC078", //검색창 배경색
-            queryTextColor: "#FFFFFF" //검색창 글자색
+            searchBgColor: "#1DC078",
+            queryTextColor: "#FFFFFF"
         };
         
         function sample4_execDaumPostcode() {
@@ -169,41 +169,39 @@
                             let resultSubstring = result.substr(4);
 
                             if (resultSubstring === 'N') {
-                                checkId('block', 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)', true)
+                                checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)', true)
                             } else {
-                                checkId('block', 'green', '사용 가능한 아이디입니다.', false)
+                                checkInfo('id', 'green', '사용 가능한 아이디입니다.', false)
                             };
                         }
                     });
                 };
             }
             else {
-                checkId('block', 'crimson', '영문/숫자만 입력', true)
+                checkInfo('id', 'crimson', '영문/숫자만 입력', true)
             };
         };
         
         // 비밀번호 정규표현식
-        // 영문 /숫자/ 특문 8~16자리 제한 / not null
         memberPwdtag.onkeyup = () => {
             let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
-            // 중복 코드 줄이기
+
             if(regExp.test(memberPwdtag.value)){
-                checkPwdResult.style.display = 'block';
-                checkPwdResult.style.color = 'green';
-                checkPwdResult.textContent = '사용가능한 비밀번호입니다.';
+                checkInfo('password', 'green', '사용가능한 비밀번호입니다.')
             }
             else {
-                checkPwdResult.style.display = 'block';
-                checkPwdResult.style.color = 'crimson';
-                checkPwdResult.textContent = '영문 / 숫자 / 특수문자를 포함해야합니다.';
-            }
+                checkInfo('password', 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.')
+            };
         };
         
-        const checkId = (display, color, text, click) => {
-            checkIdResult.style.display = display;
-            enrollFormSubmit.disabled = click;
-            checkIdResult.style.color = color;
-            checkIdResult.textContent = text;
+        // 정규표현식에 맞지않으면 경고문구 표시
+        const checkInfo = (type, color, text, message) => {
+            let checkItem =  type == 'id' ? checkIdResult : checkPwdResult;
+            
+            enrollFormSubmit.disabled = message;
+            checkItem.style.display = 'block';
+            checkItem.style.color = color;
+            checkItem.textContent = text;
         };
 
         // 전화번호
@@ -215,7 +213,7 @@
         		url : 'mail',
         		type : 'get',
         		data : {
-        			email : //히든 요소의 밸류값 
+        			email : document.getElementById('email').value 
         		},
         		success : result => {
 		        	// 결과에 따라 인증성공,실패

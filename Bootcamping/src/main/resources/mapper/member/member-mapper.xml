@@ -39,8 +39,79 @@
 		   AND 
 		   	   STATUS = 'Y'
 	</select>
-
-
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT
+		  INTO
+		       TB_MEMBER
+		       (
+		       MEMBER_NO,
+		       MEMBER_ID,
+		       MEMBER_PWD,
+		       BIRTHDAY,
+		       ADDRESS,
+		       EMAIL,
+		       ENROLL_DATE,
+		       UPDATE_DATE,
+		       STATUS
+		       )
+		VALUES
+		       (
+		       SEQ_MEMBERNO.NEXTVAL,
+		       #{ memberId },
+		       #{ memberPwd },
+		       #{ memberName },
+		       #{ birthDay },
+		       #{ phone },
+		       #{ address },
+		       #{ email },
+		       SYSDATE,
+		       NULL,
+		       DEFAULT
+		       )
+	</insert>
+	
+	<insert id="insertAuthCode" parameterType="hashmap">
+		INSERT
+		  INTO
+		       TB_AUTHCODE
+		       (
+		       DATE,
+		       EMAIL,
+		       REMOTEADDR,
+		       CODE
+		       )
+		VALUES
+		       (
+		       SYSDATE,
+		       #{ email },
+		       #{ remoteAddr },
+		       #{ code }
+		       )
+	</insert>
+	
+	<select id="checkAuthCode" parameterType="hashmap">
+		SELECT
+		       DATE,
+		       EMAIL,
+		       REMOTEADDR,
+		       CODE
+		  FROM
+		       TB_AUTHCODE
+		 WHERE
+		       REMOTEADDR = #{ remoteAddr }
+		   AND       
+		       CODE = #{ code }
+	</select>
+	
+	<select id="checkMemberEmail" parameterType="string">
+		SELECT
+		       EMAIL
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       EMAIL = #{ email }
+	</select>
 
 
 
