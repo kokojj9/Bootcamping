@@ -9,7 +9,6 @@
 		<result column="MEMBER_NO"   property="memberNo"/>
 		<result column="MEMBER_ID"   property="memberId"/>
 		<result column="MEMBER_PWD"  property="memberPwd"/>
-		<result column="MEMBER_NAME" property="memberName"/>
 		<result column="BIRTHDAY"    property="birthDay"/>
 		<result column="ADDRESS"     property="address"/>
 		<result column="EMAIL"       property="email"/>

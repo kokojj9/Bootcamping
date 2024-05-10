@@ -79,6 +79,7 @@
                     <label for="email"> &nbsp; 이메일 </label>
                     <button id="checkEmailBtn" type="button">메일 인증</button>
                     <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email" required> <br>
+                    <h6 id="count"></h6>
                     <input type="text" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" style="display: inline;  width: 250px; display:none;"> 
                     <button id="checkAuthCode" type="button" style="width: 150px; display:none;">인증번호 확인</button>
                     <br>
@@ -221,8 +222,29 @@
                         email : document.getElementById('email').value 
                     },
                     success : result => {
-                        // 결과에 따라 인증성공,실패
-                        
+                        if(result === 'YYYYY'){
+                            document.getElementById('email').setAttribute('readonly', true);
+                            alert('인증번호가 발급되었습니다.');
+
+                            let totalTime = 180;
+
+                            let countdown = setInterval(function() {
+                                let minutes = Math.floor(totalTime / 60);
+                                let seconds = totalTime % 60;
+
+                                document.getElementById(count).textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+                                totalTime--;
+
+                                if (totalTime < 0) {
+                                    clearInterval(countdown);
+                                    timerElement.textContent = '인증 시간이 끝났습니다';
+                                }
+                            }, 1000);
+                        }
+                        else {
+                            alert('인증번호발급에 실패하였습니다. 이메일을 확인해주세요');
+                        }
                     }
                 });
             }
