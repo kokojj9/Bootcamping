@@ -50,7 +50,9 @@
 		        CAMP_IMG,
 		        NVL(OPER, '봄, 여름') "OPER",
 		        NVL(OPER_DATE, '주말') "OPER_DATE",
-		        RESERPAGE
+		        RESERPAGE,
+		        MAP_X,
+		        MAP_Y
 		  FROM
 		        TB_CAMP
 		 WHERE
