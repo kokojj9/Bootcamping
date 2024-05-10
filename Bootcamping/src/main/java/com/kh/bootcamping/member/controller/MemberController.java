@@ -42,12 +42,14 @@ public class MemberController {
 				              HttpSession session, ModelAndView mv,
 				              HttpServletResponse response) {
 		
+		System.out.println("로그인");
 		Member loginMember = memberService.login(member);
-		
+		System.out.println("로그인2");
 		if(rememberId.equals("true")) saveIdCookie(member.getMemberId(), response);
 		else deleteIdCookie(response);
 				
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+			System.out.println("성공");
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
 		} else {
@@ -94,7 +96,7 @@ public class MemberController {
 		
 		if(memberService.insertMember(member) > 0) {
 			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
-			mv.setViewName("ridirect:/");
+			mv.setViewName("redirect:/");
 		} else {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 		}

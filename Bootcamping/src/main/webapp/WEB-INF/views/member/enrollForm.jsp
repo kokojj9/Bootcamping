@@ -83,9 +83,6 @@
                     <button id="checkAuthCode" type="button" style="width: 150px; display:none;">인증번호 확인</button>
                     <br>
 
-                    <label for="phone"> &nbsp; 전화번호 </label>
-                    <input type="tel" class="form-control" id="phone" placeholder="전화번호를 입력해주세요 (-없이)" name="phone"> <br>
-                    
                     <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;
                     <input type="button" id="findAddressBtn" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
                     <input type="text" id="sample4_postcode" placeholder="우편번호">

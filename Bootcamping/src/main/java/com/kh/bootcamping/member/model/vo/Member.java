@@ -18,11 +18,11 @@ public class Member {
 	private String memberPwd;
 	private String memberName;
 	private String birthDay;
-	private String phone;
 	private String address;
 	private String email;
 	private String enrollDate;
 	private String updateDate;
 	private String status;
+	private String privilege;
 		
 }

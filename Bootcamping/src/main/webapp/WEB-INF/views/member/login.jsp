@@ -63,7 +63,7 @@
                     <div class="">부트캠프 로그인</div>
                 </div>
         
-                <form action="login.member" method="post">
+                <form action="members/login" method="post">
                     <div class="login_form">
                         <label for="userId" class="">아이디 : </label>
                         <input type="text" class="" placeholder="아이디" id="memberId" name="memberId"> <br>

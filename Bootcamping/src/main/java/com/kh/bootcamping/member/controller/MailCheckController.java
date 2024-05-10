@@ -73,8 +73,6 @@ public class MailCheckController {
 			
 			impl.setJavaMailProperties(prop);
 			
-			//sender = impl;
-			
 			// 인증코드 생성
 			String code = getAuthCode();
 			// 신청자 아이피 포트 번호 추출
@@ -90,7 +88,6 @@ public class MailCheckController {
 			}
 			
 			// 메세지 정보 세팅
-			//MimeMessage message = sender.createMimeMessage();
 			MimeMessage message = impl.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 			
@@ -105,7 +102,6 @@ public class MailCheckController {
 		}
 	}
 	
-	// 인증코드 생성 메서드
 	private String getAuthCode() {
 		Random r = new Random();
 		int i = r.nextInt(100000);
