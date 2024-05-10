@@ -53,52 +53,41 @@ public class MailCheckController {
 	@ResponseBody
 	@PostMapping("mail")
 	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
-		// 이메일 중복 확인
 		if(memberService.checkMemberEmail(email) != null) {
-			System.out.println("이메일 존재함");
-			return "fail";
+			return "NNNNN";
 		} else {
-
+			Map<String, String> auth = new HashMap<String, String>();
 			JavaMailSenderImpl impl = new JavaMailSenderImpl();
-			
-			impl.setHost(getProperties().getProperty("host"));
+			Properties prop = new Properties();
+
 			impl.setPort(Integer.parseInt(getProperties().getProperty("port")));
 			impl.setUsername(getProperties().getProperty("username"));
 			impl.setPassword(getProperties().getProperty("password"));
+			impl.setHost(getProperties().getProperty("host"));
 			
-			// 옵션 설정
-			Properties prop = new Properties();
 			prop.put("mail.smtp.starttls.enable", true);
 			prop.put("mail.smtp.auth", true);
 			
 			impl.setJavaMailProperties(prop);
 			
-			// 인증코드 생성
 			String code = getAuthCode();
-			// 신청자 아이피 포트 번호 추출
 			String remoteAddr = request.getRemoteAddr();
-			Map<String, String> auth = new HashMap<String, String>();
-			auth.put("code", code);
-			auth.put("email", email);
+			
 			auth.put("remoteAddr", remoteAddr);
+			auth.put("email", email);
+			auth.put("code", code);
 			
-			// 이메일, 인증코드 DB저장
-			if(memberService.insertAuthCode(auth) == 0) {
-				return "fail";
-			}
+			if(memberService.insertAuthCode(auth) == 0) return "NNNNN";
 			
-			// 메세지 정보 세팅
 			MimeMessage message = impl.createMimeMessage();
 			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 			
-			// 메세지 생성
 			helper.setTo(email);
 			helper.setSubject("인증번호 전송");
 			helper.setText("인증번호 : " + code);
-			
 			impl.send(message);
 			
-			return "success";
+			return "YYYYY";
 		}
 	}
 	
@@ -126,9 +115,9 @@ public class MailCheckController {
 		auth.put("remoteAddr", remoteAddr);
 		
 		if(authCode.equals(memberService.checkAuthCode(auth))) {
-			return "인증 성공";
+			return "YYYYY";
 		} else {
-			return "인증 실패";
+			return "NNNNN";
 		}
 	}
 	
