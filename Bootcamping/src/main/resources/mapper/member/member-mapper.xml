@@ -76,10 +76,10 @@
 		  INTO
 		       TB_AUTHCODE
 		       (
-		       DATE,
-		       EMAIL,
-		       REMOTEADDR,
-		       CODE
+		       AUTHDATE,
+			   EMAIL,
+			   REMOTEADDR,
+			   CODE
 		       )
 		VALUES
 		       (
@@ -104,7 +104,7 @@
 		       CODE = #{ code }
 	</select>
 	
-	<select id="checkMemberEmail" parameterType="string">
+	<select id="checkMemberEmail" parameterType="string" resultType="string">
 		SELECT
 		       EMAIL
 		  FROM

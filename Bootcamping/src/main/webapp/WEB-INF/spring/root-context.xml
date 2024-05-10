@@ -11,22 +11,13 @@
 	<bean class="org.apache.commons.dbcp.BasicDataSource" id="dataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="DUDGHK"/>
-		<property name="password" value="DUDGHK"/>
+		<property name="username" value="CAMPING"/>
+		<property name="password" value="CAMPING"/>
 	</bean>
 
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<property name="configLocation" value="classpath:mybatis-config.xml"/>
 		<property name="dataSource" ref="dataSource"/>
-	</bean>
-
-	<context:property-placeholder location="classpath:configProperties/admin.properties"/>
-	
-	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
-		<property name="username" value="${username}"/>
-		<property name="password" value="${password}"/>
-		<property name="host" value="${host}"/>
-		<property name="port" value="${port}"/>
 	</bean>
 
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">

@@ -40,7 +40,7 @@
         #sample4_roadAddress{
             width: 373px;
         }
-        #findAddressBtn{
+        #findAddressBtn, #checkEmailBtn, #checkAuthCode{
             width: 90px;
             height: 30px;
             background-color: #1dc078;
@@ -77,9 +77,11 @@
                     <input type="password" class="form-control" id="checkPwd" placeholder="비밀번호 확인" required> <br>
 
                     <label for="email"> &nbsp; 이메일 </label>
-                    <button id="checkEmailBtn">메일 인증</button>
-                    <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email"> <br>
-                    <input type="text" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" hidden> <br>
+                    <button id="checkEmailBtn" type="button">메일 인증</button>
+                    <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email" required> <br>
+                    <input type="text" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" style="display: inline;  width: 250px; display:none;"> 
+                    <button id="checkAuthCode" type="button" style="width: 150px; display:none;">인증번호 확인</button>
+                    <br>
 
                     <label for="phone"> &nbsp; 전화번호 </label>
                     <input type="tel" class="form-control" id="phone" placeholder="전화번호를 입력해주세요 (-없이)" name="phone"> <br>
@@ -208,18 +210,25 @@
 
         // 이메일 인증
         document.getElementById('checkEmailBtn').onclick = () => {
-        	// 코드발송 ajax
-        	$.ajax({
-        		url : 'mail',
-        		type : 'get',
-        		data : {
-        			email : document.getElementById('email').value 
-        		},
-        		success : result => {
-		        	// 결과에 따라 인증성공,실패
-        			
-        		}
-        	});
+            if(document.getElementById('email').value == ''){
+                alert('이메일을 입력해주세요!');
+            }
+            else{
+                document.getElementById('authCode').style.display = 'block';
+                document.getElementById('checkAuthCode').style.display = 'block';
+
+                $.ajax({
+                    url : 'mail',
+                    type : 'post',
+                    data : {
+                        email : document.getElementById('email').value 
+                    },
+                    success : result => {
+                        // 결과에 따라 인증성공,실패
+                        
+                    }
+                });
+            }
         };
 		
         // submit
