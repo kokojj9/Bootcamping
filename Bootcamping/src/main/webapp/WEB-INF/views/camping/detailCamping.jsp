@@ -5,7 +5,9 @@
 <html lang="en">
 <head>
     <title>Document</title>
-
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">
         
     <!--달력-->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -313,21 +315,21 @@
             <div id="seatImg">
 
 
-<div id="demo" class="carousel slide" data-ride="carousel">
-
-  <!-- The slideshow -->
-  <div class="carousel-inner">
-
-  </div>
-  
-  <!-- Left and right controls -->
-  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-  </a>
-  <a class="carousel-control-next" href="#demo" data-slide="next">
-    <span class="carousel-control-next-icon"></span>
-  </a>
-</div>
+		<div id="demo" class="carousel slide" data-ride="carousel">
+		
+		  <!-- The slideshow -->
+		  <div class="carousel-inner">
+		
+		  </div>
+		  
+		  <!-- Left and right controls -->
+		  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+		    <span class="carousel-control-prev-icon"></span>
+		  </a>
+		  <a class="carousel-control-next" href="#demo" data-slide="next">
+		    <span class="carousel-control-next-icon"></span>
+		  </a>
+		</div>
             
             
             
@@ -569,18 +571,25 @@
 			
 			let str = '';
 			
-			for(let i in data){
-				const item = data[i];
-				
-				str += '<div class="carousel-item active">'
-					 + '<img src="'+ item.imageUrl+'" alt="Los Angeles" width="1100" height="500">'
-			    	 + '</div>';
-
-
+			str += '<div class="carousel-item active">'
+				 + '<img src="'+ data[0].imageUrl+'" alt="Los Angeles" width="1100" height="500">'
+		    	 + '</div>';	
+		    	 
+		 		
+			$('.carousel-inner').html(str);
+						
+			    	 
+			let resultStr = '';
+			
+			for(let i = 1; i < data.length; i++){
+				str += '<div class="carousel-item">'
+					 + '<img src="'+ data[i].imageUrl+'" alt="Los Angeles" width="1100" height="500">'
+			    	 + '</div>';		
 				
 			}
+	
+			$('.carousel-inner').html(str);	
 			
-			$('.carousel-inner').html(str);
 
         </script>
 
