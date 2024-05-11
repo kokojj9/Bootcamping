@@ -422,7 +422,8 @@
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
+			                    <div class="reserBtn"><a href="#"><button class="btn btn-success">예약하기</button></a></div>
+			                    
 			                </div>
 			            </div>					
 					</c:forEach>
