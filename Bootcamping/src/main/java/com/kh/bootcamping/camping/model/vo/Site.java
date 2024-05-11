@@ -17,5 +17,7 @@ public class Site {
 	private String siteYn;
 	private int sitePrice;
 	private String typeName;
+	private String campName;
+	private String campImg;
 	
 }

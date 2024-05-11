@@ -35,6 +35,8 @@
 		<result column="SITE_YN" property="siteYn" />
 		<result column="SITE_PRICE" property="sitePrice" />
 		<result column="TYPE_NAME" property="typeName" />
+		<result column="CAMP_NAME" property="campName" />
+		<result column="CAMP_IMG" property="campImg" />
 	</resultMap>
 		
 	
@@ -64,6 +66,7 @@
 
 	<select id="siteList" parameterType="list" resultMap="siteResultMap">
 			SELECT
+					SITE_NO,
 			        SITE_PATH,
 			        SITE_NAME,
 			        SITE_PRICE,
@@ -82,7 +85,22 @@
 			ORDER
 			   BY
 			   		SITE_NO ASC
-		</select>
+	</select>
+		
+	<select id="campingReservation" resultMap="siteResultMap" parameterType="_int">
+		SELECT
+		        SITE_NO,
+		        TB_CAMP.CAMP_NO,
+		        CAMP_NAME,
+		        SITE_NAME,
+		        CAMP_IMG
+		  FROM
+		        TB_SITE
+		  JOIN
+		        TB_CAMP ON (TB_CAMP.CAMP_NO = TB_SITE.CAMP_NO)
+		 WHERE
+		        SITE_NO = #{siteNo}		
+	</select>
 
 
 </mapper>

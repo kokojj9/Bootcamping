@@ -276,9 +276,9 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
-            <div id="checkIn"><input id="startDate" width="200" placeholder="체크인"/></div>
-            <div id="checkOut"><input id="endDate" width="200"  placeholder="체크아웃"/></div>
-            <div id="selectPeople"><input id="countPeople" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
+            <div id="checkIn"><input id="startDate" width="200" value="" placeholder="체크인"/></div>
+            <div id="checkOut"><input id="endDate" width="200"  value="" placeholder="체크아웃"/></div>
+            <div id="selectPeople"><input id="countPeople" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
 
         </div>
 
@@ -422,7 +422,7 @@
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><a href="#"><button class="btn btn-success">예약하기</button></a></div>
+			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button class="btn btn-success">예약하기</button></a></div>
 			                    
 			                </div>
 			            </div>					
@@ -460,21 +460,49 @@
         <!-- 달력 -->
         <script>
             var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+         // 체크인 datepicker 설정
             $('#startDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: today,
                 maxDate: function () {
                     return $('#endDate').val();
+                },
+                onSelect: function (date) {
+                    // 체크인 날짜를 startDate의 값으로 설정
+                    $('#startDate').val(date); // 수정된 부분
+                    let selectedDate = $('#startDate').val(); // 수정된 부분
+                    console.log("체크인 날짜:", selectedDate); // 수정된 부분
+                },
+                defaultDate: today, // 오늘 날짜로 기본값 설정
+                onClose: function (selectedDate) {
+                    // 체크인을 선택하지 않았을 때, 오늘 날짜로 설정
+                    if (selectedDate === "") {
+                        $('#startDate').datepicker('setDate', today);
+                    }
                 }
             });
+
+            // 체크아웃 datepicker 설정
             $('#endDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: function () {
                     return $('#startDate').val();
+                },
+                onSelect: function (date) {
+                    console.log("체크아웃 날짜:", date);
+                },
+                onClose: function (selectedDate) {
+                    // 체크아웃을 선택하지 않았을 때, 다음 날짜로 설정
+                    if (selectedDate === "") {
+                        let tomorrow = new Date();
+                        tomorrow.setDate(tomorrow.getDate() + 1);
+                        $('#endDate').datepicker('setDate', tomorrow);
+                    }
                 }
             });
+
 
             /*하트*/
             const dislikeBtn = document.querySelector('.white');
@@ -626,6 +654,10 @@
         $(function(){
             selectReview();
         });
+        
+  
+    
+        
         </script>
 
    	<jsp:include page="../common/footer.jsp"/>

@@ -41,7 +41,6 @@
     #reser_info{
         width: 100%;
         height: 30%;
-        border-bottom: 1px solid rgb(150, 150, 150) ;
     }
 
     #price_info{
@@ -71,15 +70,15 @@
     }
 
     #reser_detail > p{
-        padding-top: 7px;
+        padding-top: 20px;
+        font-size : 20px;
     }
 
     #rser_select{
         width: 100%;
-        height: 55%;
+        height: 50%;
         padding-left: 90px;
         padding-top: 20px;
-        border-bottom: 1px solid rgb(150, 150, 150) ;
     }
 
     #reservation_name{
@@ -103,7 +102,6 @@
         height: 20%;
         padding-left: 90px;
         padding-top: 20px;
-        border-bottom: 1px solid rgb(150, 150, 150) ;
     }
 
     #reser_price_info > h3{
@@ -112,17 +110,16 @@
 
     #reser_payment {
         width: 50%;
-        height: 25%;
-        padding-left: 120px;
+        height: 30%;
         padding-top: 30px;
         margin: auto;
     }
 
     #reser_payment > button{
-        width: 400px;
-        height: 100px;
+        width: 600px;
+        height: 80px;
         border-radius: 20px;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 700;
         background-color: rgb(22, 160, 133);
     }
@@ -154,17 +151,19 @@
 
 </head>
 <body>
+
+
+	<jsp:include page="../common/header.jsp"/>	
                
     <div id="content">
-            <div id="reser_title"><h3><a href="#">◁</a>&nbsp;예약 및 결제</h3></div>
+            <div id="reser_title"><h3><a href="/bootcamping/camping/detail?contentId=${campNo }">◁</a>&nbsp;예약 및 결제</h3></div>
         <div id="detail">
             <div id="reser_info">
 
-                <div id="reser_hotel_img"><img src="gg.png" width="220px" height="220px"></div>
+                <div id="reser_hotel_img"><img src="${reserSite.campImg }" width="220px" height="220px"></div>
 
                 <div id="reser_detail">
-                    <h3>보물나라캠프</h3>
-                    <p>어쩌고사이트</p>
+                    <h3>${reserSite.campName } (${reserSite.siteName })</h3>
                     <p>2인</p>
                     <p>117,000원</p>
                     <p>2024-05-05 ~ 2024-05-06</p>
@@ -177,7 +176,7 @@
             
                 <div id="rser_select">
                     <h3>예약자 정보</h3> <br>
-
+				<form action="#" method="post">
                     <div id="reservation_name">
                         <p>예약자 이름</p> 
                         <input type="text" required placeholder="이름을 입력해주세요"><br><br>
@@ -187,9 +186,6 @@
                         <p>전화번호</p>
                         <input type="text" required placeholder="-를 제외하고 입력해주세요"> <br><br>
                     </div>
-
-                    <p>차량 번호</p>
-                    <input type="text" placeholder="차량번호를 입력해주세요">
                 </div>
 
                 <div id="reser_price_info">
@@ -199,24 +195,20 @@
                             <span class="on"></span>
                             <h4>신용카드</h4>
                         </label>
-                        <!--
-                        <label for="agree2" class="radio_box">
-                            <input type="radio" id="agree2" name="agree" value="무통장입금" />
-                            <span class="on"></span>
-                            무통장입금
-                        </label>
-                    -->
                 </div>
 
                 <div id="reser_payment">
                     <button class="btn btn-success">117,000원 결제하기</button>
-        
                 </div>
+                
+                </form>
             </div>
         </div>
 
     </div>
 
+	<br>
+	<jsp:include page="../common/footer.jsp"/>
  
 
 </body>

@@ -106,7 +106,23 @@ public class CampingController {
 		
 	}
 	
-	
+	/**
+	 * 
+	 */
+	@GetMapping("reservation")
+	public String campingReservation(@RequestParam("siteNo") int siteNo, Model model) {
+		
+		if(campingService.campingReservation(siteNo) != null) {
+			
+			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
+			
+			System.out.println(campingService.campingReservation(siteNo));
+			return "reservation/reservation";
+		}
+		
+		return "redirect:/";
+		
+	}
 	
  
 
