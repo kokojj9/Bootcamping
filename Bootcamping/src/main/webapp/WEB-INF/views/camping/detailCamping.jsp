@@ -422,7 +422,7 @@
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button class="btn btn-success">예약하기</button></a></div>
+			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button class="btn btn-success" id="campingReserBtn">예약하기</button></a></div>
 			                    
 			                </div>
 			            </div>					
@@ -448,7 +448,7 @@
         <!-- 후기 -->
         <div id="camp_review">
             <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="">더보기 > </a></div>
+            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
@@ -655,9 +655,23 @@
             selectReview();
         });
         
-  
-    
+ 
         
+        </script>
+        
+        
+        <script>
+        $(function() {
+            $("#campingReserBtn").click(function() {
+                // 세션의 loginUser가 null인지 확인
+				let loginUser = "${sessionScope.loginUser}";
+              	console.log(loginUser);
+                if (loginUser === null || loginUser === "") {
+                    // 세션이 없으면 로그인 페이지로 리다이렉트
+                    window.location.href = "/bootcamping/login"; // 로그인 페이지로 이동
+                }
+            });
+        });
         </script>
 
    	<jsp:include page="../common/footer.jsp"/>

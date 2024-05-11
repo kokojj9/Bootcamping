@@ -14,11 +14,21 @@ public class ReviewController {
 	@Autowired
 	private ReviewService reviewService;
 	
+	/**
+	 * 리뷰 조회
+	 */
 	@ResponseBody
 	@GetMapping(value="camping/reviewList", produces="application/json; charset=UTF-8")
 	public String selectReview(String campNo) {
 		return new Gson().toJson(reviewService.selectReview(campNo));
 	}
 	
+	/**
+	 * 리뷰 상세 조회
+	 */
+	@GetMapping("camping/review")
+	public String reviewList() {
+		return "review/reviewList";
+	}
 	
 }
