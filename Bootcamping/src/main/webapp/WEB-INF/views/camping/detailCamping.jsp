@@ -597,6 +597,10 @@
 	                    
 	                    let reviewResult = '';
 	                    
+	                    if(result.length === 0) {
+	                    	reviewResult += '<div><br><br><h5 style="text-align:center;">리뷰가 존재하지 않습니다<h5></div>'
+	               		} else {
+	                    
 	                    for(let i in result){
 	                    
 	                    reviewResult += '<div class="review_list">'
@@ -607,7 +611,8 @@
 	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
-	                    
+	                    	}
+	                    $('#reviewListSelect').html(reviewResult);
 	                    }
 
 	                  $('#reviewListSelect').html(reviewResult);
