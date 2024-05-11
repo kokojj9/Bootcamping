@@ -29,5 +29,9 @@ public class MemberRepository {
 	public int insertMember(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.insert("memberMapper.insertMember", member);
 	}
+
+	public String checkMemberId(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.checkMemberId", memberId);
+	}
 	
 }

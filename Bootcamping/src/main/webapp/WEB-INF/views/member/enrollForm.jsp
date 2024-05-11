@@ -16,9 +16,9 @@
         }
         .innerOuter {
             border: 1px solid lightgray;
-            width: 60%;
+            width: 40%;
             margin: auto;
-            padding: 5% 10%;
+            padding: 3% 7%;
             background-color: white;
         }
         #sample4_postcode, #sample4_roadAddress{
@@ -38,11 +38,11 @@
             margin-bottom: 5px;
         }
         #sample4_roadAddress{
-            width: 373px;
+            width: 310px;
         }
         #findAddressBtn, #checkEmailBtn, #checkAuthCode{
             width: 90px;
-            height: 30px;
+            height: 35px;
             background-color: #1dc078;
             color: #f6f6f6;
             border: 0;
@@ -65,31 +65,32 @@
 
             <form id="insertForm" action="members" method="post">
                 <div class="form-group">
-                    <label for="memberId">* 아이디 </label>											<!-- userId == setUserId(value값) -->
-                    <input type="text" class="form-control" id="memberId" placeholder="아이디를 입력해주세요" name="memberId" maxlength="12" required> <br>
-                    <div id="checkIdResult" style="font-size:0.7em; display:none;"></div>
+                    <label for="memberId">* 아이디 </label>											
+                    <input type="text" class="form-control" id="memberId" placeholder="아이디를 입력해주세요" name="memberId" maxlength="12" required>
+                    <div id="checkIdResult" style="font-size:12px; display:none;"></div><br>
 
                     <label for="memberPwd">* 비밀번호 </label>
-                    <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호를 입력해주세요" name="memberPwd" maxlength="16" required> <br>
-                    <div id="checkPwdResult" style="font-size:0.7em; display:none;"></div>
+                    <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호를 입력해주세요" name="memberPwd" maxlength="16" required>
+                    <div id="checkPwdResult" style="font-size:12px; display:none;"></div><br>
 
                     <label for="checkPwd">* 비밀번호 확인 </label>
-                    <input type="password" class="form-control" id="checkPwd" placeholder="비밀번호 확인" required> <br>
+                    <input type="password" class="form-control" id="checkPwd" placeholder="비밀번호 확인" required>
+                    <div id="overlapPwd" style="font-size:0.7em; display:none;"></div><br>
 
                     <label for="email"> &nbsp; 이메일 </label>
                     <button id="checkEmailBtn" type="button">메일 인증</button>
                     <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email" required> <br>
-                    <h6 id="count"></h6>
                     <input type="text" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" style="display: inline;  width: 250px; display:none;"> 
                     <button id="checkAuthCode" type="button" style="width: 150px; display:none;">인증번호 확인</button>
-                    <br>
+                    <h6 id="timer"></h6>
 
-                    <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;
-                    <input type="button" id="findAddressBtn" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
+                    <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;<br>
                     <input type="text" id="sample4_postcode" placeholder="우편번호">
+                    <input type="button" id="findAddressBtn" onclick="sample4_execDaumPostcode()" value="주소 찾기"><br>
                     <input type="text" id="sample4_roadAddress" placeholder="도로명주소">
                     <span id="guide" style="color:#999;display:none"></span>
                     <input type="text" id="sample4_detailAddress" class="form-control" placeholder="상세주소">
+                    <input type="hidden" id="address">
                 </div> 
                 <br>
                 <div class="btns" align="center">
@@ -115,7 +116,6 @@
             new daum.Postcode({
                 theme: themeObj,
                 oncomplete: function(data) {
-                    
                     var roadAddr = data.roadAddress;
                     var extraRoadAddr = '';
 
@@ -133,6 +133,7 @@
 
                     document.getElementById('sample4_postcode').value = data.zonecode;
                     document.getElementById("sample4_roadAddress").value = roadAddr;
+                    document.getElementById('address').value = data.zonecode + roadAddr + document.getElementById('sample4_detailAddress');
 
                     var guideTextBox = document.getElementById("guide");
                    
@@ -147,31 +148,31 @@
                 }
             }).open();
         }
-
-        // 아이디 중복체크
-        let memberIdTag = document.getElementById('memberId');
-        let memberPwdtag = document.getElementById('memberPwd');
-        let checkIdResult = document.getElementById('checkIdResult');
-        let checkPwdResult = document.getElementById('checkPwdResult');
-        let enrollFormSubmit = document.getElementById('joinBtn');
         
+        let checkPwdResult = document.getElementById('checkPwdResult');
+        let checkIdResult = document.getElementById('checkIdResult');
+        let enrollFormSubmit = document.getElementById('joinBtn');
+        let overlapPwdTag = document.getElementById('overlapPwd');
+        let memberPwdtag = document.getElementById('memberPwd');
+        let memberIdTag = document.getElementById('memberId');
+        let checkPwd = document.getElementById('checkPwd');
+        
+        // 아이디 중복체크
         memberIdTag.onkeyup = () => {
             let regExp = /^[a-zA-Z0-9]+$/;
 
             if(regExp.test(memberIdTag.value)){
-                checkIdResult.style.display = 'none';
+                checkIdResult.style.display = 'block';
 
                 if(memberIdTag.value.length >= 5){
                     $.ajax({
                         url : 'members/' + memberIdTag.value,
                         type : 'GET',
                         success : result => {
-                            let resultSubstring = result.substr(4);
-
-                            if (resultSubstring === 'N') {
-                                checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)', true)
-                            } else {
+                            if (result === '') {
                                 checkInfo('id', 'green', '사용 가능한 아이디입니다.', false)
+                            } else {
+                                checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)', true)
                             };
                         }
                     });
@@ -186,25 +187,24 @@
         memberPwdtag.onkeyup = () => {
             let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
 
-            if(regExp.test(memberPwdtag.value)){
-                checkInfo('password', 'green', '사용가능한 비밀번호입니다.')
-            }
-            else {
-                checkInfo('password', 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.')
-            };
+            if(regExp.test(memberPwdtag.value)) checkInfo('password', 'green', '사용가능한 비밀번호입니다.', false)
+            else checkInfo('password', 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.', true)
+        };
+
+        checkPwd.onkeyup = () => {
+            if(memberPwdtag.value == checkPwd.value) checkInfo('overlapPwd', 'green', '비밀번호 확인', false)
+            else checkInfo('overlapPwd', 'crimson', '비밀번호 불일치', true)
         };
         
         // 정규표현식에 맞지않으면 경고문구 표시
         const checkInfo = (type, color, text, message) => {
-            let checkItem =  type == 'id' ? checkIdResult : checkPwdResult;
+            let checkItem =  type == 'id' ? checkIdResult : type == 'password' ? checkPwdResult : overlapPwdTag;
             
             enrollFormSubmit.disabled = message;
             checkItem.style.display = 'block';
             checkItem.style.color = color;
             checkItem.textContent = text;
         };
-
-        // 전화번호
 
         // 이메일 인증
         document.getElementById('checkEmailBtn').onclick = () => {
@@ -228,17 +228,18 @@
 
                             let totalTime = 180;
 
-                            let countdown = setInterval(function() {
-                                let minutes = Math.floor(totalTime / 60);
-                                let seconds = totalTime % 60;
+                            let countdown = setInterval(() => {
+                                if(totalTime > 0) {
+                                    totalTime--;
+                                    let minutes = Math.floor(totalTime / 60);
+                                    let seconds = totalTime % 60;
 
-                                document.getElementById(count).textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-
-                                totalTime--;
-
-                                if (totalTime < 0) {
+                                    document.getElementById('timer').textContent = (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+                                }
+                                else {
                                     clearInterval(countdown);
-                                    timerElement.textContent = '인증 시간이 끝났습니다';
+                                    document.getElementById('timer').textContent = '인증 시간이 끝났습니다';
+                                    enrollFormSubmit.disabled = true;
                                 }
                             }, 1000);
                         }
@@ -249,11 +250,6 @@
                 });
             }
         };
-		
-        // submit
-		enrollFormSubmit.onclick = () => {
-			document.getElementById('insertForm').submit();
-		}
 
     </script>
 

@@ -65,8 +65,10 @@ public class MailCheckController {
 			impl.setPassword(getProperties().getProperty("password"));
 			impl.setHost(getProperties().getProperty("host"));
 			
-			prop.put("mail.smtp.starttls.enable", true);
-			prop.put("mail.smtp.auth", true);
+			prop.put("mail.smtp.ssl.trust", getProperties().getProperty("host"));
+			prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
+			prop.put("mail.smtp.starttls.enable", "true");
+			prop.put("mail.smtp.auth", "true");
 			
 			impl.setJavaMailProperties(prop);
 			

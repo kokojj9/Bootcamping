@@ -111,7 +111,14 @@
 		       EMAIL = #{ email }
 	</select>
 
-
+	<select id="checkMemberId" parameterType="string" resultType="string">
+		SELECT
+		       MEMBER_ID
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       MEMBER_ID = #{ memberId }
+	</select>
 
 
 

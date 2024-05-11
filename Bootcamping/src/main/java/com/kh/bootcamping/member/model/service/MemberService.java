@@ -16,4 +16,6 @@ public interface MemberService {
 
 	String checkAuthCode(Map<String, String> auth);
 
+	String checkMemberId(String memberId);
+
 }

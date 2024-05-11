@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bootcamping.member.model.service.MemberService;
@@ -101,6 +103,13 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	// 아이디 중복 체크
+	@ResponseBody
+	@GetMapping("members/{memberId}")
+	public String checkMemberId(@PathVariable(value = "memberId") String memberId) {
+		return memberService.checkMemberId(memberId);
 	}
 	
 	
