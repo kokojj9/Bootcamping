@@ -91,8 +91,13 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("members")
-	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(Member member, String postcode,
+									 String roadAddress, String detailAddress,
+									 HttpSession session, ModelAndView mv) {
+		
+		String address = postcode + roadAddress + detailAddress;
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setAddress(address);
 		member.setMemberPwd(encPwd);
 		
 		if(memberService.insertMember(member) > 0) {
