@@ -223,16 +223,20 @@
 
     .review_list{border: 1px solid lightgray; border-radius: 20px; height: 280px; margin-top: 20px;}
 
-    .review_list p{text-align: right; padding-right: 30px;}
+    .review_list p{text-align: right; padding-right: 30px; padding-top : 5px;}
 
     .review_stroy{width: 100%;}
 
-    .review_list h4{padding-left: 20px; margin-right: 10px;}
+    .review_list h4{padding-left: 20px; padding-top: 15px; font-size : 25px;}
 
     .memberName{float: left;}
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
-
+	
+	.story_text > p { font-size : 20px; text-align : left; padding-left : 10px;}
+    
+    #reviewTitle > h4{ padding-top : 15px;}
+    
     .review_img{
     	float: left; 
     	margin-left: 20px; 
@@ -442,10 +446,12 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <h4>후기(<span id="reviewCount"></span>)</h4>
+            <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
             <div id="reviewEtc"><a href="">더보기 > </a></div>
             
+            <div id="reviewListSelect">
             
+            </div>
  
 
         </div>
@@ -597,14 +603,14 @@
 	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
 	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
-	                    			  + '<div class="story_text">'+result[i].reviewContent+'</div>'                    			  
+	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
 	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    
 	                    }
 
-	                  $('#reviewEtc').html(reviewResult);
+	                  $('#reviewListSelect').html(reviewResult);
 	                 
 	                    
 	                }
