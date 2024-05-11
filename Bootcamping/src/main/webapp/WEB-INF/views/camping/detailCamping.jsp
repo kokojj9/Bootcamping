@@ -276,9 +276,9 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
-            <div id="checkIn"><input id="startDate" width="200" value="" placeholder="체크인"/></div>
-            <div id="checkOut"><input id="endDate" width="200"  value="" placeholder="체크아웃"/></div>
-            <div id="selectPeople"><input id="countPeople" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
+            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
+            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
+            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
 
         </div>
 
@@ -422,7 +422,7 @@
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button class="btn btn-success" id="campingReserBtn">예약하기</button></a></div>
+			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button type="submit" class="btn btn-success" id="campingReserBtn">예약하기</button></a></div>
 			                    
 			                </div>
 			            </div>					
@@ -448,7 +448,7 @@
         <!-- 후기 -->
         <div id="camp_review">
             <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
+            <div id="reviewEtc"><a href="/bootcamping/camping/e">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
