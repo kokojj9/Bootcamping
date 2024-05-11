@@ -16,5 +16,6 @@ public class Site {
 	private String sitePath;
 	private String siteYn;
 	private int sitePrice;
+	private String typeName;
 	
 }

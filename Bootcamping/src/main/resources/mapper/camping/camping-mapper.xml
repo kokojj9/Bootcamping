@@ -34,6 +34,7 @@
 		<result column="SITE_PATH" property="sitePath" />
 		<result column="SITE_YN" property="siteYn" />
 		<result column="SITE_PRICE" property="sitePrice" />
+		<result column="TYPE_NAME" property="typeName" />
 	</resultMap>
 		
 	
@@ -65,7 +66,8 @@
 			SELECT
 			        SITE_PATH,
 			        SITE_NAME,
-			        SITE_PRICE
+			        SITE_PRICE,
+			        TYPE_NAME
 			  FROM
 			        TB_SITE
 			  LEFT     
@@ -73,6 +75,8 @@
 			        TB_PRICE ON (TB_PRICE.TYPE_CODE = TB_SITE.TYPE_CODE)
 			  JOIN
 			        TB_CAMP ON (TB_CAMP.CAMP_NO = TB_SITE.CAMP_NO)
+			  JOIN
+			  		TB_TYPE ON (TB_TYPE.TYPE_CODE = TB_PRICE.TYPE_CODE)
 			 WHERE
 			        TB_CAMP.CAMP_NO = #{campNo}
 			ORDER

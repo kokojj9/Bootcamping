@@ -17,7 +17,6 @@ public class ReviewController {
 	@ResponseBody
 	@GetMapping(value="camping/reviewList", produces="application/json; charset=UTF-8")
 	public String selectReview(String campNo) {
-		System.out.println(reviewService.selectReview(campNo));
 		return new Gson().toJson(reviewService.selectReview(campNo));
 	}
 	

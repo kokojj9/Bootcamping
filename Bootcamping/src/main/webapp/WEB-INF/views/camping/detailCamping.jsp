@@ -211,7 +211,7 @@
         padding-top: 10px;
     }
 
-    .siteName p {padding-top: 50px; font-size: 20px; margin-left: 20px;}
+    .siteName p, h5 {padding-top: 10px; margin-left: 20px;}
 
     .btn-success {background-color: rgb(22, 160, 133); }
 
@@ -420,8 +420,8 @@
 			            <div class="siteList">
 			                <div class="siteImg"><img src="../${site.sitePath }" width="255"></div>
 			                <div class="siteName">
-			                    <h4>${site.siteName }</h4>
-			                    <p>${site.sitePrice}원</p>
+			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
+			                    <h5>${site.sitePrice}원</h5>
 			                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
 			                </div>
 			            </div>					
