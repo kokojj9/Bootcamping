@@ -77,11 +77,30 @@
                         <button type="button" class="enrollForm">회원가입</button>
                     </div>
                 </form>
+
+                <div id="socialLoginArea">
+                    <div id="kakaoBtn">
+                        <img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼">
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
     
 	<jsp:include page="../common/footer.jsp"/>
+
+    <script>
+        document.getElementById('kakaoBtn').onclick = () => {
+            location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=85c39dbc1ec627a28e9a0f8c3d432556&redirect_uri=http://localhost:8001/bootcamping/kakaoLogin&response_type=code&scope=profile_image,profile_nickname';
+        };
+    
+    
+    
+    
+    </script>
+
 
 </body>
 </html>
