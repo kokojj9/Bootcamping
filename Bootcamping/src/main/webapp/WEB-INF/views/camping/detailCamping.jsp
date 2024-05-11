@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">
         
@@ -233,9 +233,19 @@
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
 
-    .review_img{float: left; width: 25%; margin-left: 20px; margin-top: 10px;}
+    .review_img{
+    	float: left; 
+    	margin-left: 20px; 
+    	margin-top: 10px;
+    	width : 180px;
+    	height : 180px;
+    }
     
-    .review_img img {border-radius: 20px;}
+    .review_img img {
+	    border-radius: 20px;     	
+	    width : 180px;
+	    height : 180px;
+	   }
     
     #service_list > p { width : 550px; }
     
@@ -432,39 +442,11 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <h4>후기(0)</h4>
+            <h4>후기(<span id="reviewCount"></span>)</h4>
             <div id="reviewEtc"><a href="">더보기 > </a></div>
             
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
-
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
             
+ 
 
         </div>
 
@@ -590,7 +572,48 @@
 	
 			$('.carousel-inner').html(str);	
 			
+			
+			/*리뷰*/
+			
+			let campNo = "${camping.campNo}";
+			
+			function selectReview(){
+	            $.ajax({
+	                url : 'reviewList',
+	                type : 'get',
+	                data : {campNo : campNo},
+	                success : result => {
+	                    console.log(result);
+	                    
+	      				const total = result.length;
+	      				
+	      				$('#reviewCount').text(total);
+	                    
+	                    let reviewResult = '';
+	                    
+	                    for(let i in result){
+	                    
+	                    reviewResult += '<div class="review_list">'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
+	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
+	                    			  + '<div class="review_stroy">'
+	                    			  + '<div class="story_text">'+result[i].reviewContent+'</div>'                    			  
+	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
+	                    			  + '</div>'
+	                    			  + '</div>'
+	                    
+	                    }
 
+	                  $('#reviewEtc').html(reviewResult);
+	                 
+	                    
+	                }
+	            });
+        }
+        
+        $(function(){
+            selectReview();
+        });
         </script>
 
    	<jsp:include page="../common/footer.jsp"/>

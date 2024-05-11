@@ -107,14 +107,7 @@ public class CampingController {
 	}
 	
 	
-	/**
-	 * 캠핑장 사진 
-	 
-	@ResponseBody
-	@GetMapping(value="camping.img", produces="application/json; charset=UTF-8")
-	public String campingImgList()
-	*/
-
+	
  
 
 
