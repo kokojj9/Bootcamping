@@ -116,7 +116,6 @@ public class CampingController {
 			
 			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
 			
-			System.out.println(campingService.campingReservation(siteNo));
 			return "reservation/reservation";
 		}
 		

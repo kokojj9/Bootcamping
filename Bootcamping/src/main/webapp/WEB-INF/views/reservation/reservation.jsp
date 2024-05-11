@@ -28,7 +28,7 @@
     
     #reser_title > h3 {
         margin-top: 35px;
-        margin-left: 20px;
+        margin-left: 70px;
     }
 
     #reser_title > h3 > a{
@@ -156,7 +156,7 @@
 	<jsp:include page="../common/header.jsp"/>	
                
     <div id="content">
-            <div id="reser_title"><h3><a href="/bootcamping/camping/detail?contentId=${campNo }">◁</a>&nbsp;예약 및 결제</h3></div>
+            <div id="reser_title"><h3><a href="/bootcamping/camping/detail?contentId=${reserSite.campNo}">◁</a>&nbsp;예약 및 결제</h3></div>
         <div id="detail">
             <div id="reser_info">
 
