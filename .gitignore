@@ -2,3 +2,4 @@
 .settings
 target
 Servers
+Bootcamping/src/main/resources/configProperties/admin.properties

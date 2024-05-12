@@ -1,5 +1,7 @@
 package com.kh.bootcamping.member.model.service;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,31 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Member login(Member member) {
 		return memberRepository.login(sqlSession, member);
+	}
+
+	@Override
+	public int insertAuthCode(Map<String, String> auth) {
+		return memberRepository.insertAuthCode(sqlSession, auth);
+	}
+
+	@Override
+	public int insertMember(Member member) {
+		return memberRepository.insertMember(sqlSession, member);
+	}
+
+	@Override
+	public String checkMemberEmail(String email) {
+		return memberRepository.checkMemberEmail(sqlSession, email);
+	}
+
+	@Override
+	public String checkAuthCode(Map<String, String> auth) {
+		return memberRepository.checkAuthCode(sqlSession, auth);
+	}
+
+	@Override
+	public String checkMemberId(String memberId) {
+		return memberRepository.checkMemberId(sqlSession, memberId);
 	}
 
 }

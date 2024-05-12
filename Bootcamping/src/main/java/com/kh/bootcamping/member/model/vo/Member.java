@@ -3,22 +3,27 @@ package com.kh.bootcamping.member.model.vo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Member {
 	
 	private String memberNo;
 	private String memberId;
 	private String memberPwd;
-	private String memberName;
-	private String BirthDay;
-	private String phone;
+	private String birthDay;
 	private String address;
 	private String email;
 	private String enrollDate;
 	private String updateDate;
 	private String status;
+	private String privilege;
 		
 }

@@ -9,40 +9,115 @@
 		<result column="MEMBER_NO"   property="memberNo"/>
 		<result column="MEMBER_ID"   property="memberId"/>
 		<result column="MEMBER_PWD"  property="memberPwd"/>
-		<result column="MEMBER_NAME" property="memberName"/>
 		<result column="BIRTHDAY"    property="birthDay"/>
-		<result column="PHONE"       property="phone"/>
 		<result column="ADDRESS"     property="address"/>
 		<result column="EMAIL"       property="email"/>
 		<result column="ENROLL_DATE" property="enrollDate"/>
 		<result column="UPDATE_DATE" property="updateDate"/>
 		<result column="STATUS"      property="status"/>
+		<result column="PRIVILEGE"   property="privilege"/>
 	</resultMap>
 
 	<select id="login" parameterType="member" resultMap="memberResultSet">
 		SELECT 
 			   MEMBER_NO,
-			   MEMBER_ID,
-		 	   MEMBER_PWD,
-		  	   MEMBER_NAME,
-		  	   BIRTHDAY,
-		       PHONE,
+		       MEMBER_ID,
+		       MEMBER_PWD,
+		       BIRTHDAY,
 		       ADDRESS,
-		   	   EMAIL,
+		       EMAIL,
 		       ENROLL_DATE,
-		       MODIFY_DATE,
-		       STATUS 
+		       UPDATE_DATE,
+		       STATUS,
+		       PRIVILEGE
           FROM 
           	   TB_MEMBER 
          WHERE 
-         	   MEMBER_ID = #{memberId}
+         	   MEMBER_ID = #{ memberId }
 		   AND 
 		   	   STATUS = 'Y'
 	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		INSERT
+		  INTO
+		       TB_MEMBER
+		       (
+		       MEMBER_NO,
+		       MEMBER_ID,
+		       MEMBER_PWD,
+		       BIRTHDAY,
+		       ADDRESS,
+		       EMAIL,
+		       ENROLL_DATE,
+		       UPDATE_DATE,
+		       STATUS,
+		       PRIVILEGE
+		       )
+		VALUES
+		       (
+		       SEQ_MEMBERNO.NEXTVAL,
+		       #{ memberId },
+		       #{ memberPwd },
+		       #{ birthDay },
+		       #{ address },
+		       #{ email },
+		       SYSDATE,
+		       SYSDATE,
+		       DEFAULT,
+		       DEFAULT
+		       )
+	</insert>
+	
+	<insert id="insertAuthCode" parameterType="hashmap">
+		INSERT
+		  INTO
+		       TB_AUTHCODE
+		       (
+		       AUTHDATE,
+			   EMAIL,
+			   REMOTEADDR,
+			   CODE
+		       )
+		VALUES
+		       (
+		       SYSDATE,
+		       #{ email },
+		       #{ remoteAddr },
+		       #{ code }
+		       )
+	</insert>
+	
+	<select id="checkAuthCode" parameterType="hashmap" resultType="string">
+		SELECT
+		       CODE
+		  FROM
+		       TB_AUTHCODE
+		 WHERE
+		       REMOTEADDR = #{ remoteAddr }
+		   AND       
+		       CODE = #{ authCode }
+		   AND
+		   	   EMAIL = #{ email }
+	</select>
+	
+	<select id="checkMemberEmail" parameterType="string" resultType="string">
+		SELECT
+		       EMAIL
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       EMAIL = #{ email }
+	</select>
 
-
-
-
+	<select id="checkMemberId" parameterType="string" resultType="string">
+		SELECT
+		       MEMBER_ID
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       MEMBER_ID = #{ memberId }
+	</select>
 
 
 

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부트캠핑 - 로그인</title>
 
     <style>
         #login-wrap {
@@ -25,7 +25,7 @@
 
         .login_form {
             width: 300px;
-            height: 150px;
+            height: 100px;
             margin: 25px auto;
         }
 
@@ -35,19 +35,28 @@
         }
 
         .login_btn > button{
-            width: 120px;
+            width: 137px;
             border: 0;
             border-radius: 5px;
             height: 40px;
-            font-size: 18px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 600;
         }
 
         .login { 
-            margin-left: 20px;
             margin-right: 20px;
             background-color: #1dc078;
             color: #f6f6f6;
+        }
+
+        #socialLoginArea{
+            margin: 20px auto;
+            width: 300px;
+            height: 200px;
+        }
+        #kakaoBtn{
+            width: 300px;
+            height: 100px;
         }
 
     </style>
@@ -63,25 +72,41 @@
                     <div class="">부트캠프 로그인</div>
                 </div>
         
-                <form action="login.member" method="post">
+                <form action="members/login" method="post">
                     <div class="login_form">
-                        <label for="userId" class="">아이디 : </label>
+                        <label for="memberId" class="">아이디 : </label>
                         <input type="text" class="" placeholder="아이디" id="memberId" name="memberId"> <br>
-                        <label for="userPwd" class="">비밀번호 : </label>
+                        <label for="memberPwd" class="">비밀번호 : </label>
                         <input type="password" class="" placeholder="비밀번호" id="memberPwd" name="memberPwd"> <br>
                         <input type="checkbox" name="rememberId" value="true"> 아이디 저장
                     </div>
                            
                     <div class="login_btn">
                         <button type="submit" class="login">로그인</button>
-                        <button type="button" class="enroll">회원가입</button>
+                        <button type="button" class="enrollForm">회원가입</button>
                     </div>
                 </form>
+
+                <div id="socialLoginArea">
+                    <div id="kakaoBtn">
+                        <a href="kakaoLoginForm"><img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼"></a>
+                    </div>
+                </div>
+
+
             </div>
         </div>
     </div>
     
 	<jsp:include page="../common/footer.jsp"/>
+
+    <script>
+    
+    
+    
+    
+    </script>
+
 
 </body>
 </html>
