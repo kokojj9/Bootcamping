@@ -89,6 +89,13 @@ public class MemberController {
 		return "member/enrollForm";
 	}
 	
+	//아이디 중복체크
+	@ResponseBody
+	@GetMapping("members/{memberId}")
+	public String checkMemberId(@PathVariable(name = "memberId") String memberId) {
+		return memberService.checkMemberId(memberId);
+	}
+	
 	//회원 가입 메서드
 	@PostMapping("members")
 	public ModelAndView insertMember(Member member, String postcode,

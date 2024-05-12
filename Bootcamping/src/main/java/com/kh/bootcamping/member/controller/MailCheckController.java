@@ -28,10 +28,7 @@ public class MailCheckController {
 	
 	@Autowired
 	private MemberService memberService;
-	/*
-	@Autowired
-	private JavaMailSenderImpl sender;
-	*/
+
 	private Properties getProperties() {
 		Properties prop = new Properties();
 		String sqlfile = MailCheckController.class.getResource("/configProperties/admin.properties").getPath();
@@ -51,7 +48,7 @@ public class MailCheckController {
 	 * @throws MessagingException
 	 */
 	@ResponseBody
-	@PostMapping("mail")
+	@PostMapping(value="mail", produces = "application/json; charset=UTF-8")
 	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
 		if(memberService.checkMemberEmail(email) != null) {
 			return "NNNNN";
