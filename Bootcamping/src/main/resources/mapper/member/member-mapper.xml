@@ -88,18 +88,17 @@
 		       )
 	</insert>
 	
-	<select id="checkAuthCode" parameterType="hashmap">
+	<select id="checkAuthCode" parameterType="hashmap" resultType="string">
 		SELECT
-		       DATE,
-		       EMAIL,
-		       REMOTEADDR,
 		       CODE
 		  FROM
 		       TB_AUTHCODE
 		 WHERE
 		       REMOTEADDR = #{ remoteAddr }
 		   AND       
-		       CODE = #{ code }
+		       CODE = #{ authCode }
+		   AND
+		   	   EMAIL = #{ email }
 	</select>
 	
 	<select id="checkMemberEmail" parameterType="string" resultType="string">
@@ -111,7 +110,14 @@
 		       EMAIL = #{ email }
 	</select>
 
-
+	<select id="checkMemberId" parameterType="string" resultType="string">
+		SELECT
+		       MEMBER_ID
+		  FROM
+		       TB_MEMBER
+		 WHERE
+		       MEMBER_ID = #{ memberId }
+	</select>
 
 
 

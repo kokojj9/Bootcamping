@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bootcamping.member.model.service.MemberService;
@@ -89,8 +91,13 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("members")
-	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(Member member, String postcode,
+									 String roadAddress, String detailAddress,
+									 HttpSession session, ModelAndView mv) {
+		
+		String address = postcode + roadAddress + detailAddress;
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setAddress(address);
 		member.setMemberPwd(encPwd);
 		
 		if(memberService.insertMember(member) > 0) {
@@ -101,6 +108,13 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	// 아이디 중복 체크
+	@ResponseBody
+	@GetMapping("members/{memberId}")
+	public String checkMemberId(@PathVariable(value = "memberId") String memberId) {
+		return memberService.checkMemberId(memberId);
 	}
 	
 	

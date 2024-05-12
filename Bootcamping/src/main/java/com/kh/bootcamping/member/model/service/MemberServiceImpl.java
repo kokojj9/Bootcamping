@@ -43,4 +43,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.checkAuthCode(sqlSession, auth);
 	}
 
+	@Override
+	public String checkMemberId(String memberId) {
+		return memberRepository.checkMemberId(sqlSession, memberId);
+	}
+
 }
