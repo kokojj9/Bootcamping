@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.bootcamping.common.template.PropertyTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
 
 @Controller
@@ -28,23 +29,11 @@ public class MailCheckController {
 	
 	@Autowired
 	private MemberService memberService;
-	/*
+
 	@Autowired
-	private JavaMailSenderImpl sender;
-	*/
-	private Properties getProperties() {
-		Properties prop = new Properties();
-		String sqlfile = MailCheckController.class.getResource("/configProperties/admin.properties").getPath();
-		try {
-			prop.load(new FileInputStream(sqlfile));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return prop;
-	}
+	private PropertyTemplate pt;
 	
-	/***
+	/**
 	 * 인증코드 전송 메서드
 	 * @param email 사용자가 입력한 이메일
 	 * @param request 
@@ -60,12 +49,12 @@ public class MailCheckController {
 			JavaMailSenderImpl impl = new JavaMailSenderImpl();
 			Properties prop = new Properties();
 
-			impl.setPort(Integer.parseInt(getProperties().getProperty("port")));
-			impl.setUsername(getProperties().getProperty("username"));
-			impl.setPassword(getProperties().getProperty("password"));
-			impl.setHost(getProperties().getProperty("host"));
+			impl.setPort(Integer.parseInt(pt.getProperties().getProperty("port")));
+			impl.setUsername(pt.getProperties().getProperty("username"));
+			impl.setPassword(pt.getProperties().getProperty("password"));
+			impl.setHost(pt.getProperties().getProperty("host"));
 			
-			prop.put("mail.smtp.ssl.trust", getProperties().getProperty("host"));
+			prop.put("mail.smtp.ssl.trust", pt.getProperties().getProperty("host"));
 			prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
 			prop.put("mail.smtp.starttls.enable", "true");
 			prop.put("mail.smtp.auth", "true");
@@ -93,6 +82,10 @@ public class MailCheckController {
 		}
 	}
 	
+	/**
+	 * 인증코드 생성 메서드
+	 * @return
+	 */
 	private String getAuthCode() {
 		Random r = new Random();
 		int i = r.nextInt(100000);
