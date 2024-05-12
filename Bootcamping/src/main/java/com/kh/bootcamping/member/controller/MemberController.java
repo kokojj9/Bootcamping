@@ -117,13 +117,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 아이디 중복 체크
-	@ResponseBody
-	@GetMapping("members/{memberId}")
-	public String checkMemberId(@PathVariable(value = "memberId") String memberId) {
-		return memberService.checkMemberId(memberId);
-	}
-	
 	
 	//마이페이지 메서드
 	
