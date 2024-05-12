@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">
         
@@ -73,24 +73,29 @@
     }
 
     #checkOut{
-        width: 30%;
+        width: 20%;
         height: 100%;
         float: left;
-        padding-right: 30px;
+        padding-right: 50px;
     }
 
     #selectPeople{
-        width: 30%;
+        width: 15%;
         height: 100%;
         float: left;
-        padding-right: 180px;
+        padding-top: 30px;
+    }
+    
+        
+    #selectDate{
+        padding-top: 30px;
     }
 
     #countPeople::placeholder{
         padding-left: 10px;
     }
 
-    #checkIn, #checkOut, #selectPeople{
+    #checkIn, #checkOut{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -103,6 +108,10 @@
         border-radius: 5px;
         width: 120px; 
         height: 40px; 
+    }
+    
+    #selectDateBtn{
+    	width : 70px;
     }
 
     #camp_thumbnail{
@@ -211,7 +220,7 @@
         padding-top: 10px;
     }
 
-    .siteName p {padding-top: 50px; font-size: 20px; margin-left: 20px;}
+    .siteName p, h5 {padding-top: 10px; margin-left: 20px;}
 
     .btn-success {background-color: rgb(22, 160, 133); }
 
@@ -223,19 +232,33 @@
 
     .review_list{border: 1px solid lightgray; border-radius: 20px; height: 280px; margin-top: 20px;}
 
-    .review_list p{text-align: right; padding-right: 30px;}
+    .review_list p{text-align: right; padding-right: 30px; padding-top : 5px;}
 
     .review_stroy{width: 100%;}
 
-    .review_list h4{padding-left: 20px; margin-right: 10px;}
+    .review_list h4{padding-left: 20px; padding-top: 15px; font-size : 25px;}
 
     .memberName{float: left;}
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
-
-    .review_img{float: left; width: 25%; margin-left: 20px; margin-top: 10px;}
+	
+	.story_text > p { font-size : 20px; text-align : left; padding-left : 10px;}
     
-    .review_img img {border-radius: 20px;}
+    #reviewTitle > h4{ padding-top : 15px;}
+    
+    .review_img{
+    	float: left; 
+    	margin-left: 20px; 
+    	margin-top: 10px;
+    	width : 180px;
+    	height : 180px;
+    }
+    
+    .review_img img {
+	    border-radius: 20px;     	
+	    width : 180px;
+	    height : 180px;
+	   }
     
     #service_list > p { width : 550px; }
     
@@ -262,10 +285,12 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
-            <div id="checkIn"><input id="startDate" width="200" placeholder="체크인"/></div>
-            <div id="checkOut"><input id="endDate" width="200"  placeholder="체크아웃"/></div>
-            <div id="selectPeople"><input id="countPeople" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
-
+	       <!--<form action="select" Method="get">-->
+	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
+	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
+	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
+				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="조회"/></div>
+			<!--</form>-->
         </div>
 
         <!-- 캠핑장 사진 -->
@@ -406,9 +431,10 @@
 			            <div class="siteList">
 			                <div class="siteImg"><img src="../${site.sitePath }" width="255"></div>
 			                <div class="siteName">
-			                    <h4>${site.siteName }</h4>
-			                    <p>${site.sitePrice}원</p>
-			                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
+			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
+			                    <h5>${site.sitePrice}원</h5>
+			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button type="submit" class="btn btn-success" id="campingReserBtn">예약하기</button></a></div>
+			                    
 			                </div>
 			            </div>					
 					</c:forEach>
@@ -432,60 +458,62 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <h4>후기(0)</h4>
-            <div id="reviewEtc"><a href="">더보기 > </a></div>
+            <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
+            <div id="reviewEtc"><a href="/bootcamping/camping/e">더보기 > </a></div>
             
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
-
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
+            <div id="reviewListSelect">
             
+            </div>
+ 
 
         </div>
 
         <!-- 달력 -->
         <script>
             var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+         // 체크인 datepicker 설정
             $('#startDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: today,
                 maxDate: function () {
                     return $('#endDate').val();
+                },
+                onSelect: function (date) {
+                    // 체크인 날짜를 startDate의 값으로 설정
+                    $('#startDate').val(date); // 수정된 부분
+                    let selectedDate = $('#startDate').val(); // 수정된 부분
+                    console.log("체크인 날짜:", selectedDate); // 수정된 부분
+                },
+                defaultDate: today, // 오늘 날짜로 기본값 설정
+                onClose: function (selectedDate) {
+                    // 체크인을 선택하지 않았을 때, 오늘 날짜로 설정
+                    if (selectedDate === "") {
+                        $('#startDate').datepicker('setDate', today);
+                    }
                 }
             });
+
+            // 체크아웃 datepicker 설정
             $('#endDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: function () {
                     return $('#startDate').val();
+                },
+                onSelect: function (date) {
+                    console.log("체크아웃 날짜:", date);
+                },
+                onClose: function (selectedDate) {
+                    // 체크아웃을 선택하지 않았을 때, 다음 날짜로 설정
+                    if (selectedDate === "") {
+                        let tomorrow = new Date();
+                        tomorrow.setDate(tomorrow.getDate() + 1);
+                        $('#endDate').datepicker('setDate', tomorrow);
+                    }
                 }
             });
+
 
             /*하트*/
             const dislikeBtn = document.querySelector('.white');
@@ -590,8 +618,86 @@
 	
 			$('.carousel-inner').html(str);	
 			
+			
+			/*리뷰*/
+			
+			let campNo = "${camping.campNo}";
+			
+			function selectReview(){
+	            $.ajax({
+	                url : 'reviewList',
+	                type : 'get',
+	                data : {campNo : campNo},
+	                success : result => {
+	                    console.log(result);
+	                    
+	      				const total = result.length;
+	      				
+	      				$('#reviewCount').text(total);
+	                    
+	                    let reviewResult = '';
+	                    
+	                    if(result.length === 0) {
+	                    	reviewResult += '<div><br><br><h5 style="text-align:center;">리뷰가 존재하지 않습니다<h5></div>'
+	               		} else {
+	                    
+	                    for(let i in result){
+	                    
+	                    reviewResult += '<div class="review_list">'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
+	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
+	                    			  + '<div class="review_stroy">'
+	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
+	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
+	                    			  + '</div>'
+	                    			  + '</div>'
+	                    	}
+	                    $('#reviewListSelect').html(reviewResult);
+	                    }
 
+	                  $('#reviewListSelect').html(reviewResult);
+	                 
+	                    
+	                }
+	            });
+        }
+        
+        $(function(){
+            selectReview();
+        });
+        
+ 
+        
         </script>
+        
+        <script>
+        	function AllReser(){
+        		
+        		let startDate = $('#startDate').val();
+        		let endDate = $('#endDate').val();
+        		let countPeople = $('#countPeople').val();
+        		let campNo = "${camping.campNo}";
+        		
+        		$.ajax({
+        			
+        			url : '/bootcamping/camping/selectDate',
+        			type : 'post',
+        			data : {startDate : startDate,
+	        				endDate : endDate,
+	        				countPeople : countPeople,
+	        				campNo : campNo
+        				},
+        			success : result => {
+        				console.log(result);
+        			}
+        			
+        		})
+        		
+        	}  
+        	
+        </script>
+        
+        
 
    	<jsp:include page="../common/footer.jsp"/>
    	

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.bootcamping.camping.model.dao.CampingRepository;
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.Site;
+import com.kh.bootcamping.reservation.model.vo.Reservation;
 
 @Service
 public class CampingServiceImpl implements CampingService {
@@ -27,6 +28,11 @@ public class CampingServiceImpl implements CampingService {
 	@Override
 	public List<Site> siteList(String campNo) {
 		return campingRepository.siteList(sqlSession, campNo);
+	}
+
+	@Override
+	public Site campingReservation(int siteNo) {
+		return campingRepository.campingReservation(sqlSession, siteNo);
 	}
 	
 

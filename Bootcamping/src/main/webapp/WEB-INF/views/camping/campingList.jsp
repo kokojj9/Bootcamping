@@ -452,23 +452,7 @@
 		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다.
 		
 		
-		/*
-		/*사진
-		let campNo = "${camping.campNo}";
 		
-		window.onload = function(){
-			
-			$.ajax({
-				url : 'camping.img',
-				data : {campNo : campNo},
-				success : result => {
-					console.log(result)
-				}
-				
-			})
-			
-		}
-		*/
 		
 
 	</script>
