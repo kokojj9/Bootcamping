@@ -275,7 +275,7 @@
 	       <!--<form action="select" Method="get">-->
 	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
 	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
-	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
+	            <div id="selectPeople"><input id="countPeople" name="people" value="1" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
 				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="선택"/></div>
 			<!--</form>-->
         </div>
@@ -420,7 +420,11 @@
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button type="submit" class="btn btn-success" id="campingReserBtn">예약하기</button></a></div>
+			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button type="submit" class="btn btn-success" id="campingReserBtn">예약하기
+			                        <input type="hidden" name="checkInDate" id="startDateInput">
+								    <input type="hidden" name="checkOutDate" id="endDateInput">
+								    <input type="hidden" name="people" id="countPeopleInput">
+			                    </button></a></div>
 			                    
 			                </div>
 			            </div>					
@@ -446,7 +450,7 @@
         <!-- 후기 -->
         <div id="camp_review">
             <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="/bootcamping/camping/e">더보기 > </a></div>
+            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
@@ -660,22 +664,66 @@
         <script>
         	function AllReser(){
         		
-        		let startDate = $('#startDate').val();
-        		let endDate = $('#endDate').val();
+        		let start = $('#startDate').val();
+        		let end = $('#endDate').val();
         		let countPeople = $('#countPeople').val();
         		let campNo = "${camping.campNo}";
+        		
+        		var start2 = start.split("/");
+
+        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+        		var year = parseInt(start2[2]);
+        		var month = parseInt(start2[0]) - 1;
+        		var day = parseInt(start2[1]);
+
+        		// Date 객체 생성
+        		var date = new Date(year, month, day);
+        		
+        		var date = new Date(year, month, day);
+        		var yearString = date.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
+        		var monthString = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var dayString = date.getDate().toString().padStart(2, '0');
+
+        		var dateString = yearString + '/' + monthString + '/' + dayString;
+        		console.log(dateString);
+        		
+        		
+        		
+        		var end2 = end.split("/");
+
+        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+        		var year2 = parseInt(end2[2]);
+        		var month2 = parseInt(end2[0]) - 1;
+        		var day2 = parseInt(end2[1]);
+
+        		// Date 객체 생성
+        		var date2 = new Date(year2, month2, day2);
+        		
+        		var date2 = new Date(year2, month2, day2);
+        		var yearString2 = date2.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
+        		var monthString2 = (date2.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var dayString2 = date2.getDate().toString().padStart(2, '0');
+
+        		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
+        		console.log(dateString2);
+        		
+        		
+        		
         		
         		$.ajax({
         			
         			url : '/bootcamping/camping/selectDate',
         			type : 'post',
-        			data : {startDate : startDate,
-	        				endDate : endDate,
+        			data : {startDate : dateString,
+	        				endDate : dateString2,
 	        				countPeople : countPeople,
 	        				campNo : campNo
         				},
         			success : result => {
         				console.log(result);
+        			       	$('#startDateInput').val(result.startDate);
+        			        $('#endDateInput').val(result.endDate);
+        			        $('#countPeopleInput').val(result.countPeople);
         			}
         			
         		})

@@ -127,11 +127,15 @@ public class CampingController {
 	 * 
 	 */
 	@GetMapping("reservation")
-	public String campingReservation(@RequestParam("siteNo") int siteNo, Model model) {
+	public String campingReservation(@RequestParam("siteNo") int siteNo, String checkInDate, String checkOutDate, Model model) {
 		
 		if(campingService.campingReservation(siteNo) != null) {
 			
 			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
+			model.addAttribute("checkInDate", checkInDate);
+			model.addAttribute("checkOutDate", checkOutDate);
+			
+			System.out.println(checkInDate);
 			
 			return "reservation/reservation";
 		}
