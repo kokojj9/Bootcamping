@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
+import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 @Controller
 public class CampingController {
@@ -113,16 +114,11 @@ public class CampingController {
 	 */
     @ResponseBody
     @PostMapping(value="camping/selectDate", produces="application/json; charset-UTF-8")
-    public String selectDate(@RequestParam("startDate") String startDate,
-            @RequestParam("endDate") String endDate,
-            @RequestParam("countPeople") int countPeople,
-            @RequestParam("campNo") String campNo) {
+    public String selectDate(ReservationInfo reservationInfo) {
         
-        System.out.println(startDate);
-        System.out.println(endDate);
-        System.out.println(countPeople);
-        System.out.println(campNo);
-		return new Gson().toJson(campingService.detailCamping(campNo));
+	        System.out.println(reservationInfo);
+	       
+		return new Gson().toJson(reservationInfo);
 	}
 	
 	

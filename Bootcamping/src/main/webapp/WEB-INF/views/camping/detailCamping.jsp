@@ -289,7 +289,7 @@
 	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
 	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
 	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
-				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="조회"/></div>
+				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="선택"/></div>
 			<!--</form>-->
         </div>
 
