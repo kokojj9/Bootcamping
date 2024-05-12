@@ -167,8 +167,8 @@
                         <c:otherwise>
                             
                             <lable>${ sessionScope.loginMember.memberId }님 환영합니다</label> &nbsp;&nbsp;
-                            <a href="">마이페이지</a>
-                            <a href="">로그아웃</a>
+                            <a href="myPage">마이페이지</a>
+                            <a href="logout">로그아웃</a>
                         <!-- 관리자 기능 넣어야함! -->
                         </c:otherwise>
                     </c:choose>
