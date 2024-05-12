@@ -73,24 +73,29 @@
     }
 
     #checkOut{
-        width: 30%;
+        width: 20%;
         height: 100%;
         float: left;
-        padding-right: 30px;
+        padding-right: 50px;
     }
 
     #selectPeople{
-        width: 30%;
+        width: 15%;
         height: 100%;
         float: left;
-        padding-right: 180px;
+        padding-top: 30px;
+    }
+    
+        
+    #selectDate{
+        padding-top: 30px;
     }
 
     #countPeople::placeholder{
         padding-left: 10px;
     }
 
-    #checkIn, #checkOut, #selectPeople{
+    #checkIn, #checkOut{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -103,6 +108,10 @@
         border-radius: 5px;
         width: 120px; 
         height: 40px; 
+    }
+    
+    #selectDateBtn{
+    	width : 70px;
     }
 
     #camp_thumbnail{
@@ -276,10 +285,12 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
-            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
-            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
-            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
-
+	        <form action="#">
+	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
+	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
+	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
+				<div id="selectDate"><input id="selectDateBtn" class="btn btn-light type="submit" value="조회"/></div>
+			</form>
         </div>
 
         <!-- 캠핑장 사진 -->
