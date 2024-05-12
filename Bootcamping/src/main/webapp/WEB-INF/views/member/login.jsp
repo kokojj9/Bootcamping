@@ -90,7 +90,7 @@
 
                 <div id="socialLoginArea">
                     <div id="kakaoBtn">
-                        <img src="../../../WEB-INF/resources/images/kakaoBtn.png" alt="카카오로그인 버튼">
+                        <img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼">
                     </div>
                 </div>
 
@@ -103,7 +103,7 @@
 
     <script>
         document.getElementById('kakaoBtn').onclick = () => {
-            location.href = 'https://kauth.kakao.com/oauth/authorize?client_id=85c39dbc1ec627a28e9a0f8c3d432556&redirect_uri=http://localhost:8001/bootcamping/kakaoLogin&response_type=code&scope=profile_image,profile_nickname';
+            location.href = 'kakaoLoginForm';
         };
     
     
