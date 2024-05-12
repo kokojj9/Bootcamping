@@ -285,12 +285,12 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
-	        <form action="#">
+	       <!--<form action="select" Method="get">-->
 	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
 	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
 	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
-				<div id="selectDate"><input id="selectDateBtn" class="btn btn-light type="submit" value="조회"/></div>
-			</form>
+				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="조회"/></div>
+			<!--</form>-->
         </div>
 
         <!-- 캠핑장 사진 -->
@@ -670,20 +670,34 @@
         
         </script>
         
-        
         <script>
-        $(function() {
-            $("#campingReserBtn").click(function() {
-                // 세션의 loginUser가 null인지 확인
-				let loginUser = "${sessionScope.loginUser}";
-              	console.log(loginUser);
-                if (loginUser === null || loginUser === "") {
-                    // 세션이 없으면 로그인 페이지로 리다이렉트
-                    window.location.href = "/bootcamping/login"; // 로그인 페이지로 이동
-                }
-            });
-        });
+        	function AllReser(){
+        		
+        		let startDate = $('#startDate').val();
+        		let endDate = $('#endDate').val();
+        		let countPeople = $('#countPeople').val();
+        		let campNo = "${camping.campNo}";
+        		
+        		$.ajax({
+        			
+        			url : '/bootcamping/camping/selectDate',
+        			type : 'post',
+        			data : {startDate : startDate,
+	        				endDate : endDate,
+	        				countPeople : countPeople,
+	        				campNo : campNo
+        				},
+        			success : result => {
+        				console.log(result);
+        			}
+        			
+        		})
+        		
+        	}  
+        	
         </script>
+        
+        
 
    	<jsp:include page="../common/footer.jsp"/>
    	

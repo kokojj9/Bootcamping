@@ -4,17 +4,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
@@ -105,6 +107,25 @@ public class CampingController {
 
 		
 	}
+	
+	/**
+	 * 
+	 */
+    @ResponseBody
+    @PostMapping(value="camping/selectDate", produces="application/json; charset-UTF-8")
+    public String selectDate(@RequestParam("startDate") String startDate,
+            @RequestParam("endDate") String endDate,
+            @RequestParam("countPeople") int countPeople,
+            @RequestParam("campNo") String campNo) {
+        
+        System.out.println(startDate);
+        System.out.println(endDate);
+        System.out.println(countPeople);
+        System.out.println(campNo);
+		return new Gson().toJson(campingService.detailCamping(campNo));
+	}
+	
+	
 	
 	/**
 	 * 
