@@ -7,6 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+    <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,7 +106,7 @@
 
         #header_menu > ul > li > a:hover{
             cursor: pointer;
-            color: #1dc078;
+            color: #1dc078; 
         }
 
         #header_right {
@@ -122,8 +124,6 @@
             text-decoration: none;
             color: #4a4a4a;
         }
-
-
 
 
 	</style>
@@ -158,7 +158,7 @@
             <div id="header_right">
                 <div id="header_memberArea">
                     <c:choose>
-                        <c:when test="${ empty sessionScope.loginUser }">
+                        <c:when test="${ empty sessionScope.loginMember }">
 
                             <a href="enrollForm">회원가입</a>
                             <a href="loginForm">로그인</a>
@@ -166,10 +166,10 @@
                         </c:when>
                         <c:otherwise>
                             
-                                <lable>${ sessionScope.loginUser.userName }님 환영합니다</label> &nbsp;&nbsp;
-                                <a href="">마이페이지</a>
-                                <a href="">로그아웃</a>
-                            
+                            <lable>${ sessionScope.loginMember.memberId }님 환영합니다</label> &nbsp;&nbsp;
+                            <a href="">마이페이지</a>
+                            <a href="">로그아웃</a>
+                        <!-- 관리자 기능 넣어야함! -->
                         </c:otherwise>
                     </c:choose>
                 </div>
