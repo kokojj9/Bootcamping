@@ -15,13 +15,18 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 
 @Controller
 public class SocialLoginController {
+	
+	@Autowired
+	private MemberService memberService;
 	
 	private Properties getProperties() {
 		Properties prop = new Properties();
@@ -39,11 +44,11 @@ public class SocialLoginController {
 	public String forwardKakao() {
 		String client_id = getProperties().getProperty("client_id");
 		StringBuilder sb = new StringBuilder();
-		sb.append("https://kauth.kakao.com/oauth/authorize?" + client_id);   
+		sb.append("https://kauth.kakao.com/oauth/authorize?client_id=" + client_id);   
 		sb.append("&redirect_uri=http://localhost:8001/bootcamping/kakaoLogin");
 		sb.append("&response_type=code&scope=profile_image,profile_nickname");
 		
-		return sb.toString();
+		return "redirect:" + sb.toString();
 	}
 	
 	@GetMapping("kakaoLogin")
@@ -52,16 +57,16 @@ public class SocialLoginController {
 		
 		Member sm = getUserInfo(accessToken);
 		
-		/*
-		 * sm을 들고 Service -> Dao -> DB에서 sm 에서 id 값만 SELECT해서 회원정보 있는지 조회
-		 * 
-		 * 있으면 -> 로그인
-		 * 
-		 * 없으면 - > 회원가입
-		 * 
-		 */
-		
-		session.setAttribute("loginMember", sm);
+		if(memberService.login(sm) != null) {
+			session.setAttribute("loginMember", sm);
+		} else {
+			if(memberService.insertMember(sm) > 0) {
+				session.setAttribute("loginMember", sm);
+			} else {
+				session.setAttribute("errorMsg", "회원가입에 실패하였습니다.");
+				return "common/errorPage";
+			}
+		}
 		
 		return "redirect:/";
 	}
@@ -120,11 +125,11 @@ public class SocialLoginController {
 		
 		String responseDate = br.readLine();
 		Member sm = new Member();
-
+		System.out.println(responseDate);
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseDate);
 		
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
-		sm.setMemberId(propObj.get("nickname").toString());
+		sm.setMemberId(propObj.get("id").toString());
 		
 		return sm;
 	}

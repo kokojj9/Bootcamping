@@ -25,7 +25,7 @@
 
         .login_form {
             width: 300px;
-            height: 150px;
+            height: 100px;
             margin: 25px auto;
         }
 
@@ -35,16 +35,15 @@
         }
 
         .login_btn > button{
-            width: 120px;
+            width: 137px;
             border: 0;
             border-radius: 5px;
             height: 40px;
-            font-size: 18px;
-            font-weight: 500;
+            font-size: 16px;
+            font-weight: 600;
         }
 
         .login { 
-            margin-left: 20px;
             margin-right: 20px;
             background-color: #1dc078;
             color: #f6f6f6;
@@ -90,7 +89,7 @@
 
                 <div id="socialLoginArea">
                     <div id="kakaoBtn">
-                        <img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼">
+                        <a href="kakaoLoginForm"><img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼"></a>
                     </div>
                 </div>
 
@@ -102,9 +101,6 @@
 	<jsp:include page="../common/footer.jsp"/>
 
     <script>
-        document.getElementById('kakaoBtn').onclick = () => {
-            location.href = 'kakaoLoginForm';
-        };
     
     
     
