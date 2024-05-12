@@ -16,18 +16,16 @@ import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.kh.bootcamping.member.model.vo.KakaoMember;
+import com.kh.bootcamping.member.model.vo.Member;
 
 @Controller
 public class SocialLoginController {
-	
-	
 	
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code, HttpSession session) throws IOException, ParseException {
 		String accessToken = getToken(code);
 		
-		KakaoMember sm = getUserInfo(accessToken);
+		Member sm = getUserInfo(accessToken);
 		
 		/*
 		 * sm을 들고 Service -> Dao -> DB에서 sm 에서 id 값만 SELECT해서 회원정보 있는지 조회
@@ -38,10 +36,9 @@ public class SocialLoginController {
 		 * 
 		 */
 		
-		session.setAttribute("loginUser", sm);
+		session.setAttribute("loginMember", sm);
 		
-		
-		return "redirect:kakao";
+		return "redirect:/";
 	}
 	
 	public String getToken(String code) throws IOException, ParseException {
@@ -60,7 +57,7 @@ public class SocialLoginController {
 
 		sb.append("client_id=85c39dbc1ec627a28e9a0f8c3d432556");
 		sb.append("&grant_type=authorization_code");
-		sb.append("&redirect_uri=http://localhost:8001/spring/code");
+		sb.append("&redirect_uri=http://localhost:8001/bootcamping/kakaoLogin");
 		sb.append("&code=" + code);
 		
 		bw.write(sb.toString());
@@ -91,7 +88,7 @@ public class SocialLoginController {
 		return accessToken;
 	}
 
-	public KakaoMember getUserInfo(String accessToken) throws IOException, ParseException {
+	public Member getUserInfo(String accessToken) throws IOException, ParseException {
 		
 		String userInfoUrl = "https://kapi.kakao.com/v2/user/me";
 		
@@ -106,17 +103,12 @@ public class SocialLoginController {
 		BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		
 		String responseDate = br.readLine();
-		
-		System.out.println(responseDate);
-		
+		Member sm = new Member();
+		//System.out.println(responseDate);
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseDate);
 		
-		KakaoMember sm = new KakaoMember();
-		
-		sm.setId(responseObj.get("id").toString());
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
-		sm.setNickName(propObj.get("nickname").toString());
-		sm.setThumbnailImage(propObj.get("thumbnail_image").toString());
+		sm.setMemberId(propObj.get("nickname").toString());
 		
 		return sm;
 	}

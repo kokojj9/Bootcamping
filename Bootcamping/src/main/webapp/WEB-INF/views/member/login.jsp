@@ -50,6 +50,16 @@
             color: #f6f6f6;
         }
 
+        #socialLoginArea{
+            margin: 20px auto;
+            width: 300px;
+            height: 200px;
+        }
+        #kakaoBtn{
+            width: 300px;
+            height: 100px;
+        }
+
     </style>
 
 </head>
@@ -80,7 +90,7 @@
 
                 <div id="socialLoginArea">
                     <div id="kakaoBtn">
-                        <img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼">
+                        <img src="../../../WEB-INF/resources/images/kakaoBtn.png" alt="카카오로그인 버튼">
                     </div>
                 </div>
 
