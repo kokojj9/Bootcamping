@@ -31,7 +31,7 @@ public class MemberController {
 		return "member/login";
 	}
 	
-	/***
+	/**
 	 * 로그인 메서드 내부에서 쿠키저장 메서드를 호출함
 	 * @param member 아이디, 비밀번호 필드에 로그인정보가 들어있음
 	 * @param rememberId 쿠키에 저장할 아이디
