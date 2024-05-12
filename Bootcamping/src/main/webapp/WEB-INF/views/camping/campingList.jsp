@@ -5,10 +5,11 @@
 <html lang="en">
 <head>
     <title>Document</title>
+     <!-- jQuery 라이브러리 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
  	
 
     <style>
@@ -348,12 +349,11 @@
 		<jsp:include page="../common/footer.jsp"/>
    
 	<script>
-	
-		
 
-	
 		<%--캠핑장 전체 조회--%>
 		var data = ${json}.response.body.items.item;
+		
+		console.log(data);
 		
 		var json = ${json}.response.body;
 		
@@ -368,7 +368,8 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;">'
-				 + '<a href="#">'
+				 + '<a href="camping/detail?contentId='+ item.contentId +'">'
+			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
@@ -380,14 +381,10 @@
 		}
 		
 		
-		
 		$('.items').html(str);
 		
-	
 		
-		
-		
-		<%--지도--%>
+
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = { 
@@ -402,7 +399,7 @@
 		var markerPosition = [];
 		for(var i in data){
 			var positions = {
-			    LatLng: new kakao.maps.LatLng(data[i].mapX, data[i].mapY)
+			    LatLng: new kakao.maps.LatLng(data[i].mapY, data[i].mapX)
 			}
 			markerPosition.push(positions);
 		}
@@ -452,11 +449,28 @@
 		    overlay.setMap(map);
 		});
 
-		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-		function closeOverlay() {
-		    overlay.setMap(null);     
+		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다.
+		
+		
+		/*
+		/*사진
+		let campNo = "${camping.campNo}";
+		
+		window.onload = function(){
+			
+			$.ajax({
+				url : 'camping.img',
+				data : {campNo : campNo},
+				success : result => {
+					console.log(result)
+				}
+				
+			})
+			
 		}
-	
+		*/
+		
+
 	</script>
 
 

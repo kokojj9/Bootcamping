@@ -11,10 +11,14 @@
 	
 	<typeAliases>
 		<typeAlias type="com.kh.bootcamping.member.model.vo.Member" alias="member"/>
+		<typeAlias type="com.kh.bootcamping.camping.model.vo.Camping" alias="camping"/>
+		<typeAlias type="com.kh.bootcamping.camping.model.vo.Site" alias="site" />
 	</typeAliases>
+	
 	
 	<mappers>
 		<mapper resource="/mapper/member/member-mapper.xml"/>
+		<mapper resource="/mapper/camping/camping-mapper.xml"/>
 	</mappers>
 	
 
