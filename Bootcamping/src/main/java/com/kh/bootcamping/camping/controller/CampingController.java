@@ -132,30 +132,15 @@ public class CampingController {
 	@GetMapping("reservation")
 	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, @RequestParam(value="countPeople", defaultValue="1") int countPeople, Model model) {
 		
-		Date nowDate = new Date();
-		
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy/MM/dd"); 
-
-		String strNowDate = simpleDateFormat.format(nowDate); 
-		
-		  if (startDate == null) {
-		        startDate = strNowDate;
-		    }
-		  if (endDate == null) {
-			  endDate = strNowDate + 1;
-		    }
-		
 		if(campingService.campingReservation(siteNo) != null) {
-
-			  System.out.println(startDate);
-			  System.out.println(endDate);
 			  
 			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
 			model.addAttribute("checkInDate", startDate);
 			model.addAttribute("checkOutDate", endDate);
 			model.addAttribute("people", countPeople);
 
-
+			  System.out.println(startDate);
+			  System.out.println(endDate);
 			
 			return "reservation/reservation";
 		}

@@ -278,6 +278,8 @@
 	<jsp:include page="../common/header.jsp"/>
 
     <div id="content">
+    
+    
 
         <!-- 날짜 인원 -->
         <div id="date_people">
@@ -291,7 +293,6 @@
 
         <!-- 캠핑장 사진 -->
         <div id="camp_img">
-
             <div id="camp_thumbnail">
                 <img src="${camping.campImg}" />
             </div>
@@ -429,7 +430,7 @@
 								    <input type="hidden" name="endDate" class="endDateInput">
 								    <input type="hidden" name="countPeople" class="countPeopleInput">
 								    <input type="hidden" name="reservationPrice" class="totalPrice">
-			                    <button type="submit" class="btn btn-success" id="campingReserBtn">예약하기
+			                    <button type="submit" class="btn btn-success campingReserBtn">예약하기
 			                    </button></form></div>
 			                    
 			                </div>
@@ -734,6 +735,20 @@
         		})
         		
         	}  
+        	
+        	
+        	$(document).ready(function() {
+        	    $('.campingReserBtn').click(function(event) {
+        	        var startDate = $('.startDateInput').val();
+        	        var endDate = $('.endDateInput').val();
+        	        var countPeople = $('.countPeopleInput').val();
+        	        
+        	        if (!startDate || !endDate || !countPeople) {
+        	            event.preventDefault();
+        	            alert('일정과 인원수를 선택해주세요');
+        	        }
+        	    });
+        	});
         	
         </script>
         

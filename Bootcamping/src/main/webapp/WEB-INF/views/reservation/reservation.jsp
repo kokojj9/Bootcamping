@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,11 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 	<!-- Semantic UI theme -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
-
+	
+	<!-- 결제 -->
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	<script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
 <style>
 
     div{
@@ -160,7 +165,7 @@
 
 </head>
 <body>
-	<!--  
+
 	<c:choose>
 		<c:when test="${empty sessionScope.loginMember }">
 			<script>
@@ -169,7 +174,7 @@
 			 </script>
 		</c:when>
 		<c:otherwise>
--->
+
 
 	<jsp:include page="../common/header.jsp"/>	
                
@@ -206,7 +211,7 @@
                     	<input type="hidden" name="people" value="${ people}">
                     	<input type="hidden" name="checkInDate" value="${ checkInDate}">
                     	<input type="hidden" name="checkOutDate" value="${ checkOutDate}">
-                    	<input type="hidden" name="memberNo" value="${ session.loginMember.memberNo}">
+                    	<input type="hidden" name="memberNo" value="${sessionScope.loginMember.memberNo }">
                     	
                     </div>
                 </div>
@@ -221,7 +226,7 @@
                 </div>
 
                 <div id="reser_payment">
-                    <button class="btn btn-success">117,000원 결제하기</button>
+                    <button class="btn btn-success" type="button" id="moneyBtn">117,000원 결제하기</button>
                 </div>
                 
                 </form>
@@ -231,18 +236,55 @@
 
     </div>
     
-    <!-- 
     
     </c:otherwise>
 </c:choose>
 
-	-->
 	    
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
+	<script>
+		var IMP = window.IMP;
+		IMP.init("imp"); 
+		
+		
+		$('#moneyBtn').click(function() {
+			IMP.request_pay({
+				pg: 'html5_inicis',
+				pay_method: 'card',
+				merchant_uid: 'merchant_' + new Date().getTime(),
 
- 
+				name: '예약 지점명 : ' + bookCity + '점',
+				amount: bookMoney,
+				buyer_email: "",  /*필수 항목이라 "" 로 남겨둠*/
+				buyer_name: bookName,
+			}, function(rsp) {
+				console.log(rsp);
+				
+				 //결제 성공 시
+				if (rsp.success) {
+					var msg = '결제가 완료되었습니다.';
+					console.log("결제성공 ");
+
+					$.ajax({
+						type: "GET",
+						url: 'bookingPay',
+						data: {
+							amount: bookMoney,
+							imp_uid: rsp.imp_uid,
+							merchant_uid: rsp.merchant_uid
+						}
+					});
+				} else {
+					var msg = '결제에 실패하였습니다.';
+					msg += '에러내용 : ' + rsp.error_msg;
+				}
+				alert(msg);
+			});
+		});
+		
+	</script>
 
 </body>
 </html>
