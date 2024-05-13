@@ -21,7 +21,7 @@ public class MyPageInfo {
 	
 	private Member member;
 	private List<Reservation> reservationList; 
-	private List<TradeBoard> tradeList;
+	private List<TradeBoard> tradeBoardList;
 	private List<Camping> wishList;
 	private List<Board> boardList;
 	

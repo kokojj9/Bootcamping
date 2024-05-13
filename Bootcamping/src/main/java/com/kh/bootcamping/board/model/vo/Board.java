@@ -25,6 +25,5 @@ public class Board {
 	private int memberNo;
 	private String categoryCode;
 	private int count;
-	
 
 }
