@@ -28,7 +28,7 @@ public class CampingController {
 	@Autowired
 	private CampingService campingService;
 	
-	public static final String SERVICE_KEY = "jDeUHHxyvx1AmWI1ZXjA7MNVQr1NcdX4pFo9EHtlICl0kGxbtpaEOHAtX2o%2FzWb7Kf4WWAGX%2BfvCl5pmtkbviQ%3D%3D";
+	public static final String SERVICE_KEY = "";
 
 	/**
 	 * 캠핑장 전체 조회 + 페이징처리
