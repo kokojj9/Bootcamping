@@ -25,7 +25,7 @@
 
         <div id="myInfoArea">
             <div>
-                박재인님 방갑습니다
+                ${ myPageInfo.memberId }님 안녕하세요!
                 <div>회원정보 수정</div>
             </div>
             <div>즐겨찾는 캠핑장</div>
@@ -53,24 +53,19 @@
 			                        <td>${ r.checkInDate } ~ ${ r.checkoutDate }</td>
 			                        <td>
 			                        	<c:if test="${ r.reserStatus eq 'Y' }">
-			                        		완료
+			                        		예약 완료
+			                        	</c:if>
+			                        	<c:if test="${ r.reserStatus eq 'N' }">
+			                        		취소
 			                        	</c:if>
 		                        	</td>
-			                    </tr>
-			                    <tr>
-			                        <td>Mary</td>
-			                        <td>Moe</td>
-			                        <td>mary@example.com</td>
-			                    </tr>
-			                    <tr>
-			                        <td>July</td>
-			                        <td>Dooley</td>
-			                        <td>july@example.com</td>
 			                    </tr>
 		                    </c:forEach>
                     	</c:when>
 	                    <c:otherwise>
-	                    
+	                    	<tr colspan="5">
+	                    		<td>조회된 예약내역이 없습니다.</td>
+	                    	</tr>
 	                    </c:otherwise>
                     </c:choose>
                 </tbody>
