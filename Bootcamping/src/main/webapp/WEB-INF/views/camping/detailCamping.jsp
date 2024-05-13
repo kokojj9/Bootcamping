@@ -5,6 +5,15 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    
 <style>
 
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -597,7 +606,7 @@
 		    	 + '</div>';	
 		    	 
 		 		
-			$('.carousel-inner').html(str);
+		    document.querySelector('.carousel-inner').innerHTML = str;
 						
 			    	 
 			let resultStr = '';
@@ -609,7 +618,7 @@
 				
 			}
 	
-			$('.carousel-inner').html(str);	
+			document.querySelector('.carousel-inner').innerHTML = str;
 			
 			
 			/*리뷰*/

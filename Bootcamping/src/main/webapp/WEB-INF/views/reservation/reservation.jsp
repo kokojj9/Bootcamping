@@ -151,6 +151,12 @@
 
 </head>
 <body>
+	
+	<c:choose>
+		<c:when test="${empty sessionScope.loginMember }">
+			
+		</c:when>
+		<c:otherwise>
 
 
 	<jsp:include page="../common/header.jsp"/>	
@@ -210,7 +216,8 @@
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
-
+</c:otherwise>
+</c:choose>
  
 
 </body>
