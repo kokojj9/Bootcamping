@@ -10,9 +10,12 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias type="com.kh.bootcamping.member.model.vo.Member" alias="member"/>
-		<typeAlias type="com.kh.bootcamping.camping.model.vo.Camping" alias="camping"/>
-		<typeAlias type="com.kh.bootcamping.camping.model.vo.Site" alias="site" />
+		<typeAlias type="com.kh.bootcamping.member.model.vo.Member"    alias="member"/>
+		<typeAlias type="com.kh.bootcamping.camping.model.vo.Camping"  alias="camping"/>
+		<typeAlias type="com.kh.bootcamping.camping.model.vo.Site"     alias="site" />
+		<typeAlias type="com.kh.bootcamping.member.model.vo.MyPage"    alias="myPage" />
+		<typeAlias type="com.kh.bootcamping.trade.model.vo.Trade"      alias="trade"/>
+		<typeAlias type="com.kh.bootcamping.trade.model.vo.TradeBoard" alias="tradeBoard"/>
 	</typeAliases>
 	
 	

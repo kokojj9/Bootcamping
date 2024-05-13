@@ -17,6 +17,35 @@
 		<result column="STATUS"      property="status"/>
 		<result column="PRIVILEGE"   property="privilege"/>
 	</resultMap>
+	
+	<resultMap id="myPageResultSet" type="myPage">
+		<association property="member" javaType="Member">
+			<result column="MEMBER_NO" property="memberNo"/>
+			<result column="MEMBER_ID" property="memberId"/>
+		</association>
+		<association property="boardList"  javaType="Board">
+			<result column="CATEGOTY_NAME" property="categoryName"/>			
+			<result column="CREATE_DATE"   property="createDate"/>			
+			<result column="BOARD_TITLE"   property="boardTitle"/>			
+			<result column="BOARD_NO"      property="boardNo"/>			
+		</association>
+		<association property="tradeBoard" javaType="TradeBoard">
+			<result column="TRADEBOARD_NO" property="tradeBoardNo"/>		
+			<result column="TRADE_STAUTS"  property="tradeStatus"/>		
+		</association>
+		<association property="reservation" javaType="Reservation">
+			<result column="RESERVATION_NO" property="reservationNo"/>
+			<result column="CHECKOUT_DATE"  property="checkOutDate"/>
+			<result column="CHECKIN_DATE"   property="checkInDate"/>
+			<result column="RESER_STATUS"   property="reserStatus"/>
+			<result column="PEOPLE"         property="people"/>
+		</association>
+		<association property="wishList" javaType="Camping">
+			<result column="CAMP_NO"     property="campNo"/>
+		</association>
+	</resultMap>
+	
+	
 
 	<select id="login" parameterType="member" resultMap="memberResultSet">
 		SELECT 
@@ -119,6 +148,37 @@
 		       MEMBER_ID = #{ memberId }
 	</select>
 
+	<select id="searchMyPage" parameterType="string" resultMap="myPageResultSet">
+		SELECT
+		       MEMBER_NO,
+		       MEMBER_ID,
+		       CAMP_NO,
+		       b.BOARD_NO AS BOARD_NO,
+		       b.BOARD_TITLE AS BOARD_TITLE,
+		       CREATE_DATE,
+		       CATEGORY_NAME,
+		       tb.BOARD_NO AS TRADEBOARD_NO,
+		       TRADE_STATUS,
+		       RESERVATION_NO,
+		       CHECKIN_DATE,
+		       CHECKOUT_DATE,
+		       PEOPLE,
+		       RESER_STATUS
+		  FROM
+		       TB_MEMBER
+		  JOIN
+		       TB_WISHLIST USING(MEMBER_NO)
+		  JOIN
+		       TB_RESERVATION USING(MEMBER_NO)
+		  JOIN
+		       TB_BOARD b USING(MEMBER_NO)
+		  JOIN
+		       TB_TRADEBOARD tb USING(MEMBER_NO)
+		  JOIN
+		       TB_CATEGORY c ON(b.CATEGORY_CODE = c.CATEGORY_CODE)
+		 WHERE
+		       MEMBER_NO = #{ memberNo }
+	</select>
 
 
 
