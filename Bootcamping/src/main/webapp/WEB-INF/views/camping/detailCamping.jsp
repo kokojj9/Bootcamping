@@ -5,19 +5,15 @@
 <html lang="en">
 <head>
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">
-        
-    <!--달력-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet"/>
-
-
+    
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    
 <style>
 
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -289,7 +285,7 @@
 	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
 	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
 	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
-				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="조회"/></div>
+				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="선택"/></div>
 			<!--</form>-->
         </div>
 
@@ -306,13 +302,13 @@
         <div id="camp_name">
 
             <div id="campTitle">
-                <h2>${camping.campName}</h2> <br>
+                <h2>${camping.campName}</h2> <br/>
                 <p>${camping.campPhone }</p>
                 <p>${camping.detailAddress }</p>
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"></a></div>
+                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"/></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -329,9 +325,6 @@
         <div id="service">
             <h4>시설 환경</h4>
             <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>${camping.service }</p></div>
-            <!-- <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>화장실</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div> -->
         </div>
 
         <!-- 배치도 -->
@@ -355,10 +348,7 @@
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
-            
-            
-            
-            
+
             </div>
         </div>
 
@@ -393,7 +383,7 @@
 			<c:choose>
       		  	<c:when test="${ empty requestScope.site}">
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-10</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -401,7 +391,7 @@
 		                </div>
 		            </div>	 
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-11</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -409,7 +399,7 @@
 		                </div>
 		            </div>			                    		  	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-12</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -417,7 +407,7 @@
 		                </div>
 		            </div>	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-13</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -429,11 +419,17 @@
 				<c:when test="${requestScope.site ne null}">
 					<c:forEach var="site" items="${requestScope.site }">
 			            <div class="siteList">
-			                <div class="siteImg"><img src="../${site.sitePath }" width="255"></div>
+			                <div class="siteImg"><img src="../${site.sitePath }" width="255"/></div>
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><a href="/bootcamping/reservation?siteNo=${site.siteNo }"><button type="submit" class="btn btn-success" id="campingReserBtn">예약하기</button></a></div>
+			                    <div class="reserBtn"><form action="/bootcamping/reservation">
+			                        <input type="hidden" name="siteNo" value="${site.siteNo}">
+			                     	<input type="hidden" name="startDate" id="startDateInput">
+								    <input type="hidden" name="endDate" id="endDateInput">
+								    <input type="hidden" name="countPeople" id="countPeopleInput">
+			                    <button type="submit" class="btn btn-success" id="campingReserBtn">예약하기
+			                    </button></form></div>
 			                    
 			                </div>
 			            </div>					
@@ -459,7 +455,7 @@
         <!-- 후기 -->
         <div id="camp_review">
             <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="/bootcamping/camping/e">더보기 > </a></div>
+            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
@@ -604,7 +600,7 @@
 		    	 + '</div>';	
 		    	 
 		 		
-			$('.carousel-inner').html(str);
+		    document.querySelector('.carousel-inner').innerHTML = str;
 						
 			    	 
 			let resultStr = '';
@@ -616,7 +612,7 @@
 				
 			}
 	
-			$('.carousel-inner').html(str);	
+			document.querySelector('.carousel-inner').innerHTML = str;
 			
 			
 			/*리뷰*/
@@ -633,7 +629,7 @@
 	                    
 	      				const total = result.length;
 	      				
-	      				$('#reviewCount').text(total);
+	      				document.getElementById('reviewCount').innerText = total;
 	                    
 	                    let reviewResult = '';
 	                    
@@ -652,10 +648,10 @@
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}
-	                    $('#reviewListSelect').html(reviewResult);
+	                    document.getElementById('reviewListSelect').innerHTML = reviewResult;
 	                    }
 
-	                  $('#reviewListSelect').html(reviewResult);
+	                    document.getElementById('reviewListSelect').innerHTML = reviewResult;
 	                 
 	                    
 	                }
@@ -673,22 +669,66 @@
         <script>
         	function AllReser(){
         		
-        		let startDate = $('#startDate').val();
-        		let endDate = $('#endDate').val();
+        		let start = $('#startDate').val();
+        		let end = $('#endDate').val();
         		let countPeople = $('#countPeople').val();
         		let campNo = "${camping.campNo}";
+        		
+        		var start2 = start.split("/");
+
+        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+        		var year = parseInt(start2[2]);
+        		var month = parseInt(start2[0]) - 1;
+        		var day = parseInt(start2[1]);
+
+        		// Date 객체 생성
+        		var date = new Date(year, month, day);
+        		
+        		var date = new Date(year, month, day);
+        		var yearString = date.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
+        		var monthString = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var dayString = date.getDate().toString().padStart(2, '0');
+
+        		var dateString = yearString + '/' + monthString + '/' + dayString;
+        		console.log(dateString);
+        		
+        		
+        		
+        		var end2 = end.split("/");
+
+        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+        		var year2 = parseInt(end2[2]);
+        		var month2 = parseInt(end2[0]) - 1;
+        		var day2 = parseInt(end2[1]);
+
+        		// Date 객체 생성
+        		var date2 = new Date(year2, month2, day2);
+        		
+        		var date2 = new Date(year2, month2, day2);
+        		var yearString2 = date2.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
+        		var monthString2 = (date2.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var dayString2 = date2.getDate().toString().padStart(2, '0');
+
+        		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
+        		console.log(dateString2);
+        		
+        		
+        		
         		
         		$.ajax({
         			
         			url : '/bootcamping/camping/selectDate',
         			type : 'post',
-        			data : {startDate : startDate,
-	        				endDate : endDate,
+        			data : {startDate : dateString,
+	        				endDate : dateString2,
 	        				countPeople : countPeople,
 	        				campNo : campNo
         				},
         			success : result => {
         				console.log(result);
+        			       	$('#startDateInput').val(result.startDate);
+        			        $('#endDateInput').val(result.endDate);
+        			        $('#countPeopleInput').val(result.countPeople);
         			}
         			
         		})
