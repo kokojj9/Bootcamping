@@ -74,6 +74,7 @@
         <div id="footer_1">
             <a href="#">회사소개</a>&ensp;&ensp;&ensp;&ensp;
             <a href="#">이용약관</a> &ensp;&ensp;&ensp;&ensp;
+			<a href="#">공지사항</a> &ensp;&ensp;&ensp;&ensp;
 
             <a href="#">개인정보처리방침</a> 
         </div>

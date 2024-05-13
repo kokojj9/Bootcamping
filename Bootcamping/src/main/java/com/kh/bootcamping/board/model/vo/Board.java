@@ -1,4 +1,4 @@
-package com.kh.bootcamping.reviewboard.model.vo;
+package com.kh.bootcamping.board.model.vo;
 
 import java.sql.Date;
 
