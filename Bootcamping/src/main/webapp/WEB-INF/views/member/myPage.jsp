@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>부트캠핑 - 마이페이지</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
 
@@ -28,11 +32,87 @@
         </div>
 
         <div id="reservationInfoArea">
-            
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>예약 번호</th>
+                        <th>캠핑장 이름</th>
+                        <th>인원</th>
+                        <th>기간</th>
+                        <th>상태</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:choose>
+                        <c:when test="${ not empty myPageInfo.reservationList }" >
+                        	<c:forEach items="${ myPageInfo.reservationList }" var="r">
+			                    <tr>
+			                        <td>${ r.reservationNo }</td>
+			                        <td>${ r.campName }</td>
+			                        <td>${ r.people }</td>
+			                        <td>${ r.checkInDate } ~ ${ r.checkoutDate }</td>
+			                        <td>
+			                        	<c:if test="${ r.reserStatus eq 'Y' }">
+			                        		완료
+			                        	</c:if>
+		                        	</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Mary</td>
+			                        <td>Moe</td>
+			                        <td>mary@example.com</td>
+			                    </tr>
+			                    <tr>
+			                        <td>July</td>
+			                        <td>Dooley</td>
+			                        <td>july@example.com</td>
+			                    </tr>
+		                    </c:forEach>
+                    	</c:when>
+	                    <c:otherwise>
+	                    
+	                    </c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
         </div>
 
         <div id="boardArea">
-
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <c:choose>
+                        <c:when test="${ not empty myPageInfo.boardList }" >
+                        	<c:forEach items="${ myPageInfo.boardList }" var="b">
+			                    <tr>
+			                        <td>${ b.boardNo }</td>
+			                        <td>$</td>
+			                        <td>john@example.com</td>
+			                    </tr>
+			                    <tr>
+			                        <td>Mary</td>
+			                        <td>Moe</td>
+			                        <td>mary@example.com</td>
+			                    </tr>
+			                    <tr>
+			                        <td>July</td>
+			                        <td>Dooley</td>
+			                        <td>july@example.com</td>
+			                    </tr>
+		                    </c:forEach>
+                    	</c:when>
+	                    <c:otherwise>
+	                    
+	                    </c:otherwise>
+                    </c:choose>
+                </tbody>
+            </table>
         </div>
     </div>
 </body>

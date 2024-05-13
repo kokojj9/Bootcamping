@@ -28,6 +28,7 @@ public class Reservation {
 	private String reserPhone;
 	private String reserStatus;
 	private String campNo;
+	private String campName;
 	private int typeNo;
 	private int priceNo;
 	

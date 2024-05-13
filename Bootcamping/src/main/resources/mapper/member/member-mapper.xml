@@ -38,13 +38,10 @@
 			<result column="CHECKOUT_DATE"  property="checkOutDate"/>
 			<result column="CHECKIN_DATE"   property="checkInDate"/>
 			<result column="RESER_STATUS"   property="reserStatus"/>
+			<result column="CAMP_NAME"      property="campName"/>
 			<result column="PEOPLE"         property="people"/>
 		</association>
-		<association property="wishList" javaType="Camping">
-			<result column="CAMP_NO"     property="campNo"/>
-		</association>
 	</resultMap>
-	
 	
 
 	<select id="login" parameterType="member" resultMap="memberResultSet">
@@ -152,7 +149,6 @@
 		SELECT
 		       MEMBER_NO,
 		       MEMBER_ID,
-		       CAMP_NO,
 		       b.BOARD_NO AS BOARD_NO,
 		       b.BOARD_TITLE AS BOARD_TITLE,
 		       CREATE_DATE,
@@ -160,24 +156,38 @@
 		       tb.BOARD_NO AS TRADEBOARD_NO,
 		       TRADE_STATUS,
 		       RESERVATION_NO,
-		       CHECKIN_DATE,
-		       CHECKOUT_DATE,
+		       CAMP_NAME,
+		       TO_CHAR(CHECKIN_DATE, 'YYYY-MM-DD HH24:MI') AS CHECKIN_DATE,
+		       TO_CHAR(CHECKOUT_DATE, 'YYYY-MM-DD HH24:MI') AS CHECKOUT_DATE,
 		       PEOPLE,
 		       RESER_STATUS
 		  FROM
 		       TB_MEMBER
+		  LEFT
 		  JOIN
-		       TB_WISHLIST USING(MEMBER_NO)
-		  JOIN
-		       TB_RESERVATION USING(MEMBER_NO)
+		       TB_RESERVATION r USING(MEMBER_NO)
+		  LEFT
 		  JOIN
 		       TB_BOARD b USING(MEMBER_NO)
+		  LEFT
 		  JOIN
 		       TB_TRADEBOARD tb USING(MEMBER_NO)
+		  LEFT
 		  JOIN
 		       TB_CATEGORY c ON(b.CATEGORY_CODE = c.CATEGORY_CODE)
+		  LEFT
+		  JOIN
+		       TB_SITE USING(SITE_NO)
+		  LEFT
+		  JOIN
+		       TB_CAMP USING(CAMP_NO)
 		 WHERE
 		       MEMBER_NO = #{ memberNo }
+		 ORDER
+		    BY
+		       RESERVATION_NO,
+		       TRADEBOARD_NO,
+		       BOARD_NO DESC;
 	</select>
 
 
