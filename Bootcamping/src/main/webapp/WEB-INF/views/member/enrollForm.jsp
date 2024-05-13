@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>부트캠핑 - 회원가입</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <style>
@@ -53,6 +52,9 @@
         #detailAddress{
             margin-top: 5px;
         }
+        #checkAuthCode{
+            margin-top: 5px;
+        }
     </style>
 
 </head>
@@ -83,7 +85,7 @@
                     <label for="email">* 이메일 </label>
                     <button id="checkEmailBtn" type="button">메일 인증</button>
                     <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email" required> <br>
-                    <input type="number" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" style="display: inline;  width: 200px; display:none;"> 
+                    <input type="number" class="form-control" id="authCode" placeholder="인증코드를 입력해주세요" style="display: inline;  width: 250px; display:none;"> 
                     <button id="checkAuthCode" type="button" style="width: 150px; display:none;">인증번호 확인</button>
                     <h6 id="timer"></h6>
 
