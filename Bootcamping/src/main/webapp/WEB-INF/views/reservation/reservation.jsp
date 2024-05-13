@@ -258,7 +258,7 @@
 
 		
 		var IMP = window.IMP;
-		IMP.init(""); 
+		IMP.init("imp60634072"); 
 		
 		 IMP.request_pay({
 			    pg: "html5_inicis.INIpayTest",
