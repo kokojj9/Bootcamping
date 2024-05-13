@@ -449,7 +449,7 @@
             <h4>위치</h4>
 			<!-- 지도를 표시할 div 입니다 -->
 			<div id="map" style="width:100%;height:350px;"></div>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051"></script>
         </div>
 
         <!-- 후기 -->
