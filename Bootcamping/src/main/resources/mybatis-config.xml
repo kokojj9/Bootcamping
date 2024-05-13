@@ -18,8 +18,8 @@
 		<typeAlias type="com.kh.bootcamping.trade.model.vo.Trade"       alias="trade"/>
 		<typeAlias type="com.kh.bootcamping.trade.model.vo.TradeBoard"  alias="tradeBoard"/>
 		<typeAlias type="com.kh.bootcamping.board.model.vo.Board"       alias="board"/>
+		<typeAlias type="com.kh.bootcamping.review.model.vo.Review"     alias="review"/>
 		<typeAlias type="com.kh.bootcamping.reservation.model.vo.Reservation" alias="reservation"/>
-
 	</typeAliases>
 	
 	
