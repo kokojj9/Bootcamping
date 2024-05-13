@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="reviewMapper">
+	
+	<resultMap type="review" id="reviewResultMap">
+		<result column="RESERVATION_NO" property="reservationNo" />
+		<result column="REVIEW_CONTENT" property="reviewContent" />
+		<result column="REVIEW_SCORE" property="reviewScore" />
+		<result column="REVIEW_PATH" property="reviewPath" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="REVIEW_YN" property="reviewYn" />
+		<result column="CAMP_NO" property="campNo" />
+		<result column="MEMBER_ID" property="memberId" />
+	</resultMap>
+	
+	<select id="selectReview" resultMap="reviewResultMap">
+	SELECT
+                REVIEW_PATH,
+                REVIEW_CONTENT,
+                CASE WHEN REVIEW_SCORE = 1 THEN '★' 
+                WHEN REVIEW_SCORE = 2 THEN '★★'
+                WHEN REVIEW_SCORE = 3 THEN '★★★'
+                WHEN REVIEW_SCORE = 4 THEN '★★★★'
+                WHEN REVIEW_SCORE = 5 THEN '★★★★★'
+                END AS "REVIEW_SCORE",
+                TO_CHAR(CREATE_DATE, 'YYYY.MM.DD') "CREATE_DATE",
+                MEMBER_ID
+        FROM
+                TB_REVIEW
+        LEFT        
+        JOIN
+                TB_RESERVATION ON (TB_REVIEW.RESERVATION_NO = TB_RESERVATION.RESERVATION_NO)
+        LEFT        
+        JOIN
+                TB_MEMBER ON (TB_RESERVATION.MEMBER_NO = TB_MEMBER.MEMBER_NO)
+        LEFT        
+       	JOIN
+                TB_SITE ON (TB_SITE.SITE_NO = TB_RESERVATION.SITE_NO)
+        LEFT        
+        JOIN
+                TB_CAMP ON (TB_CAMP.CAMP_NO = TB_SITE.CAMP_NO)       
+	   WHERE
+		 		TB_CAMP.CAMP_NO = #{campNo}
+          AND
+                REVIEW_YN = 'Y'
+       ORDER
+          BY
+                CREATE_DATE DESC
+		 		
+	</select>
+
+
+
+</mapper>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.Site;
+import com.kh.bootcamping.reservation.model.vo.Reservation;
 
 @Repository
 public class CampingRepository {
@@ -17,6 +18,11 @@ public class CampingRepository {
 
 	public List<Site> siteList (SqlSession sqlSession, String campNo){
 		return sqlSession.selectList("campingMapper.siteList", campNo);
+	}
+	
+
+	public Site campingReservation(SqlSession sqlSession, int siteNo) {
+		return sqlSession.selectOne("campingMapper.campingReservation", siteNo);
 	}
 
 }

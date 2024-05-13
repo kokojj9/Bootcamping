@@ -1,23 +1,29 @@
 package com.kh.bootcamping.camping.controller;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Properties;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
+import com.kh.bootcamping.common.template.PropertyTemplate;
+import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 @Controller
 public class CampingController {
@@ -25,7 +31,8 @@ public class CampingController {
 	@Autowired
 	private CampingService campingService;
 	
-	public static final String SERVICE_KEY = "jDeUHHxyvx1AmWI1ZXjA7MNVQr1NcdX4pFo9EHtlICl0kGxbtpaEOHAtX2o%2FzWb7Kf4WWAGX%2BfvCl5pmtkbviQ%3D%3D";
+	@Autowired
+	private PropertyTemplate pt;
 
 	/**
 	 * 캠핑장 전체 조회 + 페이징처리
@@ -36,7 +43,7 @@ public class CampingController {
 		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 5);
 		
 		String url = "http://apis.data.go.kr/B551011/GoCamping/basedList";
-			   url += "?serviceKey=" + SERVICE_KEY;
+			   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
 			   url += "&MobileOS=ETC";
 			   url += "&MobileApp=TestApp";
 			   url += "&numOfRows=8";
@@ -74,7 +81,7 @@ public class CampingController {
 		if(campingService.detailCamping(campNo) != null) {
 			
 			String url = "http://apis.data.go.kr/B551011/GoCamping/imageList";
-				   url += "?serviceKey=" + SERVICE_KEY;
+				   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
 				   url += "&MobileOS=ETC";
 				   url += "&MobileApp=TestApp";
 				   url += "&contentId=" + campNo;
@@ -106,15 +113,41 @@ public class CampingController {
 		
 	}
 	
+	/**
+	 * 
+	 */
+    @ResponseBody
+    @PostMapping(value="camping/selectDate", produces="application/json; charset-UTF-8")
+    public String selectDate(ReservationInfo reservationInfo) {
+        
+	        System.out.println(reservationInfo);
+	       
+		return new Gson().toJson(reservationInfo);
+	}
+	
+	
 	
 	/**
-	 * 캠핑장 사진 
-	 
-	@ResponseBody
-	@GetMapping(value="camping.img", produces="application/json; charset=UTF-8")
-	public String campingImgList()
-	*/
-
+	 * 
+	 */
+	@GetMapping("reservation")
+	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, Model model) {
+		
+		if(campingService.campingReservation(siteNo) != null) {
+			
+			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
+			model.addAttribute("checkInDate", startDate);
+			model.addAttribute("checkOutDate", endDate);
+			
+			System.out.println(startDate);
+			
+			return "reservation/reservation";
+		}
+		
+		return "redirect:/";
+		
+	}
+	
  
 
 
