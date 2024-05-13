@@ -19,8 +19,9 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 	
 	<!-- 결제 -->
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-	<script type="text/javascript"	src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 	
 <style>
 
@@ -187,6 +188,7 @@
 
                 <div id="reser_detail">
                     <h3>${reserSite.campName } (${reserSite.siteName })</h3>
+                    <input type="hidden" id="campName" value="${reserSite.campName }">
                     <p>${people }인</p>
                     <p>117,000원</p>
                     <p>${checkInDate} ~ ${checkOutDate }</p>
@@ -202,12 +204,12 @@
 				<form action="#" method="post">
                     <div id="reservation_name">
                         <p>예약자 이름</p> 
-                        <input type="text" required placeholder="이름을 입력해주세요" maxlength="4"><br><br>
+                        <input type="text" id="reservationName" required placeholder="이름을 입력해주세요" maxlength="4"><br><br>
                     </div>
 
                     <div id="reservation_phone">
                         <p>전화번호</p>
-                        <input type="text" required placeholder="-를 제외하고 입력해주세요" maxlength="11"> <br><br>
+                        <input type="text" required  id="reservationPhone" placeholder="-를 제외하고 입력해주세요" maxlength="11"> <br><br>
                     	<input type="hidden" name="people" value="${ people}">
                     	<input type="hidden" name="checkInDate" value="${ checkInDate}">
                     	<input type="hidden" name="checkOutDate" value="${ checkOutDate}">
@@ -226,7 +228,7 @@
                 </div>
 
                 <div id="reser_payment">
-                    <button class="btn btn-success" type="button" id="moneyBtn">117,000원 결제하기</button>
+                    <button class="btn btn-success" type="button" onclick="moneyBtn();">117,000원 결제하기</button>
                 </div>
                 
                 </form>
@@ -244,46 +246,44 @@
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
-	<script>
+<script>
+
+	
+	function moneyBtn(){
+		
+        var campName = $('#campName').val();
+        var reservationName = $('#reservationName').val();
+        var reservationPhone = $('#reservationPhone').val();
+        
+
+		
 		var IMP = window.IMP;
-		IMP.init("imp"); 
+		IMP.init("imp60634072"); 
 		
-		
-		$('#moneyBtn').click(function() {
-			IMP.request_pay({
-				pg: 'html5_inicis',
-				pay_method: 'card',
-				merchant_uid: 'merchant_' + new Date().getTime(),
+		 IMP.request_pay({
+			    pg: "html5_inicis.INIpayTest",
+			    pay_method: "card",
+			    merchant_uid: "결제 번호",
+			    name: campName,
+			    amount: 100, // 테스트 후 가격 바꾸기
+			    buyer_name: reservationName,
+			    buyer_tel: reservationPhone,
+					m_redirect_url : "/bootcamping/"
+					
+			  }, function (rsp) { // callback
+							if (rsp.success) {
+			           alert('결제가 성공했습니다.');
 
-				name: '예약 지점명 : ' + bookCity + '점',
-				amount: bookMoney,
-				buyer_email: "",  /*필수 항목이라 "" 로 남겨둠*/
-				buyer_name: bookName,
-			}, function(rsp) {
-				console.log(rsp);
-				
-				 //결제 성공 시
-				if (rsp.success) {
-					var msg = '결제가 완료되었습니다.';
-					console.log("결제성공 ");
+			            // 결제 성공 로직
 
-					$.ajax({
-						type: "GET",
-						url: 'bookingPay',
-						data: {
-							amount: bookMoney,
-							imp_uid: rsp.imp_uid,
-							merchant_uid: rsp.merchant_uid
-						}
-					});
-				} else {
-					var msg = '결제에 실패하였습니다.';
-					msg += '에러내용 : ' + rsp.error_msg;
-				}
-				alert(msg);
-			});
-		});
-		
+			        } else {
+			            alert('결제에 실패했습니다.');
+
+			            // 결제 실패 로직
+			        }
+			   });
+	}
+
 	</script>
 
 </body>
