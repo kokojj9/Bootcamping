@@ -3,6 +3,7 @@ package com.kh.bootcamping.member.model.service;
 import java.util.Map;
 
 import com.kh.bootcamping.member.model.vo.Member;
+import com.kh.bootcamping.member.model.vo.MyPageInfo;
 
 public interface MemberService {
 
@@ -17,5 +18,7 @@ public interface MemberService {
 	String checkAuthCode(Map<String, String> auth);
 
 	String checkMemberId(String memberId);
+
+	MyPageInfo searchMyPage(String memberId);
 
 }

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bootcamping.member.model.vo.Member;
+import com.kh.bootcamping.member.model.vo.MyPageInfo;
 
 @Repository
 public class MemberRepository {
@@ -32,6 +33,10 @@ public class MemberRepository {
 
 	public String checkMemberId(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.selectOne("memberMapper.checkMemberId", memberId);
+	}
+
+	public MyPageInfo searchMyPage(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.searchMyPage", memberId);
 	}
 	
 }

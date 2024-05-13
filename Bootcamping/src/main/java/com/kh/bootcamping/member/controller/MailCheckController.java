@@ -43,7 +43,6 @@ public class MailCheckController {
 	@PostMapping(value="mail", produces = "html/text; charset=UTF-8")
 	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
 		if(memberService.checkMemberEmail(email) != null) {
-			System.out.println("중복임!");
 			return "NNNNN";
 		} else {
 			
@@ -78,7 +77,7 @@ public class MailCheckController {
 			helper.setSubject("인증번호 전송");
 			helper.setText("인증번호 : " + code);
 			impl.send(message);
-			System.out.println("안중복임");
+			
 			return "YYYYY";
 		}
 	}

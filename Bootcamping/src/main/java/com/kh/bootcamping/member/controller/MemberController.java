@@ -60,6 +60,12 @@ public class MemberController {
 		return mv;
 	}
 	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginMember", null);
+		return "redirect:/";
+	}
+	
 	/***
 	 * 쿠키 생성 메서드
 	 * @param saveId 사용자가 입력한 아이디
@@ -119,7 +125,12 @@ public class MemberController {
 	
 	
 	//마이페이지 메서드
-	
+	@GetMapping("myPage")
+	public String forwardMyPage(String memberId) {
+		memberService.searchMyPage(memberId);
+		
+		return "member/myPage";
+	}
 	
 	
 	
