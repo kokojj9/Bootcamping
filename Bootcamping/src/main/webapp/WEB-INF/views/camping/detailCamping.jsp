@@ -635,7 +635,7 @@
 	                    
 	      				const total = result.length;
 	      				
-	      				$('#reviewCount').text(total);
+	      				document.getElementById('reviewCount').innerText = total;
 	                    
 	                    let reviewResult = '';
 	                    
@@ -654,10 +654,10 @@
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}
-	                    $('#reviewListSelect').html(reviewResult);
+	                    document.getElementById('reviewListSelect').innerHTML = reviewResult;
 	                    }
 
-	                  $('#reviewListSelect').html(reviewResult);
+	                    document.getElementById('reviewListSelect').innerHTML = reviewResult;
 	                 
 	                    
 	                }
