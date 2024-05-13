@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>부트캠핑 - 회원가입</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
     <style>
         .content { 
@@ -21,7 +20,7 @@
             padding: 3% 7%;
             background-color: white;
         }
-        #sample4_postcode, #sample4_roadAddress{
+        #postcode, #roadAddress{
             font-size: 1rem;
             font-weight: 400;
             line-height: 1.5;
@@ -33,11 +32,11 @@
             border: 1px solid #ced4da;
             border-radius: .25rem;
         }
-        #sample4_postcode{
+        #postcode{
             width: 100px;
             margin-bottom: 5px;
         }
-        #sample4_roadAddress{
+        #roadAddress{
             width: 310px;
         }
         #findAddressBtn, #checkEmailBtn, #checkAuthCode{
@@ -50,7 +49,10 @@
             font-weight: 400;
             border-radius: .25rem;
         }
-        #sample4_detailAddress{
+        #detailAddress{
+            margin-top: 5px;
+        }
+        #checkAuthCode{
             margin-top: 5px;
         }
     </style>
@@ -106,7 +108,6 @@
     </div>
 
     <jsp:include page="../common/footer.jsp"/>
-    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     
     <script>
         
@@ -143,17 +144,13 @@
                 checkInfo('id', 'crimson', '영문/숫자만 입력')
             };
         };
-        let countdown;
+
         // 이메일 인증
         document.getElementById('checkEmailBtn').onclick = () => {
             if(document.getElementById('email').value == ''){
                 alert('이메일을 입력해주세요!');
             }
             else{
-                document.getElementById('authCode').style.display = 'block';
-                document.getElementById('checkAuthCode').style.display = 'block';
-                document.getElementById('checkAuthCode').disabled = false;
-
                 $.ajax({
                     url : 'mail',
                     type : 'post',
@@ -161,13 +158,18 @@
                         email : document.getElementById('email').value 
                     },
                     success : result => {
+                        console.log(result);
                         if(result === 'YYYYY'){
+                            document.getElementById('checkAuthCode').style.display = 'block';
                             document.getElementById('email').setAttribute('readonly', true);
+                            document.getElementById('authCode').style.display = 'block';
+                            document.getElementById('checkAuthCode').disabled = false;
+
                             alert('인증번호가 발급되었습니다.');
 
                             var totalTime = 180;
         
-                            countdown = setInterval(() => {
+                            let countdown = setInterval(() => {
                                 document.getElementById('timer').style.color = 'black';
                                 
                                 if(totalTime > 0) {
@@ -189,6 +191,9 @@
                         else {
                             alert('인증번호발급에 실패하였습니다. 이메일을 확인해주세요');
                         }
+                    },
+                    error : e => {
+                        console.log('먼데이게~');
                     }
                 });
             }
@@ -218,7 +223,7 @@
             });
         };
 
-         // 비밀번호 정규표현식
+        // 비밀번호 정규표현식
         memberPwdtag.onkeyup = () => {
             let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
 

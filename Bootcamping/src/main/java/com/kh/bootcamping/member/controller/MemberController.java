@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,6 +59,12 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginMember", null);
+		return "redirect:/";
 	}
 	
 	/***
@@ -117,16 +124,13 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 아이디 중복 체크
-	@ResponseBody
-	@GetMapping("members/{memberId}")
-	public String checkMemberId(@PathVariable(value = "memberId") String memberId) {
-		return memberService.checkMemberId(memberId);
-	}
-	
 	
 	//마이페이지 메서드
-	
+	@GetMapping("myPage")
+	public String forwardMyPage(String memberId, Model model) {
+		model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
+		return "member/myPage";
+	}
 	
 	
 	
