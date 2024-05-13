@@ -302,13 +302,13 @@
         <div id="camp_name">
 
             <div id="campTitle">
-                <h2>${camping.campName}</h2> <br>
+                <h2>${camping.campName}</h2> <br/>
                 <p>${camping.campPhone }</p>
                 <p>${camping.detailAddress }</p>
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"></a></div>
+                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"/></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -325,9 +325,6 @@
         <div id="service">
             <h4>시설 환경</h4>
             <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>${camping.service }</p></div>
-            <!-- <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>화장실</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div> -->
         </div>
 
         <!-- 배치도 -->
@@ -351,10 +348,7 @@
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
-            
-            
-            
-            
+
             </div>
         </div>
 
@@ -389,7 +383,7 @@
 			<c:choose>
       		  	<c:when test="${ empty requestScope.site}">
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-10</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -397,7 +391,7 @@
 		                </div>
 		            </div>	 
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-11</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -405,7 +399,7 @@
 		                </div>
 		            </div>			                    		  	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-12</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -413,7 +407,7 @@
 		                </div>
 		            </div>	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-13</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -425,7 +419,7 @@
 				<c:when test="${requestScope.site ne null}">
 					<c:forEach var="site" items="${requestScope.site }">
 			            <div class="siteList">
-			                <div class="siteImg"><img src="../${site.sitePath }" width="255"></div>
+			                <div class="siteImg"><img src="../${site.sitePath }" width="255"/></div>
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
@@ -455,7 +449,7 @@
             <h4>위치</h4>
 			<!-- 지도를 표시할 div 입니다 -->
 			<div id="map" style="width:100%;height:350px;"></div>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051"></script>
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey="></script>
         </div>
 
         <!-- 후기 -->
