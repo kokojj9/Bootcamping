@@ -64,7 +64,7 @@
         }
 
         #header_center {
-            width: 700px;
+            width: 500px;
             height: 100%;
             display: flex;
         }
@@ -95,7 +95,6 @@
             background-color: #f6f6f6;
         }
 
-
         #header_menu > ul {
             list-style: none;
             display: flex;
@@ -121,7 +120,7 @@
         }
 
         #header_right {
-            width: 200px;
+            width: 400px;
             height: 100%;
         }
 
@@ -161,12 +160,6 @@
                         
                         <br> <br> <br> <br> <br> <br>
                     </ul>
-                </div>
-                <div id="header_search">
-                    <input type="text" name="keyword">
-                    <span>
-                        검색<img src="">                        
-                    </span>
                 </div>
             </div>
             <div id="header_right">
