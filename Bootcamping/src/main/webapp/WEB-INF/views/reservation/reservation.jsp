@@ -8,6 +8,15 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- alert -->
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+
 <style>
 
     div{
@@ -154,7 +163,9 @@
 	
 	<c:choose>
 		<c:when test="${empty sessionScope.loginMember }">
-			
+			<script>
+				alertify.alert('축하한다~~~~~~~~','${alertMsg}', function(){alertify.success('띠용~~~~~~')});
+			</script>
 		</c:when>
 		<c:otherwise>
 
@@ -170,9 +181,9 @@
 
                 <div id="reser_detail">
                     <h3>${reserSite.campName } (${reserSite.siteName })</h3>
-                    <p>2인</p>
+                    <p>${people }인</p>
                     <p>117,000원</p>
-                    <p>2024-05-05 ~ 2024-05-06</p>
+                    <p>${checkInDate} ~ ${checkOutDate }</p>
                 </div>
             </div>
         
@@ -185,12 +196,12 @@
 				<form action="#" method="post">
                     <div id="reservation_name">
                         <p>예약자 이름</p> 
-                        <input type="text" required placeholder="이름을 입력해주세요"><br><br>
+                        <input type="text" required placeholder="이름을 입력해주세요" maxlength="4"><br><br>
                     </div>
 
                     <div id="reservation_phone">
                         <p>전화번호</p>
-                        <input type="text" required placeholder="-를 제외하고 입력해주세요"> <br><br>
+                        <input type="text" required placeholder="-를 제외하고 입력해주세요" maxlength="11"> <br><br>
                     </div>
                 </div>
 

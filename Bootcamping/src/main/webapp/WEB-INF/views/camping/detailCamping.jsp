@@ -428,6 +428,7 @@
 			                     	<input type="hidden" name="startDate" id="startDateInput">
 								    <input type="hidden" name="endDate" id="endDateInput">
 								    <input type="hidden" name="countPeople" id="countPeopleInput">
+								    <input type="hidden" name="reservationPrice" id="totalPrice">
 			                    <button type="submit" class="btn btn-success" id="campingReserBtn">예약하기
 			                    </button></form></div>
 			                    
