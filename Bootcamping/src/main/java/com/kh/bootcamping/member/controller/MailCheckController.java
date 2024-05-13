@@ -40,11 +40,13 @@ public class MailCheckController {
 	 * @throws MessagingException
 	 */
 	@ResponseBody
-	@PostMapping(value="mail", produces = "application/json; charset=UTF-8")
+	@PostMapping(value="mail", produces = "html/text; charset=UTF-8")
 	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
 		if(memberService.checkMemberEmail(email) != null) {
+			System.out.println("중복임!");
 			return "NNNNN";
 		} else {
+			
 			Map<String, String> auth = new HashMap<String, String>();
 			JavaMailSenderImpl impl = new JavaMailSenderImpl();
 			Properties prop = new Properties();
@@ -67,7 +69,6 @@ public class MailCheckController {
 			auth.put("remoteAddr", remoteAddr);
 			auth.put("email", email);
 			auth.put("code", code);
-			
 			if(memberService.insertAuthCode(auth) == 0) return "NNNNN";
 			
 			MimeMessage message = impl.createMimeMessage();
@@ -77,7 +78,7 @@ public class MailCheckController {
 			helper.setSubject("인증번호 전송");
 			helper.setText("인증번호 : " + code);
 			impl.send(message);
-			
+			System.out.println("안중복임");
 			return "YYYYY";
 		}
 	}

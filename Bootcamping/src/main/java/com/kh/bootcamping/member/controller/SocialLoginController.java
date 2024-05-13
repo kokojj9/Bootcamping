@@ -2,13 +2,11 @@ package com.kh.bootcamping.member.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
 
