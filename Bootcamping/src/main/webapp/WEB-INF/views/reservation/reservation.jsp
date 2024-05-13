@@ -160,15 +160,16 @@
 
 </head>
 <body>
-	
+	<!--  
 	<c:choose>
 		<c:when test="${empty sessionScope.loginMember }">
 			<script>
-				alertify.alert('축하한다~~~~~~~~','${alertMsg}', function(){alertify.success('띠용~~~~~~')});
-			</script>
+				alert("로그인을 해주세요!");
+				location.href ="/bootcamping/loginForm";
+			 </script>
 		</c:when>
 		<c:otherwise>
-
+-->
 
 	<jsp:include page="../common/header.jsp"/>	
                
@@ -202,6 +203,11 @@
                     <div id="reservation_phone">
                         <p>전화번호</p>
                         <input type="text" required placeholder="-를 제외하고 입력해주세요" maxlength="11"> <br><br>
+                    	<input type="hidden" name="people" value="${ people}">
+                    	<input type="hidden" name="checkInDate" value="${ checkInDate}">
+                    	<input type="hidden" name="checkOutDate" value="${ checkOutDate}">
+                    	<input type="hidden" name="memberNo" value="${ session.loginMember.memberNo}">
+                    	
                     </div>
                 </div>
 
@@ -224,11 +230,18 @@
 
 
     </div>
+    
+    <!-- 
+    
+    </c:otherwise>
+</c:choose>
+
+	-->
+	    
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
-</c:otherwise>
-</c:choose>
+
  
 
 </body>

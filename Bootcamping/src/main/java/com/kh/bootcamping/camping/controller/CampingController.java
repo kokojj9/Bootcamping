@@ -1,12 +1,12 @@
 package com.kh.bootcamping.camping.controller;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Properties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -124,23 +124,38 @@ public class CampingController {
 	       
 		return new Gson().toJson(reservationInfo);
 	}
-	
-	
+
 	
 	/**
 	 * 
 	 */
 	@GetMapping("reservation")
-	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, int countPeople, Model model) {
+	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, @RequestParam(value="countPeople", defaultValue="1") int countPeople, Model model) {
+		
+		Date nowDate = new Date();
+		
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy/MM/dd"); 
+
+		String strNowDate = simpleDateFormat.format(nowDate); 
+		
+		  if (startDate == null) {
+		        startDate = strNowDate;
+		    }
+		  if (endDate == null) {
+			  endDate = strNowDate + 1;
+		    }
 		
 		if(campingService.campingReservation(siteNo) != null) {
-			
+
+			  System.out.println(startDate);
+			  System.out.println(endDate);
+			  
 			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
 			model.addAttribute("checkInDate", startDate);
 			model.addAttribute("checkOutDate", endDate);
 			model.addAttribute("people", countPeople);
-			
-			System.out.println(startDate);
+
+
 			
 			return "reservation/reservation";
 		}

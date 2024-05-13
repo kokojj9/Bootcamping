@@ -425,10 +425,10 @@
 			                    <h5>${site.sitePrice}원</h5>
 			                    <div class="reserBtn"><form action="/bootcamping/reservation">
 			                        <input type="hidden" name="siteNo" value="${site.siteNo}">
-			                     	<input type="hidden" name="startDate" id="startDateInput">
-								    <input type="hidden" name="endDate" id="endDateInput">
-								    <input type="hidden" name="countPeople" id="countPeopleInput">
-								    <input type="hidden" name="reservationPrice" id="totalPrice">
+			                     	<input type="hidden" name="startDate" class="startDateInput">
+								    <input type="hidden" name="endDate" class="endDateInput">
+								    <input type="hidden" name="countPeople" class="countPeopleInput">
+								    <input type="hidden" name="reservationPrice" class="totalPrice">
 			                    <button type="submit" class="btn btn-success" id="campingReserBtn">예약하기
 			                    </button></form></div>
 			                    
@@ -667,6 +667,8 @@
         
         </script>
         
+        
+        <!-- 날짜 & 인원수 선택 -->
         <script>
         	function AllReser(){
         		
@@ -677,12 +679,11 @@
         		
         		var start2 = start.split("/");
 
-        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+
         		var year = parseInt(start2[2]);
         		var month = parseInt(start2[0]) - 1;
         		var day = parseInt(start2[1]);
 
-        		// Date 객체 생성
         		var date = new Date(year, month, day);
         		
         		var date = new Date(year, month, day);
@@ -697,12 +698,10 @@
         		
         		var end2 = end.split("/");
 
-        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
         		var year2 = parseInt(end2[2]);
         		var month2 = parseInt(end2[0]) - 1;
         		var day2 = parseInt(end2[1]);
 
-        		// Date 객체 생성
         		var date2 = new Date(year2, month2, day2);
         		
         		var date2 = new Date(year2, month2, day2);
@@ -727,9 +726,9 @@
         				},
         			success : result => {
         				console.log(result);
-        			       	$('#startDateInput').val(result.startDate);
-        			        $('#endDateInput').val(result.endDate);
-        			        $('#countPeopleInput').val(result.countPeople);
+        			       	$('.startDateInput').val(result.startDate);
+        			        $('.endDateInput').val(result.endDate);
+        			        $('.countPeopleInput').val(result.countPeople);
         			}
         			
         		})
@@ -738,6 +737,8 @@
         	
         </script>
         
+        
+   
         
 
    	<jsp:include page="../common/footer.jsp"/>
