@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class NoticeController {
 	
-	@RequestMapping("notice")
+	//@RequestMapping("notice")
 	
 	
 }
