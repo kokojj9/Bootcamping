@@ -20,5 +20,5 @@ public class Reservation {
 	private String reserPhone;
 	private int price;
 	private String reserStatus;
-	
+	private String priceNo;
 }

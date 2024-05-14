@@ -277,7 +277,7 @@
  			    pay_method: "card",
  			    merchant_uid: "IMP"+makeMerchantUid,
  			    name: campName,
- 			    amount: sitePrice, // 테스트 후 가격 바꾸기
+ 			    amount: 100, // 테스트 후 가격 바꾸기
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone,
  				m_redirect_url : "/bootcamping/"
@@ -291,16 +291,18 @@
  							type: "GET",
  							url: 'successReservation',
  							data: {
- 								reservationNo: rsp.imp_uid,
  								priceNo : rsp.merchant_uid,
- 								reservationName : reservationName,
- 								reservationPhone : reservationPhone,
- 								checkIdDate : checkIdDate,
+ 								reserName : reservationName,
+ 								reserPhone : reservationPhone,
+ 								checkInDate : checkIdDate,
  								checkOutDate : checkOutDate,
  								people : people,
  								memberNo : memberNo,
  								sitePrice : sitePrice,
  								siteNo : siteNo,
+ 							},
+ 							success : result => {
+ 								console.log(result);
  							}
  						});
  			          

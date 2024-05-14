@@ -15,6 +15,11 @@ public class ReservationServiceImpl implements ReservationService {
 	
 	@Autowired
 	private SqlSession sqlSession;
+
+	@Override
+	public int insertReservation(Reservation reservation) {
+		return reservationRepository.insertReservation(sqlSession, reservation);
+	}
 	
 
 
