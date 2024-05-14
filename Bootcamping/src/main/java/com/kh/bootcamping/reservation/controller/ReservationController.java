@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.bootcamping.reservation.model.service.ReservationService;
@@ -20,7 +20,7 @@ public class ReservationController {
 	
 	
 	@ResponseBody
-	@GetMapping(value="successReservation")
+	@PostMapping(value="successReservation")
 	public void insertResrvation(Reservation reservation, HttpServletResponse response) throws IOException {
 		
 		int result  = reservationService.insertReservation(reservation);

@@ -201,7 +201,6 @@
             
                 <div id="rser_select">
                     <h3>예약자 정보</h3> <br>
-				<form action="#" method="post">
                     <div id="reservation_name">
                         <p>예약자 이름</p> 
                         <input type="text" id="reservationName" required placeholder="이름을 입력해주세요" maxlength="4"><br><br>
@@ -230,8 +229,6 @@
                 <div id="reser_payment">
                     <button class="btn btn-success" type="button" onclick="moneyBtn();">${sitePrice }원 결제하기</button>
                 </div>
-                
-                </form>
             </div>
         </div>	
 
@@ -251,15 +248,16 @@
 		IMP.init("imp60634072"); 
 	
         var campName = document.getElementById('campName').value;
-        var reservationName = document.getElementById('reservationName').value;
-        var reservationPhone = document.getElementById('reservationPhone').value;
         var checkIdDate = document.getElementById('checkInDate').value;
         var checkOutDate = document.getElementById('checkOutDate').value;
         var people = document.getElementById('people').value;
         var memberNo = document.getElementById('memberNo').value;
         var siteNo = document.getElementById('siteNo').value;
         var sitePrice = "${sitePrice }";
+
         
+
+
         
         
         
@@ -272,6 +270,11 @@
         
 
         function moneyBtn() {
+        	
+            var reservationName = document.getElementById('reservationName').value;
+            var reservationPhone = document.getElementById('reservationPhone').value;
+
+        	
         	 IMP.request_pay({
  			    pg: "html5_inicis.INIpayTest",
  			    pay_method: "card",
@@ -288,7 +291,7 @@
  			          console.log(rsp);
  			          
  						$.ajax({
- 							type: "GET",
+ 							type: "POST",
  							url: 'successReservation',
  							data: {
  								priceNo : rsp.merchant_uid,
@@ -298,7 +301,7 @@
  								checkOutDate : checkOutDate,
  								people : people,
  								memberNo : memberNo,
- 								sitePrice : sitePrice,
+ 								sitePrice : amount,
  								siteNo : siteNo,
  							},
  							success : result => {
@@ -312,6 +315,9 @@
  			        } else {
  			            alert('결제에 실패했습니다.');
  			            console.log(rsp);
+ 			            
+ 			           console.log(reservationName);
+ 			          console.log(reservationPhone);
 
  			            // 결제 실패 로직
  			        }
