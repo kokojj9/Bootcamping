@@ -40,11 +40,12 @@ public class MailCheckController {
 	 * @throws MessagingException
 	 */
 	@ResponseBody
-	@PostMapping(value="mail", produces = "application/json; charset=UTF-8")
+	@PostMapping(value="mail", produces = "html/text; charset=UTF-8")
 	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
 		if(memberService.checkMemberEmail(email) != null) {
 			return "NNNNN";
 		} else {
+			
 			Map<String, String> auth = new HashMap<String, String>();
 			JavaMailSenderImpl impl = new JavaMailSenderImpl();
 			Properties prop = new Properties();
@@ -67,7 +68,6 @@ public class MailCheckController {
 			auth.put("remoteAddr", remoteAddr);
 			auth.put("email", email);
 			auth.put("code", code);
-			
 			if(memberService.insertAuthCode(auth) == 0) return "NNNNN";
 			
 			MimeMessage message = impl.createMimeMessage();

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,7 +45,7 @@ public class MemberController {
 	public ModelAndView login(Member member, @RequestParam(defaultValue = "false")String rememberId,
 				              HttpSession session, ModelAndView mv,
 				              HttpServletResponse response) {
-
+		
 		Member loginMember = memberService.login(member);
 		
 		if(rememberId.equals("true")) saveIdCookie(member.getMemberId(), response);
@@ -60,6 +61,12 @@ public class MemberController {
 		return mv;
 	}
 	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginMember", null);
+		return "redirect:/";
+	}
+	
 	/***
 	 * 쿠키 생성 메서드
 	 * @param saveId 사용자가 입력한 아이디
@@ -68,7 +75,6 @@ public class MemberController {
 	private void saveIdCookie(String saveId, HttpServletResponse response) {
 		Cookie saveIdCookie = new Cookie("saveId", saveId);
 		saveIdCookie.setMaxAge(1*60*60*24);
-		
 		response.addCookie(saveIdCookie);
 	}
 	
@@ -79,7 +85,6 @@ public class MemberController {
 	private void deleteIdCookie(HttpServletResponse response) {
 		Cookie saveIdCookie = new Cookie("saveId","");
 		saveIdCookie.setMaxAge(0);
-		
 		response.addCookie(saveIdCookie);
 	}
 	
@@ -102,30 +107,39 @@ public class MemberController {
 									 String roadAddress, String detailAddress,
 									 HttpSession session, ModelAndView mv) {
 		
-		String address = postcode + roadAddress + detailAddress;
-		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-		member.setAddress(address);
-		member.setMemberPwd(encPwd);
-		
-		if(memberService.insertMember(member) > 0) {
-			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
-			mv.setViewName("redirect:/");
-		} else {
+		if(member.getEmail().equals("") && member.getMemberId().equals("") && member.getMemberPwd().equals("")) {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
+		} else {
+			String address = postcode + roadAddress + detailAddress;
+			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+			member.setAddress(address);
+			member.setMemberPwd(encPwd);
+			
+			if(memberService.insertMember(member) > 0) {
+				session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+				mv.setViewName("redirect:/");
+			} else {
+				mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
+			}
 		}
-		
 		return mv;
-	}
-	
-	// 아이디 중복 체크
-	@ResponseBody
-	@GetMapping("members/{memberId}")
-	public String checkMemberId(@PathVariable(value = "memberId") String memberId) {
-		return memberService.checkMemberId(memberId);
 	}
 	
 	
 	//마이페이지 메서드
+	@GetMapping("myPage")
+	public String forwardMyPage(String memberId, Model model) {
+		model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
+		return "member/myPage";
+	}
+	
+	// 회원 정보 수정 페이지 포워딩 메서드
+	@GetMapping("editForm")
+	public String forwardEditMember(Member member, Model model) {
+		return "member/editForm";
+	}
+	
+	
 	
 	
 	

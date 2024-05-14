@@ -1,0 +1,47 @@
+.content { 
+    background-color: rgb(247, 245, 245);
+    width: 1200px; 
+    margin: auto;
+}
+.innerOuter {
+    border: 1px solid lightgray;
+    width: 40%;
+    margin: auto;
+    padding: 3% 7%;
+    background-color: white;
+}
+#postcode, #roadAddress{
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+#postcode{
+    width: 100px;
+    margin-bottom: 5px;
+}
+#roadAddress{
+    width: 310px;
+}
+#findAddressBtn, #checkEmailBtn, #checkAuthCode{
+    width: 90px;
+    height: 35px;
+    background-color: #1dc078;
+    color: #f6f6f6;
+    border: 0;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: .25rem;
+}
+#detailAddress{
+    margin-top: 5px;
+}
+#checkAuthCode{
+    margin-top: 5px;
+}

@@ -7,62 +7,12 @@
 <head>
 <meta charset="UTF-8">
 <title>부트캠핑 - 로그인</title>
-
-    <style>
-        #login-wrap {
-            width: 500px;
-            height: 500px;
-            margin: 50px auto;
-        }
-
-        .login_title > div {
-            width: 300px;
-            font-size: 36px;
-            font-weight: 500;
-            text-align: center;
-            margin: auto;
-        }
-
-        .login_form {
-            width: 300px;
-            height: 100px;
-            margin: 25px auto;
-        }
-
-        .login_btn {
-            width: 300px;
-            margin: auto;
-        }
-
-        .login_btn > button{
-            width: 137px;
-            border: 0;
-            border-radius: 5px;
-            height: 40px;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .login { 
-            margin-right: 20px;
-            background-color: #1dc078;
-            color: #f6f6f6;
-        }
-
-        #socialLoginArea{
-            margin: 20px auto;
-            width: 300px;
-            height: 200px;
-        }
-        #kakaoBtn{
-            width: 300px;
-            height: 100px;
-        }
-
-    </style>
+    <link rel="stylesheet" href="resources/CSS/member/login.css">
+  
 
 </head>
 <body>
+    
 	<jsp:include page="../common/header.jsp"/>
 
     <div id="login-wrap">
@@ -99,14 +49,6 @@
     </div>
     
 	<jsp:include page="../common/footer.jsp"/>
-
-    <script>
-    
-    
-    
-    
-    </script>
-
 
 </body>
 </html>
