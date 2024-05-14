@@ -210,11 +210,11 @@
                     <div id="reservation_phone">
                         <p>전화번호</p>
                         <input type="text" required  id="reservationPhone" placeholder="-를 제외하고 입력해주세요" maxlength="11"> <br><br>
-                    	<input type="hidden" name="people" value="${ people}">
-                    	<input type="hidden" name="checkInDate" value="${ checkInDate}">
-                    	<input type="hidden" name="checkOutDate" value="${ checkOutDate}">
-                    	<input type="hidden" name="memberNo" value="${sessionScope.loginMember.memberNo }">
-                    	
+                    	<input type="hidden" id="people" value="${ people}">
+                    	<input type="hidden" id="checkInDate" value="${ checkInDate}">
+                    	<input type="hidden" id="checkOutDate" value="${ checkOutDate}">
+                    	<input type="hidden" id="memberNo" value="${sessionScope.loginMember.memberNo }">
+                    	<input type="hidden" id="siteNo" value="${reserSite.siteNo }">
                     </div>
                 </div>
 
@@ -250,9 +250,18 @@
 		var IMP = window.IMP;
 		IMP.init("imp60634072"); 
 	
-        var campName = $('#campName').val();
-        var reservationName = $('#reservationName').val();
-        var reservationPhone = $('#reservationPhone').val();
+        var campName = document.getElementById('campName').value;
+        var reservationName = document.getElementById('reservationName').value;
+        var reservationPhone = document.getElementById('reservationPhone').value;
+        var checkIdDate = document.getElementById('checkInDate').value;
+        var checkOutDate = document.getElementById('checkOutDate').value;
+        var people = document.getElementById('people').value;
+        var memberNo = document.getElementById('memberNo').value;
+        var siteNo = document.getElementById('siteNo').value;
+        
+        
+        
+        
         
         var today = new Date();   
         var hours = today.getHours(); // 시
@@ -271,16 +280,30 @@
  			    amount: 100, // 테스트 후 가격 바꾸기
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone,
- 					m_redirect_url : "/bootcamping/"
+ 				m_redirect_url : "/bootcamping/"
  					
  			  }, function (rsp) { // callback
- 							if (rsp.success) {
+ 					if (rsp.success) {
  			           alert('결제가 성공했습니다.');
+ 			          console.log(rsp);
+ 			          
+ 						$.ajax({
+ 							type: "GET",
+ 							url: 'successReservation',
+ 							data: {
+ 								reservationNo: rsp.imp_uid,
+ 								priceNo : rsp.merchant_uid,
+ 								
+ 								
+ 							}
+ 						});
+ 			          
 
  			            // 결제 성공 로직
 
  			        } else {
  			            alert('결제에 실패했습니다.');
+ 			            console.log(rsp);
 
  			            // 결제 실패 로직
  			        }
