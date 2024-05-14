@@ -283,7 +283,7 @@
  			    amount: 100, // 테스트 후 가격 바꾸기
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone,
- 				m_redirect_url : "/bootcamping/"
+ 				m_redirect_url : "http://localhost:8001/bootcamping/"
  					
  			  }, function (rsp) { // callback
  					if (rsp.success) {
