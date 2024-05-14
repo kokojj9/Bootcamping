@@ -1,0 +1,125 @@
+.wrap{
+    width: 1200px;
+    height: 800px;
+    margin: auto;
+}
+
+.wrap > h2{
+    text-align: center;
+    margin: 50px auto;
+    
+}
+
+#myInfoArea{
+    margin: auto;
+    width: 950px;
+    height: 100px;
+    border: 1px solid rgb(94, 94, 94);
+    position: relative;
+}
+
+.welcomeMember{
+    color: rgb(51,51,51);
+    margin-top: 15px;
+    width: 260px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 30px;
+    position: absolute;
+}
+
+#editMember{
+    margin-top: 5px;
+    height: 35px;
+    width: 140px;
+    font-size: 16px;
+    color: white;
+    border-radius: 20px;
+    background-color: #1dc078;
+}
+
+#editMember:hover{
+    cursor: pointer;
+}
+
+#wishList{
+    margin-top: 30px;
+    width: 200px;
+    height: 30px;
+    font-size: 23px;
+    font-weight: 700;
+    color: rgb(94, 94, 94);
+    text-decoration: underline;
+    float: right;
+}
+
+#wishList:hover{
+    cursor: pointer;
+    color: #1dc078;
+}
+
+#reservationInfoArea, #boardArea{
+    width: 950px;
+    margin: 40px auto;
+}
+
+.myBoardList, .reservationList, .tradeList{
+    color: rgb(51,51,51);
+    font-size: 25px;
+    font-weight: 500;
+    float: left;
+}
+
+#reservmoreBtn, #boardmoreBtn, #trademoreBtn{
+    color: rgb(51,51,51);
+    margin-top: 10px;
+    float: right;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#reservmoreBtn:hover, #boardmoreBtn:hover, #trademoreBtn:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.tradeArea{
+    margin: auto;
+    width: 950px;
+    height: 130px;
+}
+
+.tradeInfo{
+    width: 950px;
+    height: 50px;
+}
+
+.tradeCount{
+    height: 130px;
+    width: 316px;
+    border: 1px solid rgb(94, 94, 94);
+    float: left;
+}
+
+.tradeCount > h4{
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.tradeCount > div{
+    width: fit-content;
+    margin: 15px auto;
+    text-align: center;
+    text-decoration: underline;
+    color: #1dc078;
+    font-weight: 400;
+}
+
+.tradeCount > div:hover{
+    cursor: pointer;
+    font-weight: bolder;
+}

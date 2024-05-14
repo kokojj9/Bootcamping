@@ -14,6 +14,7 @@ import com.kh.bootcamping.notice.model.service.NoticeService;
 @Controller
 public class NoticeController {
 	
+
 	// 공지사항은 페이징처리 안함
 	@Autowired
 	private NoticeService noticeService;
@@ -27,9 +28,6 @@ public class NoticeController {
 		return "notice/notice";
 	}
 	
-	
-	
-	
-		
+
 	
 }
