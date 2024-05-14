@@ -22,7 +22,6 @@
 		<typeAlias type="com.kh.bootcamping.reservation.model.vo.Reservation" alias="reservation"/>
 	</typeAliases>
 	
-	
 	<mappers>
 		<mapper resource="/mapper/member/member-mapper.xml"/>
 		<mapper resource="/mapper/camping/camping-mapper.xml"/>

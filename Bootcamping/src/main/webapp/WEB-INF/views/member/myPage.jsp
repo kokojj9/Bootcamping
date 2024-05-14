@@ -28,7 +28,7 @@
             margin: auto;
             width: 950px;
             height: 100px;
-            border: 1px solid black;
+            border: 1px solid rgb(94, 94, 94);
             position: relative;
         }
 
@@ -81,14 +81,14 @@
             margin: 40px auto;
         }
 
-        .myBoardList, .reservationList{
+        .myBoardList, .reservationList, .tradeList{
             color: rgb(51,51,51);
             font-size: 25px;
             font-weight: 500;
             float: left;
         }
 
-        .reservmoreBtn, .boardmoreBtn{
+        .reservmoreBtn, .boardmoreBtn, .trademoreBtn{
             color: rgb(51,51,51);
             margin-top: 10px;
             float: right;
@@ -96,9 +96,34 @@
             font-weight: 600;
         }
 
-        .reservmoreBtn:hover, .boardmoreBtn:hover{
+        .reservmoreBtn:hover, .boardmoreBtn:hover, .trademoreBtn:hover{
             cursor: pointer;
             text-decoration: underline;
+        }
+
+        .tradeArea{
+            margin: auto;
+            width: 950px;
+            height: 130px;
+        }
+
+        .tradeInfo{
+            width: 950px;
+            height: 50px;
+        }
+
+        .tradeProgress, .tradeCompleted, .tradeCancelled{
+            height: 130px;
+            width: 316px;
+            border: 1px solid rgb(94, 94, 94);
+            float: left;
+        }
+
+        .tradeProgress > h4, .tradeCompleted > h4, .tradeCancelled > h4{
+            font-size: 20px;
+            font-weight: 400;
+            margin-top: 25px;
+            text-align: center;
         }
 
 
@@ -199,6 +224,56 @@
                 </tbody>
             </table>
         </div>
+
+		<c:set var="tradeStatusList" value="${myPageInfo.tradeBoardList}" />
+
+		<c:set var="countInProgress" value="0" />
+		<c:set var="countCompleted" value="0" />
+		<c:set var="countCancelled" value="0" />
+		
+		<c:forEach var="status" items="${tradeStatusList}">
+		    <c:choose>
+		        <c:when test="${status eq 1}">
+		            <c:set var="countInProgress" value="${countInProgress + 1}" />
+		        </c:when>
+		        <c:when test="${status eq 2}">
+		            <c:set var="countCompleted" value="${countCompleted + 1}" />
+		        </c:when>
+		        <c:when test="${status eq 3}">
+		            <c:set var="countCancelled" value="${countCancelled + 1}" />
+		        </c:when>
+		    </c:choose>
+		</c:forEach>
+
+        <div class="tradeArea">
+            <div class="tradeInfo">
+                <div class="tradeList">거래 현황</div>
+                <div class="trademoreBtn">더보기</div>
+            </div>
+            <div class="tradeProgress">
+                <h4>거래중</h4>
+                <div>${ countInProgress }건</div>
+            </div>
+            <div class="tradeCompleted">
+                <h4>거래 완료</h4>
+				<div>${ countCompleted }건</div>
+            </div>
+            <div class="tradeCancelled">
+                <h4>거래 취소</h4>
+				<div>${ countCancelled }건</div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
     </div>
     
     <jsp:include page="../common/footer.jsp"/>
