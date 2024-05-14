@@ -2,13 +2,11 @@ package com.kh.bootcamping.member.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Properties;
 
 import javax.servlet.http.HttpSession;
 
@@ -143,7 +141,6 @@ public class SocialLoginController {
 		
 		String responseDate = br.readLine();
 		Member sm = new Member();
-		System.out.println(responseDate);
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseDate);
 		
 		JSONObject propObj = (JSONObject)responseObj.get("properties");

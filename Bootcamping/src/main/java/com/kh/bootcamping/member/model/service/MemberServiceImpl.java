@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.member.model.dao.MemberRepository;
 import com.kh.bootcamping.member.model.vo.Member;
+import com.kh.bootcamping.member.model.vo.MyPageInfo;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -46,6 +47,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String checkMemberId(String memberId) {
 		return memberRepository.checkMemberId(sqlSession, memberId);
+	}
+
+	@Override
+	public MyPageInfo searchMyPage(String memberId) {
+		return memberRepository.searchMyPage(sqlSession, memberId);
 	}
 
 }
