@@ -190,7 +190,7 @@
                     <h3>${reserSite.campName } (${reserSite.siteName })</h3>
                     <input type="hidden" id="campName" value="${reserSite.campName }">
                     <p>${people }인</p>
-                    <p>117,000원</p>
+                    <p>${sitePrice }원</p>
                     <p>${checkInDate} ~ ${checkOutDate }</p>
                 </div>
             </div>
@@ -228,7 +228,7 @@
                 </div>
 
                 <div id="reser_payment">
-                    <button class="btn btn-success" type="button" onclick="moneyBtn();">117,000원 결제하기</button>
+                    <button class="btn btn-success" type="button" onclick="moneyBtn();">${sitePrice }원 결제하기</button>
                 </div>
                 
                 </form>
@@ -258,7 +258,7 @@
         var people = document.getElementById('people').value;
         var memberNo = document.getElementById('memberNo').value;
         var siteNo = document.getElementById('siteNo').value;
-        
+        var sitePrice = "${sitePrice }";
         
         
         
@@ -277,7 +277,7 @@
  			    pay_method: "card",
  			    merchant_uid: "IMP"+makeMerchantUid,
  			    name: campName,
- 			    amount: 100, // 테스트 후 가격 바꾸기
+ 			    amount: sitePrice, // 테스트 후 가격 바꾸기
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone,
  				m_redirect_url : "/bootcamping/"
@@ -309,7 +309,16 @@
  			            // 결제 실패 로직
  			        }
  			   });
- 	}
+ 		}
+        
+        
+        
+        
+    
+	        
+        
+        
+        
 	</script>
 
 </body>

@@ -130,7 +130,7 @@ public class CampingController {
 	 * 
 	 */
 	@GetMapping("reservation")
-	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, @RequestParam(value="countPeople", defaultValue="1") int countPeople, Model model) {
+	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, @RequestParam(value="countPeople", defaultValue="1") int countPeople, int sitePrice, Model model) {
 		
 		if(campingService.campingReservation(siteNo) != null) {
 			  
@@ -138,9 +138,11 @@ public class CampingController {
 			model.addAttribute("checkInDate", startDate);
 			model.addAttribute("checkOutDate", endDate);
 			model.addAttribute("people", countPeople);
+			model.addAttribute("sitePrice", sitePrice);
 
 			  System.out.println(startDate);
 			  System.out.println(endDate);
+			  System.out.println(sitePrice);
 			
 			return "reservation/reservation";
 		}

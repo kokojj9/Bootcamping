@@ -713,22 +713,22 @@
         		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
         		console.log(dateString2);
         		
-        		
         		/*checkOutDate에서 CheckInDate 뺀 거 계산*/
         		var checkInDate = new Date(document.getElementById('startDate').value);
         	    var checkOutDate = new Date(document.getElementById('endDate').value);
 
         		var dateComparison = checkOutDate.getTime() - checkInDate.getTime();
-        		
-        		console.log(dateComparison);		
          	   	
         		dateComparison = Math.ceil(dateComparison / (1000 * 60 * 60 * 24));
-				
+        		
          	   	console.log(dateComparison);
          	   	
-         	   	var addPrice = 50000;
+         	   	var addPrice = 30000;
          	   	var currentPrice = parseInt(document.querySelector('.totalPrice').value);
          	    
+         	   	console.log(currentPrice);
+         	   	
+         	   	
          	   	if (dateComparison !=1 ) {
          	        var totalPrice = currentPrice + ((dateComparison-1) * addPrice);
          	        $('.totalPrice').val(totalPrice);
@@ -736,6 +736,7 @@
          	    } else{
          	    	$('.totalPrice').val(currentPrice);
          	    }
+
 
         	
         		
