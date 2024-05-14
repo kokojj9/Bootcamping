@@ -730,10 +730,12 @@
          	   	var currentPrice = parseInt(document.querySelector('.totalPrice').value);
          	    
          	   	if (dateComparison !=1 ) {
-         	        var totalPrice = currentPrice + (dateComparison * addPrice);
+         	        var totalPrice = currentPrice + ((dateComparison-1) * addPrice);
          	        $('.totalPrice').val(totalPrice);
          	    	console.log(totalPrice);    
-         	    } 
+         	    } else{
+         	    	$('.totalPrice').val(currentPrice);
+         	    }
 
         	
         		
