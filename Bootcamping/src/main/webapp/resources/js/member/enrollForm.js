@@ -18,7 +18,7 @@ memberIdTag.onkeyup = () => {
                 url : 'members/' + memberIdTag.value,
                 type : 'GET',
                 success : result => {
-                    if (result === '') {
+                    if (result == null) {
                         checkInfo('id', 'green', '사용 가능한 아이디입니다.')
                     } else {
                         checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)')
@@ -78,9 +78,6 @@ document.getElementById('checkEmailBtn').onclick = () => {
                 else {
                     alert('인증번호발급에 실패하였습니다. 이메일을 확인해주세요');
                 }
-            },
-            error : e => {
-                console.log('먼데이게~');
             }
         });
     }

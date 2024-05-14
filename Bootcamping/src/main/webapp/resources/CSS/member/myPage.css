@@ -30,23 +30,21 @@
     position: absolute;
 }
 
-.editMember{
+#editMember{
     margin-top: 5px;
-    margin-left: 50px;
     height: 35px;
     width: 140px;
     font-size: 16px;
     color: white;
     border-radius: 20px;
     background-color: #1dc078;
-    line-height: 33px;
 }
 
-.editMember:hover{
+#editMember:hover{
     cursor: pointer;
 }
 
-.wishList{
+#wishList{
     margin-top: 30px;
     width: 200px;
     height: 30px;
@@ -57,7 +55,7 @@
     float: right;
 }
 
-.wishList:hover{
+#wishList:hover{
     cursor: pointer;
     color: #1dc078;
 }
@@ -74,7 +72,7 @@
     float: left;
 }
 
-.reservmoreBtn, .boardmoreBtn, .trademoreBtn{
+#reservmoreBtn, #boardmoreBtn, #trademoreBtn{
     color: rgb(51,51,51);
     margin-top: 10px;
     float: right;
@@ -82,7 +80,7 @@
     font-weight: 600;
 }
 
-.reservmoreBtn:hover, .boardmoreBtn:hover, .trademoreBtn:hover{
+#reservmoreBtn:hover, #boardmoreBtn:hover, #trademoreBtn:hover{
     cursor: pointer;
     text-decoration: underline;
 }
