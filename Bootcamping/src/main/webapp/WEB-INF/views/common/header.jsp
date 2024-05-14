@@ -156,7 +156,7 @@
                         <li><a href="/bootcamping/camping">캠핑장</a></li>
                         <li><a href="">중고거래</a></li>
                         <li><a href="">커뮤니티</a></li>
-                        <li><a href="">게시판</a></li>
+                        <li><a href="list.board">게시판</a></li>
                         
                         <br> <br> <br> <br> <br> <br>
                     </ul>

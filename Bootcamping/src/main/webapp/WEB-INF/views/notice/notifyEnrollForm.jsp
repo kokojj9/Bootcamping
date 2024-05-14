@@ -4,19 +4,21 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공지사항 글쓰기</title>
+<title>회원/게시글  신구</title>
 </head>
 <body>
-
+		<form>
+			<button>
+					
+			
+			
+			</button>
 		
-
-
-
-
-
-
-
-
+		
+		
+		
+		
+		</form>
 
 </body>
 </html>
