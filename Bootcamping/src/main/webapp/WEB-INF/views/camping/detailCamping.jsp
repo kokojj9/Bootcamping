@@ -429,7 +429,7 @@
 			                     	<input type="hidden" name="startDate" class="startDateInput">
 								    <input type="hidden" name="endDate" class="endDateInput">
 								    <input type="hidden" name="countPeople" class="countPeopleInput">
-								    <input type="hidden" name="sitePrice" value="${site.sitePrice}" class="totalPrice">
+								    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
 			                    <button type="submit" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
 			                    </button></form></div>
 			                    
@@ -713,6 +713,7 @@
         		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
         		console.log(dateString2);
         		
+        		
         		/*checkOutDate에서 CheckInDate 뺀 거 계산*/
         		var checkInDate = new Date(document.getElementById('startDate').value);
         	    var checkOutDate = new Date(document.getElementById('endDate').value);
@@ -725,22 +726,14 @@
 				
          	   	console.log(dateComparison);
          	   	
-         	   	function reservationPage() {
-             	    if (dateComparison > 1) {
-             	    	
-             	        var addPrice = 50000;
-             	        var currentPrice = parseInt(document.querySelector('.totalPrice').value);
-             	        var totalPrice = currentPrice + addPrice;
-
-             	       
-             	        $('.totalPrice').val(totalPrice);
-             	        
-             	    	console.log(totalPrice);    
-
-             	    }
-        	   		
-         	   	}
-         	   	
+         	   	var addPrice = 50000;
+         	   	var currentPrice = parseInt(document.querySelector('.totalPrice').value);
+         	    
+         	   	if (dateComparison !=1 ) {
+         	        var totalPrice = currentPrice + (dateComparison * addPrice);
+         	        $('.totalPrice').val(totalPrice);
+         	    	console.log(totalPrice);    
+         	    } 
 
         	
         		
