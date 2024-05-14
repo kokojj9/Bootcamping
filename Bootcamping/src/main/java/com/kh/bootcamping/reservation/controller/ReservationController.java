@@ -22,7 +22,7 @@ public class ReservationController {
 	@ResponseBody
 	@PostMapping(value="successReservation")
 	public void insertResrvation(Reservation reservation, HttpServletResponse response) throws IOException {
-		
+		System.out.println(reservation);
 		int result  = reservationService.insertReservation(reservation);
 		
 		response.setContentType("application/json; charset=UTF-8");

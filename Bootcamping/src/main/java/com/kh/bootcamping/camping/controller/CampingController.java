@@ -119,8 +119,6 @@ public class CampingController {
     @ResponseBody
     @PostMapping(value="camping/selectDate", produces="application/json; charset-UTF-8")
     public String selectDate(ReservationInfo reservationInfo) {
-        
-	        System.out.println(reservationInfo);
 	       
 		return new Gson().toJson(reservationInfo);
 	}

@@ -293,6 +293,7 @@
  						$.ajax({
  							type: "POST",
  							url: 'successReservation',
+ 							async : false,
  							data: {
  								priceNo : rsp.merchant_uid,
  								reserName : reservationName,
@@ -306,7 +307,12 @@
  							},
  							success : result => {
  								console.log(result);
+ 							},
+ 							error : result => {
+ 								console.log(result);
+ 								console.log('우헤헤헤');
  							}
+ 							
  						});
  			          
 
