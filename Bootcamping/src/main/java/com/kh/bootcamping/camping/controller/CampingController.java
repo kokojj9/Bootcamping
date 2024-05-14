@@ -1,12 +1,12 @@
 package com.kh.bootcamping.camping.controller;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Properties;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -119,28 +119,25 @@ public class CampingController {
     @ResponseBody
     @PostMapping(value="camping/selectDate", produces="application/json; charset-UTF-8")
     public String selectDate(ReservationInfo reservationInfo) {
-        
-	        System.out.println(reservationInfo);
 	       
 		return new Gson().toJson(reservationInfo);
 	}
-	
-	
+
 	
 	/**
 	 * 
 	 */
 	@GetMapping("reservation")
-	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, Model model) {
+	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, @RequestParam(value="countPeople", defaultValue="1") int countPeople, int sitePrice, Model model) {
 		
 		if(campingService.campingReservation(siteNo) != null) {
-			
+			  
 			model.addAttribute("reserSite", campingService.campingReservation(siteNo));
 			model.addAttribute("checkInDate", startDate);
 			model.addAttribute("checkOutDate", endDate);
-			
-			System.out.println(startDate);
-			
+			model.addAttribute("people", countPeople);
+			model.addAttribute("sitePrice", sitePrice);
+
 			return "reservation/reservation";
 		}
 		

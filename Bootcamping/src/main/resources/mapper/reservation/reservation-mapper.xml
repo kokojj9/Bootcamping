@@ -6,8 +6,54 @@
 <mapper namespace="reservationMapper">
 
 <resultMap id="reservationResultMap" type="reservation">
-
+	<result column="RESERVATION_NO" property="reservationNo"/>
+	<result column="MEMBER_NO" property="memberNo" />
+	<result column="SITE_NO" property="siteNo" />
+	<result column="CHECKIN_DATE" property="checkInDate" />
+	<result column="CHECKOUT_DATE" property="checkOutDate" />
+	<result column="RESERVATION_DATE" property="reservationDate" />
+	<result column="PEOPLE" property="people" />
+	<result column="RESER_NAME" property="reserName" />
+	<result column="RESER_PHONE" property="reserPhone" />
+	<result column="PRICE" property="price" />
+	<result column="RESER_STATUS" property="reserStatus" />
+	<result column="PRICE_NO" property="priceNo" />
 </resultMap>
+
+<insert id="insertReservation" parameterType="reservation">
+	
+	INSERT
+	   ALL
+	  INTO
+	  		TB_RESERVATION
+	VALUES
+			(
+			 SEQ_RESVNO.NEXTVAL,
+	        #{memberNo},
+	        #{siteNo},
+	        #{checkInDate},
+	        #{checkOutDate},
+	        SYSDATE,
+	        #{people},
+	        #{reserName},
+	        #{reserPhone},
+	        #{price},
+        	'Y'
+			)
+	 INTO
+        	TB_PAYMENTLIST
+   VALUES
+        (
+        #{priceNo},
+        SEQ_RESVNO.CURRVAL
+        )
+ 		SELECT
+		       *
+		  FROM
+		       DUAL
+	
+
+</insert>
 
 
 

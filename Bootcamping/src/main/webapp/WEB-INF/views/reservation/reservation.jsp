@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,20 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<!-- alert -->
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+	
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
+	
 <style>
 
     div{
@@ -151,10 +166,13 @@
 
 </head>
 <body>
-	
+
 	<c:choose>
 		<c:when test="${empty sessionScope.loginMember }">
-			
+			<script>
+				alert("로그인을 해주세요!");
+				location.href ="/bootcamping/loginForm";
+			 </script>
 		</c:when>
 		<c:otherwise>
 
@@ -170,9 +188,10 @@
 
                 <div id="reser_detail">
                     <h3>${reserSite.campName } (${reserSite.siteName })</h3>
-                    <p>2인</p>
-                    <p>117,000원</p>
-                    <p>2024-05-05 ~ 2024-05-06</p>
+                    <input type="hidden" id="campName" value="${reserSite.campName }">
+                    <p>${people }인</p>
+                    <p>${sitePrice }원</p>
+                    <p>${checkInDate} ~ ${checkOutDate }</p>
                 </div>
             </div>
         
@@ -182,15 +201,19 @@
             
                 <div id="rser_select">
                     <h3>예약자 정보</h3> <br>
-				<form action="#" method="post">
                     <div id="reservation_name">
                         <p>예약자 이름</p> 
-                        <input type="text" required placeholder="이름을 입력해주세요"><br><br>
+                        <input type="text" id="reservationName" required placeholder="이름을 입력해주세요" maxlength="4"><br><br>
                     </div>
 
                     <div id="reservation_phone">
                         <p>전화번호</p>
-                        <input type="text" required placeholder="-를 제외하고 입력해주세요"> <br><br>
+                        <input type="text" required  id="reservationPhone" placeholder="-를 제외하고 입력해주세요" maxlength="11"> <br><br>
+                    	<input type="hidden" id="people" value="${ people}">
+                    	<input type="hidden" id="checkInDate" value="${ checkInDate}">
+                    	<input type="hidden" id="checkOutDate" value="${ checkOutDate}">
+                    	<input type="hidden" id="memberNo" value="${sessionScope.loginMember.memberNo }">
+                    	<input type="hidden" id="siteNo" value="${reserSite.siteNo }">
                     </div>
                 </div>
 
@@ -204,21 +227,118 @@
                 </div>
 
                 <div id="reser_payment">
-                    <button class="btn btn-success">117,000원 결제하기</button>
+                    <button class="btn btn-success" type="button" onclick="moneyBtn();">${sitePrice }원 결제하기</button>
                 </div>
-                
-                </form>
             </div>
         </div>	
 
 
     </div>
+    
+    
+    </c:otherwise>
+</c:choose>
+
+	    
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
-</c:otherwise>
-</c:choose>
- 
+<script>
+		var IMP = window.IMP;
+		IMP.init("imp60634072"); 
+	
+        var campName = document.getElementById('campName').value;
+        var checkIdDate = document.getElementById('checkInDate').value;
+        var checkOutDate = document.getElementById('checkOutDate').value;
+        var people = document.getElementById('people').value;
+        var memberNo = document.getElementById('memberNo').value;
+        var siteNo = document.getElementById('siteNo').value;
+        var sitePrice = "${sitePrice }";
+        var reservationName;
+        var reservationPhone;
+
+
+        
+        
+        
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
+
+        function moneyBtn() {
+        	
+            reservationName = document.getElementById('reservationName').value;
+            reservationPhone = document.getElementById('reservationPhone').value;
+
+        	
+        	 IMP.request_pay({
+ 			    pg: "html5_inicis.INIpayTest",
+ 			    pay_method: "card",
+ 			    merchant_uid: "IMP"+makeMerchantUid,
+ 			    name: campName,
+ 			    amount: 100, // 테스트 후 가격 바꾸기
+ 			    buyer_name: reservationName,
+ 			    buyer_tel: reservationPhone,
+ 				m_redirect_url : "http://localhost:8001/bootcamping/"
+ 					
+ 			  }, function (rsp) { // callback
+ 					if (rsp.success) {
+ 			           alert('결제가 성공했습니다.');
+ 			          console.log(rsp);
+ 			          
+ 						$.ajax({
+ 							type: "POST",
+ 							url: 'successReservation',
+ 							async : false,
+ 							data: {
+ 								priceNo : rsp.merchant_uid,
+ 								reserName : reservationName,
+ 								reserPhone : reservationPhone,
+ 								checkInDate : checkIdDate,
+ 								checkOutDate : checkOutDate,
+ 								people : people,
+ 								memberNo : memberNo,
+ 								sitePrice : amount,
+ 								siteNo : siteNo,
+ 							},
+ 							success : result => {
+ 								console.log(result);
+ 							},
+ 							error : result => {
+ 								console.log(result);
+ 								console.log('우헤헤헤');
+ 							}
+ 							
+ 						});
+ 			          
+
+ 			            // 결제 성공 로직
+
+ 			        } else {
+ 			            alert('결제에 실패했습니다.');
+ 			            console.log(rsp);
+ 			            
+ 			           console.log(reservationName);
+ 			          console.log(reservationPhone);
+
+ 			            // 결제 실패 로직
+ 			        }
+ 			   });
+ 		}
+        
+        
+        
+        
+    
+	        
+        
+        
+        
+	</script>
 
 </body>
 </html>
