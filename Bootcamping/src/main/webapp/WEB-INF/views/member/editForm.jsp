@@ -88,7 +88,7 @@
 
                 <label for="memberPwd">비밀번호 </label>
                 <button type="button" id="editPwd" class="btn btn-primary" data-toggle="modal" data-target="#myModal">비밀번호 확인</button><br>
-                <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required>
+                <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required style="display: none;">
 
                 <label for="email">* 이메일 </label>
                 <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" value="${ loginMember.email }" name="email" required> <br>
@@ -141,11 +141,8 @@
         let memberPwdtag = document.getElementById('memberPwd');
 
         document.getElementById('checkPwdBtn').onclick = () => {
-            // 비밀번호가 맞늕 ㅣ확인행허ㅑ
-        }
-
-
-
+            // 비밀번호가 맞는지 확인하는 -> 로그인 메서드로 활용가능
+        };
 
         document.getElementById('editBtn').onclick = () => {
             
