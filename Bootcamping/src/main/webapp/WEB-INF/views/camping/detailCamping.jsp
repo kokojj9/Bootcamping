@@ -429,8 +429,8 @@
 			                     	<input type="hidden" name="startDate" class="startDateInput">
 								    <input type="hidden" name="endDate" class="endDateInput">
 								    <input type="hidden" name="countPeople" class="countPeopleInput">
-								    <input type="hidden" name="reservationPrice" class="totalPrice">
-			                    <button type="submit" class="btn btn-success campingReserBtn">예약하기
+								    <input type="hidden" name="sitePrice" value="${site.sitePrice}" class="totalPrice">
+			                    <button type="submit" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
 			                    </button></form></div>
 			                    
 			                </div>
@@ -676,8 +676,8 @@
         		let start = $('#startDate').val();
         		let end = $('#endDate').val();
         		let countPeople = $('#countPeople').val();
-        		let campNo = "${camping.campNo}";
         		
+        		/*checkInDate*/
         		var start2 = start.split("/");
 
 
@@ -688,15 +688,15 @@
         		var date = new Date(year, month, day);
         		
         		var date = new Date(year, month, day);
-        		var yearString = date.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
-        		var monthString = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var yearString = date.getFullYear().toString().slice(-2);
+        		var monthString = (date.getMonth() + 1).toString().padStart(2, '0');
         		var dayString = date.getDate().toString().padStart(2, '0');
 
         		var dateString = yearString + '/' + monthString + '/' + dayString;
         		console.log(dateString);
         		
         		
-        		
+        		/*checkOutDate*/
         		var end2 = end.split("/");
 
         		var year2 = parseInt(end2[2]);
@@ -706,16 +706,45 @@
         		var date2 = new Date(year2, month2, day2);
         		
         		var date2 = new Date(year2, month2, day2);
-        		var yearString2 = date2.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
-        		var monthString2 = (date2.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var yearString2 = date2.getFullYear().toString().slice(-2);
+        		var monthString2 = (date2.getMonth() + 1).toString().padStart(2, '0');
         		var dayString2 = date2.getDate().toString().padStart(2, '0');
 
         		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
         		console.log(dateString2);
         		
+        		/*checkOutDate에서 CheckInDate 뺀 거 계산*/
+        		var checkInDate = new Date(document.getElementById('startDate').value);
+        	    var checkOutDate = new Date(document.getElementById('endDate').value);
+
+        		var dateComparison = checkOutDate.getTime() - checkInDate.getTime();
         		
+        		console.log(dateComparison);		
+         	   	
+        		dateComparison = Math.ceil(dateComparison / (1000 * 60 * 60 * 24));
+				
+         	   	console.log(dateComparison);
+         	   	
+         	   	function reservationPage() {
+             	    if (dateComparison > 1) {
+             	    	
+             	        var addPrice = 50000;
+             	        var currentPrice = parseInt(document.querySelector('.totalPrice').value);
+             	        var totalPrice = currentPrice + addPrice;
+
+             	       
+             	        $('.totalPrice').val(totalPrice);
+             	        
+             	    	console.log(totalPrice);    
+
+             	    }
+        	   		
+         	   	}
+         	   	
+
+        	
         		
-        		
+
         		$.ajax({
         			
         			url : '/bootcamping/camping/selectDate',
@@ -723,7 +752,7 @@
         			data : {startDate : dateString,
 	        				endDate : dateString2,
 	        				countPeople : countPeople,
-	        				campNo : campNo
+	        				
         				},
         			success : result => {
         				console.log(result);
