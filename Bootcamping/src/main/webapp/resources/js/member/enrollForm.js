@@ -78,9 +78,6 @@ document.getElementById('checkEmailBtn').onclick = () => {
                 else {
                     alert('인증번호발급에 실패하였습니다. 이메일을 확인해주세요');
                 }
-            },
-            error : e => {
-                console.log('먼데이게~');
             }
         });
     }

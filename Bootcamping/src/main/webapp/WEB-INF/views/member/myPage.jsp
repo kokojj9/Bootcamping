@@ -23,9 +23,9 @@
         <div id="myInfoArea">
             <div class="welcomeMember">
                 ${ sessionScope.loginMember.memberId }님, 안녕하세요!
-                <div class="editMember">회원정보 수정 ></div>
+                <div class="editMember btn">회원정보 수정 ></div>
             </div>
-            <div class="wishList">즐겨찾는 캠핑장</div>
+            <div class="wishList btn">즐겨찾는 캠핑장</div>
         </div>
 
         <div id="reservationInfoArea">
@@ -75,7 +75,7 @@
 
         <div id="boardArea">
             <div class="myBoardList">내가 쓴 글</div>
-            <div class="boardmoreBtn">더보기</div> 
+            <div class="boardmoreBtn btn">더보기</div> 
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -132,7 +132,7 @@
         <div class="tradeArea">
             <div class="tradeInfo">
                 <div class="tradeList">거래 현황</div>
-                <div class="trademoreBtn">더보기</div>
+                <div class="trademoreBtn btn">더보기</div>
             </div>
             <div class="tradeProgress tradeCount">
                 <h4>거래중</h4>
@@ -152,23 +152,24 @@
     <jsp:include page="../common/footer.jsp"/>
     
     <script>
-        document.getElementsByClassName('editMember').onclick = () => {
-            location.href = 'editMember';
-        };
+        let memberPwdtag = document.getElementById('memberPwd');
+        let checkPwdResult = document.getElementById('checkPwdResult');
 
-        document.getElementsByClassName('wishList').onclick = () => {
-            location.href = 'wishList';
-        };
+        let urlList = [
+            'editForm',
+            'wishList',
+            'reservations',
+            'boardList'
+        ];
 
-        document.getElementsByClassName('reservmoreBtn').onclick = () => {
-            location.href = 'reservations';
-        };
+        let btn = document.querySelectorAll('.btn');
 
-        document.getElementsByClassName('boardmoreBtn').onclick = () => {
-            location.href = 'boardList';
-        };
-
-
+        btn.forEach((e, i) => {
+            e.onclick = () => {
+                location.href = urlList[i];
+            };
+        });
+       
 
     </script>
 
