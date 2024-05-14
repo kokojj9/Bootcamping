@@ -18,10 +18,10 @@
 	<!-- Semantic UI theme -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
 	
-	<!-- 결제 -->
-	<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
-	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <!-- iamport.payment.js -->
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
 	
 <style>
 
@@ -247,43 +247,45 @@
 	<jsp:include page="../common/footer.jsp"/>
 	
 <script>
-
+		var IMP = window.IMP;
+		IMP.init("imp60634072"); 
 	
-	function moneyBtn(){
-		
         var campName = $('#campName').val();
         var reservationName = $('#reservationName').val();
         var reservationPhone = $('#reservationPhone').val();
         
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
 
-		
-		var IMP = window.IMP;
-		IMP.init("imp60634072"); 
-		
-		 IMP.request_pay({
-			    pg: "html5_inicis.INIpayTest",
-			    pay_method: "card",
-			    merchant_uid: "결제 번호",
-			    name: campName,
-			    amount: 100, // 테스트 후 가격 바꾸기
-			    buyer_name: reservationName,
-			    buyer_tel: reservationPhone,
-					m_redirect_url : "/bootcamping/"
-					
-			  }, function (rsp) { // callback
-							if (rsp.success) {
-			           alert('결제가 성공했습니다.');
+        function moneyBtn() {
+        	 IMP.request_pay({
+ 			    pg: "html5_inicis.INIpayTest",
+ 			    pay_method: "card",
+ 			    merchant_uid: "IMP"+makeMerchantUid,
+ 			    name: campName,
+ 			    amount: 100, // 테스트 후 가격 바꾸기
+ 			    buyer_name: reservationName,
+ 			    buyer_tel: reservationPhone,
+ 					m_redirect_url : "/bootcamping/"
+ 					
+ 			  }, function (rsp) { // callback
+ 							if (rsp.success) {
+ 			           alert('결제가 성공했습니다.');
 
-			            // 결제 성공 로직
+ 			            // 결제 성공 로직
 
-			        } else {
-			            alert('결제에 실패했습니다.');
+ 			        } else {
+ 			            alert('결제에 실패했습니다.');
 
-			            // 결제 실패 로직
-			        }
-			   });
-	}
-
+ 			            // 결제 실패 로직
+ 			        }
+ 			   });
+ 	}
 	</script>
 
 </body>
