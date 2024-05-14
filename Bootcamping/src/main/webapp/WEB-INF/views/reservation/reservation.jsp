@@ -254,8 +254,8 @@
         var memberNo = document.getElementById('memberNo').value;
         var siteNo = document.getElementById('siteNo').value;
         var sitePrice = "${sitePrice }";
-
-        
+        var reservationName;
+        var reservationPhone;
 
 
         
@@ -271,8 +271,8 @@
 
         function moneyBtn() {
         	
-            var reservationName = document.getElementById('reservationName').value;
-            var reservationPhone = document.getElementById('reservationPhone').value;
+            reservationName = document.getElementById('reservationName').value;
+            reservationPhone = document.getElementById('reservationPhone').value;
 
         	
         	 IMP.request_pay({
