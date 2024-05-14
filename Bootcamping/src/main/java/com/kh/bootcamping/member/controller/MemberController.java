@@ -132,6 +132,10 @@ public class MemberController {
 		return "member/myPage";
 	}
 	
-	
+	// 회원 정보 수정 페이지 포워딩 메서드
+	@GetMapping("editForm")
+	public String forwardEditMember(Member member, Model model) {
+		return "member/editMember";
+	}
 	
 }

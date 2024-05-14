@@ -152,9 +152,21 @@
     <jsp:include page="../common/footer.jsp"/>
     
     <script>
+        document.getElementsByClassName('editMember').onclick = () => {
+            location.href = 'editMember';
+        };
 
+        document.getElementsByClassName('wishList').onclick = () => {
+            location.href = 'wishList';
+        };
 
+        document.getElementsByClassName('reservmoreBtn').onclick = () => {
+            location.href = 'reservations';
+        };
 
+        document.getElementsByClassName('boardmoreBtn').onclick = () => {
+            location.href = 'boardList';
+        };
 
 
 
