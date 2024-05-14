@@ -126,7 +126,13 @@
             text-align: center;
         }
 
-
+        .tradeProgress > div, .tradeCompleted > div, .tradeCancelled > div{
+            margin: 15px auto;
+            text-align: center;
+            text-decoration: underline;
+            color: #1dc078;
+            font-weight: 700;
+        }
     </style>
 
 </head>
