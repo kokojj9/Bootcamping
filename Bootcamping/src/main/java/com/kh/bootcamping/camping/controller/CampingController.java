@@ -140,10 +140,6 @@ public class CampingController {
 			model.addAttribute("people", countPeople);
 			model.addAttribute("sitePrice", sitePrice);
 
-			  System.out.println(startDate);
-			  System.out.println(endDate);
-			  System.out.println(sitePrice);
-			
 			return "reservation/reservation";
 		}
 		

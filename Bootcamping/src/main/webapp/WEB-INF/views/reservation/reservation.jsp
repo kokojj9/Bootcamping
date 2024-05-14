@@ -293,9 +293,14 @@
  							data: {
  								reservationNo: rsp.imp_uid,
  								priceNo : rsp.merchant_uid,
- 								
- 								
- 								
+ 								reservationName : reservationName,
+ 								reservationPhone : reservationPhone,
+ 								checkIdDate : checkIdDate,
+ 								checkOutDate : checkOutDate,
+ 								people : people,
+ 								memberNo : memberNo,
+ 								sitePrice : sitePrice,
+ 								siteNo : siteNo,
  							}
  						});
  			          
