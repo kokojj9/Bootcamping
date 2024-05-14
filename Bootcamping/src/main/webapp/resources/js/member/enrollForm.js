@@ -18,7 +18,7 @@ memberIdTag.onkeyup = () => {
                 url : 'members/' + memberIdTag.value,
                 type : 'GET',
                 success : result => {
-                    if (result === '') {
+                    if (result == null) {
                         checkInfo('id', 'green', '사용 가능한 아이디입니다.')
                     } else {
                         checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)')

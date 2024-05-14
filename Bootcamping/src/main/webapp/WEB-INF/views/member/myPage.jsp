@@ -23,14 +23,14 @@
         <div id="myInfoArea">
             <div class="welcomeMember">
                 ${ sessionScope.loginMember.memberId }님, 안녕하세요!
-                <div class="editMember btn">회원정보 수정 ></div>
+                <div id="editMember" class="btn">회원정보 수정 ></div>
             </div>
-            <div class="wishList btn">즐겨찾는 캠핑장</div>
+            <div id="wishList" class="btn">즐겨찾는 캠핑장</div>
         </div>
 
         <div id="reservationInfoArea">
             <div class="reservationList">예약 내역</div>
-            <div class="reservmoreBtn">더보기</div> 
+            <div id="reservmoreBtn" class="btn">더보기</div> 
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -75,7 +75,7 @@
 
         <div id="boardArea">
             <div class="myBoardList">내가 쓴 글</div>
-            <div class="boardmoreBtn btn">더보기</div> 
+            <div id="boardmoreBtn" class="btn">더보기</div> 
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -132,7 +132,7 @@
         <div class="tradeArea">
             <div class="tradeInfo">
                 <div class="tradeList">거래 현황</div>
-                <div class="trademoreBtn btn">더보기</div>
+                <div id="trademoreBtn" class="btn">더보기</div>
             </div>
             <div class="tradeProgress tradeCount">
                 <h4>거래중</h4>
@@ -152,14 +152,13 @@
     <jsp:include page="../common/footer.jsp"/>
     
     <script>
-        let memberPwdtag = document.getElementById('memberPwd');
-        let checkPwdResult = document.getElementById('checkPwdResult');
-
+        
         let urlList = [
             'editForm',
             'wishList',
             'reservations',
-            'boardList'
+            'boardList',
+            'tradeList'
         ];
 
         let btn = document.querySelectorAll('.btn');
@@ -169,7 +168,6 @@
                 location.href = urlList[i];
             };
         });
-       
 
     </script>
 

@@ -11,6 +11,58 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
+    <style>
+        .content { 
+    background-color: rgb(247, 245, 245);
+    width: 1200px; 
+    margin: auto;
+}
+.innerOuter {
+    border: 1px solid lightgray;
+    width: 40%;
+    margin: auto;
+    padding: 3% 7%;
+    background-color: white;
+}
+#postcode, #roadAddress{
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    height: calc(1.5em + .75rem + 2px);
+    padding: .375rem .75rem;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+#postcode{
+    width: 100px;
+    margin-bottom: 5px;
+}
+#roadAddress{
+    width: 310px;
+}
+#findAddressBtn, #checkEmailBtn, #checkAuthCode{
+    width: 90px;
+    height: 35px;
+    background-color: #1dc078;
+    color: #f6f6f6;
+    border: 0;
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: .25rem;
+}
+#detailAddress{
+    margin-top: 5px;
+}
+#checkAuthCode{
+    margin-top: 5px;
+}
+
+
+    </style>
+
 </head>
 <body>
 
@@ -31,15 +83,15 @@
 
             <div class="form-group">
                 <label for="memberId">* 아이디 </label>											
-                <input type="text" class="form-control" id="memberId" placeholder="아이디(영문, 숫자, 최대 12자)" name="memberId" maxlength="12" readonly>
+                <input type="text" class="form-control" id="memberId" value="${ loginMember.memberId }" name="memberId" maxlength="12" readonly>
                 <div id="checkIdResult" style="font-size:12px; display:none;"></div><br>
 
                 <label for="memberPwd">비밀번호 </label>
+                <button type="button" id="editPwd" class="btn btn-primary" data-toggle="modal" data-target="#myModal">비밀번호 확인</button><br>
                 <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required>
-                <div id="checkPwdResult" style="font-size:12px; display:none;"></div><br>
 
                 <label for="email">* 이메일 </label>
-                <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" name="email" required> <br>
+                <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" value="${ loginMember.email }" name="email" required> <br>
 
                 <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;<br>
                 <input type="text" name="postcode" id="postcode" placeholder="우편번호">
@@ -55,15 +107,45 @@
         </div>
     </div>
 
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                
+                <div class="modal-header">
+                <h4 class="modal-title">비밀번호 확인</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+        
+                <div class="modal-body">
+                    비밀번호 <input type="password" class="form-control" id="checkPwd" placeholder="현재 비밀번호를 입력해주세요" name="MemberPwd" maxlength="16" required>
+                </div>
+        
+                <div class="modal-footer">
+                    <button id="checkPwdBtn" type="button" class="btn btn-primary" >비밀번호 확인</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
+                </div>
+        
+            </div>
+        </div>
+      </div>
+
     
     <jsp:include page="../common/footer.jsp"/>
 
-    <script>
-        var loginMemberId = ${ loginMember.memberId };
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
+    <script>
+        var loginMemberId = '${ loginMember.memberId }';
 
         let checkPwdResult = document.getElementById('checkPwdResult');
         let memberPwdtag = document.getElementById('memberPwd');
+
+        document.getElementById('checkPwdBtn').onclick = () => {
+            // 비밀번호가 맞늕 ㅣ확인행허ㅑ
+        }
+
+
+
 
         document.getElementById('editBtn').onclick = () => {
             
@@ -84,19 +166,23 @@
             });
         };
 
-        memberPwdtag.onkeyup = () => {
-            let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
 
-            if(regExp.test(memberPwdtag.value)) checkInfo('password', 'green', '사용가능한 비밀번호입니다.')
-            else checkInfo('password', 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.')
-        };
 
-        const checkInfo = (type, color, text) => {
-            let checkItem =  type == 'id' ? checkIdResult : type == 'password' ? checkPwdResult : overlapPwdTag;
-            
-            checkItem.style.display = 'block';
-            checkItem.style.color = color;
-            checkItem.textContent = text;
+
+
+
+
+
+
+
+
+
+
+
+
+        var themeObj = {
+            searchBgColor: "#1DC078",
+            queryTextColor: "#FFFFFF"
         };
 
         function execDaumPostcode() {
@@ -133,6 +219,7 @@
                 }
             }
         }).open();
+
 }
 
     </script>

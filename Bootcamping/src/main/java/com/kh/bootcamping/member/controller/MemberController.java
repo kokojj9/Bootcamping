@@ -45,7 +45,7 @@ public class MemberController {
 	public ModelAndView login(Member member, @RequestParam(defaultValue = "false")String rememberId,
 				              HttpSession session, ModelAndView mv,
 				              HttpServletResponse response) {
-
+		
 		Member loginMember = memberService.login(member);
 		
 		if(rememberId.equals("true")) saveIdCookie(member.getMemberId(), response);
@@ -75,7 +75,6 @@ public class MemberController {
 	private void saveIdCookie(String saveId, HttpServletResponse response) {
 		Cookie saveIdCookie = new Cookie("saveId", saveId);
 		saveIdCookie.setMaxAge(1*60*60*24);
-		
 		response.addCookie(saveIdCookie);
 	}
 	
@@ -86,7 +85,6 @@ public class MemberController {
 	private void deleteIdCookie(HttpServletResponse response) {
 		Cookie saveIdCookie = new Cookie("saveId","");
 		saveIdCookie.setMaxAge(0);
-		
 		response.addCookie(saveIdCookie);
 	}
 	
@@ -109,18 +107,21 @@ public class MemberController {
 									 String roadAddress, String detailAddress,
 									 HttpSession session, ModelAndView mv) {
 		
-		String address = postcode + roadAddress + detailAddress;
-		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-		member.setAddress(address);
-		member.setMemberPwd(encPwd);
-		
-		if(memberService.insertMember(member) > 0) {
-			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
-			mv.setViewName("redirect:/");
-		} else {
+		if(member.getEmail().equals("") && member.getMemberId().equals("") && member.getMemberPwd().equals("")) {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
+		} else {
+			String address = postcode + roadAddress + detailAddress;
+			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+			member.setAddress(address);
+			member.setMemberPwd(encPwd);
+			
+			if(memberService.insertMember(member) > 0) {
+				session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+				mv.setViewName("redirect:/");
+			} else {
+				mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
+			}
 		}
-		
 		return mv;
 	}
 	
@@ -135,7 +136,7 @@ public class MemberController {
 	// 회원 정보 수정 페이지 포워딩 메서드
 	@GetMapping("editForm")
 	public String forwardEditMember(Member member, Model model) {
-		return "member/editMember";
+		return "member/editForm";
 	}
 	
 }
