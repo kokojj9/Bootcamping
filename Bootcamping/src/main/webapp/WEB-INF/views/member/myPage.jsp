@@ -10,127 +10,11 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <style>
-        .wrap{
-            width: 1200px;
-            height: 800px;
-            margin: auto;
-        }
-
-        .wrap > h2{
-            text-align: center;
-            margin: 50px auto;
-            
-        }
-
-        #myInfoArea{
-            margin: auto;
-            width: 950px;
-            height: 100px;
-            border: 1px solid rgb(94, 94, 94);
-            position: relative;
-        }
-
-        .welcomeMember{
-            color: rgb(51,51,51);
-            margin-top: 15px;
-            width: 260px;
-            height: 30px;
-            font-size: 20px;
-            font-weight: 500;
-            text-align: center;
-            line-height: 30px;
-            position: absolute;
-        }
-
-        .editMember{
-            margin-top: 5px;
-            margin-left: 50px;
-            height: 35px;
-            width: 140px;
-            font-size: 16px;
-            color: white;
-            border-radius: 20px;
-            background-color: #1dc078;
-            line-height: 35px;
-        }
-
-        .editMember:hover{
-            cursor: pointer;
-        }
-
-        .wishList{
-            margin-top: 30px;
-            width: 200px;
-            height: 30px;
-            font-size: 23px;
-            font-weight: 700;
-            color: rgb(94, 94, 94);
-            text-decoration: underline;
-            float: right;
-        }
-
-        .wishList:hover{
-            cursor: pointer;
-            color: #1dc078;
-        }
-
-        #reservationInfoArea, #boardArea{
-            width: 950px;
-            margin: 40px auto;
-        }
-
-        .myBoardList, .reservationList, .tradeList{
-            color: rgb(51,51,51);
-            font-size: 25px;
-            font-weight: 500;
-            float: left;
-        }
-
-        .reservmoreBtn, .boardmoreBtn, .trademoreBtn{
-            color: rgb(51,51,51);
-            margin-top: 10px;
-            float: right;
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        .reservmoreBtn:hover, .boardmoreBtn:hover, .trademoreBtn:hover{
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .tradeArea{
-            margin: auto;
-            width: 950px;
-            height: 130px;
-        }
-
-        .tradeInfo{
-            width: 950px;
-            height: 50px;
-        }
-
-        .tradeProgress, .tradeCompleted, .tradeCancelled{
-            height: 130px;
-            width: 316px;
-            border: 1px solid rgb(94, 94, 94);
-            float: left;
-        }
-
-        .tradeProgress > h4, .tradeCompleted > h4, .tradeCancelled > h4{
-            font-size: 20px;
-            font-weight: 400;
-            margin-top: 25px;
-            text-align: center;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="resources/CSS/member/myPage.css">
 
 </head>
 <body>
+
     <jsp:include page="../common/header.jsp"/>
 
     <div class="wrap">
@@ -250,33 +134,31 @@
                 <div class="tradeList">거래 현황</div>
                 <div class="trademoreBtn">더보기</div>
             </div>
-            <div class="tradeProgress">
+            <div class="tradeProgress tradeCount">
                 <h4>거래중</h4>
                 <div>${ countInProgress }건</div>
             </div>
-            <div class="tradeCompleted">
+            <div class="tradeCompleted tradeCount">
                 <h4>거래 완료</h4>
 				<div>${ countCompleted }건</div>
             </div>
-            <div class="tradeCancelled">
+            <div class="tradeCancelled tradeCount">
                 <h4>거래 취소</h4>
 				<div>${ countCancelled }건</div>
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-
-
     </div>
     
     <jsp:include page="../common/footer.jsp"/>
     
+    <script>
+
+
+
+
+
+
+    </script>
+
 </body>
 </html>
