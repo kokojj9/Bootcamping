@@ -1,5 +1,14 @@
 package com.kh.bootcamping.notice.controller;
 
-public class NoticeController {
 
+import org.springframework.stereotype.Controller;
+
+
+
+@Controller
+public class NoticeController {
+	
+	@RequestMapping("notice")
+	
+	
 }
