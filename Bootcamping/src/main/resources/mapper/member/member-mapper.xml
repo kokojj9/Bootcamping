@@ -187,7 +187,7 @@
 		    BY
 		       RESERVATION_NO,
 		       TRADEBOARD_NO,
-		       BOARD_NO DESC;
+		       BOARD_NO DESC
 	</select>
 
 

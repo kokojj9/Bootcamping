@@ -18,7 +18,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">   
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+
+	<!--달력-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
+    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet"/>
+
 	<style>
 		div {
             box-sizing: border-box;
@@ -55,7 +64,7 @@
         }
 
         #header_center {
-            width: 700px;
+            width: 500px;
             height: 100%;
             display: flex;
         }
@@ -86,7 +95,6 @@
             background-color: #f6f6f6;
         }
 
-
         #header_menu > ul {
             list-style: none;
             display: flex;
@@ -112,7 +120,7 @@
         }
 
         #header_right {
-            width: 200px;
+            width: 400px;
             height: 100%;
         }
 
@@ -152,12 +160,6 @@
                         
                         <br> <br> <br> <br> <br> <br>
                     </ul>
-                </div>
-                <div id="header_search">
-                    <input type="text" name="keyword">
-                    <span>
-                        검색<img src="">                        
-                    </span>
                 </div>
             </div>
             <div id="header_right">

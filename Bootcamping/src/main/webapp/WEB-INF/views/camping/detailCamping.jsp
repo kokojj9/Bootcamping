@@ -5,19 +5,15 @@
 <html lang="en">
 <head>
     <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js">
-        
-    <!--달력-->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
-    <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet"/>
-
-
+    
+     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+     
+      <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    
 <style>
 
     .wrap {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
@@ -73,24 +69,29 @@
     }
 
     #checkOut{
-        width: 30%;
+        width: 20%;
         height: 100%;
         float: left;
-        padding-right: 30px;
+        padding-right: 50px;
     }
 
     #selectPeople{
-        width: 30%;
+        width: 15%;
         height: 100%;
         float: left;
-        padding-right: 180px;
+        padding-top: 30px;
+    }
+    
+        
+    #selectDate{
+        padding-top: 30px;
     }
 
     #countPeople::placeholder{
         padding-left: 10px;
     }
 
-    #checkIn, #checkOut, #selectPeople{
+    #checkIn, #checkOut{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -103,6 +104,10 @@
         border-radius: 5px;
         width: 120px; 
         height: 40px; 
+    }
+    
+    #selectDateBtn{
+    	width : 70px;
     }
 
     #camp_thumbnail{
@@ -211,7 +216,7 @@
         padding-top: 10px;
     }
 
-    .siteName p {padding-top: 50px; font-size: 20px; margin-left: 20px;}
+    .siteName p, h5 {padding-top: 10px; margin-left: 20px;}
 
     .btn-success {background-color: rgb(22, 160, 133); }
 
@@ -223,19 +228,33 @@
 
     .review_list{border: 1px solid lightgray; border-radius: 20px; height: 280px; margin-top: 20px;}
 
-    .review_list p{text-align: right; padding-right: 30px;}
+    .review_list p{text-align: right; padding-right: 30px; padding-top : 5px;}
 
     .review_stroy{width: 100%;}
 
-    .review_list h4{padding-left: 20px; margin-right: 10px;}
+    .review_list h4{padding-left: 20px; padding-top: 15px; font-size : 25px;}
 
     .memberName{float: left;}
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
-
-    .review_img{float: left; width: 25%; margin-left: 20px; margin-top: 10px;}
+	
+	.story_text > p { font-size : 20px; text-align : left; padding-left : 10px;}
     
-    .review_img img {border-radius: 20px;}
+    #reviewTitle > h4{ padding-top : 15px;}
+    
+    .review_img{
+    	float: left; 
+    	margin-left: 20px; 
+    	margin-top: 10px;
+    	width : 180px;
+    	height : 180px;
+    }
+    
+    .review_img img {
+	    border-radius: 20px;     	
+	    width : 180px;
+	    height : 180px;
+	   }
     
     #service_list > p { width : 550px; }
     
@@ -262,10 +281,12 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
-            <div id="checkIn"><input id="startDate" width="200" placeholder="체크인"/></div>
-            <div id="checkOut"><input id="endDate" width="200"  placeholder="체크아웃"/></div>
-            <div id="selectPeople"><input id="countPeople" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
-
+	       <!--<form action="select" Method="get">-->
+	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
+	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
+	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
+				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="선택"/></div>
+			<!--</form>-->
         </div>
 
         <!-- 캠핑장 사진 -->
@@ -281,13 +302,13 @@
         <div id="camp_name">
 
             <div id="campTitle">
-                <h2>${camping.campName}</h2> <br>
+                <h2>${camping.campName}</h2> <br/>
                 <p>${camping.campPhone }</p>
                 <p>${camping.detailAddress }</p>
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"></a></div>
+                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"/></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -304,9 +325,6 @@
         <div id="service">
             <h4>시설 환경</h4>
             <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>${camping.service }</p></div>
-            <!-- <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>화장실</p></div>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>와이파이</p></div> -->
         </div>
 
         <!-- 배치도 -->
@@ -330,10 +348,7 @@
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
-            
-            
-            
-            
+
             </div>
         </div>
 
@@ -368,7 +383,7 @@
 			<c:choose>
       		  	<c:when test="${ empty requestScope.site}">
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-10</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -376,7 +391,7 @@
 		                </div>
 		            </div>	 
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-11</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -384,7 +399,7 @@
 		                </div>
 		            </div>			                    		  	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-12</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -392,7 +407,7 @@
 		                </div>
 		            </div>	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"></div>
+		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-13</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -404,11 +419,18 @@
 				<c:when test="${requestScope.site ne null}">
 					<c:forEach var="site" items="${requestScope.site }">
 			            <div class="siteList">
-			                <div class="siteImg"><img src="../${site.sitePath }" width="255"></div>
+			                <div class="siteImg"><img src="../${site.sitePath }" width="255"/></div>
 			                <div class="siteName">
-			                    <h4>${site.siteName }</h4>
-			                    <p>${site.sitePrice}원</p>
-			                    <div class="reserBtn"><button class="btn btn-success">예약하기</button></div>
+			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
+			                    <h5>${site.sitePrice}원</h5>
+			                    <div class="reserBtn"><form action="/bootcamping/reservation">
+			                        <input type="hidden" name="siteNo" value="${site.siteNo}">
+			                     	<input type="hidden" name="startDate" id="startDateInput">
+								    <input type="hidden" name="endDate" id="endDateInput">
+								    <input type="hidden" name="countPeople" id="countPeopleInput">
+			                    <button type="submit" class="btn btn-success" id="campingReserBtn">예약하기
+			                    </button></form></div>
+			                    
 			                </div>
 			            </div>					
 					</c:forEach>
@@ -432,60 +454,62 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <h4>후기(0)</h4>
-            <div id="reviewEtc"><a href="">더보기 > </a></div>
+            <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
+            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
             
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
-
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
+            <div id="reviewListSelect">
             
+            </div>
+ 
 
         </div>
 
         <!-- 달력 -->
         <script>
             var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
+         // 체크인 datepicker 설정
             $('#startDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: today,
                 maxDate: function () {
                     return $('#endDate').val();
+                },
+                onSelect: function (date) {
+                    // 체크인 날짜를 startDate의 값으로 설정
+                    $('#startDate').val(date); // 수정된 부분
+                    let selectedDate = $('#startDate').val(); // 수정된 부분
+                    console.log("체크인 날짜:", selectedDate); // 수정된 부분
+                },
+                defaultDate: today, // 오늘 날짜로 기본값 설정
+                onClose: function (selectedDate) {
+                    // 체크인을 선택하지 않았을 때, 오늘 날짜로 설정
+                    if (selectedDate === "") {
+                        $('#startDate').datepicker('setDate', today);
+                    }
                 }
             });
+
+            // 체크아웃 datepicker 설정
             $('#endDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: function () {
                     return $('#startDate').val();
+                },
+                onSelect: function (date) {
+                    console.log("체크아웃 날짜:", date);
+                },
+                onClose: function (selectedDate) {
+                    // 체크아웃을 선택하지 않았을 때, 다음 날짜로 설정
+                    if (selectedDate === "") {
+                        let tomorrow = new Date();
+                        tomorrow.setDate(tomorrow.getDate() + 1);
+                        $('#endDate').datepicker('setDate', tomorrow);
+                    }
                 }
             });
+
 
             /*하트*/
             const dislikeBtn = document.querySelector('.white');
@@ -576,7 +600,7 @@
 		    	 + '</div>';	
 		    	 
 		 		
-			$('.carousel-inner').html(str);
+		    document.querySelector('.carousel-inner').innerHTML = str;
 						
 			    	 
 			let resultStr = '';
@@ -588,10 +612,132 @@
 				
 			}
 	
-			$('.carousel-inner').html(str);	
+			document.querySelector('.carousel-inner').innerHTML = str;
 			
+			
+			/*리뷰*/
+			
+			let campNo = "${camping.campNo}";
+			
+			function selectReview(){
+	            $.ajax({
+	                url : 'reviewList',
+	                type : 'get',
+	                data : {campNo : campNo},
+	                success : result => {
+	                    console.log(result);
+	                    
+	      				const total = result.length;
+	      				
+	      				document.getElementById('reviewCount').innerText = total;
+	                    
+	                    let reviewResult = '';
+	                    
+	                    if(result.length === 0) {
+	                    	reviewResult += '<div><br><br><h5 style="text-align:center;">리뷰가 존재하지 않습니다<h5></div>'
+	               		} else {
+	                    
+	                    for(let i in result){
+	                    
+	                    reviewResult += '<div class="review_list">'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
+	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
+	                    			  + '<div class="review_stroy">'
+	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
+	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
+	                    			  + '</div>'
+	                    			  + '</div>'
+	                    	}
+	                    document.getElementById('reviewListSelect').innerHTML = reviewResult;
+	                    }
 
+	                    document.getElementById('reviewListSelect').innerHTML = reviewResult;
+	                 
+	                    
+	                }
+	            });
+        }
+        
+        $(function(){
+            selectReview();
+        });
+        
+ 
+        
         </script>
+        
+        <script>
+        	function AllReser(){
+        		
+        		let start = $('#startDate').val();
+        		let end = $('#endDate').val();
+        		let countPeople = $('#countPeople').val();
+        		let campNo = "${camping.campNo}";
+        		
+        		var start2 = start.split("/");
+
+        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+        		var year = parseInt(start2[2]);
+        		var month = parseInt(start2[0]) - 1;
+        		var day = parseInt(start2[1]);
+
+        		// Date 객체 생성
+        		var date = new Date(year, month, day);
+        		
+        		var date = new Date(year, month, day);
+        		var yearString = date.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
+        		var monthString = (date.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var dayString = date.getDate().toString().padStart(2, '0');
+
+        		var dateString = yearString + '/' + monthString + '/' + dayString;
+        		console.log(dateString);
+        		
+        		
+        		
+        		var end2 = end.split("/");
+
+        		// Date 객체 생성 시 월은 0부터 시작하므로 -1을 해줌
+        		var year2 = parseInt(end2[2]);
+        		var month2 = parseInt(end2[0]) - 1;
+        		var day2 = parseInt(end2[1]);
+
+        		// Date 객체 생성
+        		var date2 = new Date(year2, month2, day2);
+        		
+        		var date2 = new Date(year2, month2, day2);
+        		var yearString2 = date2.getFullYear().toString().slice(-2); // 연도에서 뒤의 두 자리만 사용합니다.
+        		var monthString2 = (date2.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 +1 해줍니다.
+        		var dayString2 = date2.getDate().toString().padStart(2, '0');
+
+        		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
+        		console.log(dateString2);
+        		
+        		
+        		
+        		
+        		$.ajax({
+        			
+        			url : '/bootcamping/camping/selectDate',
+        			type : 'post',
+        			data : {startDate : dateString,
+	        				endDate : dateString2,
+	        				countPeople : countPeople,
+	        				campNo : campNo
+        				},
+        			success : result => {
+        				console.log(result);
+        			       	$('#startDateInput').val(result.startDate);
+        			        $('#endDateInput').val(result.endDate);
+        			        $('#countPeopleInput').val(result.countPeople);
+        			}
+        			
+        		})
+        		
+        	}  
+        	
+        </script>
+        
+        
 
    	<jsp:include page="../common/footer.jsp"/>
    	

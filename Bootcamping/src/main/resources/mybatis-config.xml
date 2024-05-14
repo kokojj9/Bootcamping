@@ -10,6 +10,7 @@
 	</settings>
 	
 	<typeAliases>
+
 		<typeAlias type="com.kh.bootcamping.member.model.vo.Member"     alias="member"/>
 		<typeAlias type="com.kh.bootcamping.camping.model.vo.Camping"   alias="camping"/>
 		<typeAlias type="com.kh.bootcamping.camping.model.vo.Site"      alias="site" />
@@ -17,6 +18,7 @@
 		<typeAlias type="com.kh.bootcamping.trade.model.vo.Trade"       alias="trade"/>
 		<typeAlias type="com.kh.bootcamping.trade.model.vo.TradeBoard"  alias="tradeBoard"/>
 		<typeAlias type="com.kh.bootcamping.board.model.vo.Board"       alias="board"/>
+		<typeAlias type="com.kh.bootcamping.review.model.vo.Review"     alias="review"/>
 		<typeAlias type="com.kh.bootcamping.reservation.model.vo.Reservation" alias="reservation"/>
 	</typeAliases>
 	
@@ -24,6 +26,7 @@
 	<mappers>
 		<mapper resource="/mapper/member/member-mapper.xml"/>
 		<mapper resource="/mapper/camping/camping-mapper.xml"/>
+		<mapper resource="/mapper/review/review-mapper.xml"/>
 	</mappers>
 	
 

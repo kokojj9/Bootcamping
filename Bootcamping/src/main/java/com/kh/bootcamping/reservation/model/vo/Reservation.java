@@ -1,35 +1,29 @@
 package com.kh.bootcamping.reservation.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-@Builder
+@Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Reservation {
 
 	private int reservationNo;
-	private int memberNo;
+	private String memberNo;
 	private int siteNo;
-	private Date checkInDate;
-	private Date checkoutDate;
-	private String reservationDays;
-	private Date reservationDate;
+	private String checkInDate;
+	private String checkOutDate;
+	private String reservationDate;
 	private int people;
-	private int price;
-	private String reserName;
+	private String  reserName;
 	private String reserPhone;
+	private int price;
 	private String reserStatus;
 	private String campNo;
 	private String campName;
 	private int typeNo;
 	private int priceNo;
+
 	
 }

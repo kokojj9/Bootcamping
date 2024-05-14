@@ -5,12 +5,6 @@
 <html lang="en">
 <head>
     <title>Document</title>
-     <!-- jQuery 라이브러리 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    
- 	
 
     <style>
     
@@ -452,23 +446,7 @@
 		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다.
 		
 		
-		/*
-		/*사진
-		let campNo = "${camping.campNo}";
 		
-		window.onload = function(){
-			
-			$.ajax({
-				url : 'camping.img',
-				data : {campNo : campNo},
-				success : result => {
-					console.log(result)
-				}
-				
-			})
-			
-		}
-		*/
 		
 
 	</script>
