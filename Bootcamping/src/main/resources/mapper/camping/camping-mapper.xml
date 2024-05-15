@@ -126,6 +126,8 @@
 			        TB_CAMP.CAMP_NO = #{campNo}
                AND
                     CHECKIN_DATE BETWEEN #{startDate} AND #{endDate}
+               OR
+                    CHECKOUT_DATE BETWEEN #{startDate} AND #{endDate}
 			ORDER
 			   BY
 			   		SITE_NO ASC    	

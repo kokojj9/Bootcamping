@@ -758,8 +758,11 @@
         				console.log(result);
         				if(result != null){
         					$('#campReserBtn').attr("disabled", true);
+        					$('#campReserBtn').value = "예약마감";
+        					
         				}else{
         					$('#campReserBtn').attr("disabled", false);
+        					$('#campReserBtn').value = "예약하기";
         				}
         			       
         			}
