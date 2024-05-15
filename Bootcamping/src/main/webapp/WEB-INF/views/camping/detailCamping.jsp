@@ -723,6 +723,7 @@
         		
          	   	console.log(dateComparison);
          	   	
+         	   	
          	   	var addPrice = 30000;
          	   	var currentPrice = parseInt(document.querySelector('.totalPrice').value);
          	    
@@ -738,7 +739,9 @@
          	    }
 
 
-        	
+         		$('.startDateInput').val(dateString);
+		        $('.endDateInput').val(dateString2);
+		        $('.countPeopleInput').val(countPeople);
         		
 
         		$.ajax({
@@ -748,13 +751,12 @@
         			data : {startDate : dateString,
 	        				endDate : dateString2,
 	        				countPeople : countPeople,
+	        				campNo : campNo
 	        				
         				},
         			success : result => {
         				console.log(result);
-        			       	$('.startDateInput').val(result.startDate);
-        			        $('.endDateInput').val(result.endDate);
-        			        $('.countPeopleInput').val(result.countPeople);
+        			       
         			}
         			
         		})

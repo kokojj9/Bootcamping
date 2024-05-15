@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.Site;
-import com.kh.bootcamping.reservation.model.vo.Reservation;
+import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 public interface CampingService {
 	
@@ -13,5 +13,7 @@ public interface CampingService {
 	List<Site> siteList(String campNo);
 	
 	Site campingReservation (int siteNo);
+	
+	Camping selectDate(ReservationInfo ReservationInfo);
 
 }
