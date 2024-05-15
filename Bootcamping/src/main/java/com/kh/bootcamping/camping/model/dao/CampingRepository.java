@@ -25,7 +25,7 @@ public class CampingRepository {
 		return sqlSession.selectOne("campingMapper.campingReservation", siteNo);
 	}
 	
-	public Camping selectDate(SqlSession sqlSession, ReservationInfo reservationInfo) {
+	public Site selectDate(SqlSession sqlSession, ReservationInfo reservationInfo) {
 		return sqlSession.selectOne("campingMapper.selectDate", reservationInfo);
 	}
 
