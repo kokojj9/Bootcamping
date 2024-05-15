@@ -51,6 +51,11 @@
             height: 60px;
         }
 
+        #header_left > a {
+            height: 50px;
+            width: 180px;
+        }
+
         #header_left {
             width: 300px;
             height: 100%;
@@ -58,9 +63,10 @@
             line-height: 50px;
         }
 
-        #header_left > img{ 
+        #header_left img{ 
             margin: 0 auto;
-            height: 40px;
+            width: 100%;
+            height: 100%;
         }
 
         #header_center {
@@ -148,7 +154,7 @@
         </div>
         <div id="header_content">
             <div id="header_left">
-                <img src="resources/img/logo/logo2.png" alt="">
+                <a href="/bootcamping"><img src="resources/img/logo/logo2.png" alt=""></a>
             </div>
             <div id="header_center">
                 <div id="header_menu">

@@ -58,9 +58,13 @@
     }
     
     #footer_logo img {
-        padding-top: 40px;
+        padding-top: 20px;
         margin: 0px;
-        width : 200px;
+        width : 300px;
+    }
+    #footer_logo > a {
+        height: 50px;
+        width: 180px;
     }
 
 
@@ -90,7 +94,7 @@
             </div>
 
             <div id="footer_logo">
-                 <img src="https://kh-academy.co.kr/resources/images/main/logo.svg" alt="">
+                <a href="/bootcamping"><img src="resources/img/logo/logo2.png" alt=""></a>
             </div>
         </div>
 
