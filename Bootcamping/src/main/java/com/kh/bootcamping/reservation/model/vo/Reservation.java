@@ -24,6 +24,6 @@ public class Reservation {
 	private String campNo;
 	private String campName;
 	private int typeNo;
-	private int priceNo;
+	private String priceNo;
 
 }

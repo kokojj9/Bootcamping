@@ -282,18 +282,14 @@
  			    name: campName,
  			    amount: 100, // 테스트 후 가격 바꾸기
  			    buyer_name: reservationName,
- 			    buyer_tel: reservationPhone,
- 				m_redirect_url : "http://localhost:8001/bootcamping/"
+ 			    buyer_tel: reservationPhone
  					
  			  }, function (rsp) { // callback
  					if (rsp.success) {
- 			           alert('결제가 성공했습니다.');
- 			          console.log(rsp);
  			          
  						$.ajax({
  							type: "POST",
  							url: 'successReservation',
- 							async : false,
  							data: {
  								priceNo : rsp.merchant_uid,
  								reserName : reservationName,
@@ -302,11 +298,14 @@
  								checkOutDate : checkOutDate,
  								people : people,
  								memberNo : memberNo,
- 								sitePrice : amount,
- 								siteNo : siteNo,
+ 								price : sitePrice,
+ 								siteNo : siteNo
  							},
  							success : result => {
  								console.log(result);
+ 		   			            alert('결제가 성공했습니다.');
+ 		 			            console.log(rsp);
+ 		 			            location.href='/boot/camping';
  							},
  							error : result => {
  								console.log(result);
