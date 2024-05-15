@@ -430,7 +430,7 @@
 								    <input type="hidden" name="endDate" class="endDateInput">
 								    <input type="hidden" name="countPeople" class="countPeopleInput">
 								    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
-			                    <button type="submit" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
+			                    <button type="submit" id="campReserBtn" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
 			                    </button></form></div>
 			                    
 			                </div>
@@ -723,6 +723,7 @@
         		
          	   	console.log(dateComparison);
          	   	
+         	   	
          	   	var addPrice = 30000;
          	   	var currentPrice = parseInt(document.querySelector('.totalPrice').value);
          	    
@@ -738,7 +739,9 @@
          	    }
 
 
-        	
+         		$('.startDateInput').val(dateString);
+		        $('.endDateInput').val(dateString2);
+		        $('.countPeopleInput').val(countPeople);
         		
 
         		$.ajax({
@@ -748,13 +751,20 @@
         			data : {startDate : dateString,
 	        				endDate : dateString2,
 	        				countPeople : countPeople,
+	        				campNo : campNo
 	        				
         				},
         			success : result => {
         				console.log(result);
-        			       	$('.startDateInput').val(result.startDate);
-        			        $('.endDateInput').val(result.endDate);
-        			        $('.countPeopleInput').val(result.countPeople);
+        				if(result.length === 0){
+        					$('#campReserBtn').attr("disabled", false);
+        					$('#campReserBtn').value = "예약하기";
+        					
+        				}else{
+        					$('#campReserBtn').attr("disabled", true);
+        					$('#campReserBtn').value = "예약마감";
+        				}
+        			       
         			}
         			
         		})
