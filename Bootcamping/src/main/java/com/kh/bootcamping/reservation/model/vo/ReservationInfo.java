@@ -12,4 +12,5 @@ public class ReservationInfo {
     private String startDate;
     private String endDate;
     private int countPeople;
+    private int campNo;
 }
