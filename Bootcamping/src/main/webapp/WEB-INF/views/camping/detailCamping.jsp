@@ -430,7 +430,7 @@
 								    <input type="hidden" name="endDate" class="endDateInput">
 								    <input type="hidden" name="countPeople" class="countPeopleInput">
 								    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
-			                    <button type="submit" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
+			                    <button type="submit" id="campReserBtn" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
 			                    </button></form></div>
 			                    
 			                </div>
@@ -756,6 +756,11 @@
         				},
         			success : result => {
         				console.log(result);
+        				if(result != null){
+        					$('#campReserBtn').attr("disabled", true);
+        				}else{
+        					$('#campReserBtn').attr("disabled", false);
+        				}
         			       
         			}
         			
