@@ -39,7 +39,7 @@
 
                 <div id="socialLoginArea">
                     <div id="kakaoBtn">
-                        <a href="kakaoLoginForm"><img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼"></a>
+                        <a href="kakaoLoginForm"><img src="resources/img/kakaoBtn.png" alt="카카오로그인 버튼"></a>
                     </div>
                 </div>
 

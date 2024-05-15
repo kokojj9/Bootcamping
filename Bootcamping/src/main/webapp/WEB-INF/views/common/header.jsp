@@ -148,7 +148,7 @@
         </div>
         <div id="header_content">
             <div id="header_left">
-                <img src="https://kh-academy.co.kr/resources/images/main/logo.svg" alt="">
+                <img src="resources/img/logo/logo2.png" alt="">
             </div>
             <div id="header_center">
                 <div id="header_menu">
