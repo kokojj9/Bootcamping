@@ -102,7 +102,7 @@
 		        SITE_NO = #{siteNo}		
 	</select>
 
-	<select id="selectDate" parameterType="reservationInfo" resultMap="siteResultMap">
+	<select id="selectDate" parameterType="list" resultMap="siteResultMap">
         
 		SELECT
 					TB_SITE.SITE_NO,

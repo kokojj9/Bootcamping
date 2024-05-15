@@ -756,13 +756,13 @@
         				},
         			success : result => {
         				console.log(result);
-        				if(result != null){
-        					$('#campReserBtn').attr("disabled", true);
-        					$('#campReserBtn').value = "예약마감";
-        					
-        				}else{
+        				if(result.length === 0){
         					$('#campReserBtn').attr("disabled", false);
         					$('#campReserBtn').value = "예약하기";
+        					
+        				}else{
+        					$('#campReserBtn').attr("disabled", true);
+        					$('#campReserBtn').value = "예약마감";
         				}
         			       
         			}

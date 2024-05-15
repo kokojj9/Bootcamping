@@ -36,7 +36,7 @@ public class CampingServiceImpl implements CampingService {
 	}
 
 	@Override
-	public Site selectDate(ReservationInfo ReservationInfo) {
+	public List<Site> selectDate(ReservationInfo ReservationInfo) {
 		return campingRepository.selectDate(sqlSession, ReservationInfo);
 	}
 	

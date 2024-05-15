@@ -14,6 +14,6 @@ public interface CampingService {
 	
 	Site campingReservation (int siteNo);
 	
-	Site selectDate(ReservationInfo ReservationInfo);
+	List<Site> selectDate(ReservationInfo ReservationInfo);
 
 }
