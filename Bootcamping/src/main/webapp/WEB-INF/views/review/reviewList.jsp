@@ -132,13 +132,13 @@
 		            </c:when>
 		            
 					<c:otherwise>
-						 <a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage - 1}"><</a>
+						 <a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&page=${pageInfo.currentPage - 1}"><</a>
 					</c:otherwise>
 					
 	            </c:choose>		
 	            			
                 <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-                  	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${p}">${p}</a>
+                  	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&page=${p}">${p}</a>
 				</c:forEach>	
 					
                	<c:choose>
@@ -146,7 +146,7 @@
                     	<a class="btn btn-sm disabled"  href="#">></a>
    					</c:when>
    					<c:otherwise>
-   					 	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage + 1}">></a>
+   					 	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&page=${pageInfo.currentPage + 1}">></a>
    					</c:otherwise>				
    				</c:choose>   					
             
