@@ -79,7 +79,7 @@
 				<script>
 					$(function(){
 						
-						ajax
+						화면단작업중!!!
 					});
 					
 				
