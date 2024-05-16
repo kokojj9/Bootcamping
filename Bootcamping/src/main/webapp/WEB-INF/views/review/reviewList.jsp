@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,6 +56,7 @@
         width: 70%; 
         height: 100%; 
         padding-left: 10px;
+        padding-top: 10px;
     }
 
     .review_img{
@@ -75,7 +77,7 @@
 
     #reviewUpdate button{margin-right: 10px; margin-top: 5px;}
 
-    #reviewTitle{width: 55%; text-align:center;}
+    #reviewTitle{width: 55%;}
 
     #reviewTitle a {
         text-decoration: none;
@@ -95,79 +97,62 @@
     <div id="content">
 
         <!-- 후기 -->       
-        <div id="reviewTitle"><h3><a href="#">◁</a>&nbsp;보물나라캠프 후기(0)</h3></div>
+        <div id="reviewTitle"><h3><a href="/bootcamping/camping/detail?contentId=${campNo}">◁</a>&nbsp;리뷰 전체보기</h3></div>
             
         <div id="camp_review">
-     
+     	
+     	
+     <c:choose>
+     	<c:when test="${requestScope.review ne null && empty requestScope.review}">
+     		<h3>리뷰가 존재하지 않습니다.</h3>
+     	</c:when>
+     	<c:when test="${requestScope.review ne null }">
+     	<c:forEach items="${review }" var="review">
             <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
+                <h4 class="memberName">${review.memberId } &nbsp; ${review.reviewScore }</h4>
                 <div id="reviewUpdate">
                     <button class="btn-sm btn-outline-light text-dark">수정</button>
                     <button class="btn-sm btn-outline-light text-dark">삭제</button></div>
-                <div class=review_date><p>2024.05.04</p></div>
+                <div class=review_date><p>${review.createDate }</p></div>
                 <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
+                    <div class="story_text">${review.reviewContent }</div>
+                    <div class="review_img"><img src="${review.reviewPath }" width="180px" height="180px"></div>
                 </div>
             </div>
-
-                 
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div id="reviewUpdate">
-                    <button class="btn-sm btn-outline-light text-dark">수정</button>
-                    <button class="btn-sm btn-outline-light text-dark">삭제</button></div>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
+		
+		</c:forEach>
+		</c:when>
+		</c:choose>
 
 
-                 
-            <div class="review_list">
-                <h4 class="memberName">user01 &nbsp; ⭐️⭐️⭐️</h4>
-                <div id="reviewUpdate">
-                    <button class="btn-sm btn-outline-light text-dark">수정</button>
-                    <button class="btn-sm btn-outline-light text-dark">삭제</button></div>
-                <div class=review_date><p>2024.05.04</p></div>
-                <div class="review_stroy">
-                    <div class="story_text">안녕하세요. 지난주 주말에 수도권 매립지 캠핑장을 이용한 사람입니다.
-                    인천 시민으로써 가까운곳에 캠핑장이 생겨 자리가 날때만을 기다리며 광클릭을 통해 여러번 캠핑을 즐겼었죠.                    
-                    다른캠핑장과 달리 코로나로 인해 사이트 간격을 비워놓고 예약을 받아서 좀 더 안심하고 해당 캠핑장을 이용중이였습니다.아이들이 있는관계로..
-                    근데 이번 캠핑장 이용하며 너무 황당한 일을 겪었습니다. 
-                    전 그렇게도 힘들게 카라반 예약을 했는데......거기까진 그냥 그런가보다 요즘세상에 이렇게 하는사람들이 있네...이래도 되나.....생각하고 있었는데
-                    그분들 자리가 원래 비어있던 저희 옆 카라반이였습니다.... 쫌 당황했죠. 처음에는 다른곳 취소한 곳이 있어서 자리를 내줬나보다......
-                    하고있었는데 원래 예약이 안되는 자리를 그분들께 주신겨 였더라구요..</div>
-                    <div class="review_img"><img src="gg.png" width="180px" height="180px"></div>
-                </div>
-            </div>
-
-
-
-        
             <div class="paging-area" align="center";>
-                <button class="btn btn-sm"><</button>
-                <button class="btn btn-sm">1</button>
-                <button class="btn btn-sm">2</button>
-                <button class="btn btn-sm">3</button>
-                <button class="btn btn-sm">4</button>
-                <button class="btn btn-sm">5</button>
-                <button class="btn btn-sm">></button>
+                <c:choose>
+                	<c:when test="${pageInfo.currentPage eq 1 }">
+		                <a class="btn btn-sm disabled" href="#"><</a>
+		            </c:when>
+		            
+					<c:otherwise>
+						 <a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage - 1}"><</a>
+					</c:otherwise>
+					
+	            </c:choose>		
+	            			
+                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+                  	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${p}">${p}</a>
+				</c:forEach>	
+					
+               	<c:choose>
+               		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
+                    	<a class="btn btn-sm disabled"  href="#">></a>
+   					</c:when>
+   					<c:otherwise>
+   					 	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage + 1}">></a>
+   					</c:otherwise>				
+   				</c:choose>   					
+            
             </div>
+		        
+
             
 
     </div>

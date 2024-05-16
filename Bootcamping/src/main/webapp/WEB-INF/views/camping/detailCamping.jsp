@@ -45,11 +45,11 @@
 
     #camp_img{width: 100%; height: 13%;}
 
-    #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid black;} 
+    #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid #e2e2e2;} 
 
-    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid black;} 
+    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
 
-    #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid black;}
+    #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid #e2e2e2;}
 
     #seat {width: 70%; height: 12%; margin: auto; padding-left: 50px;padding-top: 20px; }
 
@@ -232,13 +232,13 @@
 
     .review_stroy{width: 100%;}
 
-    .review_list h4{padding-left: 20px; padding-top: 15px; font-size : 25px;}
+    .review_list h4{padding-left: 20px; padding-top: 5px; font-size : 25px;}
 
     .memberName{float: left;}
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
 	
-	.story_text > p { font-size : 20px; text-align : left; padding-left : 10px;}
+	.story_text > p {text-align : left; padding-left : 10px;}
     
     #reviewTitle > h4{ padding-top : 15px;}
     
@@ -459,8 +459,8 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
+            <div id="reviewTitle"><h4>리뷰<span id="reviewCount"></span></h4></div>
+            <div id="reviewEtc"><a href="/bootcamping/review?campNo=${camping.campNo }">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
@@ -631,10 +631,7 @@
 	                data : {campNo : campNo},
 	                success : result => {
 	                    console.log(result);
-	                    
-	      				const total = result.length;
-	      				
-	      				document.getElementById('reviewCount').innerText = total;
+	      	
 	                    
 	                    let reviewResult = '';
 	                    
