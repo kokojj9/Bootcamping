@@ -20,13 +20,13 @@ public class ReservationController {
 	
 	
 	@ResponseBody
-	@PostMapping(value="successReservation")
-	public void insertResrvation(Reservation reservation, HttpServletResponse response) throws IOException {
+	@PostMapping("successReservation")
+	public String insertResrvation(Reservation reservation) {
 		System.out.println(reservation);
+		
 		int result  = reservationService.insertReservation(reservation);
 		
-		response.setContentType("application/json; charset=UTF-8");
-		response.getWriter().print(result > 0 ?  "success" : "fail");
+		return result > 0 ? "success" : "fail";
 	}
 	
 	
