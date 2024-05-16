@@ -173,7 +173,15 @@ public class MemberController {
 		return result;
 	}
 	
+	@GetMapping("reservations")
+	public String forwardReservList() {
+		return "member/myReservationList";
+	}
 	
+	@GetMapping("boards")
+	public String forwardBoardList() {
+		return "member/myBoardList";
+	}
 	
 	
 	

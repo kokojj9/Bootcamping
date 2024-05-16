@@ -15,7 +15,13 @@
 </head>
 <body>
 
-    <c:choos
+    <c:if test="${ empty loginMember }">
+    	<script>
+    		alert('회원 전용 서비스입니다. 로그인해주세요');
+    		location.href = 'errorPage';
+    	</script>
+    </c:if>
+    
     <jsp:include page="../common/header.jsp"/>
 
 
@@ -159,7 +165,7 @@
             'editForm',
             'wishList',
             'reservations',
-            'boardList',
+            'boards',
             'tradeList'
         ];
 

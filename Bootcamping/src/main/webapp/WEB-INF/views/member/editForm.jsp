@@ -11,57 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <style>
-        .content { 
-            background-color: rgb(247, 245, 245);
-            width: 1200px; 
-            margin: auto;
-        }
-        .innerOuter {
-            border: 1px solid lightgray;
-            width: 40%;
-            margin: auto;
-            padding: 3% 7%;
-            background-color: white;
-        }
-        #postcode, #roadAddress{
-            font-size: 1rem;
-            font-weight: 400;
-            line-height: 1.5;
-            height: calc(1.5em + .75rem + 2px);
-            padding: .375rem .75rem;
-            color: #495057;
-            background-color: #fff;
-            background-clip: padding-box;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-        }
-        #postcode{
-            width: 100px;
-            margin-bottom: 5px;
-        }
-        #roadAddress{
-            width: 310px;
-        }
-        #findAddressBtn, #checkEmailBtn, #checkAuthCode{
-            width: 90px;
-            height: 35px;
-            background-color: #1dc078;
-            color: #f6f6f6;
-            border: 0;
-            font-size: 16px;
-            font-weight: 400;
-            border-radius: .25rem;
-        }
-        #detailAddress{
-            margin-top: 5px;
-        }
-        #checkAuthCode{
-            margin-top: 5px;
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="resources/CSS/member/editForm.css">
 
 </head>
 <body>
@@ -135,115 +85,12 @@
     <jsp:include page="../common/footer.jsp"/>
 
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+    
     <script>
         var loginMemberId = '${ loginMember.memberId }';
-
-        let checkPwdResult = document.getElementById('checkPwdResult');
-        let memberPwdtag = document.getElementById('memberPwd');
-        let changePwdType = document.getElementById('pwdType').value;
-        
-        document.getElementById('checkPwdBtn').onclick = () => {
-            $.ajax({
-                url : 'members/editPassword',
-                type : 'post',
-                data : {
-                    memberId : loginMemberId,
-                    memberPwd : document.getElementById('checkPwd').value
-                },
-                success : result => {
-                    if(result === 'YYYYY') {
-                        memberPwdtag.style.display = 'block';
-                        changePwdType = 'Y';
-                    }
-                    else {
-                        alert('비밀번호를 확인해주세요!');
-                        memberPwdtag.style.display = 'none';
-                        changePwdType = 'N';
-                    };
-                }
-            });
-        };
-
-        document.getElementById('editBtn').onclick = () => {
-            $.ajax({
-                url : 'members/edit',
-                type : 'post',
-                data : {
-                    memberId : loginMemberId,
-                    memberPwd : memberPwdtag.value,
-                    email : document.getElementById('email').value,
-                    postCode : document.getElementById('postcode').value,
-                    roadAddress : document.getElementById('roadAddress').value,
-                    detailAddress : document.getElementById('detailAddress').value,
-                    changePwdType : changePwdType
-                },
-                success : result => {
-                    if(result === 'YYYYY') location.href = 'editForm';
-                    else alert('정보 수정 실패'); location.href = 'editForm';
-                }
-            });
-        };
-        
-        memberPwdtag.onkeyup = () => {
-            if(memberPwdtag.style.display = 'block'){
-                let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
-                
-                if(regExp.test(memberPwdtag.value)) checkInfo(false, 'green', '사용가능한 비밀번호입니다.');
-                else checkInfo(true, 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.');
-            };
-        };
-
-        const checkInfo = (type, color, text) => {
-            checkPwdResult.style.display = 'block';
-            checkPwdResult.style.color = color;
-            checkPwdResult.textContent = text;
-            document.getElementById('editBtn').disabled = type;
-        };
-
-        var themeObj = {
-            searchBgColor: "#1DC078",
-            queryTextColor: "#FFFFFF"
-        };
-
-        function execDaumPostcode() {
-            new daum.Postcode({
-            theme: themeObj,
-            oncomplete: function(data) {
-                var roadAddr = data.roadAddress;
-                var extraRoadAddr = '';
-
-                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                    extraRoadAddr += data.bname;
-                }
-                
-                if(data.buildingName !== '' && data.apartment === 'Y'){
-                    extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                }
-                
-                if(extraRoadAddr !== ''){
-                    extraRoadAddr = ' (' + extraRoadAddr + ')';
-                }
-
-                document.getElementById('postcode').value = data.zonecode;
-                document.getElementById("roadAddress").value = roadAddr;
-
-                var guideTextBox = document.getElementById("guide");
-                
-                if(data.autoRoadAddress) {
-                    var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
-                    guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
-                    guideTextBox.style.display = 'block';
-                } else {
-                    guideTextBox.innerHTML = '';
-                    guideTextBox.style.display = 'none';
-                }
-            }
-        }).open();
-
-}
-
     </script>
+    
+    <script src="resources/js/member/editForm.js" ></script>
 
 
 
