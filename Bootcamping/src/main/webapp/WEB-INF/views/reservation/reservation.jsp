@@ -306,7 +306,7 @@
  								if(result == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			            location.href='/boot/camping';
+ 	 		 			            location.href='/bootcamping/';
  									
  								}
  		   			            

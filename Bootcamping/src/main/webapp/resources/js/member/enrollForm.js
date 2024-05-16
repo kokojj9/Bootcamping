@@ -32,6 +32,8 @@ memberIdTag.onkeyup = () => {
     };
 };
 
+let countdown;
+
 // 이메일 인증
 document.getElementById('checkEmailBtn').onclick = () => {
     if(document.getElementById('email').value == ''){
@@ -56,7 +58,7 @@ document.getElementById('checkEmailBtn').onclick = () => {
 
                     var totalTime = 180;
 
-                    let countdown = setInterval(() => {
+                    countdown = setInterval(() => {
                         document.getElementById('timer').style.color = 'black';
                         
                         if(totalTime > 0) {

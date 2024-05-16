@@ -424,14 +424,17 @@
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><form action="/bootcamping/reservation">
-			                        <input type="hidden" name="siteNo" value="${site.siteNo}">
-			                     	<input type="hidden" name="startDate" class="startDateInput">
-								    <input type="hidden" name="endDate" class="endDateInput">
-								    <input type="hidden" name="countPeople" class="countPeopleInput">
-								    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
-			                    <button type="submit" id="campReserBtn" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
-			                    </button></form></div>
+			                    <div class="reserBtn">
+			                    	<form action="/bootcamping/reservation">
+				                        <input type="hidden" name="siteNo" value="${site.siteNo}">
+				                     	<input type="hidden" name="startDate" class="startDateInput">
+									    <input type="hidden" name="endDate" class="endDateInput">
+									    <input type="hidden" name="countPeople" class="countPeopleInput">
+									    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
+				                  		<button type="submit" id="campReserBtn" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
+				                    	</button>
+			                    	</form>
+			                    </div>
 			                    
 			                </div>
 			            </div>					
