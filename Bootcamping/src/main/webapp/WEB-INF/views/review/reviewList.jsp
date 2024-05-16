@@ -100,7 +100,13 @@
         <div id="reviewTitle"><h3><a href="/bootcamping/camping/detail?contentId=${campNo}">◁</a>&nbsp;리뷰 전체보기</h3></div>
             
         <div id="camp_review">
-     
+     	
+     	
+     <c:choose>
+     	<c:when test="${requestScope.review ne null && empty requestScope.review}">
+     		<h3>리뷰가 존재하지 않습니다.</h3>
+     	</c:when>
+     	<c:when test="${requestScope.review ne null }">
      	<c:forEach items="${review }" var="review">
             <div class="review_list">
                 <h4 class="memberName">${review.memberId } &nbsp; ${review.reviewScore }</h4>
@@ -115,28 +121,32 @@
             </div>
 		
 		</c:forEach>
+		</c:when>
+		</c:choose>
 
 
             <div class="paging-area" align="center";>
                 <c:choose>
                 	<c:when test="${pageInfo.currentPage eq 1 }">
-		                <button class="btn btn-sm disabled" onclick="#"><</button>
+		                <a class="btn btn-sm disabled" href="#"><</a>
 		            </c:when>
+		            
 					<c:otherwise>
-						<button class="btn btn-sm" onclick="location.href='/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage - 1}'"><</button>
+						 <a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage - 1}"><</a>
 					</c:otherwise>
+					
 	            </c:choose>		
 	            			
                 <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-                  	<button class="btn btn-sm" onclick="location.href='/bootcamping/review?campNo=${campNo}&Page=${p}'">${p}</button>
+                  	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${p}">${p}</a>
 				</c:forEach>	
 					
                	<c:choose>
                		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
-                    	<button class="btn btn-sm disabled"  onclick="#">></button>
+                    	<a class="btn btn-sm disabled"  href="#">></a>
    					</c:when>
    					<c:otherwise>
-   					 	<button class="btn btn-sm" onclick="location.href='/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage + 1}'">></button>
+   					 	<a class="btn btn-sm" href="/bootcamping/review?campNo=${campNo}&Page=${pageInfo.currentPage + 1}">></a>
    					</c:otherwise>				
    				</c:choose>   					
             
