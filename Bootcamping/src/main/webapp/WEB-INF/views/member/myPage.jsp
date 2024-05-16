@@ -15,7 +15,9 @@
 </head>
 <body>
 
+    <c:choos
     <jsp:include page="../common/header.jsp"/>
+
 
     <div class="wrap">
         <h2> 부트캠핑 - 마이페이지</h2>

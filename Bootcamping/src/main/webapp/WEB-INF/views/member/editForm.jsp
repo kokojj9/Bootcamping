@@ -88,7 +88,9 @@
 
                 <label for="memberPwd">* 비밀번호 </label>
                 <button type="button" id="editPwd" class="btn btn-primary" data-toggle="modal" data-target="#myModal">비밀번호 확인</button><br>
-                <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required style="display: none;">
+                <input type="password" class="form-control" id="memberPwd" placeholder="변경 비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required style="display: none;">
+                <div id="checkPwdResult" style="font-size:12px; display:none;"></div><br>
+                <input type="hidden" id="pwdType" value="N">
 
                 <label for="email">* 이메일 </label>
                 <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" value="${ loginMember.email }" name="email" required> <br>
@@ -102,7 +104,7 @@
             </div> 
             <br>
             <div class="btns" align="center">
-                <button id="editBtn" type="button" class="btn btn-primary" disabled>정보 수정</button>
+                <button id="editBtn" type="button" class="btn btn-primary">정보 수정</button>
             </div>
         </div>
     </div>
@@ -139,7 +141,8 @@
 
         let checkPwdResult = document.getElementById('checkPwdResult');
         let memberPwdtag = document.getElementById('memberPwd');
-
+        let changePwdType = document.getElementById('pwdType').value;
+        
         document.getElementById('checkPwdBtn').onclick = () => {
             $.ajax({
                 url : 'members/editPassword',
@@ -151,10 +154,12 @@
                 success : result => {
                     if(result === 'YYYYY') {
                         memberPwdtag.style.display = 'block';
+                        changePwdType = 'Y';
                     }
                     else {
                         alert('비밀번호를 확인해주세요!');
                         memberPwdtag.style.display = 'none';
+                        changePwdType = 'N';
                     };
                 }
             });
@@ -166,11 +171,12 @@
                 type : 'post',
                 data : {
                     memberId : loginMemberId,
-                    memberPwd : document.getElementById('memberPwd').value,
+                    memberPwd : memberPwdtag.value,
                     email : document.getElementById('email').value,
                     postCode : document.getElementById('postcode').value,
                     roadAddress : document.getElementById('roadAddress').value,
-                    detailAddress : document.getElementById('detailAddress').value
+                    detailAddress : document.getElementById('detailAddress').value,
+                    changePwdType : changePwdType
                 },
                 success : result => {
                     if(result === 'YYYYY') location.href = 'editForm';
@@ -178,20 +184,22 @@
                 }
             });
         };
+        
+        memberPwdtag.onkeyup = () => {
+            if(memberPwdtag.style.display = 'block'){
+                let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
+                
+                if(regExp.test(memberPwdtag.value)) checkInfo(false, 'green', '사용가능한 비밀번호입니다.');
+                else checkInfo(true, 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.');
+            };
+        };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+        const checkInfo = (type, color, text) => {
+            checkPwdResult.style.display = 'block';
+            checkPwdResult.style.color = color;
+            checkPwdResult.textContent = text;
+            document.getElementById('editBtn').disabled = type;
+        };
 
         var themeObj = {
             searchBgColor: "#1DC078",

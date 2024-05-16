@@ -199,15 +199,18 @@
 	</select>
 
 	<update id="editMember" parameterType="member">
-		UPDATE
-       		   TB_MEMBER
-		   SET
-		       MEMBER_PWD = #{ memberPwd },
-		       ADDRESS = #{ address },
-		       EMAIL = #{ email }
-		 WHERE       
-		       MEMBER_ID = #{ memberId }
-	
+		UPDATE 
+			   TB_MEMBER
+           SET
+	    	<if test='changePwdType == "Y"'>
+	           MEMBER_PWD = #{ memberPwd },
+	        </if>
+	           POSTCODE = #{ postCode },
+			   ROADADDRESS = #{ roadAddress },
+			   DETAILADDRESS = #{ detailAddress },
+	           EMAIL = #{ email }
+	     WHERE 
+	           MEMBER_ID = #{memberId}
 	</update>
 
 

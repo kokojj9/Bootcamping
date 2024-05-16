@@ -18,8 +18,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 
-import oracle.jdbc.proxy.annotation.Post;
-
 @Controller
 public class MemberController {
 
@@ -159,15 +157,16 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@PostMapping("members/eidt")
+	@PostMapping("members/edit")
 	public String editMember(Member member) {
-		
 		String result = "NNNNN";
 		
 		if(member != null) {
-			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-			member.setMemberPwd(encPwd);
-
+			if(member.getChangePwdType().equals("Y")) {
+				String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+				member.setMemberPwd(encPwd);
+			}
+			
 			result = memberService.editMember(member) > 0 ? "YYYYY" : "NNNNN";
 		}
 		
