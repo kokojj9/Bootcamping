@@ -11,6 +11,6 @@ public interface ReviewService {
 	
 	int selectReviewCount(String campNo);
 	
-	List<Review> selectReviewList(PageInfo pi);
+	List<Review> selectReviewList(PageInfo pi, String campNo);
 
 }

@@ -35,10 +35,12 @@ public class ReviewController {
 		
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectReviewCount(campNo), page, 3, 5);
 		
-		// System.out.println(reviewService.selectReviewCount(campNo));
+		System.out.println(reviewService.selectReviewCount(campNo));
 		
-		if(!reviewService.selectReviewList(pi).isEmpty()) {
-					mv.addObject("list", reviewService.selectReviewList(pi));
+		System.out.println(pi);
+		
+		if(!reviewService.selectReviewList(pi, campNo).isEmpty()) {
+					mv.addObject("review", reviewService.selectReviewList(pi, campNo));
 					mv.addObject("pageInfo", pi);
 					
 					mv.setViewName("review/reviewList");
@@ -47,6 +49,8 @@ public class ReviewController {
 			mv.addObject("errorMsg", "리뷰가 존재하지 않습니다.").setViewName("common/errorPage");		
 		}
 
+		System.out.println(reviewService.selectReviewList(pi, campNo));
+		
 		return mv;
 		
 	}

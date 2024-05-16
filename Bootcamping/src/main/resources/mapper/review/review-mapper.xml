@@ -80,7 +80,6 @@
 	
 	<select id="selectReviewList" resultMap="reviewResultMap">
 		SELECT       
-                   ROWNUM AS RNUM,
                    REVIEW_PATH,
                    REVIEW_CONTENT,
                    CASE WHEN REVIEW_SCORE = 1 THEN '★' 

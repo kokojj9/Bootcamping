@@ -31,11 +31,11 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<Review> selectReviewList(PageInfo pi) {
+	public List<Review> selectReviewList(PageInfo pi, String campNo) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return reviewRepository.selectReviewList(sqlSession, rowBounds);
+		return reviewRepository.selectReviewList(sqlSession, campNo, rowBounds);
 	}
 
 }

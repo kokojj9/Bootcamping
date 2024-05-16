@@ -19,8 +19,8 @@ public class ReviewRepository {
 		return sqlSession.selectOne("reviewMapper.selectReviewCount", campNo);
 	}
 	
-	public List<Review> selectReviewList(SqlSession sqlSession, RowBounds rowBounds){
-		return sqlSession.selectList("reviewMapper.selectReviewList", null, rowBounds);
+	public List<Review> selectReviewList(SqlSession sqlSession, String campNo, RowBounds rowBounds){
+		return sqlSession.selectList("reviewMapper.selectReviewList", campNo, rowBounds);
 	}
 	
 	
