@@ -13,52 +13,52 @@
 
     <style>
         .content { 
-    background-color: rgb(247, 245, 245);
-    width: 1200px; 
-    margin: auto;
-}
-.innerOuter {
-    border: 1px solid lightgray;
-    width: 40%;
-    margin: auto;
-    padding: 3% 7%;
-    background-color: white;
-}
-#postcode, #roadAddress{
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: .25rem;
-}
-#postcode{
-    width: 100px;
-    margin-bottom: 5px;
-}
-#roadAddress{
-    width: 310px;
-}
-#findAddressBtn, #checkEmailBtn, #checkAuthCode{
-    width: 90px;
-    height: 35px;
-    background-color: #1dc078;
-    color: #f6f6f6;
-    border: 0;
-    font-size: 16px;
-    font-weight: 400;
-    border-radius: .25rem;
-}
-#detailAddress{
-    margin-top: 5px;
-}
-#checkAuthCode{
-    margin-top: 5px;
-}
+            background-color: rgb(247, 245, 245);
+            width: 1200px; 
+            margin: auto;
+        }
+        .innerOuter {
+            border: 1px solid lightgray;
+            width: 40%;
+            margin: auto;
+            padding: 3% 7%;
+            background-color: white;
+        }
+        #postcode, #roadAddress{
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+        }
+        #postcode{
+            width: 100px;
+            margin-bottom: 5px;
+        }
+        #roadAddress{
+            width: 310px;
+        }
+        #findAddressBtn, #checkEmailBtn, #checkAuthCode{
+            width: 90px;
+            height: 35px;
+            background-color: #1dc078;
+            color: #f6f6f6;
+            border: 0;
+            font-size: 16px;
+            font-weight: 400;
+            border-radius: .25rem;
+        }
+        #detailAddress{
+            margin-top: 5px;
+        }
+        #checkAuthCode{
+            margin-top: 5px;
+        }
 
 
     </style>
@@ -86,7 +86,7 @@
                 <input type="text" class="form-control" id="memberId" value="${ loginMember.memberId }" name="memberId" maxlength="12" readonly>
                 <div id="checkIdResult" style="font-size:12px; display:none;"></div><br>
 
-                <label for="memberPwd">비밀번호 </label>
+                <label for="memberPwd">* 비밀번호 </label>
                 <button type="button" id="editPwd" class="btn btn-primary" data-toggle="modal" data-target="#myModal">비밀번호 확인</button><br>
                 <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required style="display: none;">
 
@@ -141,7 +141,23 @@
         let memberPwdtag = document.getElementById('memberPwd');
 
         document.getElementById('checkPwdBtn').onclick = () => {
-            // 비밀번호가 맞는지 확인하는 -> 로그인 메서드로 활용가능
+            $.ajax({
+                url : 'members/editPassword',
+                type : 'POST',
+                data : {
+                    memberId : loginMemberId,
+                    memberPwd : document.getElementById('checkPwd').value
+                },
+                success : result => {
+                    if(result === 'YYYYY') {
+                        memberPwdtag.style.display = 'block';
+                    }
+                    else {
+                        alert('비밀번호를 확인해주세요!');
+                        memberPwdtag.style.display = 'none';
+                    };
+                }
+            });
         };
 
         document.getElementById('editBtn').onclick = () => {

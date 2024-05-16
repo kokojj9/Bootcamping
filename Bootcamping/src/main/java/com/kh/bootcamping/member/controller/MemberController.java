@@ -139,6 +139,17 @@ public class MemberController {
 		return "member/editForm";
 	}
 	
+	// 회원정보 수정 로그인 메서드 활용
+	@ResponseBody
+	@PostMapping("members/editPassword")
+	public String editPassword(Member member) {
+		Member loginMember = memberService.login(member);
+		
+		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+			return "YYYYY";
+		}
+			return "NNNNN";
+	}
 	
 	
 	
