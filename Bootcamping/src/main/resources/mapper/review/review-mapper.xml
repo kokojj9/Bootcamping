@@ -61,7 +61,7 @@
 		 		
 	</select>
 	
-	<select id="selectReviewCount" resultMap="reviewResultMap">
+	<select id="selectReviewCount" resultType="_int">
 		SELECT
 		        COUNT(*)
 		  FROM
