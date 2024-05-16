@@ -21,4 +21,6 @@ public interface MemberService {
 
 	MyPageInfo searchMyPage(String memberId);
 
+	int editMember(Member member);
+
 }

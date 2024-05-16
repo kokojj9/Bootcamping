@@ -73,7 +73,6 @@ document.getElementById('checkEmailBtn').onclick = () => {
                             document.getElementById('timer').style.color = 'crimson';
                             document.getElementById('checkAuthCode').disabled = true;
                             enrollFormSubmit.disabled = true;
-                            totalTime = 180;
                         }
                     }, 1000);
                 }

@@ -54,4 +54,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.searchMyPage(sqlSession, memberId);
 	}
 
+	@Override
+	public int editMember(Member member) {
+		return memberRepository.editMember(sqlSession, member);
+	}
+
 }

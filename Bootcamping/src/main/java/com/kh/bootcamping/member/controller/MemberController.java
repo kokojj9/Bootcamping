@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bootcamping.common.model.vo.PageInfo;
+import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 
@@ -103,16 +105,12 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("members")
-	public ModelAndView insertMember(Member member, String postcode,
-									 String roadAddress, String detailAddress,
-									 HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
 		
 		if(member.getEmail().equals("") && member.getMemberId().equals("") && member.getMemberPwd().equals("")) {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 		} else {
-			String address = postcode + roadAddress + detailAddress;
 			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-			member.setAddress(address);
 			member.setMemberPwd(encPwd);
 			
 			if(memberService.insertMember(member) > 0) {
@@ -122,6 +120,7 @@ public class MemberController {
 				mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 			}
 		}
+		
 		return mv;
 	}
 	
@@ -138,6 +137,74 @@ public class MemberController {
 	public String forwardEditMember(Member member, Model model) {
 		return "member/editForm";
 	}
+	
+	// 회원정보 수정 로그인 메서드 활용
+	@ResponseBody
+	@PostMapping("members/editPassword")
+	public String editPassword(Member member) {
+		Member loginMember = memberService.login(member);
+		
+		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+			return "YYYYY";
+		}
+			return "NNNNN";
+	}
+	
+	/**
+	 * 회원 정보 수정 메서드
+	 * @param member
+	 * @param postcode
+	 * @param roadAddress
+	 * @param detailAddress
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("members/edit")
+	public String editMember(Member member) {
+		String result = "NNNNN";
+		
+		if(member != null) {
+			if(member.getChangePwdType().equals("Y")) {
+				String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+				member.setMemberPwd(encPwd);
+			}
+			
+			result = memberService.editMember(member) > 0 ? "YYYYY" : "NNNNN";
+		}
+		
+		return result;
+	}
+	
+	@GetMapping("reservations")
+	public String forwardReservList(Model model) {
+		
+		// 총 개수 == DB가서 조회
+		// 요청페이지 == ?
+		// 한페이지에 몇 개 == 5
+		// 페이징 바 몇 개 == 5
+		
+		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), 
+											 page,
+											 5,
+											 5);
+		
+		//System.out.println("페이지 인포 : " + pi);
+		//log.info("페이지 인포={}", pi); //Slf4j 애노테이션과 함께 사용하여 콘솔에 출력가능 어디서 찍혔는지 클래스까지 보여줌 
+		
+		model.addAttribute("list", boardService.selectList(pi));
+		model.addAttribute("pageInfo", pi);
+		
+		return "member/myReservationList";
+	}
+	
+	@GetMapping("boards")
+	public String forwardBoardList() {
+		return "member/myBoardList";
+	}
+	
+	
+	
+	
 	
 	
 	

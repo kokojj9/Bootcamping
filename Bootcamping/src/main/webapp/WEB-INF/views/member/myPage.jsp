@@ -15,7 +15,15 @@
 </head>
 <body>
 
+    <c:if test="${ empty loginMember }">
+    	<script>
+    		alert('회원 전용 서비스입니다. 로그인해주세요');
+    		location.href = 'errorPage';
+    	</script>
+    </c:if>
+    
     <jsp:include page="../common/header.jsp"/>
+
 
     <div class="wrap">
         <h2> 부트캠핑 - 마이페이지</h2>
@@ -157,7 +165,7 @@
             'editForm',
             'wishList',
             'reservations',
-            'boardList',
+            'boards',
             'tradeList'
         ];
 
