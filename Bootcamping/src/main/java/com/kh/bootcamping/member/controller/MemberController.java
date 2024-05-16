@@ -18,6 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 public class MemberController {
 
@@ -103,16 +105,12 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("members")
-	public ModelAndView insertMember(Member member, String postcode,
-									 String roadAddress, String detailAddress,
-									 HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
 		
 		if(member.getEmail().equals("") && member.getMemberId().equals("") && member.getMemberPwd().equals("")) {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 		} else {
-			String address = postcode + roadAddress + detailAddress;
 			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-			member.setAddress(address);
 			member.setMemberPwd(encPwd);
 			
 			if(memberService.insertMember(member) > 0) {
@@ -150,6 +148,37 @@ public class MemberController {
 		}
 			return "NNNNN";
 	}
+	
+	/**
+	 * 회원 정보 수정 메서드
+	 * @param member
+	 * @param postcode
+	 * @param roadAddress
+	 * @param detailAddress
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("members/eidt")
+	public String editMember(Member member) {
+		
+		String result = "NNNNN";
+		
+		if(member != null) {
+			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+			member.setMemberPwd(encPwd);
+
+			result = memberService.editMember(member) > 0 ? "YYYYY" : "NNNNN";
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

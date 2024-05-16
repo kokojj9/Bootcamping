@@ -38,5 +38,9 @@ public class MemberRepository {
 	public MyPageInfo searchMyPage(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.selectOne("memberMapper.searchMyPage", memberId);
 	}
+
+	public int editMember(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.update("memberMapper.editMember", member);
+	}
 	
 }

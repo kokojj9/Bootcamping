@@ -161,9 +161,8 @@
         };
 
         document.getElementById('editBtn').onclick = () => {
-            
             $.ajax({
-                url : 'members',
+                url : 'members/edit',
                 type : 'post',
                 data : {
                     memberId : loginMemberId,
@@ -174,7 +173,8 @@
                     detailAddress : document.getElementById('detailAddress').value
                 },
                 success : result => {
-
+                    if(result === 'YYYYY') location.href = 'editForm';
+                    else alert('정보 수정 실패'); location.href = 'editForm';
                 }
             });
         };

@@ -25,5 +25,9 @@ public class Member {
 	private String updateDate;
 	private String status;
 	private String privilege;
+	
+	private String postcode;
+	private String roadAddress;
+	private String detailAddress;
 		
 }
