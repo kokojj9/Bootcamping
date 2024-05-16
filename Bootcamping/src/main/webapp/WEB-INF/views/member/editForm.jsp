@@ -94,11 +94,11 @@
                 <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" value="${ loginMember.email }" name="email" required> <br>
 
                 <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;<br>
-                <input type="text" name="postcode" id="postcode" placeholder="우편번호">
+                <input type="text" name="postCode" id="postcode" placeholder="우편번호" value="${ loginMember.postCode }">
                 <input type="button" id="findAddressBtn" onclick="execDaumPostcode()" value="주소 찾기"><br>
-                <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소">
+                <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소" value="${ loginMember.roadAddress }">
                 <span id="guide" style="color:#999;display:none"></span>
-                <input type="text" name="detailAddress" id="detailAddress" class="form-control" placeholder="상세주소">
+                <input type="text" name="detailAddress" id="detailAddress" class="form-control" placeholder="상세주소" value="${ loginMember.detailAddress }">
             </div> 
             <br>
             <div class="btns" align="center">
@@ -121,7 +121,7 @@
                 </div>
         
                 <div class="modal-footer">
-                    <button id="checkPwdBtn" type="button" class="btn btn-primary" >비밀번호 확인</button>
+                    <button id="checkPwdBtn" type="button" class="btn btn-primary" data-dismiss="modal">비밀번호 확인</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
                 </div>
         
@@ -143,7 +143,7 @@
         document.getElementById('checkPwdBtn').onclick = () => {
             $.ajax({
                 url : 'members/editPassword',
-                type : 'POST',
+                type : 'post',
                 data : {
                     memberId : loginMemberId,
                     memberPwd : document.getElementById('checkPwd').value
@@ -168,7 +168,7 @@
                     memberId : loginMemberId,
                     memberPwd : document.getElementById('memberPwd').value,
                     email : document.getElementById('email').value,
-                    postcode : document.getElementById('postcode').value,
+                    postCode : document.getElementById('postcode').value,
                     roadAddress : document.getElementById('roadAddress').value,
                     detailAddress : document.getElementById('detailAddress').value
                 },

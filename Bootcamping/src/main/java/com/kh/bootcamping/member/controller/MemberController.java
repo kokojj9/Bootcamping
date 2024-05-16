@@ -120,6 +120,7 @@ public class MemberController {
 				mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 			}
 		}
+		
 		return mv;
 	}
 	

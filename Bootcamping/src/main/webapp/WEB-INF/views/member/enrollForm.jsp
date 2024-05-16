@@ -41,7 +41,7 @@
                     <h6 id="timer"></h6>
 
                     <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;<br>
-                    <input type="text" name="postcode" id="postcode" placeholder="우편번호">
+                    <input type="text" name="postCode" id="postcode" placeholder="우편번호">
                     <input type="button" id="findAddressBtn" onclick="execDaumPostcode()" value="주소 찾기"><br>
                     <input type="text" name="roadAddress" id="roadAddress" placeholder="도로명주소">
                     <span id="guide" style="color:#999;display:none"></span>
