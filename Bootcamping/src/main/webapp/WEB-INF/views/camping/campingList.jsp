@@ -200,7 +200,7 @@
 	
 
     #camp_btn{
-    	width:25%;
+    	width:70%;
         margin: auto;
     }
     
@@ -296,21 +296,25 @@
                     <div id="camp_btn">
 	                	<c:choose>
 	                		<c:when test="${pageInfo.currentPage eq 1}">
-		                    	<a class="btn btn-outline-success disabled" href="#"><</a>
+		                    	<a class="btn btn-sm disabled" href="#"><</a>
 	    					</c:when>
 	    					<c:otherwise>
-	    							<a class="btn btn-outline-success" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
+	    							<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
 	    								<
 	    							</a>
 	    					</c:otherwise>				
 	    				</c:choose>
+	    				
+	    				 <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+		                  	<a class="btn btn-sm" href="/bootcamping/camping?page=${p}">${p}</a>
+						</c:forEach>	
  
 	                	<c:choose>
 	                		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
-		                    	<a class="btn btn-outline-success disabled" href="#">></a>
+		                    	<a class="btn btn-sm disabled" href="#">></a>
 	    					</c:when>
 	    					<c:otherwise>
-	    							<a class="btn btn-outline-success" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
+	    							<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
 	    								>
 	    							</a>
 	    					</c:otherwise>				
