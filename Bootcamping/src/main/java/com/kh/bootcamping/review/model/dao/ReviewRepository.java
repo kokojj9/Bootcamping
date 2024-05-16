@@ -2,6 +2,7 @@ package com.kh.bootcamping.review.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -14,4 +15,16 @@ public class ReviewRepository {
 		return sqlSession.selectList("reviewMapper.selectReview", campNo);
 	}
 
+	public int selectReviewCount(SqlSession sqlSession, String campNo) {
+		return sqlSession.selectOne("reviewMapper.selectReviewCount", campNo);
+	}
+	
+	public List<Review> selectReviewList(SqlSession sqlSession, RowBounds rowBounds){
+		return sqlSession.selectList("reviewMapper.selectReviewList", null, rowBounds);
+	}
+	
+	
+	
+	
+	
 }

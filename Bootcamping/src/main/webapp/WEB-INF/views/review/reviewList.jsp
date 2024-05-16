@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +76,7 @@
 
     #reviewUpdate button{margin-right: 10px; margin-top: 5px;}
 
-    #reviewTitle{width: 55%; text-align:center;}
+    #reviewTitle{width: 55%;}
 
     #reviewTitle a {
         text-decoration: none;

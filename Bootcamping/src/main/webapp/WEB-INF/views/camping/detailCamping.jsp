@@ -232,13 +232,13 @@
 
     .review_stroy{width: 100%;}
 
-    .review_list h4{padding-left: 20px; padding-top: 15px; font-size : 25px;}
+    .review_list h4{padding-left: 20px; padding-top: 5px; font-size : 25px;}
 
     .memberName{float: left;}
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
 	
-	.story_text > p { font-size : 20px; text-align : left; padding-left : 10px;}
+	.story_text > p {text-align : left; padding-left : 10px;}
     
     #reviewTitle > h4{ padding-top : 15px;}
     
@@ -460,7 +460,7 @@
         <!-- 후기 -->
         <div id="camp_review">
             <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
+            <div id="reviewEtc"><a href="/bootcamping/review?campNo=${camping.campNo }">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
