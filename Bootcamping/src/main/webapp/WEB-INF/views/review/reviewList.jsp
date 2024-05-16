@@ -107,17 +107,21 @@
         <div id="camp_review">
      	
      	
-     <c:choose>
-     	<c:when test="${requestScope.review ne null && empty requestScope.review}">
-     		<h3>리뷰가 존재하지 않습니다.</h3>
-     	</c:when>
-     	<c:when test="${requestScope.review ne null }">
+
      	<c:forEach items="${review }" var="review">
             <div class="review_list">
                 <h4 class="memberName">${review.memberId } &nbsp; <span id="reviewScoreColor">${review.reviewScore }</span></h4>
-                <div id="reviewUpdate">
-                    <button class="btn-sm btn-outline-light text-dark">수정</button>
-                    <button class="btn-sm btn-outline-light text-dark">삭제</button></div>
+                
+                
+                <!-- 리뷰 작성자일 경우에만 수정 삭제 조회 -->
+                <c:if test="${sessionScope.loginMember.memberId eq review.memberId}">
+	                <div id="reviewUpdate">
+	                    <button class="btn-sm btn-outline-light text-dark">수정</button>
+	                    <button class="btn-sm btn-outline-light text-dark">삭제</button>
+	                </div>
+               </c:if>
+                    
+                    
                 <div class=review_date><p>${review.createDate }</p></div>
                 <div class="review_stroy">
                     <div class="story_text">${review.reviewContent }</div>
@@ -126,8 +130,6 @@
             </div>
 		
 		</c:forEach>
-		</c:when>
-		</c:choose>
 
 
             <div class="paging-area" align="center";>
