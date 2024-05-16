@@ -271,6 +271,13 @@
     	width : 790px;
     	height : 400px;
     }
+    
+    #reviewScoreColor{
+    	color : #FFBF00;
+    	
+    }
+        
+    
 </style>
 </head>
 <body>
@@ -642,7 +649,7 @@
 	                    for(let i in result){
 	                    
 	                    reviewResult += '<div class="review_list">'
-	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result[i].reviewScore + '</span>' + '</h4>'
 	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
 	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  

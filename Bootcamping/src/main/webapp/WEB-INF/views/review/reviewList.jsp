@@ -84,6 +84,11 @@
         color: black;
     }
     
+    #reviewScoreColor{
+    	color : #FFBF00;
+    	
+    }
+    
 
 
 </style>
@@ -109,7 +114,7 @@
      	<c:when test="${requestScope.review ne null }">
      	<c:forEach items="${review }" var="review">
             <div class="review_list">
-                <h4 class="memberName">${review.memberId } &nbsp; ${review.reviewScore }</h4>
+                <h4 class="memberName">${review.memberId } &nbsp; <span id="reviewScoreColor">${review.reviewScore }</span></h4>
                 <div id="reviewUpdate">
                     <button class="btn-sm btn-outline-light text-dark">수정</button>
                     <button class="btn-sm btn-outline-light text-dark">삭제</button></div>
