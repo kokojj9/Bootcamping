@@ -466,7 +466,7 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <div id="reviewTitle"><h4>리뷰<span id="reviewCount"></span></h4></div>
+            <div id="reviewTitle"><h4><span id="reviewCount"></span></h4></div>
             <div id="reviewEtc"><a href="/bootcamping/review?campNo=${camping.campNo }">더보기 > </a></div>
             
             <div id="reviewListSelect">
