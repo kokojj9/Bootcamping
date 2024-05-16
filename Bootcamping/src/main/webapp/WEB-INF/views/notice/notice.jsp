@@ -9,11 +9,12 @@
 
 #q1{
 	position : left;
+	
 }
 
 #c1{
 	position : right;
-	relative:rigth;
+	
 	
 }
 
@@ -28,6 +29,7 @@
 </head>
 <body>
 
+		<jsp:include page="../common/header.jsp"/>
 		<!-- 관리자가 로그인한 경우에만 공지사항 글쓰기 가능-->
 		
 		<div>
@@ -72,9 +74,11 @@
 		
 			
 		
-			
-			
+			<br><br><br><br><br>
+			<jsp:include page="../common/footer.jsp"/>
 			
 		</div>
-</body>
+		
+		
+		
 </html>
