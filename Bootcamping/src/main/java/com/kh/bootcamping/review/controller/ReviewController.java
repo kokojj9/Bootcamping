@@ -42,6 +42,7 @@ public class ReviewController {
 		if(!reviewService.selectReviewList(pi, campNo).isEmpty()) {
 					mv.addObject("review", reviewService.selectReviewList(pi, campNo));
 					mv.addObject("pageInfo", pi);
+					mv.addObject("campNo", campNo);
 					
 					mv.setViewName("review/reviewList");
 					
@@ -50,6 +51,8 @@ public class ReviewController {
 		}
 
 		System.out.println(reviewService.selectReviewList(pi, campNo));
+		
+		System.out.println(campNo);
 		
 		return mv;
 		
