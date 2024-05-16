@@ -2,12 +2,27 @@ package com.kh.bootcamping.board.model.service;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kh.bootcamping.board.model.dao.BoardRepository;
 import com.kh.bootcamping.board.model.vo.Board;
 import com.kh.bootcamping.board.model.vo.Reply;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 
+
+@Service
 public class BoardServiceImpl implements BoardService {
 
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private BoardRepository baordRepository;
+	
+	
 	@Override
 	public int selectListCount() {
 		// TODO Auto-generated method stub

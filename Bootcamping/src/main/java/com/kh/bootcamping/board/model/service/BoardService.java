@@ -7,6 +7,7 @@ import com.kh.bootcamping.board.model.vo.Board;
 import com.kh.bootcamping.board.model.vo.Reply;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 
+
 public interface BoardService {
 	
 	// 최종목적 : 게시글 목록조회 + 페이징 처리
