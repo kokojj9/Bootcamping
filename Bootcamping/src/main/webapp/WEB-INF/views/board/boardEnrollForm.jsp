@@ -7,6 +7,18 @@
 <title>게시판 상세보기</title>
 </head>
 <body>
+		<form action="insert.board">
+			
+		
+		
+		
+		
+		
+		
+		
+		</form>
+
+		
 
 </body>
 </html>
