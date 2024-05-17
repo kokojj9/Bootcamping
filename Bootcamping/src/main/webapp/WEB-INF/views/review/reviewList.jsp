@@ -123,6 +123,7 @@
                
                <form action="" method="post" class="postForm">
                		<input type="hidden" name="reservationNo" value="${review.reservationNo }" />
+               		<input type="hidden" name="filePath" value="${review.reviewPath }" />
                </form>
                
 

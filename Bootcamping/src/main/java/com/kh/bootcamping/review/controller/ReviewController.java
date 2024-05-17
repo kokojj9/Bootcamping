@@ -107,9 +107,14 @@ public class ReviewController {
 	 * 리뷰 삭제
 	 */
 	@PostMapping("delete.review")
-	public String deleteReivew(int reservationNo, HttpSession session) {
+	public String deleteReivew(int reservationNo, HttpSession session, String filePath) {
 		
 		if(reviewService.deleteReivew(reservationNo) > 0) {
+			
+			if(!filePath.equals("")) {
+				
+				new File(session.getServletContext().getRealPath(filePath)).delete();
+			}
 			
 			session.setAttribute("alertMsg", "리뷰 삭제가 완료 되었습니다!");
 			return "redirect:/";
