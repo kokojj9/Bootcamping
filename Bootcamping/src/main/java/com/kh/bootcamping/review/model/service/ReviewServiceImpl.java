@@ -43,4 +43,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.selectReviewOne(sqlSession, reservationNo);
 	}
 
+	@Override
+	public int deleteReivew(int reservationNo) {
+		return reviewRepository.deleteReivew(sqlSession, reservationNo);
+	}
+
 }

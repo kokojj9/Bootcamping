@@ -103,4 +103,27 @@ public class ReviewController {
 	}
 	
 	
+	/**
+	 * 리뷰 삭제
+	 */
+	@PostMapping("delete.review")
+	public String deleteReivew(int reservationNo, HttpSession session) {
+		
+		if(reviewService.deleteReivew(reservationNo) > 0) {
+			
+
+			session.setAttribute("alertMsg", "리뷰 삭제");
+			return "redirect:/";
+			
+		} else {
+			
+			session.setAttribute("errorMsg", "리뷰 삭제 실패");
+			return "common.errorPage";
+			
+		}
+		
+	}
+	
+	
+	
 }

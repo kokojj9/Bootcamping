@@ -28,6 +28,14 @@
     <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet"/>
 
+	<!-- alert -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+
+
 	<style>
 		div {
             box-sizing: border-box;
@@ -147,6 +155,16 @@
 
 </head>
 <body>
+
+
+	<c:if test="${not empty alertMsg }">
+		<script>
+			alertify.alert('축하한다~~~~~~~~','${alertMsg}', function(){alertify.success('띠용~~~~~~')});
+		</script>
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
+
+
 	
 	 <div id="header_wrap">
         <div id="header_status">

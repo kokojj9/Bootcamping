@@ -14,5 +14,7 @@ public interface ReviewService {
 	List<Review> selectReviewList(PageInfo pi, String campNo);
 	
 	Review selectReviewOne(int reservationNo);
+	
+	int deleteReivew (int reservationNo);
 
 }
