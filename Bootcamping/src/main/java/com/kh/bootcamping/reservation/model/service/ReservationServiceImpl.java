@@ -26,8 +26,8 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public int selectListCount(String memberId) {
-		return reservationRepository.selectListCount(sqlSession, memberId);
+	public int selectReservationListCount(String memberId) {
+		return reservationRepository.selectReservationListCount(sqlSession, memberId);
 	}
 
 	@Override
@@ -36,6 +36,10 @@ public class ReservationServiceImpl implements ReservationService {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return reservationRepository.selectReservationList(sqlSession, memberId, rowBounds);
 	}
+
+	
+
+	
 	
 
 

@@ -15,8 +15,8 @@ public class ReservationRepository {
 		return sqlSession.insert("reservationMapper.insertReservation", reservation);
 	}
 
-	public int selectListCount(SqlSession sqlSession, String memberId) {
-		return sqlSession.selectOne("reservationMapper.selectListCount", memberId);
+	public int selectReservationListCount(SqlSession sqlSession, String memberId) {
+		return sqlSession.selectOne("reservationMapper.selectReservationListCount", memberId);
 	}
 
 	public List<Reservation> selectReservationList(SqlSession sqlSession, String memberId,RowBounds rowBounds) {

@@ -55,7 +55,7 @@
 
 </insert>
 
-<select id="selectListCount" parameterType="string" resultType="_int">
+<select id="selectReservationListCount" parameterType="string" resultType="_int">
 	SELECT 
 	       COUNT(RESERVATION_NO) 
 	  FROM 

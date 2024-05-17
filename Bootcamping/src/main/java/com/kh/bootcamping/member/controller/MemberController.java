@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bootcamping.board.model.service.BoardService;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.member.model.service.MemberService;
@@ -29,6 +30,9 @@ public class MemberController {
 	
 	@Autowired
 	private ReservationService reservationService;
+	
+	@Autowired
+	private BoardService boardService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -180,9 +184,9 @@ public class MemberController {
 	}
 	
 	@GetMapping("reservations")
-	public String forwardReservationList(Model model, String memberId, int page) {
+	public String selectMemberReservationList(Model model, String memberId, int page) {
 		
-		PageInfo pi = Pagination.getPageInfo(reservationService.selectListCount(memberId), 
+		PageInfo pi = Pagination.getPageInfo(reservationService.selectReservationListCount(memberId), 
 											 page,
 											 10,
 											 5);
@@ -194,7 +198,16 @@ public class MemberController {
 	}
 	
 	@GetMapping("boards")
-	public String forwardBoardList() {
+	public String selectMemberBoardList(Model model, String memberId, int page) {
+		
+		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
+				 page,
+				 10,
+				 5);
+
+		model.addAttribute("boardslist", boardService.selectBoardList(pi, memberId));
+		model.addAttribute("pageInfo", pi);
+		
 		return "member/myBoardList";
 	}
 	
