@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.review.model.service.ReviewService;
+import com.kh.bootcamping.review.model.vo.Review;
 
 @Controller
 public class ReviewController {
@@ -33,7 +34,9 @@ public class ReviewController {
 	@ResponseBody
 	@GetMapping(value="reviewList", produces="application/json; charset=UTF-8")
 	public String selectReview(String campNo) {
+		
 		return new Gson().toJson(reviewService.selectReview(campNo));
+	
 	}
 	
 	/**
@@ -45,14 +48,16 @@ public class ReviewController {
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectReviewCount(campNo), page, 3, 5);
 		
 		if(!reviewService.selectReviewList(pi, campNo).isEmpty()) {
+					
 					mv.addObject("review", reviewService.selectReviewList(pi, campNo));
 					mv.addObject("pageInfo", pi);
 					mv.addObject("campNo", campNo);
-					
 					mv.setViewName("review/reviewList");
 					
 		} else {
+			
 			mv.addObject("errorMsg", "리뷰가 존재하지 않습니다.").setViewName("common/errorPage");		
+		
 		}
 		
 		return mv;
@@ -61,7 +66,7 @@ public class ReviewController {
 	
 	
 	/**
-	 * 리뷰 수정
+	 * 리뷰 수정 페이지 이동
 	 */
 	@PostMapping("updateForm.review")
 	public ModelAndView selectReviewOne(int reservationNo, ModelAndView mv) {
@@ -73,6 +78,20 @@ public class ReviewController {
 		
 		return mv;
 	}
+	
+	/**
+	 * 리뷰 수정 페이지
+	 */
+	/*@PostMapping("update.review")
+	public String updateReview(Review review, MultipartFile reUpfile) {
+		
+		if(reUpfile.getOriginalFilename().contentEquals("")) {
+			
+		}
+		
+		reviewService.updateReview(review);
+		
+	}*/
 	
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) {

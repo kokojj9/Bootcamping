@@ -170,7 +170,8 @@
 
 
         <div id="content_3">
-        <form action="#" method="post" enctype="multipart/form-data">
+        
+        <form action="update.review" method="post" enctype="multipart/form-data">
         
         <input type="hidden" name="reservationNo" value="${review.reservationNo }"/>
         <input type="hidden" name="memberNo" value="${sessionScope.loginMember.memberNo }" />
@@ -201,7 +202,7 @@
                     <label class="input-file-button" for="input-file">
                         업로드
                       </label>
-                      <input type="file" id="input-file" style="display: none;"/>
+                      <input type="file" id="input-file" style="display: none;" name="reUpfile"/>
                 </div>
             </div>           
 

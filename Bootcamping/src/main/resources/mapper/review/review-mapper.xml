@@ -159,6 +159,19 @@
                    TB_REVIEW.RESERVATION_NO = #{reservationNo}	
 	</select>
 	
+	<update id="updateReview" parameterType="review">
+		UPDATE
+				TB_REVIEW
+		   SET
+		   		REVIEW_CONTENT = #{reviewContent},
+				REVIEW_SCORE = #{reviewScore},
+				REVIEW_PATH = #{reviewPath}
+	   	 WHERE
+	   			RESERVATION_NO = #{reservationNo}
+	</update>
+	
+	
+	
 	<update id="deleteReivew" parameterType="_int">
 		UPDATE
 				TB_REVIEW

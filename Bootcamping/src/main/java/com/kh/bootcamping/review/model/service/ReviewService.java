@@ -15,6 +15,8 @@ public interface ReviewService {
 	
 	Review selectReviewOne(int reservationNo);
 	
+	int updateReview (Review review);
+	
 	int deleteReivew (int reservationNo);
 
 }

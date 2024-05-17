@@ -27,6 +27,10 @@ public class ReviewRepository {
 		return sqlSession.selectOne("reviewMapper.selectReviewOne", reservationNo);
 	}
 	
+	public int updateReview(SqlSession sqlSession, Review review) {
+		return sqlSession.update("reviewMapper.updateReview", review);
+	}
+	
 	public int deleteReivew(SqlSession sqlSession, int reservationNo) {
 		return sqlSession.update("reviewMapper.deleteReivew", reservationNo);
 	}
