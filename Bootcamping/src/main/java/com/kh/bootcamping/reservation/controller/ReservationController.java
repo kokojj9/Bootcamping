@@ -18,7 +18,6 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 	
-	
 	@ResponseBody
 	@PostMapping("successReservation")
 	public String insertResrvation(Reservation reservation) {

@@ -19,12 +19,16 @@ import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
+import com.kh.bootcamping.reservation.model.service.ReservationService;
 
 @Controller
 public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private ReservationService reservationService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -176,26 +180,22 @@ public class MemberController {
 	}
 	
 	@GetMapping("reservations")
-	public String forwardReservList(Model model) {
+	public String forwardReservationList(Model model, String memberId, int page) {
 		
-		// 총 개수 == DB가서 조회
-		// 요청페이지 == ?
-		// 한페이지에 몇 개 == 5
-		// 페이징 바 몇 개 == 5
-		
-		PageInfo pi = Pagination.getPageInfo(boardService.selectListCount(), 
+		PageInfo pi = Pagination.getPageInfo(reservationService.selectListCount(memberId), 
 											 page,
-											 5,
+											 10,
 											 5);
 		
-		//System.out.println("페이지 인포 : " + pi);
-		//log.info("페이지 인포={}", pi); //Slf4j 애노테이션과 함께 사용하여 콘솔에 출력가능 어디서 찍혔는지 클래스까지 보여줌 
-		
-		model.addAttribute("list", boardService.selectList(pi));
+		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
 		model.addAttribute("pageInfo", pi);
 		
 		return "member/myReservationList";
 	}
+	
+	
+	
+	
 	
 	@GetMapping("boards")
 	public String forwardBoardList() {
