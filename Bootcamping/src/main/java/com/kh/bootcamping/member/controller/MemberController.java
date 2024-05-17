@@ -193,10 +193,6 @@ public class MemberController {
 		return "member/myReservationList";
 	}
 	
-	
-	
-	
-	
 	@GetMapping("boards")
 	public String forwardBoardList() {
 		return "member/myBoardList";

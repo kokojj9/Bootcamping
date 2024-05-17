@@ -10,12 +10,17 @@
     <style>
         #wrap{
             margin: 5% auto 5%;
-            width: 1200px;
+            width: 1000px;
         }
         #title{
             margin: 5px auto 50px;
             width: fit-content;
-            font-size: 25px;
+            font-size: 32px;
+            font-weight: 400;
+        }
+        #pagingArea {
+            width:fit-content; 
+            margin:auto;
         }
 
 
@@ -79,6 +84,36 @@
                 </c:choose>
             </tbody>
         </table>
+
+        <div id="pagingArea">
+            <ul class="pagination">
+                
+                <c:choose>
+                    <c:when test="${ pageInfo.currentPage eq 1 }">
+                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="reservations?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage - 1 }">Previous</a></li>
+                    </c:otherwise>
+                </c:choose>
+                    
+                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+                            <li class="page-item"><a class="page-link" href="reservations?memberId=${ loginMember.memberId }&page=${ p }">${ p }</a></li>
+                </c:forEach>
+                            
+                <c:choose>
+                    <c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
+                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="reservations?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage + 1 }">Next</a></li>
+                    </c:otherwise>
+                </c:choose>                    
+                
+            </ul>
+        </div>
+
+
 
     </div>
 
