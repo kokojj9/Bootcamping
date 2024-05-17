@@ -164,8 +164,8 @@
         let urlList = [
             'editForm',
             'wishList',
-            'reservations',
-            'boards',
+            'reservations?memberId=${loginMember.memberId}&page=1',
+            'boards?memberId=${loginMember.memberId}&page=1',
             'tradeList'
         ];
 
