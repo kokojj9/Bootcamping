@@ -366,7 +366,7 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;">'
-				 + '<a href="camping/detail?contentId='+ item.contentId +'">'
+				 + '<a href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
 			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'

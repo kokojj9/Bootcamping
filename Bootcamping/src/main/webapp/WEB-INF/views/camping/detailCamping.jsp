@@ -316,7 +316,7 @@
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"/></a></div>
+                <div id="camp_share"><a><img src="resources/img/share.png" width="30px"/></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -427,7 +427,7 @@
 				<c:when test="${requestScope.site ne null}">
 					<c:forEach var="site" items="${requestScope.site }">
 			            <div class="siteList">
-			                <div class="siteImg"><img src="../${site.sitePath }" width="255"/></div>
+			                <div class="siteImg"><img src="${site.sitePath }" width="255"/></div>
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
@@ -653,7 +653,7 @@
 	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
 	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
-	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
+	                    			  + '<div class="review_img"><img src="'+ result[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}

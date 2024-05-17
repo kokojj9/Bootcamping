@@ -75,7 +75,7 @@ public class CampingController {
 	/**
 	 * 캠핑장 상세조회
 	 */
-	@GetMapping("camping/detail")
+	@GetMapping("detailCamping")
 	public String detailCamping(@RequestParam("contentId") String campNo, Model model) throws IOException {
 		
 		if(campingService.detailCamping(campNo) != null) {

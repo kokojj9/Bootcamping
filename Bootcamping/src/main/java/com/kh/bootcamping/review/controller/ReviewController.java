@@ -23,7 +23,7 @@ public class ReviewController {
 	 * 리뷰 조회
 	 */
 	@ResponseBody
-	@GetMapping(value="camping/reviewList", produces="application/json; charset=UTF-8")
+	@GetMapping(value="reviewList", produces="application/json; charset=UTF-8")
 	public String selectReview(String campNo) {
 		return new Gson().toJson(reviewService.selectReview(campNo));
 	}
@@ -50,10 +50,6 @@ public class ReviewController {
 		} else {
 			mv.addObject("errorMsg", "리뷰가 존재하지 않습니다.").setViewName("common/errorPage");		
 		}
-
-		System.out.println(reviewService.selectReviewList(pi, campNo));
-		
-		System.out.println(campNo);
 		
 		return mv;
 		
