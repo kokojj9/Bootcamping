@@ -39,6 +39,10 @@
         height: 100%;
         float: left;
     }
+    
+    #reser_detail > p {
+    	padding-top : 10px;
+    }
 
     #content_3{
         width: 100%;
