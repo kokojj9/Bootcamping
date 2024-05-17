@@ -135,7 +135,7 @@
         float: right;
     }
 
-    #content_1 > h2 a{
+    #content_1 > h3 a{
         text-decoration: none;
         color: black;
     }
@@ -143,10 +143,14 @@
 </style>
 <body>
 
+	<jsp:include page="../common/header.jsp"/>	
+	
+	<br><br>
+
     <div id="content">
 
         <div id="content_1">
-            <h2><a href="#">◁</a>&nbsp;리뷰 작성하기</h2>
+            <h3><a href="#">◁</a>&nbsp;리뷰 수정하기</h3>
         </div>
 
         <div id="content_2">
@@ -209,6 +213,11 @@
         </form>
 
     </div>
+
+	<br><br>
+	
+	<jsp:include page="../common/footer.jsp"/>	
+	
 
     
     <script>
