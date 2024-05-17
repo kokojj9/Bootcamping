@@ -288,64 +288,66 @@
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
   
-                </div>
+            </div>
                 
                 
            
                 
-                    <div id="camp_btn">
-	                	<c:choose>
-	                		<c:when test="${pageInfo.currentPage eq 1}">
-		                    	<a class="btn btn-sm disabled" href="#"><</a>
-	    					</c:when>
-	    					<c:otherwise>
-	    							<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
-	    								<
-	    							</a>
-	    					</c:otherwise>				
-	    				</c:choose>
-	    				
-	    				 <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-		                  	<a class="btn btn-sm" href="/bootcamping/camping?page=${p}">${p}</a>
-						</c:forEach>	
- 
-	                	<c:choose>
-	                		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
-		                    	<a class="btn btn-sm disabled" href="#">></a>
-	    					</c:when>
-	    					<c:otherwise>
-	    							<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
-	    								>
-	    							</a>
-	    					</c:otherwise>				
-	    				</c:choose>   
+            <div id="camp_btn">
+               	<c:choose>
+	               		<c:when test="${pageInfo.currentPage eq 1}">
+	                    	<a class="btn btn-sm disabled" href="#"><</a>
+	   					</c:when>
+	   					<c:otherwise>
+	   							<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
+	   								<
+	   							</a>
+	   					</c:otherwise>				
+	   				</c:choose>
+	   				
+	   				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+	                  	<a class="btn btn-sm" href="/bootcamping/camping?page=${p}">${p}</a>
+					</c:forEach>	
+	
+	               	<c:choose>
+	               		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
+	                    	<a class="btn btn-sm disabled" href="#">></a>
+	   					</c:when>
+	   				<c:otherwise>
+	   						<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
+	   							>
+	   						</a>
+	   				</c:otherwise>				
+   				</c:choose>   
 
                  
-                    </div>
-            </div>
+	              </div>
+	       	</div>
+	
+	
+	     </div>
+	            
 
+	
+	     <div id="content_5">
+			<!-- 지도를 표시할 div 입니다 -->
+			<div id="map" style="width:100%;height:880px;"></div>
+			
+			
+	
+			
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051"></script>
+	
+	
+	
+	     </div>
+	
+	  </div>
 
-            </div>
-            
-
-
-     <div id="content_5">
-		<!-- 지도를 표시할 div 입니다 -->
-		<div id="map" style="width:100%;height:880px;"></div>
-		
-		
-
-		
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051"></script>
-
-
-
-     </div>
-
-        </div>
-
-		<jsp:include page="../common/footer.jsp"/>
+	
+	 <jsp:include page="../common/footer.jsp"/>
    
+	
 	<script>
 
 		<%--캠핑장 전체 조회--%>
@@ -366,7 +368,7 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;">'
-				 + '<a href="camping/detail?contentId='+ item.contentId +'">'
+				 + '<a href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
 			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
