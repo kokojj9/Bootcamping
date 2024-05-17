@@ -4,11 +4,7 @@
 <html lang="en">
 <head>
     <title>Document</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <style>
@@ -96,7 +92,7 @@
 
     #file-area{
         padding-top: 10px;
-        padding-left: 20px;
+        padding-left: 80px;
     }
 
     #submitReview {
@@ -131,7 +127,7 @@
     }
 
     #countWrite {
-        width: 20%;
+        width: 25%;
         float: right;
     }
 
@@ -145,8 +141,7 @@
 
 	<jsp:include page="../common/header.jsp"/>	
 	
-	<br><br>
-
+	<br>
     <div id="content">
 
         <div id="content_1">
@@ -192,9 +187,6 @@
             </div>
 
             <div id="imgUpload">
-                <div id="reivewImgUpload" style="display:inline-block; margin-left:19px;">
-                    <img width="250" id="sub-img3" height="180" src="" alt="상세이미지3">
-                </div>
                 <div id="file-area">
                     <label class="input-file-button" for="input-file">
                         업로드
