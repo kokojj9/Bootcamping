@@ -102,7 +102,7 @@
     <div id="content">
 
         <!-- 후기 -->       
-        <div id="reviewTitle"><h3><a href="/bootcamping/camping/detail?contentId=${campNo}">◁</a>&nbsp;리뷰 전체보기</h3></div>
+        <div id="reviewTitle"><h4><a href="/bootcamping/detailCamping?contentId=${campNo}">◁</a>&nbsp;리뷰 전체보기</h4></div>
             
         <div id="camp_review">
      	

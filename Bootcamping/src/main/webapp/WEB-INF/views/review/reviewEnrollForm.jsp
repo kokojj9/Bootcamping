@@ -152,7 +152,7 @@
     <div id="content">
 
         <div id="content_1">
-            <h4><a href="#">◁</a>&nbsp;리뷰 수정하기</h4>
+            <h4><a href="#">◁</a>&nbsp;리뷰 작성하기</h4>
         </div>
 
         <div id="content_2">
@@ -174,6 +174,7 @@
         
         <input type="hidden" name="reservationNo" value="${review.reservationNo }"/>
         <input type="hidden" name="memberNo" value="${sessionScope.loginMember.memberNo }" />
+        
                 <div class="star-rating">
 	                <input type="radio" value="1" id="rate1"><label
 	                    for="rate1">★</label>
