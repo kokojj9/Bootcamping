@@ -32,12 +32,14 @@
         width: 30%;
         height: 100%;
         float: left;
+        padding-left : 100px;
     }
-
+   
     #reser_detail{
         width: 50%;
         height: 100%;
         float: left;
+        padding-left : 30px;
     }
     
     #reser_detail > p {
@@ -154,14 +156,14 @@
 
         <div id="content_2">
 
-                <div id="reser_hotel_img"><img src="" width="220px" height="220px" /></div>
+                <div id="reser_hotel_img"><img src="${review.campImg }" width="220px" height="220px" /></div>
 
                 <div id="reser_detail">
                     <h3>${review.campName }</h3>
-                    <p>어쩌고사이트</p>
-                    <p>2인</p>
-                    <p>117,000원</p>
-                    <p>2024-05-05 ~ 2024-05-06</p>
+                    <p>${review.siteName }</p>
+                    <p>${review.people }인</p>
+                    <p>${review.price }원</p>
+                    <p>${review.checkInDate } ~ ${review.checkOutDate }</p>
                 </div>
         </div>
 
@@ -188,7 +190,7 @@
         <div id="content_4">
  
             <div id="review">
-                <textarea id="reviewMessage" cols="100" rows="15" style="resize: none;" maxlength="600" placeholder="내용을 입력해주세요."></textarea>
+                <textarea id="reviewMessage" name="reviewContent" cols="100" rows="15" style="resize: none;" maxlength="600" placeholder="내용을 입력해주세요.">${review.reviewContent }</textarea>
                 <br>
                 <div id="countWrite"><span id="count">0</span> /600</div>
             </div>

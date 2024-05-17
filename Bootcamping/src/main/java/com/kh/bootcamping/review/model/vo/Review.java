@@ -17,5 +17,11 @@ public class Review {
 	private String reviewYn;
 	private String memberId;
 	private String campName;
+	private String siteName;
+	private int people;
+	private String checkInDate;
+	private String checkOutDate;
+	private int price;
+	private String campImg;
 
 }

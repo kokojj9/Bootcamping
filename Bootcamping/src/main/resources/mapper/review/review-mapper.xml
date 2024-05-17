@@ -15,6 +15,12 @@
 		<result column="CAMP_NO" property="campNo" />
 		<result column="MEMBER_ID" property="memberId" />
 		<result column="CAMP_NAME" property="campName" />
+		<result column="SITE_NAME" property="siteName" />
+		<result column="PEOPLE" property="people" />
+		<result column="CHECKIN_DATE" property="checkInDate" />
+		<result column="CHECKOUT_DATE" property="checkOutDate" />
+		<result column="PRICE" property="price" />
+		<result column="CAMP_IMG" property="campImg" />
 	</resultMap>
 	
 	<select id="selectReview" resultMap="reviewResultMap">
@@ -128,7 +134,13 @@
                    END AS "REVIEW_SCORE",
                    TO_CHAR(CREATE_DATE, 'YYYY.MM.DD') "CREATE_DATE",
                    MEMBER_ID,
-                   CAMP_NAME
+                   CAMP_NAME,
+                   SITE_NAME,
+                   PEOPLE,
+                   TO_CHAR(CHECKIN_DATE, 'YY/MM/DD') "CHECKIN_DATE",
+                   TO_CHAR(CHECKOUT_DATE, 'YY/MM/DD') "CHECKOUT_DATE",
+                   PRICE,
+                   CAMP_IMG
            FROM
                    TB_REVIEW
            LEFT        
