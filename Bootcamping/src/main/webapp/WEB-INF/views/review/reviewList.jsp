@@ -116,27 +116,16 @@
                 <!-- 리뷰 작성자일 경우에만 수정 삭제 조회 -->
                 <c:if test="${sessionScope.loginMember.memberId eq review.memberId}">
 	                <div id="reviewUpdate">
-	                    <button class="btn-sm btn-outline-light text-dark" onclick="postSubmit(0);">수정</button>
-	                    <button class="btn-sm btn-outline-light text-dark" onclick="postSubmit(1);">삭제</button>
+	                    <button class="btn-sm btn-outline-light text-dark reviewBtn">수정</button>
+	                    <button class="btn-sm btn-outline-light text-dark reviewBtn">삭제</button>
 	                </div>
                </c:if>
                
-               <form action="" method="post" id="postForm">
+               <form action="" method="post" class="postForm">
                		<input type="hidden" name="reservationNo" value="${review.reservationNo }" />
                </form>
                
-               <script>
-               		function postSubmit(num){
-               			
-               			if(num == 0){
-               				$('#postForm').attr('action', 'updateForm.review').submit();
-               			} else {
-               				$('#postForm').attr('action', 'delete.review').submit();
-               			}
-               		}
-               </script>
-                    
-                    
+
                 <div class=review_date><p>${review.createDate }</p></div>
                 <div class="review_stroy">
                     <div class="story_text">${review.reviewContent }</div>
@@ -173,15 +162,28 @@
    				</c:choose>   					
             
             </div>
-		        
-
-            
-
-    </div>
-  </div>
+	    </div>
+	  </div>
+  
+	  <script>
+	            		
+		$('.reviewBtn').click(function(){
+		        			
+			if($(this).text() == '수정'){
+				
+				$(this).parent().next().attr('action', 'updateForm.review').submit();
+			
+			} else {
+				
+				$(this).parent().next().attr('action', 'delete.review').submit();
+			
+			} 						
+		})
+	
+	  </script>
     
     
-	<jsp:include page="../common/footer.jsp"/>	
+ 	 <jsp:include page="../common/footer.jsp"/>	
     
 </body>
 </html>
