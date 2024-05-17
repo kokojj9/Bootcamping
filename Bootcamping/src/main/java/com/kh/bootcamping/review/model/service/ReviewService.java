@@ -12,5 +12,7 @@ public interface ReviewService {
 	int selectReviewCount(String campNo);
 	
 	List<Review> selectReviewList(PageInfo pi, String campNo);
+	
+	Review selectReviewOne(int reservationNo);
 
 }

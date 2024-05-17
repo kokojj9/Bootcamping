@@ -38,4 +38,9 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewRepository.selectReviewList(sqlSession, campNo, rowBounds);
 	}
 
+	@Override
+	public Review selectReviewOne(int reservationNo) {
+		return reviewRepository.selectReviewOne(sqlSession, reservationNo);
+	}
+
 }

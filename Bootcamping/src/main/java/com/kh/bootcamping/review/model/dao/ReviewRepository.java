@@ -23,6 +23,9 @@ public class ReviewRepository {
 		return sqlSession.selectList("reviewMapper.selectReviewList", campNo, rowBounds);
 	}
 	
+	public Review selectReviewOne(SqlSession sqlSession, int reservationNo) {
+		return sqlSession.selectOne("reviewMapper.selectReviewOne", reservationNo);
+	}
 	
 	
 	
