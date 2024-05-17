@@ -20,5 +20,13 @@ public class BoardController {
 		
 		return "board/boardList";
 	}
+	
+	
+	
+	@GetMapping("insert.board")
+	public String insert(Model model) {
+		
+		return "board/boardEnrollForm";
+	}
 }
 
