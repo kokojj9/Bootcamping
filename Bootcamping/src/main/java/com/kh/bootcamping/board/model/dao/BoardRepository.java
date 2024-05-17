@@ -17,7 +17,7 @@ public class BoardRepository {
 	}
 
 	public List<Board> seleBoardList(SqlSessionTemplate sqlSession, String memberId, RowBounds rowBounds) {
-		return null;
+		return sqlSession.selectList("boardMapper.seleBoardList", memberId, rowBounds);
 	}
 
 
