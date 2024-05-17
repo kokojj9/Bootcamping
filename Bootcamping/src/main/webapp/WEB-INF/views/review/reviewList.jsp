@@ -117,7 +117,7 @@
                 <c:if test="${sessionScope.loginMember.memberId eq review.memberId}">
 	                <div id="reviewUpdate">
 	                    <button class="btn-sm btn-outline-light text-dark" onclick="postSubmit(0);">수정</button>
-	                    <button class="btn-sm btn-outline-light text-dark" onclick="postSubmit(0);">삭제</button>
+	                    <button class="btn-sm btn-outline-light text-dark" onclick="postSubmit(1);">삭제</button>
 	                </div>
                </c:if>
                

@@ -14,6 +14,7 @@
 		<result column="REVIEW_YN" property="reviewYn" />
 		<result column="CAMP_NO" property="campNo" />
 		<result column="MEMBER_ID" property="memberId" />
+		<result column="CAMP_NAME" property="campName" />
 	</resultMap>
 	
 	<select id="selectReview" resultMap="reviewResultMap">
@@ -126,7 +127,8 @@
                    WHEN REVIEW_SCORE = 5 THEN '★★★★★'
                    END AS "REVIEW_SCORE",
                    TO_CHAR(CREATE_DATE, 'YYYY.MM.DD') "CREATE_DATE",
-                   MEMBER_ID
+                   MEMBER_ID,
+                   CAMP_NAME
            FROM
                    TB_REVIEW
            LEFT        

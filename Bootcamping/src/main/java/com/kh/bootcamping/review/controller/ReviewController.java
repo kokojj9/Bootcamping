@@ -36,10 +36,6 @@ public class ReviewController {
 		
 		PageInfo pi = Pagination.getPageInfo(reviewService.selectReviewCount(campNo), page, 3, 5);
 		
-		System.out.println(reviewService.selectReviewCount(campNo));
-		
-		System.out.println(pi);
-		
 		if(!reviewService.selectReviewList(pi, campNo).isEmpty()) {
 					mv.addObject("review", reviewService.selectReviewList(pi, campNo));
 					mv.addObject("pageInfo", pi);
@@ -61,8 +57,10 @@ public class ReviewController {
 	 */
 	@PostMapping("updateForm.review")
 	public ModelAndView selectReviewOne(int reservationNo, ModelAndView mv) {
-		mv.addObject("review", reviewService.selectReviewOne(reservationNo)).setViewName("review/updateReview");
 		
+		System.out.println(reservationNo);
+		mv.addObject("review", reviewService.selectReviewOne(reservationNo)).setViewName("review/updateReview");
+	
 		System.out.println(reviewService.selectReviewOne(reservationNo));
 		
 		return mv;

@@ -150,10 +150,10 @@
 
         <div id="content_2">
 
-                <div id="reser_hotel_img"><img src="gg.png" width="220px" height="220px" /></div>
+                <div id="reser_hotel_img"><img src="" width="220px" height="220px" /></div>
 
                 <div id="reser_detail">
-                    <h3>보물나라캠프</h3>
+                    <h3>${review.campName }</h3>
                     <p>어쩌고사이트</p>
                     <p>2인</p>
                     <p>117,000원</p>
@@ -164,6 +164,9 @@
 
         <div id="content_3">
         <form enctype="multipart/form-data">
+        
+        <input type="hidden" name="reservationNo" value="${review.reservationNo }"/>
+        
                 <div class="star-rating">
                     <input type="radio" value="1" id="rate1"><label
                     for="rate1">★</label>

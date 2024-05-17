@@ -16,6 +16,6 @@ public class Review {
 	private String createDate;
 	private String reviewYn;
 	private String memberId;
-	
+	private String campName;
 
 }
