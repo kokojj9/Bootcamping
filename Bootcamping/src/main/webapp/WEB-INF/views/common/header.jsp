@@ -29,6 +29,7 @@
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet"/>
 
 	<!-- alert -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
 	<!-- Default theme -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
@@ -159,7 +160,7 @@
 
 	<c:if test="${not empty alertMsg }">
 		<script>
-			alertify.alert('축하한다~~~~~~~~','${alertMsg}', function(){alertify.success('띠용~~~~~~')});
+			alertify.alert('성공','${alertMsg}', function(){alertify.success('Ok')});
 		</script>
 		<c:remove var="alertMsg" scope="session" />
 	</c:if>

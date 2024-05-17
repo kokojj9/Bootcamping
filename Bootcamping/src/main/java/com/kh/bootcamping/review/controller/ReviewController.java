@@ -111,8 +111,7 @@ public class ReviewController {
 		
 		if(reviewService.deleteReivew(reservationNo) > 0) {
 			
-
-			session.setAttribute("alertMsg", "리뷰 삭제");
+			session.setAttribute("alertMsg", "리뷰 삭제가 완료 되었습니다!");
 			return "redirect:/";
 			
 		} else {
