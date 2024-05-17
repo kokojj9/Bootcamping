@@ -55,9 +55,7 @@ public class ReviewController {
 					mv.setViewName("review/reviewList");
 					
 		} else {
-			
-			mv.addObject("errorMsg", "리뷰가 존재하지 않습니다.").setViewName("common/errorPage");		
-		
+			mv.setViewName("review/reviewList");	
 		}
 		
 		return mv;
@@ -101,7 +99,7 @@ public class ReviewController {
 		
 		if(reviewService.updateReview(review) > 0) {
 			session.setAttribute("alertMsg", "리뷰 수정이 완료 되었습니다!");
-			return "redirect:myPage";
+			return "redirect:/";
 		} else {
 			session.setAttribute("alertMsg", "리뷰 수정에 실패했습니다");
 			return "redirect:/";
