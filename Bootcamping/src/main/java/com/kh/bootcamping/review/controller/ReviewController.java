@@ -56,6 +56,7 @@ public class ReviewController {
 					
 		} else {
 			mv.setViewName("review/reviewList");	
+		
 		}
 		
 		return mv;
