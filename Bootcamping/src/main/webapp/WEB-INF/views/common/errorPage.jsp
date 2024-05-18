@@ -8,19 +8,19 @@
 
 <style>
     #error{
-        font-size: 300px;
+        font-size: 250px;
         color: #1dc078;
         text-align: center;
     }
 
     #errorMessage{
-        font-size: 25px;
+        font-size: 20px;
         font-weight: 400;
         text-align: center;
     }
 
     #errorMsg{
-        font-size: 20px;
+        font-size: 15px;
         font-weight: 300;
         text-align: center;
         color: gray;
