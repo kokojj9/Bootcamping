@@ -110,12 +110,14 @@
         margin-top: 10px;
     }
 
-    .input-file-button{
-        padding: 6px 25px;
-        background-color:#9c9c9c;
-        border-radius: 4px;
-        color: white;
-    }
+	input[type=file]::file-selector-button {
+	  width: 150px;
+	  height: 30px;
+	  background: white;
+	  border: 1px solid rgb(77,77,77);
+	  border-radius: 10px;
+	  cursor: pointer;
+	}
 
     .star-rating > input[type=radio]{
         display: none;
@@ -199,10 +201,8 @@
 
             <div id="imgUpload">
                 <div id="file-area">
-                    <label class="input-file-button" for="input-file">
-                        업로드
-                      </label>
-                      <input type="file" id="input-file" style="display: none;" name="reUpfile"/>
+                      <input type="file" id="input-file"  name="reUpfile"/>
+                	  <br/><br/>  <div>현재 사진 : ${review.reviewPath }</div>
                 </div>
             </div>           
 
