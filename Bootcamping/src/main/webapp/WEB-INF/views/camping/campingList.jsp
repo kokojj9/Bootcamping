@@ -335,9 +335,8 @@
 			
 			
 	
-			
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051"></script>
-	
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051&libraries=clusterer"></script>
+
 	
 	
 	     </div>
@@ -383,7 +382,6 @@
 		
 		$('.items').html(str);
 		
-		
 
 		
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -395,61 +393,55 @@
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 		
-		// 지도에 마커를 표시합니다 
-		var markerPosition = [];
-		for(var i in data){
-			var positions = {
-			    LatLng: new kakao.maps.LatLng(data[i].mapY, data[i].mapX)
-			}
-			markerPosition.push(positions);
-		}
 		
-		console.log(markerPosition);
+	    // 마커 클러스터러를 생성합니다 
+	    var clusterer = new kakao.maps.MarkerClusterer({
+	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+	        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+	    });
+	 		
+		
+		
+		
+		/**/
+		$(function(){
+			
+			$.ajax({
+				url : 'mapCamping',
+				success : result => {
+					//console.log(result.response.body.items);
+					
+					let positions = result.response.body.items.item;
+					
+					console.log(data);
 
-		for (var i = 0; i < markerPosition.length; i++) {
-		    var marker = new kakao.maps.Marker({
-		        map: map,
-		        position: markerPosition[i].LatLng
-		    });
-		}
+				
+						
+						
+				        var markers = $(positions).map(function(i, position) {
+				            return new kakao.maps.Marker({
+				                position : new kakao.maps.LatLng(position.mapY, position.mapX)
+				            });
+				        });
+				        
+				        console.log(markers);
 
+				        // 클러스터러에 마커들을 추가합니다
+				        clusterer.addMarkers(markers);
+						
+						
+					
+					
+					
+				}
+			})
+			
+		})
+		
+		
+		
 
-		// 커스텀 오버레이에 표시할 컨텐츠 입니다
-		// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-		// 별도의 이벤트 메소드를 제공하지 않습니다 
-		var content = '<div class="wrap">' + 
-		            '    <div class="info">' + 
-		            '        <div class="title">' + 
-		            '            카카오 스페이스닷원' + 
-		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-		            '        </div>' + 
-		            '        <div class="body">' + 
-		            '            <div class="img">' +
-		            '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">' +
-		            '           </div>' + 
-		            '            <div class="desc">' + 
-		            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-		            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-		            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-		            '            </div>' + 
-		            '        </div>' + 
-		            '    </div>' +    
-		            '</div>';
-
-		// 마커 위에 커스텀오버레이를 표시합니다
-		// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-		var overlay = new kakao.maps.CustomOverlay({
-		    content: content,
-		    map: map,
-		    position: marker.getPosition()       
-		});
-
-		// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-		kakao.maps.event.addListener(marker, 'click', function() {
-		    overlay.setMap(map);
-		});
-
-		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다.
 		
 		
 		

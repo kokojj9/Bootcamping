@@ -203,7 +203,7 @@
                 <div id="file-area">
                       <input type="file" id="input-file"  name="reUpfile"/>
                 	  <br/><br/>  <div>현재 사진 : ${review.reviewPath }</div>
-                </div>
+                </div>/
             </div>           
 
         </div>
