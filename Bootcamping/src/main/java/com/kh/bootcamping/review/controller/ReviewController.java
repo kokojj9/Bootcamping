@@ -55,8 +55,7 @@ public class ReviewController {
 					mv.setViewName("review/reviewList");
 					
 		} else {
-			
-			mv.addObject("errorMsg", "리뷰가 존재하지 않습니다.").setViewName("common/errorPage");		
+			mv.setViewName("review/reviewList");	
 		
 		}
 		
@@ -82,16 +81,32 @@ public class ReviewController {
 	/**
 	 * 리뷰 수정 페이지
 	 */
-	/*@PostMapping("update.review")
-	public String updateReview(Review review, MultipartFile reUpfile) {
+	@PostMapping("update.review")
+	public String updateReview(Review review, 
+							   MultipartFile reUpfile, 
+							   HttpSession session) {
 		
-		if(reUpfile.getOriginalFilename().contentEquals("")) {
+		if(!reUpfile.getOriginalFilename().contentEquals("")) {
+			
+			// 기존 리뷰 이미지 경로 삭제
+			if(review.getReviewPath() != null) {
+				new File(session.getServletContext().getRealPath(review.getReviewPath())).delete();
+			}
+			
+			// 새로 첨부한 리뷰이미지 업로드
+			review.setReviewPath(saveFile(reUpfile, session));
 			
 		}
 		
-		reviewService.updateReview(review);
+		if(reviewService.updateReview(review) > 0) {
+			session.setAttribute("alertMsg", "리뷰 수정이 완료 되었습니다!");
+			return "redirect:/";
+		} else {
+			session.setAttribute("alertMsg", "리뷰 수정에 실패했습니다");
+			return "redirect:/";
+		}
 		
-	}*/
+	}
 	
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) {

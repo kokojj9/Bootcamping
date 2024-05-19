@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,6 +69,33 @@ public class CampingController {
 			   return mv;
 		
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="mapCamping",  produces="application/json; charset=UTF-8")
+	public String mapCamping() throws IOException {
+		
+		String url = "http://apis.data.go.kr/B551011/GoCamping/basedList";
+			   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
+			   url += "&MobileOS=ETC";
+			   url += "&MobileApp=TestApp";
+			   url += "&numOfRows=3825";
+			   url += "&_type=json";
+			   
+			   // System.out.println(url);
+			   
+			   URL requestUrl = new URL(url);
+			   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
+			   BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+			   String responseJson = br.readLine();
+			   
+			   br.close();
+			   urlConnection.disconnect();
+	
+		return responseJson;
+		
+	}
+	
+	
 	
 	/**
 	 * 캠핑장 상세조회

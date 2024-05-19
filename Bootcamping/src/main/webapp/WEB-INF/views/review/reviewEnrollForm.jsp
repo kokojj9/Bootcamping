@@ -202,7 +202,7 @@
                     <label class="input-file-button" for="input-file">
                         업로드
                       </label>
-                      <input type="file" id="input-file" style="display: none;"/>
+                      <input type="file" id="input-file" style="display: none;" name="upfile"/>
                 </div>
             </div>           
 
