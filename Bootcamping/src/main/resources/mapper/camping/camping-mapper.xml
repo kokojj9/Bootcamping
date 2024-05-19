@@ -11,7 +11,7 @@
 		<result column="CAMP_INTRO" property="campIntro" />
 		<result column="INTRO" property="intro" />
 		<result column="TYPE" property="type" />
-		<result column="ADRRESS" property="address" />
+		<result column="ADDRESS" property="address" />
 		<result column="DETAIL_ADDRRESS" property="detailAddress" />
 		<result column="MAP_X" property="mapX"/>
 		<result column="MAP_Y" property="mapY" />
@@ -38,7 +38,6 @@
 		<result column="CAMP_NAME" property="campName" />
 		<result column="CAMP_IMG" property="campImg" />
 	</resultMap>
-		
 	
 
 	<select id="detailCamping" parameterType="string" resultMap="campingResultMap">
@@ -132,6 +131,28 @@
 			   BY
 			   		SITE_NO ASC    	
 	
+	</select>
+	
+	<select id="selectSearchCount" resultType="_int">
+		SELECT 
+		        COUNT(*)
+		  FROM
+		        TB_CAMP
+		  WHERE
+		        CAMP_NAME LIKE  '%' || #{keyword} || '%'		
+	</select>
+	
+	<select id="searchList" resultMap="campingResultMap">
+		SELECT 
+				CAMP_NO,
+				CAMP_IMG,
+		        CAMP_NAME,
+		        ADDRESS,
+		        TYPE
+		  FROM
+		        TB_CAMP
+		  WHERE
+		        CAMP_NAME LIKE  '%' || #{keyword} || '%'	
 	</select>
 
 </mapper>

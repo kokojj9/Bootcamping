@@ -228,8 +228,8 @@
              <div id="search_form">
                 <div id="search_1">
                     
-                    <form action="#" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!">
+                    <form action="searchCamping" method="get">
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" name="keyword">
                         <input type="submit" value="검색" id="submit_btn">
                     </form>
                 </div>
@@ -277,6 +277,21 @@
 			
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
+					  <c:forEach items="${campingList}" var="list">
+	                	<div class="card" style="width:250px;">
+					 	<a href="/bootcamping/detailCamping?contentId=${list.campNo }">
+				    	<img class="card-img-top" src="${list.campImg }">
+						 <div class="card-body">
+						 <h4 class="card-title">${list.campName }</h4>
+					     <h5 class="card-text">'${list.type }</h5>
+				    	 <p>${list.address }</p>
+				    	 </a>
+				    	 </div>
+						 </div>
+	                 </c:forEach>
+  
+  
+  
   
             </div>
                 

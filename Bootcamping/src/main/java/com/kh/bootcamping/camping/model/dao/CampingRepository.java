@@ -2,6 +2,7 @@ package com.kh.bootcamping.camping.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
@@ -11,6 +12,7 @@ import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 @Repository
 public class CampingRepository {
+	
 	
 	public Camping detailCamping(SqlSession sqlSession, String campNo) {
 		return sqlSession.selectOne("campingMapper.detailCamping", campNo);
@@ -27,6 +29,14 @@ public class CampingRepository {
 	
 	public List<Site> selectDate(SqlSession sqlSession, ReservationInfo reservationInfo) {
 		return sqlSession.selectList("campingMapper.selectDate", reservationInfo);
+	}
+	
+	public int selectSearchCount(SqlSession sqlSession, String keyword) {
+		return sqlSession.selectOne("campingMapper.selectSearchCount", keyword);
+	}
+	
+	public List<Camping> searchList (SqlSession sqlSession, String keyword, RowBounds rowBounds){
+		return sqlSession.selectList("campingMapper.searchList", keyword, rowBounds);
 	}
 
 }
