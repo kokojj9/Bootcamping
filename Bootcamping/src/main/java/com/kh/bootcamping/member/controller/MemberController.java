@@ -211,7 +211,13 @@ public class MemberController {
 		return "member/myBoardList";
 	}
 	
-	
+	@PostMapping("members/searchId")
+	public String searchId(Model model, String email) {
+		if(memberService.searchId(email) != null) {
+			return "member/resultSearchId";
+		}
+		return "common/errorPage";
+	}
 	
 	
 	

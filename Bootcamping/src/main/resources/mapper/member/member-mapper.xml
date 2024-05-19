@@ -213,8 +213,17 @@
 	           MEMBER_ID = #{memberId}
 	</update>
 
-
-
+	<select id="searchId" parameterType="string">
+		SELECT
+			   MEMBER_ID
+		  FROM
+			   TB_MEMBER
+	     WHERE
+			   EMAIL = #{ email }
+		   AND
+		   	   STATUS = 'Y'
+	</select>
+	
 
 
 

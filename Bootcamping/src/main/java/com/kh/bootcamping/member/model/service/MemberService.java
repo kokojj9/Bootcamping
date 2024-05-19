@@ -23,4 +23,6 @@ public interface MemberService {
 
 	int editMember(Member member);
 
+	String searchId(String email);
+
 }
