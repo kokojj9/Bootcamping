@@ -39,25 +39,6 @@
 		<result column="CAMP_IMG" property="campImg" />
 	</resultMap>
 	
-		
-	<select id="campingCount" resultType="_int">
-		SELECT
-				COUNT(*)
-		  FROM
-		  		TB_CAMP
-	</select>
-	
-	<select id="selectCampingList" resultMap="campingResultMap">
-		SELECT 
-				CAMP_NO,
-				CAMP_IMG,
-		        CAMP_NAME,
-		        ADDRESS,
-		        TYPE
-		  FROM
-		        TB_CAMP	
-	</select>
-	
 
 	<select id="detailCamping" parameterType="string" resultMap="campingResultMap">
 		SELECT

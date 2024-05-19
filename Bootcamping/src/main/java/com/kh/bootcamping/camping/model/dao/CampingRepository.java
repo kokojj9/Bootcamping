@@ -13,13 +13,6 @@ import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 @Repository
 public class CampingRepository {
 	
-	public int campingCount (SqlSession sqlSession) {
-		return sqlSession.selectOne("campingMapper.campingCount");
-	}
-	
-	public List<Camping> selectCampingList (SqlSession sqlSession, RowBounds rowBounds){
-		return sqlSession.selectList("campingMapper.selectCampingList", rowBounds);
-	}
 	
 	public Camping detailCamping(SqlSession sqlSession, String campNo) {
 		return sqlSession.selectOne("campingMapper.detailCamping", campNo);

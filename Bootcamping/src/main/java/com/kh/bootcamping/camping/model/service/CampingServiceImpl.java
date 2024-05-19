@@ -22,19 +22,6 @@ public class CampingServiceImpl implements CampingService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
-	@Override
-	public int campingCount() {
-		return campingRepository.campingCount(sqlSession);
-	}
-	
-	@Override
-	public List<Camping> selectCampingList(PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return campingRepository.selectCampingList(sqlSession, rowBounds);
-	}
-
 
 	@Override
 	public Camping detailCamping(String campNo) {

@@ -8,11 +8,7 @@ import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 public interface CampingService {
-	
-	int campingCount();
-	
-	List<Camping> selectCampingList (PageInfo pi);
-	
+
 	Camping detailCamping(String campNo);
 	
 	List<Site> siteList(String campNo);
