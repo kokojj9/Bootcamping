@@ -18,17 +18,24 @@
                     <div class="">아이디 찾기 결과</div>
                 </div>
         
-                <form action="members/searchId" method="post">
-                    <div class="searchId_form">
-                        <label for="email" class="">이메일 : </label>
-                        <input type="text" class="" placeholder="아이디" id="email" name="email"> <br>
-                    </div>
+                <div class="result">
+            		<div class="resultMsg">
+            			<c:choose>
+            				<c:when test="${ not empty memberId  }">
+            					<div>${ memberId } 입니다.</div>
+            				</c:when>
+            				<c:otherwise>
+            					<div>검색하신 아이디가 없습니다.</div>
+            				</c:otherwise>
+            			</c:choose>
+            		</div>    	
                            
-                    <div class="btn">
-                        <button type="submit" class="searchId">아이디 찾기</button>
-                        <button type="button" class="enrollForm">회원가입</button>
-                    </div>
-                </form>
+				</div>                           	
+                <div class="btn">
+                    <button type="submit" class="searchId">아이디 찾기</button>
+                    <button type="button" class="enrollForm">회원가입</button>
+                </div>
+                
 
             </div>
         </div>

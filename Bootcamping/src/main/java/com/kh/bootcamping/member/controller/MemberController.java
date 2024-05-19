@@ -213,7 +213,9 @@ public class MemberController {
 	
 	@PostMapping("members/searchId")
 	public String searchId(Model model, String email) {
-		if(memberService.searchId(email) != null) {
+		String memberId = memberService.searchId(email);
+		if(memberId != null) {
+			model.addAttribute("memberId", memberId);
 			return "member/resultSearchId";
 		}
 		return "common/errorPage";
