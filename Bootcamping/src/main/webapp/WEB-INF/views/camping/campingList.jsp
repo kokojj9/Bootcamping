@@ -228,8 +228,8 @@
              <div id="search_form">
                 <div id="search_1">
                     
-                    <form action="#" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!">
+                    <form action="searchCamping" method="get">
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" name="keyword">
                         <input type="submit" value="검색" id="submit_btn">
                     </form>
                 </div>
