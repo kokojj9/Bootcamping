@@ -42,5 +42,9 @@ public class MemberRepository {
 	public int editMember(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.update("memberMapper.editMember", member);
 	}
+
+	public String searchId(SqlSessionTemplate sqlSession, String email) {
+		return sqlSession.selectOne("memberMapper.searchId", email);
+	}
 	
 }

@@ -211,7 +211,15 @@ public class MemberController {
 		return "member/myBoardList";
 	}
 	
-	
+	@PostMapping("members/searchId")
+	public String searchId(Model model, String email) {
+		String memberId = memberService.searchId(email);
+		if(memberId != null) {
+			model.addAttribute("memberId", memberId);
+			return "member/resultSearchId";
+		}
+		return "common/errorPage";
+	}
 	
 	
 	

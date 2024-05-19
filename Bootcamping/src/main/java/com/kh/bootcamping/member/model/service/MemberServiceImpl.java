@@ -59,4 +59,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.editMember(sqlSession, member);
 	}
 
+	@Override
+	public String searchId(String email) {
+		return memberRepository.searchId(sqlSession, email);
+	}
+
 }
