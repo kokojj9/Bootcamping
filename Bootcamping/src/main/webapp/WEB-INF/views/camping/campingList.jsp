@@ -227,17 +227,6 @@
              <!--검색창 부분-->
              <div id="search_form">
                 <div id="search_1">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                          지역별
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">서울</a>
-                          <a class="dropdown-item" href="#">경기</a>
-                          <a class="dropdown-item" href="#">강원</a>
-                        </div>
-                      
-                    </div>
                     
                     <form action="#" method="get">
                         <input type="text" placeholder="캠핑장 이름을 입력해주세요!">
@@ -257,15 +246,16 @@
                 <label><input type="checkbox" class="list">일반야영장</label>
                 <label><input type="checkbox" class="list">자동차야영장</label>
             </div>
-            <div id="theme"><h4>시설</h4></div>
+            <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" class="list">침대</label>
-                <label><input type="checkbox" class="list">에어컨</label>
-                <label><input type="checkbox" class="list">냉장고</label>
-                <label><input type="checkbox" class="list">유무선인터넷</label>
-                <label><input type="checkbox" class="list">난방기구</label>
-                <label><input type="checkbox" class="list">취사도구</label>
-                <label><input type="checkbox" class="list">내부화장실</label>
+                <label><input type="checkbox" class="list">서울</label>
+                <label><input type="checkbox" class="list">경기</label>
+                <label><input type="checkbox" class="list">인천</label>
+                <label><input type="checkbox" class="list">충청도</label>
+                <label><input type="checkbox" class="list">경상도</label>
+                <label><input type="checkbox" class="list">강원도</label>
+                <label><input type="checkbox" class="list">전라도</label>
+                <label><input type="checkbox" class="list">제주도</label>
             </div>
 
             <!--여기까지-->
