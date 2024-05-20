@@ -1,7 +1,5 @@
 package com.kh.bootcamping.member.controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.HashMap;
@@ -13,7 +11,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -24,14 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.bootcamping.common.template.PropertyTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class MailCheckController {
 	
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 
-	@Autowired
-	private PropertyTemplate pt;
+	private final PropertyTemplate pt;
 	
 	/**
 	 * 인증코드 전송 메서드

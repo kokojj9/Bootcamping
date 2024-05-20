@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,20 +21,20 @@ import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.reservation.model.service.ReservationService;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 	
-	@Autowired
-	private ReservationService reservationService;
+	private final ReservationService reservationService;
 	
-	@Autowired
-	private BoardService boardService;
+	private final BoardService boardService;
 	
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@GetMapping("loginForm")
 	public String forwardToLoginPage() {
@@ -213,7 +212,7 @@ public class MemberController {
 	 */
 	@GetMapping("boards")
 	public String selectMemberBoardList(Model model, String memberId, int page) {
-		
+		System.out.println(memberId);
 		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
 				 page,
 				 10,

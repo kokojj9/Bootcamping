@@ -32,16 +32,19 @@
 		       BOARD_TITLE,
 		       BOARD_CONTENT,
 		       CREATE_DATE,
-		       UPDATE_DATE,
-		       STATUS,
+		       B.UPDATE_DATE,
+		       B.STATUS,
 		       MEMBER_NO,
-		       CATEGORY_CODE
+		       CATEGORY_NAME,
+		       COUNT
 		  FROM
-		       TB_BOARD
+		       TB_BOARD B
 		  JOIN
 		       TB_MEMBER USING(MEMBER_NO)
+		  JOIN
+		       TB_CATEGORY USING(CATEGORY_CODE)
 		 WHERE
-		       MEMBER_ID - #{ memberId };
+		       MEMBER_ID = #{ memberId }
 	</select>
 
 
