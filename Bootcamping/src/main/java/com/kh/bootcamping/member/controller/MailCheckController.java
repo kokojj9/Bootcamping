@@ -1,7 +1,5 @@
 package com.kh.bootcamping.member.controller;
 
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.HashMap;
@@ -13,7 +11,6 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -24,14 +21,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.kh.bootcamping.common.template.PropertyTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class MailCheckController {
 	
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 
-	@Autowired
-	private PropertyTemplate pt;
+	private final PropertyTemplate pt;
 	
 	/**
 	 * 인증코드 전송 메서드
@@ -45,41 +43,52 @@ public class MailCheckController {
 		if(memberService.checkMemberEmail(email) != null) {
 			return "NNNNN";
 		} else {
-			
-			Map<String, String> auth = new HashMap<String, String>();
-			JavaMailSenderImpl impl = new JavaMailSenderImpl();
-			Properties prop = new Properties();
-
-			impl.setPort(Integer.parseInt(pt.getProperties().getProperty("port")));
-			impl.setUsername(pt.getProperties().getProperty("username"));
-			impl.setPassword(pt.getProperties().getProperty("password"));
-			impl.setHost(pt.getProperties().getProperty("host"));
-			
-			prop.put("mail.smtp.ssl.trust", pt.getProperties().getProperty("host"));
-			prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
-			prop.put("mail.smtp.starttls.enable", "true");
-			prop.put("mail.smtp.auth", "true");
-			
-			impl.setJavaMailProperties(prop);
-			
-			String code = getAuthCode();
-			String remoteAddr = request.getRemoteAddr();
-			
-			auth.put("remoteAddr", remoteAddr);
-			auth.put("email", email);
-			auth.put("code", code);
-			if(memberService.insertAuthCode(auth) == 0) return "NNNNN";
-			
-			MimeMessage message = impl.createMimeMessage();
-			MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-			
-			helper.setTo(email);
-			helper.setSubject("인증번호 전송");
-			helper.setText("인증번호 : " + code);
-			impl.send(message);
-			
-			return "YYYYY";
+			return validateMail(email, request);
 		}
+	}
+	
+	@ResponseBody
+	@PostMapping(value = "searchPwdMail", produces = "html/text; charset=UTF-8")
+	public String searchPwdMail(String email, HttpServletRequest request) throws MessagingException {
+		return validateMail(email, request);
+	}
+	
+	
+	//인증이메일 전송 메서드
+	private String validateMail(String email, HttpServletRequest request) throws MessagingException {
+		Map<String, String> auth = new HashMap<String, String>();
+		JavaMailSenderImpl impl = new JavaMailSenderImpl();
+		Properties prop = new Properties();
+
+		impl.setPort(Integer.parseInt(pt.getProperties().getProperty("port")));
+		impl.setUsername(pt.getProperties().getProperty("username"));
+		impl.setPassword(pt.getProperties().getProperty("password"));
+		impl.setHost(pt.getProperties().getProperty("host"));
+		
+		prop.put("mail.smtp.ssl.trust", pt.getProperties().getProperty("host"));
+		prop.put("mail.smtp.ssl.protocols", "TLSv1.2");
+		prop.put("mail.smtp.starttls.enable", "true");
+		prop.put("mail.smtp.auth", "true");
+		
+		impl.setJavaMailProperties(prop);
+		
+		String code = getAuthCode();
+		String remoteAddr = request.getRemoteAddr();
+		
+		auth.put("remoteAddr", remoteAddr);
+		auth.put("email", email);
+		auth.put("code", code);
+		if(memberService.insertAuthCode(auth) == 0) return "NNNNN";
+		
+		MimeMessage message = impl.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+		
+		helper.setTo(email);
+		helper.setSubject("인증번호 전송");
+		helper.setText("인증번호 : " + code);
+		impl.send(message);
+		
+		return "YYYYY";
 	}
 	
 	/**

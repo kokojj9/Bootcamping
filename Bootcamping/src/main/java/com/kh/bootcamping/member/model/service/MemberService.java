@@ -21,4 +21,10 @@ public interface MemberService {
 
 	MyPageInfo searchMyPage(String memberId);
 
+	int editMember(Member member);
+
+	String searchId(String email);
+
+	String searchPwd(Member member);
+
 }

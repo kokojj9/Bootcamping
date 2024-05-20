@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,14 +20,15 @@ import com.kh.bootcamping.common.template.PropertyTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class SocialLoginController {
 	
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 	
-	@Autowired
-	private PropertyTemplate pt;
+	private final PropertyTemplate pt;
 	
 	/**
 	 * 카카오 로그인 버튼 포워딩메서드

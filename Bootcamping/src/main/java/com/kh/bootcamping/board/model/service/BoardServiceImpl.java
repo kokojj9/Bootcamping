@@ -86,4 +86,16 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
+	@Override
+	public int selectBoardListCount(String memberId) {
+		return boardRepository.selectBoardListCount(sqlSession, memberId);
+	}
+
+	@Override
+	public List<Board> selectBoardList(PageInfo pi, String memberId) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return boardRepository.seleBoardList(sqlSession, memberId, rowBounds);
+	}
+	
 }

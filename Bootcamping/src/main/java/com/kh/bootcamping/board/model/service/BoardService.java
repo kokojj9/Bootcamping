@@ -56,6 +56,10 @@ public interface BoardService {
 	
 	//---------------
 	List<Board> findTopBoard();
+
+	int selectBoardListCount(String memberId);
+
+	List<Board> selectBoardList(PageInfo pi, String memberId);
 	
 	
 	

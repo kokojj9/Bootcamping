@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,17 +14,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bootcamping.board.model.service.BoardService;
+import com.kh.bootcamping.common.model.vo.PageInfo;
+import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
+import com.kh.bootcamping.reservation.model.service.ReservationService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Controller
 public class MemberController {
 
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 	
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	private final ReservationService reservationService;
+	
+	private final BoardService boardService;
+	
+	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@GetMapping("loginForm")
 	public String forwardToLoginPage() {
@@ -103,16 +111,12 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("members")
-	public ModelAndView insertMember(Member member, String postcode,
-									 String roadAddress, String detailAddress,
-									 HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
 		
 		if(member.getEmail().equals("") && member.getMemberId().equals("") && member.getMemberPwd().equals("")) {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 		} else {
-			String address = postcode + roadAddress + detailAddress;
 			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-			member.setAddress(address);
 			member.setMemberPwd(encPwd);
 			
 			if(memberService.insertMember(member) > 0) {
@@ -122,6 +126,7 @@ public class MemberController {
 				mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 			}
 		}
+		
 		return mv;
 	}
 	
@@ -138,6 +143,117 @@ public class MemberController {
 	public String forwardEditMember(Member member, Model model) {
 		return "member/editForm";
 	}
+	
+	// 회원정보 수정 로그인 메서드 활용
+	@ResponseBody
+	@PostMapping("members/editPassword")
+	public String editPassword(Member member) {
+		Member loginMember = memberService.login(member);
+		
+		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+			return "YYYYY";
+		}
+			return "NNNNN";
+	}
+	
+	/**
+	 * 회원 정보 수정 메서드
+	 * @param member
+	 * @param postcode
+	 * @param roadAddress
+	 * @param detailAddress
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("members/edit")
+	public String editMember(Member member) {
+		String result = "NNNNN";
+		
+		if(member != null) {
+			if(member.getChangePwdType().equals("Y")) {
+				String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+				member.setMemberPwd(encPwd);
+			}
+			
+			result = memberService.editMember(member) > 0 ? "YYYYY" : "NNNNN";
+		}
+		
+		return result;
+	}
+	
+	/**
+	 * 마이페이지 예약 내역 리스트
+	 * @param model
+	 * @param memberId
+	 * @param page
+	 * @return
+	 */
+	@GetMapping("reservations")
+	public String selectMemberReservationList(Model model, String memberId, int page) {
+		
+		PageInfo pi = Pagination.getPageInfo(reservationService.selectReservationListCount(memberId), 
+											 page,
+											 10,
+											 5);
+		
+		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
+		model.addAttribute("pageInfo", pi);
+		
+		return "member/myReservationList";
+	}
+	
+	/**
+	 * 마이페이지 내가 쓴 글 리스트
+	 * @param model
+	 * @param memberId
+	 * @param page
+	 * @return
+	 */
+	@GetMapping("boards")
+	public String selectMemberBoardList(Model model, String memberId, int page) {
+		
+		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
+				 page,
+				 10,
+				 5);
+
+		model.addAttribute("boardslist", boardService.selectBoardList(pi, memberId));
+		model.addAttribute("pageInfo", pi);
+		
+		return "member/myBoardList";
+	}
+	
+	@GetMapping("searchIdForm")
+	public String forwardSearchId() {
+		return "member/searchMemberId";
+	}
+	
+	@GetMapping("searchPwdForm")
+	public String forwardSearchPwd() {
+		return "member/searchMemberPwd";
+	}
+	
+	@PostMapping("searchId")
+	public String searchId(Model model, String email) {
+		String memberId = memberService.searchId(email);
+		if(memberId != null) {
+			model.addAttribute("memberId", memberId);
+			return "member/resultSearchId";
+		}
+		
+		return "common/errorPage";
+	}
+	
+	@PostMapping("searchPwd")
+	public String searchPwd(HttpSession session, Member member) {
+		if(memberService.searchPwd(member) != null) {
+			return "member/editPwd";
+		}
+		
+		session.setAttribute("errorMsg", "아이디와 이메일이 일치하지 않습니다.");
+		return "member/searchMemberPwd";
+	}
+	
 	
 	
 	

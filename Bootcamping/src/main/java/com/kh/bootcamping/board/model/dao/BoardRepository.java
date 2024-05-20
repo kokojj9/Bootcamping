@@ -11,14 +11,14 @@ import com.kh.bootcamping.board.model.vo.Board;
 
 @Repository
 public class BoardRepository {
-	
-	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("boardMapper.selectListCount");
-		
-	}
-	
-	public List<Board> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds){
-		return sqlSession.selectList("boardMapper.selectList", null, rowBounds);
-	}
+
+   public int selectBoardListCount(SqlSessionTemplate sqlSession, String memberId) {
+      return sqlSession.selectOne("boardMapper.selectBoardListCount", memberId);
+   }
+
+   public List<Board> seleBoardList(SqlSessionTemplate sqlSession, String memberId, RowBounds rowBounds) {
+      return sqlSession.selectList("boardMapper.seleBoardList", memberId, rowBounds);
+   }
+
 
 }

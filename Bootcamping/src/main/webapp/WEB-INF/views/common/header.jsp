@@ -28,6 +28,15 @@
     <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js"></script>
     <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet"/>
 
+	<!-- alert -->
+	<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+
+
 	<style>
 		div {
             box-sizing: border-box;
@@ -51,6 +60,11 @@
             height: 60px;
         }
 
+        #header_left > a {
+            height: 50px;
+            width: 180px;
+        }
+
         #header_left {
             width: 300px;
             height: 100%;
@@ -58,9 +72,10 @@
             line-height: 50px;
         }
 
-        #header_left > img{ 
+        #header_left img{ 
             margin: 0 auto;
-            height: 40px;
+            width: 100%;
+            height: 100%;
         }
 
         #header_center {
@@ -141,6 +156,16 @@
 
 </head>
 <body>
+
+
+	<c:if test="${not empty alertMsg }">
+		<script>
+			alertify.alert('성공','${alertMsg}', function(){alertify.success('Ok')});
+		</script>
+		<c:remove var="alertMsg" scope="session" />
+	</c:if>
+
+
 	
 	 <div id="header_wrap">
         <div id="header_status">
@@ -148,7 +173,7 @@
         </div>
         <div id="header_content">
             <div id="header_left">
-                <img src="https://kh-academy.co.kr/resources/images/main/logo.svg" alt="">
+                <a href="/bootcamping"><img src="resources/img/logo/logo2.png" alt=""></a>
             </div>
             <div id="header_center">
                 <div id="header_menu">
@@ -174,7 +199,7 @@
                         <c:otherwise>
                             
                             <lable>${ sessionScope.loginMember.memberId }님 환영합니다</label> &nbsp;&nbsp;
-                            <a href="myPage">마이페이지</a>
+                            <a href="/bootcamping/myPage">마이페이지</a>
                             <a href="logout">로그아웃</a>
                         <!-- 관리자 기능 넣어야함! -->
                         </c:otherwise>

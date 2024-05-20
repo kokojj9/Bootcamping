@@ -45,11 +45,11 @@
 
     #camp_img{width: 100%; height: 13%;}
 
-    #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid black;} 
+    #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid #e2e2e2;} 
 
-    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid black;} 
+    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
 
-    #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid black;}
+    #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid #e2e2e2;}
 
     #seat {width: 70%; height: 12%; margin: auto; padding-left: 50px;padding-top: 20px; }
 
@@ -232,13 +232,13 @@
 
     .review_stroy{width: 100%;}
 
-    .review_list h4{padding-left: 20px; padding-top: 15px; font-size : 25px;}
+    .review_list h4{padding-left: 20px; padding-top: 5px; font-size : 25px;}
 
     .memberName{float: left;}
 
     .story_text {float: left; width: 70%; height: 100%; margin-left: 10px;}
 	
-	.story_text > p { font-size : 20px; text-align : left; padding-left : 10px;}
+	.story_text > p {text-align : left; padding-left : 10px;}
     
     #reviewTitle > h4{ padding-top : 15px;}
     
@@ -271,6 +271,13 @@
     	width : 790px;
     	height : 400px;
     }
+    
+    #reviewScoreColor{
+    	color : #FFBF00;
+    	
+    }
+        
+    
 </style>
 </head>
 <body>
@@ -309,7 +316,7 @@
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"/></a></div>
+                <div id="camp_share"><a><img src="resources/img/share.png" width="30px"/></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -420,18 +427,21 @@
 				<c:when test="${requestScope.site ne null}">
 					<c:forEach var="site" items="${requestScope.site }">
 			            <div class="siteList">
-			                <div class="siteImg"><img src="../${site.sitePath }" width="255"/></div>
+			                <div class="siteImg"><img src="${site.sitePath }" width="255"/></div>
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
-			                    <div class="reserBtn"><form action="/bootcamping/reservation">
-			                        <input type="hidden" name="siteNo" value="${site.siteNo}">
-			                     	<input type="hidden" name="startDate" class="startDateInput">
-								    <input type="hidden" name="endDate" class="endDateInput">
-								    <input type="hidden" name="countPeople" class="countPeopleInput">
-								    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
-			                    <button type="submit" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
-			                    </button></form></div>
+			                    <div class="reserBtn">
+			                    	<form action="/bootcamping/reservation">
+				                        <input type="hidden" name="siteNo" value="${site.siteNo}">
+				                     	<input type="hidden" name="startDate" class="startDateInput">
+									    <input type="hidden" name="endDate" class="endDateInput">
+									    <input type="hidden" name="countPeople" class="countPeopleInput">
+									    <input type="hidden" name="sitePrice" value="${site.sitePrice }" class="totalPrice">
+				                  		<button type="submit" id="campReserBtn" class="btn btn-success campingReserBtn" onclick="reservationPage(${site.siteNo})">예약하기
+				                    	</button>
+			                    	</form>
+			                    </div>
 			                    
 			                </div>
 			            </div>					
@@ -456,8 +466,8 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <div id="reviewTitle"><h4>후기(<span id="reviewCount"></span>)</h4></div>
-            <div id="reviewEtc"><a href="/bootcamping/camping/review">더보기 > </a></div>
+            <div id="reviewTitle"><h4><span id="reviewCount"></span></h4></div>
+            <div id="reviewEtc"><a href="/bootcamping/review?campNo=${camping.campNo }">더보기 > </a></div>
             
             <div id="reviewListSelect">
             
@@ -628,10 +638,7 @@
 	                data : {campNo : campNo},
 	                success : result => {
 	                    console.log(result);
-	                    
-	      				const total = result.length;
-	      				
-	      				document.getElementById('reviewCount').innerText = total;
+	      	
 	                    
 	                    let reviewResult = '';
 	                    
@@ -642,11 +649,11 @@
 	                    for(let i in result){
 	                    
 	                    reviewResult += '<div class="review_list">'
-	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result[i].reviewScore + '</span>' + '</h4>'
 	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
 	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
-	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
+	                    			  + '<div class="review_img"><img src="'+ result[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}
@@ -723,6 +730,7 @@
         		
          	   	console.log(dateComparison);
          	   	
+         	   	
          	   	var addPrice = 30000;
          	   	var currentPrice = parseInt(document.querySelector('.totalPrice').value);
          	    
@@ -738,7 +746,9 @@
          	    }
 
 
-        	
+         		$('.startDateInput').val(dateString);
+		        $('.endDateInput').val(dateString2);
+		        $('.countPeopleInput').val(countPeople);
         		
 
         		$.ajax({
@@ -748,13 +758,20 @@
         			data : {startDate : dateString,
 	        				endDate : dateString2,
 	        				countPeople : countPeople,
+	        				campNo : campNo
 	        				
         				},
         			success : result => {
         				console.log(result);
-        			       	$('.startDateInput').val(result.startDate);
-        			        $('.endDateInput').val(result.endDate);
-        			        $('.countPeopleInput').val(result.countPeople);
+        				if(result.length === 0){
+        					$('#campReserBtn').attr("disabled", false);
+        					$('#campReserBtn').value = "예약하기";
+        					
+        				}else{
+        					$('#campReserBtn').attr("disabled", true);
+        					$('#campReserBtn').value = "예약마감";
+        				}
+        			       
         			}
         			
         		})

@@ -4,11 +4,71 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="boardMapper">
   	
-  	<select id="selectListCount" resultType="_int">
-  			SELECT 
+  <resultMap  id="boardResultSet" type="board">
+    <result column="BOARD_NO" property="boardNo"/>
+    <result column="BOARD_TITLE" property="boardNo"/>
+    <result column="BOARD_CONTENT" property="boardNo"/>
+    <result column="CREATE_DATE" property="boardNo"/>
+    <result column="UPDATE_DATE" property="boardNo"/>
+    <result column="STATUS" property="boardNo"/>
+  </resultMap>
+    
+  <select id="selectListCount" resultType="_int">
+     SELECT 
   					COUNT(*)		
-  			FROM	
+       FROM	
   					BAORD	
-  			WHERE	
+      WHERE	
   					STATUS='Y'
+<<<<<<< HEAD
   	</select>
+=======
+  </select>
+    
+	<select id="selectBoardListCount" parameterType="string" resultType="_int">
+		SELECT
+		       COUNT(BOARD_NO)
+		  FROM
+		       TB_BOARD
+		  JOIN
+		       TB_MEMBER USING(MEMBER_NO)
+		 WHERE
+		       MEMBER_ID = #{ memberId }
+	</select>
+
+	<select id="seleBoardList" parameterType="string" resultMap="boardResultSet">
+		SELECT
+		       BOARD_NO,
+		       BOARD_TITLE,
+		       BOARD_CONTENT,
+		       CREATE_DATE,
+		       B.UPDATE_DATE,
+		       B.STATUS,
+		       MEMBER_NO,
+		       CATEGORY_NAME,
+		       COUNT
+		  FROM
+		       TB_BOARD B
+		  JOIN
+		       TB_MEMBER USING(MEMBER_NO)
+		  JOIN
+		       TB_CATEGORY USING(CATEGORY_CODE)
+		 WHERE
+		       MEMBER_ID = #{ memberId }
+	</select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</mapper>
+
+>>>>>>> 4b3b6bf23df571db898a032bc80166f3a59f3a39

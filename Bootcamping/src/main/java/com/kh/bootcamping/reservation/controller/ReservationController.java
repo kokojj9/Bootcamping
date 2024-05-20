@@ -1,9 +1,5 @@
 package com.kh.bootcamping.reservation.controller;
 
-import java.io.IOException;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,15 +14,14 @@ public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
 	
-	
 	@ResponseBody
-	@PostMapping(value="successReservation")
-	public void insertResrvation(Reservation reservation, HttpServletResponse response) throws IOException {
+	@PostMapping("successReservation")
+	public String insertResrvation(Reservation reservation) {
 		System.out.println(reservation);
+		
 		int result  = reservationService.insertReservation(reservation);
 		
-		response.setContentType("application/json; charset=UTF-8");
-		response.getWriter().print(result > 0 ?  "success" : "fail");
+		return result > 0 ? "success" : "fail";
 	}
 	
 	

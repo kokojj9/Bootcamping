@@ -25,9 +25,9 @@
                 <form action="members/login" method="post">
                     <div class="login_form">
                         <label for="memberId" class="">아이디 : </label>
-                        <input type="text" class="" placeholder="아이디" id="memberId" name="memberId"> <br>
+                        <input type="text" class="" placeholder="아이디" id="memberId" name="memberId" required> <br>
                         <label for="memberPwd" class="">비밀번호 : </label>
-                        <input type="password" class="" placeholder="비밀번호" id="memberPwd" name="memberPwd"> <br>
+                        <input type="password" class="" placeholder="비밀번호" id="memberPwd" name="memberPwd" required> <br>
                         <input type="checkbox" name="rememberId" value="true"> 아이디 저장
                     </div>
                            
@@ -36,14 +36,18 @@
                         <button type="button" class="enrollForm">회원가입</button>
                     </div>
                 </form>
-
+                
                 <div id="socialLoginArea">
                     <div id="kakaoBtn">
-                        <a href="kakaoLoginForm"><img src="resources/images/kakaoBtn.png" alt="카카오로그인 버튼"></a>
+                        <a href="kakaoLoginForm"><img src="resources/img/kakaoBtn.png" alt="카카오로그인 버튼"></a>
                     </div>
                 </div>
-
-
+                
+                <div class="search_btn">
+                    <a href="searchIdForm" class="searchId_btn">아이디 찾기</a> |
+                    <a href="searchPwdForm" class="searchPwd_btn"> 비밀번호 찾기</a>
+                </div>
+                
             </div>
         </div>
     </div>
