@@ -240,6 +240,7 @@ public class MemberController {
 			model.addAttribute("memberId", memberId);
 			return "member/resultSearchId";
 		}
+		
 		return "common/errorPage";
 	}
 	

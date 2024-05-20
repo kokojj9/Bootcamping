@@ -6,6 +6,42 @@
 <head>
 <meta charset="UTF-8">
 <title>아이디 찾기 결과</title>
+
+    <style>
+        #wrap{
+            width: 500px;
+            height: 400px;
+            margin: auto;
+        }
+        .title{
+            text-align: center;
+            margin: 50px auto;
+            font-size: 24px;
+        }
+        .resultMsg{
+            margin: auto;
+            text-align: center;
+            font-size: 24px;
+        }
+        .login{
+            background-color: #1dc078;
+            border: none;
+            width: 150px;
+            height: 40px;
+        }
+        .login > a{
+            color: #f6f6f6;
+            font-size: 24px;
+        }
+        .login > a:hover{
+            text-decoration: none;
+            color: #f6f6f6;
+        }
+
+
+    </style>
+
+
 </head>
 <body>
 	
@@ -32,8 +68,7 @@
                            
 				</div>                           	
                 <div class="btn">
-                    <button type="submit" class="searchId">아이디 찾기</button>
-                    <button type="button" class="enrollForm">회원가입</button>
+                    <button type="button" class="login"><a href="/bootcamping/loginForm">로그인</a></button>
                 </div>
                 
 
