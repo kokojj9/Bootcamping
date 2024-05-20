@@ -15,6 +15,8 @@ public class BoardController {
 	private BoardService boardService;
 	
 	
+	//header.jsp에서 클릭시 => 1 =>list.board
+	// 페이징바에서 눌렀다 => list.board?page=요청페이지
 	@GetMapping("list.board")
 	public String selectAll(Model model) {
 		
@@ -28,5 +30,8 @@ public class BoardController {
 		
 		return "board/boardEnrollForm";
 	}
+	
+	
+	
 }
 
