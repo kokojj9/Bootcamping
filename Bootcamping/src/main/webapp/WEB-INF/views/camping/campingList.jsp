@@ -200,8 +200,7 @@
 	
 
     #camp_btn{
-    	width:70%;
-        margin: auto;
+		text-align: center;
     }
     
     #camp_btn a {

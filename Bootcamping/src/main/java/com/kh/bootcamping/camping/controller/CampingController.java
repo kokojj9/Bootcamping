@@ -41,7 +41,7 @@ public class CampingController {
 	@RequestMapping("camping")
 	public ModelAndView camping(@RequestParam(value="page", defaultValue="1") int page,  ModelAndView mv) throws IOException {
 		
-		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 5);
+		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 3);
 		
 		String url = "http://apis.data.go.kr/B551011/GoCamping/basedList";
 		   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
