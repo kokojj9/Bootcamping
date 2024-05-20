@@ -12,8 +12,3 @@
   			WHERE	
   					STATUS='Y'
   	</select>
-  	
-  			   
-  					
-  	
-  	

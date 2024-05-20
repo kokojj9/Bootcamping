@@ -2,6 +2,7 @@ package com.kh.bootcamping.board.model.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,8 +33,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> selectList(PageInfo pi) {
 		
-		
-		return null;
+		int offset=(pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset,pi.getBoardLimit());
+		return boardRepository.selectList(sqlSession,rowBounds);
 	}
 
 	@Override
