@@ -1,6 +1,5 @@
 package com.kh.bootcamping.board.model.dao;
 
-
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -11,6 +10,11 @@ import com.kh.bootcamping.board.model.vo.Board;
 
 @Repository
 public class BoardRepository {
+	
+	public int selectListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectListCount");
+		
+	}
 
 	public int selectBoardListCount(SqlSessionTemplate sqlSession, String memberId) {
 		return sqlSession.selectOne("boardMapper.selectBoardListCount", memberId);

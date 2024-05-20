@@ -1,20 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
-  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-<mapper namespace="boardMapper">
-
-	<resultMap  id="boardResultSet" type="board">
-		<result column="BOARD_NO" property="boardNo"/>
-		<result column="BOARD_TITLE" property="boardNo"/>
-		<result column="BOARD_CONTENT" property="boardNo"/>
-		<result column="CREATE_DATE" property="boardNo"/>
-		<result column="UPDATE_DATE" property="boardNo"/>
-		<result column="STATUS" property="boardNo"/>
-	</resultMap>
-	
-
+  <mapper namespace="boardMapper">
+  	
+  <resultMap  id="boardResultSet" type="board">
+    <result column="BOARD_NO" property="boardNo"/>
+    <result column="BOARD_TITLE" property="boardNo"/>
+    <result column="BOARD_CONTENT" property="boardNo"/>
+    <result column="CREATE_DATE" property="boardNo"/>
+    <result column="UPDATE_DATE" property="boardNo"/>
+    <result column="STATUS" property="boardNo"/>
+  </resultMap>
+    
+  <select id="selectListCount" resultType="_int">
+     SELECT 
+  					COUNT(*)		
+       FROM	
+  					BAORD	
+      WHERE	
+  					STATUS='Y'
+  </select>
+    
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">
 		SELECT
 		       COUNT(BOARD_NO)
@@ -60,3 +67,4 @@
 
 
 </mapper>
+
