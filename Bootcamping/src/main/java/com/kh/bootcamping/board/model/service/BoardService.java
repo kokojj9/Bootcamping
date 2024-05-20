@@ -3,12 +3,16 @@ package com.kh.bootcamping.board.model.service;
 
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.kh.bootcamping.board.model.vo.Board;
 import com.kh.bootcamping.board.model.vo.Reply;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 
 
 public interface BoardService {
+	
 	
 	// 최종목적 : 게시글 목록조회 + 페이징 처리
 	

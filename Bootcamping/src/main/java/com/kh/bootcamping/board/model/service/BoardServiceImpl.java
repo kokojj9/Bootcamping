@@ -20,18 +20,19 @@ public class BoardServiceImpl implements BoardService {
 	private SqlSessionTemplate sqlSession;
 	
 	@Autowired
-	private BoardRepository baordRepository;
+	private BoardRepository boardRepository;
 	
 	
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return boardRepository.selectListCount(sqlSession);
 	}
 
 	@Override
 	public List<Board> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
