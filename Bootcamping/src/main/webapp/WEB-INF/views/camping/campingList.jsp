@@ -351,7 +351,7 @@
 	
 	<script>
 
-		<%--캠핑장 전체 조회
+		<%--캠핑장 전체 조회--%>
 		var data = ${json}.response.body.items.item;
 		
 		console.log(data);
@@ -383,21 +383,6 @@
 		
 		
 		$('.items').html(str);
-		--%>
-		
-		$(function(){
-			
-			$.ajax({
-				
-				url : 'camping',
-				data : {keyword : $('#keyword').val() },
-				success : result => {
-					console.log(result);
-				}
-			
-			})
-			
-		}
 		
 
 		
@@ -454,7 +439,7 @@
 		})
 		
 		
-		/*검색
+		/*검색*/
 		
 		function searchBtn(){
 			
@@ -467,37 +452,31 @@
 					
 					$('#totalCamp').text(result.length);
 					
-					if(result.length === 0){
-						alertify.alert('캠핑장이 존재하지 않습니다.');
-						location.href = location.href;
-					} else {
-								
-								let str = '';
-								
-								for(let i = 0; i <result.length; i++){
-									
-									str += '<div class="card" style="width:250px;">'
-										 + '<a href="/bootcamping/detailCamping?contentId='+ result[i].campNo +'">'
-										 + '<img class="card-img-top" src="'+result[i].campImg+'">'
-										 + '<div class="card-body">'
-										 + '<h4 class="card-title">'+result[i].campName+'</h4>'
-									     + '<h5 class="card-text">'+result[i].address+'</h5>'
-								    	 + '<p>'+result[i].type+'</p>'
-								    	 + '</a>'
-								    	 + '</div>'
-										 + '</div>'
-								}
-								
-								
-								$('.items').html(str);					
-												
+					let str = '';
+					
+					for(let i = 0; i <result.length; i++){
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a href="/bootcamping/detailCamping?contentId='+ result[i].campNo +'">'
+						    
+							 + '<img class="card-img-top" src="'+result[i].campImg+'">'
+							 + '<div class="card-body">'
+							 + '<h4 class="card-title">'+result[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result[i].address+'</h5>'
+					    	 + '<p>'+result[i].type+'</p>'
+					    	 + '</a>'
+					    	 + '</div>'
+							 + '</div>'
 					}
-
+					
+					
+					$('.items').html(str);					
+					
 				}
 			})
 		}
 		
-		*/
+		
 		
 		
 
