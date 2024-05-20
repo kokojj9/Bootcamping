@@ -20,10 +20,13 @@
   					BAORD	
       WHERE	
   					STATUS='Y'
-<<<<<<< HEAD
+
   	</select>
+  	
+  	
+  	
 =======
-  </select>
+
     
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">
 		SELECT
