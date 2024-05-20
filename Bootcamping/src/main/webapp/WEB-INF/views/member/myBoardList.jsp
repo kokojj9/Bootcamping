@@ -5,22 +5,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부트캠핑 - 내가 쓴 글</title>
+
+<style>
+    #wrap{
+        margin: 5% auto 5%;
+        width: 1000px;
+    }
+    #title{
+        margin: 5px auto 50px;
+        width: fit-content;
+        font-size: 32px;
+        font-weight: 400;
+    }
+    #pagingArea {
+        width:fit-content; 
+        margin:auto;
+    }
+
+
+
+
+</style>
+
 </head>
 <body>
 
     <c:if test="${ empty loginMember }">
     	<script>
     		alert('회원 전용 서비스입니다. 로그인해주세요');
-    		location.href = 'errorPage';
+    		location.href = '/login';
     	</script>
     </c:if>
     
     <jsp:include page="../common/header.jsp"/>
 
-    <div id="boardArea">
-        <div class="myBoardList">내가 쓴 글</div>
-        <div id="boardmoreBtn" class="btn">더보기</div> 
+    <div id="wrap">
+        <div id="title">내가 쓴 글</div>
+        
         <table class="table">
             <thead class="thead-light">
                 <tr>

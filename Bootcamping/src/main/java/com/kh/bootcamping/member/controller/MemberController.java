@@ -22,7 +22,6 @@ import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.reservation.model.service.ReservationService;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.log4j.Log4j2;
 
 @RequiredArgsConstructor
 @Controller
@@ -212,7 +211,7 @@ public class MemberController {
 	 */
 	@GetMapping("boards")
 	public String selectMemberBoardList(Model model, String memberId, int page) {
-		System.out.println(memberId);
+		
 		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
 				 page,
 				 10,
