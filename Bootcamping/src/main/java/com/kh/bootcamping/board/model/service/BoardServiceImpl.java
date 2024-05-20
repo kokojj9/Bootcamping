@@ -33,8 +33,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<Board> selectList(PageInfo pi) {
 		
-		
-		return null;
+		int offset=(pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset,pi.getBoardLimit());
+		return boardRepository.selectList(sqlSession,rowBounds);
 	}
 
 	@Override

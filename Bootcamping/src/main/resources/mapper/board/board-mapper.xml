@@ -20,6 +20,9 @@
   					BAORD	
       WHERE	
   					STATUS='Y'
+<<<<<<< HEAD
+  	</select>
+=======
   </select>
     
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">
@@ -68,3 +71,4 @@
 
 </mapper>
 
+>>>>>>> 4b3b6bf23df571db898a032bc80166f3a59f3a39
