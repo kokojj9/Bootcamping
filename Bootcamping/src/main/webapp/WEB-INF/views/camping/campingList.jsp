@@ -351,7 +351,7 @@
 	
 	<script>
 
-		<%--캠핑장 전체 조회--%>
+		<%--캠핑장 전체 조회
 		var data = ${json}.response.body.items.item;
 		
 		console.log(data);
@@ -383,6 +383,21 @@
 		
 		
 		$('.items').html(str);
+		--%>
+		
+		$(function(){
+			
+			$.ajax({
+				
+				url : 'camping',
+				data : {keyword : $('#keyword').val() },
+				success : result => {
+					console.log(result);
+				}
+			
+			})
+			
+		}
 		
 
 		
@@ -439,7 +454,7 @@
 		})
 		
 		
-		/*검색*/
+		/*검색
 		
 		function searchBtn(){
 			
@@ -482,7 +497,7 @@
 			})
 		}
 		
-		
+		*/
 		
 		
 
