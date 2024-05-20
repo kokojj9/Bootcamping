@@ -193,6 +193,16 @@ public class CampingController {
 	
 	}
 	
+	/**
+	 * 캠핑장 체크박스 조회
+	 */
+	/*
+	@ResponseBody
+	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
+	public String checkedCamping(@RequestParam(value="page", defaultValue="1") int page, String types) {
+		
+	}
+	*/
 	
-
+	
 }
