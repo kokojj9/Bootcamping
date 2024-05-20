@@ -256,7 +256,7 @@
 	    height : 180px;
 	   }
     
-    #service_list > p { width : 550px; }
+    #service_list > p { width : 660px; }
     
     #service > h4 { padding-left: 50px;}
     
