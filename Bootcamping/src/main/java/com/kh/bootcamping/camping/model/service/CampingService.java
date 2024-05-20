@@ -19,6 +19,6 @@ public interface CampingService {
 
 	int selectSearchCount (String keyword);
 	
-	// List<Camping> searchList (PageInfo pi, String keyword);
-	List<Camping> searchList (String keyword);
+	 List<Camping> searchList (PageInfo pi, String keyword);
+	//List<Camping> searchList (String keyword);
 }

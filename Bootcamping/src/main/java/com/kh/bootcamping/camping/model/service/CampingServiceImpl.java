@@ -48,7 +48,7 @@ public class CampingServiceImpl implements CampingService {
 		return campingRepository.selectSearchCount(sqlSession, keyword);
 	}
 	
-	/*
+	
 	@Override
 
 	public List<Camping> searchList(PageInfo pi, String keyword) {
@@ -57,13 +57,13 @@ public class CampingServiceImpl implements CampingService {
 		
 		return campingRepository.searchList(sqlSession, keyword, rowBounds);
 	}
-	*/
 	
+	/*
 	@Override
 	public List<Camping> searchList(String keyword) {
 
 		return campingRepository.searchList(sqlSession, keyword);
 	}
-
+*/
 
 }

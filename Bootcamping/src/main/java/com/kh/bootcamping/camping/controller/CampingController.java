@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -176,13 +177,19 @@ public class CampingController {
 	 */
 	@ResponseBody
 	@GetMapping(value="searchCamping", produces="application/json; charset=UTF-8")
-	public String searchCamping(String keyword) {
+	public String searchCamping(@RequestParam(value="page", defaultValue="1") int page, String keyword) {
 		
-		List<Camping> searchCampingList = campingService.searchList(keyword);
+		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 5);
 		
-		System.out.println(searchCampingList);
+		 HashMap<String, Object> map = new HashMap();
+		 
+		 map.put("searchCampingList", campingService.searchList(pi, keyword));
+	     
+		 map.put("pageInfo", pi);
 		
-		return new Gson().toJson(searchCampingList);
+		System.out.println(map);
+		
+		return new Gson().toJson(map);
 	
 	}
 	

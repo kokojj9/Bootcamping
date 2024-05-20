@@ -445,25 +445,26 @@
 			
 			$.ajax({
 				url : 'searchCamping',
-				data : {keyword : $('#keyword').val() },
+				data : {keyword : $('#keyword').val(),
+						page: 1},
 				type : 'get',
 				success : result => {
 					console.log(result);
 					
-					$('#totalCamp').text(result.length);
+					$('#totalCamp').text(result.searchCampingList.length);
 					
 					let str = '';
 					
-					for(let i = 0; i <result.length; i++){
+					for(let i = 0; i <result.searchCampingList.length; i++){
 						
 						str += '<div class="card" style="width:250px;">'
-							 + '<a href="/bootcamping/detailCamping?contentId='+ result[i].campNo +'">'
+							 + '<a href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
 						    
-							 + '<img class="card-img-top" src="'+result[i].campImg+'">'
+							 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
 							 + '<div class="card-body">'
-							 + '<h4 class="card-title">'+result[i].campName+'</h4>'
-						     + '<h5 class="card-text">'+result[i].address+'</h5>'
-					    	 + '<p>'+result[i].type+'</p>'
+							 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
+					    	 + '<p>'+result.searchCampingList[i].type+'</p>'
 					    	 + '</a>'
 					    	 + '</div>'
 							 + '</div>'
