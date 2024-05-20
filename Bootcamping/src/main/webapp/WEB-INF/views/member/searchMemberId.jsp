@@ -28,7 +28,7 @@
                     </div>
                            
                     <div class="btn">
-                        <button type="submit" class="searchId">아이디 찾기</button>
+                        <button type="submit" class="/bootcamping/searchId">아이디 찾기</button>
                         <button type="button" class="enrollForm">회원가입</button>
                     </div>
                 </form>

@@ -5,22 +5,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부트캠핑 - 내가 쓴 글</title>
+
+<style>
+    #wrap{
+        margin: 5% auto 5%;
+        width: 1000px;
+    }
+    #title{
+        margin: 5px auto 50px;
+        width: fit-content;
+        font-size: 32px;
+        font-weight: 400;
+    }
+    #pagingArea {
+        width:fit-content; 
+        margin:auto;
+    }
+
+
+
+
+</style>
+
 </head>
 <body>
 
     <c:if test="${ empty loginMember }">
     	<script>
     		alert('회원 전용 서비스입니다. 로그인해주세요');
-    		location.href = 'errorPage';
+    		location.href = '/login';
     	</script>
     </c:if>
     
     <jsp:include page="../common/header.jsp"/>
 
-    <div id="boardArea">
-        <div class="myBoardList">내가 쓴 글</div>
-        <div id="boardmoreBtn" class="btn">더보기</div> 
+    <div id="wrap">
+        <div id="title">내가 쓴 글</div>
+        
         <table class="table">
             <thead class="thead-light">
                 <tr>
@@ -58,10 +80,10 @@
                 
                 <c:choose>
                     <c:when test="${ pageInfo.currentPage eq 1 }">
-                        <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="boards?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage - 1 }">Previous</a></li>
+                        <li class="page-item"><a class="page-link" href="boards?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage - 1 }">이전</a></li>
                     </c:otherwise>
                 </c:choose>
                     
@@ -71,10 +93,10 @@
                             
                 <c:choose>
                     <c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
-                        <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                        <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="boards?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage + 1 }">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="boards?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage + 1 }">다음</a></li>
                     </c:otherwise>
                 </c:choose>                    
                 

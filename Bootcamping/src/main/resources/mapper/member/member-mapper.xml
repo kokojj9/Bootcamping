@@ -213,7 +213,7 @@
 	           MEMBER_ID = #{memberId}
 	</update>
 
-	<select id="searchId" parameterType="string">
+	<select id="searchId" parameterType="string" resultType="string">
 		SELECT
 			   MEMBER_ID
 		  FROM

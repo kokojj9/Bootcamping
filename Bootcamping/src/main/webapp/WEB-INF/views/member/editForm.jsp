@@ -28,7 +28,7 @@
 	<div class="content">
         <br><br>
         <div class="innerOuter">
-            <h2>부트캠핑 - 회원정보 수정</h2>
+            <h2>회원정보 수정</h2>
             <br>
 
             <div class="form-group">

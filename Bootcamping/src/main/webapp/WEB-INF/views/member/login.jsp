@@ -25,9 +25,9 @@
                 <form action="members/login" method="post">
                     <div class="login_form">
                         <label for="memberId" class="">아이디 : </label>
-                        <input type="text" class="" placeholder="아이디" id="memberId" name="memberId"> <br>
+                        <input type="text" class="" placeholder="아이디" id="memberId" name="memberId" required> <br>
                         <label for="memberPwd" class="">비밀번호 : </label>
-                        <input type="password" class="" placeholder="비밀번호" id="memberPwd" name="memberPwd"> <br>
+                        <input type="password" class="" placeholder="비밀번호" id="memberPwd" name="memberPwd" required> <br>
                         <input type="checkbox" name="rememberId" value="true"> 아이디 저장
                     </div>
                            

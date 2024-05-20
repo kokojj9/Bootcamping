@@ -11,6 +11,9 @@
     padding: 3% 7%;
     background-color: white;
 }
+.innerOuter > h2{
+    text-align: center;
+}
 #postcode, #roadAddress{
     font-size: 1rem;
     font-weight: 400;
