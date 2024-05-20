@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>부트캠핑 - 비밀번호 찾기</title>
+
+<link rel="stylesheet" href="resources/CSS/member/searchMemberPwd.css">
+
+
 </head>
 <body>
 
@@ -14,20 +18,19 @@
         <div class="">
             <div class="">
                 <div class="title">
-                    <div class="">아이디 찾기</div>
+                    <div class="">비밀번호 찾기</div>
                 </div>
         
-                <form action="members/searchId" method="post">
+                <form action="searchPwd" method="post">
                     <div class="searchId_form">
                         <label for="memberId" class="">아이디 : </label>
-                        <input type="text" class="" placeholder="아이디" id="memberId" name="memberId"> <br>
+                        <input type="text" class="" placeholder="아이디를 입력해주세요" id="memberId" name="memberId" required> <br>
                         <label for="email" class="">이메일 : </label>
-                        <input type="text" class="" placeholder="아이디" id="email" name="email"> <br>
+                        <input type="text" class="" placeholder="이메일을 입력해주세요" id="email" name="email" required> <br>
                     </div>
                            
                     <div class="btn">
-                        <button type="submit" class="searchId">아이디 찾기</button>
-                        <button type="button" class="enrollForm">회원가입</button>
+                        <button type="submit" class="searchId">비밀번호 찾기</button>
                     </div>
                 </form>
 

@@ -233,7 +233,7 @@ public class MemberController {
 		return "member/searchMemberPwd";
 	}
 	
-	@PostMapping("members/searchId")
+	@PostMapping("searchId")
 	public String searchId(Model model, String email) {
 		String memberId = memberService.searchId(email);
 		if(memberId != null) {
