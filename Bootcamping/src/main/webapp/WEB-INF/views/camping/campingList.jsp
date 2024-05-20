@@ -237,21 +237,21 @@
             <!--필터링-->
             <div id="kind"><h4>종류</h4></div>
             <div id="kind_list">
-                <label><input type="checkbox" class="list">글램핑</label>
-                <label><input type="checkbox" class="list">카라반</label>
-                <label><input type="checkbox" class="list">일반야영장</label>
-                <label><input type="checkbox" class="list">자동차야영장</label>
+                <label><input type="checkbox" name="type" class="list">글램핑</label>
+                <label><input type="checkbox" name="type" class="list">카라반</label>
+                <label><input type="checkbox" name="type" class="list">일반야영장</label>
+                <label><input type="checkbox" name="type" class="list">자동차야영장</label>
             </div>
             <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" class="list">서울</label>
-                <label><input type="checkbox" class="list">경기</label>
-                <label><input type="checkbox" class="list">인천</label>
-                <label><input type="checkbox" class="list">충청도</label>
-                <label><input type="checkbox" class="list">경상도</label>
-                <label><input type="checkbox" class="list">강원도</label>
-                <label><input type="checkbox" class="list">전라도</label>
-                <label><input type="checkbox" class="list">제주도</label>
+                <label><input type="checkbox" name="address" class="list">서울</label>
+                <label><input type="checkbox" name="address" class="list">경기</label>
+                <label><input type="checkbox" name="address" class="list">인천</label>
+                <label><input type="checkbox" name="address" class="list">충청도</label>
+                <label><input type="checkbox" name="address" class="list">경상도</label>
+                <label><input type="checkbox" name="address" class="list">강원도</label>
+                <label><input type="checkbox" name="address" class="list">전라도</label>
+                <label><input type="checkbox" name="address" class="list">제주도</label>
             </div>
 
             <!--여기까지-->
