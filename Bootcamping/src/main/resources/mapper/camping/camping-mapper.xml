@@ -153,6 +153,9 @@
 		        TB_CAMP
 		  WHERE
 		        CAMP_NAME LIKE  '%' || #{keyword} || '%'	
+		  ORDER
+			 BY
+			 	CAMP_NO ASC
 	</select>
 
 </mapper>

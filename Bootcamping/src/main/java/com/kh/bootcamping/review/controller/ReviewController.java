@@ -119,7 +119,7 @@ public class ReviewController {
 		
 		int ranNum = (int)Math.random() * 90000 + 10000;
 		
-		String changeName = ext + currentTime + ranNum;
+		String changeName = currentTime + ranNum + ext;
 		
 		String savePath = session.getServletContext().getRealPath("/resources/reviewImg/");
 		

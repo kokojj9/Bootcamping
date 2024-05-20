@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,7 @@ public class CampingController {
 	@RequestMapping("camping")
 	public ModelAndView camping(@RequestParam(value="page", defaultValue="1") int page,  ModelAndView mv) throws IOException {
 		
-		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 5);
+		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 3);
 		
 		String url = "http://apis.data.go.kr/B551011/GoCamping/basedList";
 		   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
@@ -174,22 +175,24 @@ public class CampingController {
 	/**
 	 * 캠핑장 검색
 	 */
-	@GetMapping("searchCamping")
-	public String searchCamping(@RequestParam(value="page", defaultValue="1")int page, String keyword, Model model) {
+	@ResponseBody
+	@GetMapping(value="searchCamping", produces="application/json; charset=UTF-8")
+	public String searchCamping(@RequestParam(value="page", defaultValue="1") int page, String keyword) {
 		
+		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 3);
 		
-		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 5);
-	
-		List<Camping> searchCampingList = campingService.searchList(pi, keyword);
+		 HashMap<String, Object> map = new HashMap();
+		 
+		 map.put("searchCampingList", campingService.searchList(pi, keyword));
+	     
+		 map.put("pageInfo", pi);
 		
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("campingList", searchCampingList);
-		model.addAttribute("pageInfo", pi);
+		System.out.println(map);
 		
-		System.out.println(searchCampingList);
-	
-		return "camping/campingList";
+		return new Gson().toJson(map);
 	
 	}
+	
+	
 
 }

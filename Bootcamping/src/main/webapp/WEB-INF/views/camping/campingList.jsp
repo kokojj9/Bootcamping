@@ -200,8 +200,7 @@
 	
 
     #camp_btn{
-    	width:70%;
-        margin: auto;
+		text-align: center;
     }
     
     #camp_btn a {
@@ -227,11 +226,8 @@
              <!--검색창 부분-->
              <div id="search_form">
                 <div id="search_1">
-                    
-                    <form action="searchCamping" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" name="keyword">
-                        <input type="submit" value="검색" id="submit_btn">
-                    </form>
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" id="keyword">
+                        <input type="button" value="검색" id="submit_btn" onclick="searchBtn();">
                 </div>
             </div> 
             <!-- 여기까지 -->
@@ -277,22 +273,7 @@
 			
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
-					  <c:forEach items="${campingList}" var="list">
-	                	<div class="card" style="width:250px;">
-					 	<a href="/bootcamping/detailCamping?contentId=${list.campNo }">
-				    	<img class="card-img-top" src="${list.campImg }">
-						 <div class="card-body">
-						 <h4 class="card-title">${list.campName }</h4>
-					     <h5 class="card-text">'${list.type }</h5>
-				    	 <p>${list.address }</p>
-				    	 </a>
-				    	 </div>
-						 </div>
-	                 </c:forEach>
-  
-  
-  
-  
+
             </div>
                 
                 
@@ -327,6 +308,8 @@
 
                  
 	              </div>
+	              
+	              
 	       	</div>
 	
 	
@@ -435,9 +418,6 @@
 				        // 클러스터러에 마커들을 추가합니다
 				        clusterer.addMarkers(markers);
 						
-						
-					
-					
 					
 				}
 			})
@@ -445,11 +425,66 @@
 		})
 		
 		
+		/*검색*/
+		
+		function searchBtn(num){
+			
+			$.ajax({
+				url : 'searchCamping',
+				data : {keyword : $('#keyword').val(),
+						page: num },
+				type : 'get',
+				success : result => {
+					console.log(result);
+					
+					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					let str = '';
+					
+					for(let i = 0; i <result.searchCampingList.length; i++){
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
+						    
+							 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
+							 + '<div class="card-body">'
+							 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
+					    	 + '<p>'+result.searchCampingList[i].type+'</p>'
+					    	 + '</a>'
+					    	 + '</div>'
+							 + '</div>'
+					}
+					
+					
+					$('.items').html(str)
+
+					
+			var pagination = $('#camp_btn');
+            pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+            var pageInfo = result.pageInfo;
+            if(pageInfo.currentPage === 1){
+            	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+            }else {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+            }
+            for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+            }
+            if (pageInfo.currentPage === pageInfo.maxPage) {
+            	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+            }
+            	else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+            }
+
+					
+				}
+			})
+		}
+		
 		
 
-		
-		
-		
 		
 
 	</script>

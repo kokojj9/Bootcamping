@@ -181,7 +181,7 @@
                         <li><a href="/bootcamping/camping">캠핑장</a></li>
                         <li><a href="">중고거래</a></li>
                         <li><a href="">커뮤니티</a></li>
-                        <li><a href="list.board">게시판</a></li>
+                        <li><a href="/bootcamping/list.board">게시판</a></li>
                         
                         <br> <br> <br> <br> <br> <br>
                     </ul>
@@ -192,15 +192,15 @@
                     <c:choose>
                         <c:when test="${ empty sessionScope.loginMember }">
 
-                            <a href="enrollForm">회원가입</a>
-                            <a href="loginForm">로그인</a>
+                            <a href="/bootcamping/enrollForm">회원가입</a>
+                            <a href="/bootcamping/loginForm">로그인</a>
             
                         </c:when>
                         <c:otherwise>
                             
                             <lable>${ sessionScope.loginMember.memberId }님 환영합니다</label> &nbsp;&nbsp;
                             <a href="/bootcamping/myPage">마이페이지</a>
-                            <a href="logout">로그아웃</a>
+                            <a href="/bootcamping/logout">로그아웃</a>
                         <!-- 관리자 기능 넣어야함! -->
                         </c:otherwise>
                     </c:choose>

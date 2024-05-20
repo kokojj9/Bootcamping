@@ -35,8 +35,14 @@ public class CampingRepository {
 		return sqlSession.selectOne("campingMapper.selectSearchCount", keyword);
 	}
 	
+	
 	public List<Camping> searchList (SqlSession sqlSession, String keyword, RowBounds rowBounds){
 		return sqlSession.selectList("campingMapper.searchList", keyword, rowBounds);
 	}
-
+	
+/*
+	public List<Camping> searchList (SqlSession sqlSession, String keyword){
+		return sqlSession.selectList("campingMapper.searchList", keyword);
+		
+	}*/
 }

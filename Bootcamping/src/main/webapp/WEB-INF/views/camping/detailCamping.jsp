@@ -47,7 +47,13 @@
 
     #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid #e2e2e2;} 
 
-    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
+    #camp_info {width: 70%; 
+    
+    
+    
+    
+    
+    margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
 
     #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid #e2e2e2;}
 
@@ -256,7 +262,7 @@
 	    height : 180px;
 	   }
     
-    #service_list > p { width : 550px; }
+    #service_list > p { width : 660px; }
     
     #service > h4 { padding-left: 50px;}
     
@@ -391,7 +397,7 @@
 			<c:choose>
       		  	<c:when test="${ empty requestScope.site}">
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-10</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -399,7 +405,7 @@
 		                </div>
 		            </div>	 
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-11</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -407,7 +413,7 @@
 		                </div>
 		            </div>			                    		  	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-12</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -415,7 +421,7 @@
 		                </div>
 		            </div>	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-13</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
