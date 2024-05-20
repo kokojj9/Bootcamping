@@ -36,14 +36,18 @@
                         <button type="button" class="enrollForm">회원가입</button>
                     </div>
                 </form>
-
+                
                 <div id="socialLoginArea">
                     <div id="kakaoBtn">
                         <a href="kakaoLoginForm"><img src="resources/img/kakaoBtn.png" alt="카카오로그인 버튼"></a>
                     </div>
                 </div>
-
-
+                
+                <div class="search_btn">
+                    <a href="searchIdForm" class="searchId_btn">아이디 찾기</a> |
+                    <a href="searchPwdForm" class="searchPwd_btn"> 비밀번호 찾기</a>
+                </div>
+                
             </div>
         </div>
     </div>

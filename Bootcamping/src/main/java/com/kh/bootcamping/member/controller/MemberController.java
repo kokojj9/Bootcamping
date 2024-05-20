@@ -183,6 +183,13 @@ public class MemberController {
 		return result;
 	}
 	
+	/**
+	 * 마이페이지 예약 내역 리스트
+	 * @param model
+	 * @param memberId
+	 * @param page
+	 * @return
+	 */
 	@GetMapping("reservations")
 	public String selectMemberReservationList(Model model, String memberId, int page) {
 		
@@ -197,6 +204,13 @@ public class MemberController {
 		return "member/myReservationList";
 	}
 	
+	/**
+	 * 마이페이지 내가 쓴 글 리스트
+	 * @param model
+	 * @param memberId
+	 * @param page
+	 * @return
+	 */
 	@GetMapping("boards")
 	public String selectMemberBoardList(Model model, String memberId, int page) {
 		
@@ -209,6 +223,16 @@ public class MemberController {
 		model.addAttribute("pageInfo", pi);
 		
 		return "member/myBoardList";
+	}
+	
+	@GetMapping("searchIdForm")
+	public String forwardSearchId() {
+		return "member/searchMemberId";
+	}
+	
+	@GetMapping("searchPwdForm")
+	public String forwardSearchPwd() {
+		return "member/searchMemberPwd";
 	}
 	
 	@PostMapping("members/searchId")
