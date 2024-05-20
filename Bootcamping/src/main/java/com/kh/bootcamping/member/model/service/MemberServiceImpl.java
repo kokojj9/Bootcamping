@@ -65,4 +65,9 @@ public class MemberServiceImpl implements MemberService {
 		return memberRepository.searchId(sqlSession, email);
 	}
 
+	@Override
+	public String searchPwd(Member member) {
+		return memberRepository.searchPwd(sqlSession, member);
+	}
+
 }

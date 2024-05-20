@@ -25,4 +25,6 @@ public interface MemberService {
 
 	String searchId(String email);
 
+	String searchPwd(Member member);
+
 }
