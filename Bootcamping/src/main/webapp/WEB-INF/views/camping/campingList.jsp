@@ -274,22 +274,7 @@
 			
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
-					  <c:forEach items="${campingList}" var="list">
-	                	<div class="card" style="width:250px;">
-					 	<a href="/bootcamping/detailCamping?contentId=${list.campNo }">
-				    	<img class="card-img-top" src="${list.campImg }">
-						 <div class="card-body">
-						 <h4 class="card-title">${list.campName }</h4>
-					     <h5 class="card-text">'${list.type }</h5>
-				    	 <p>${list.address }</p>
-				    	 </a>
-				    	 </div>
-						 </div>
-	                 </c:forEach>
-  
-  
-  
-  
+
             </div>
                 
                 
@@ -324,6 +309,8 @@
 
                  
 	              </div>
+	              
+	              
 	       	</div>
 	
 	
@@ -446,12 +433,12 @@
 			$.ajax({
 				url : 'searchCamping',
 				data : {keyword : $('#keyword').val(),
-						page: 1},
+						page: 1 },
 				type : 'get',
 				success : result => {
 					console.log(result);
 					
-					$('#totalCamp').text(result.searchCampingList.length);
+					$('#totalCamp').text(result.pageInfo.listCount);
 					
 					let str = '';
 					
@@ -471,14 +458,26 @@
 					}
 					
 					
-					$('.items').html(str);					
+					$('.items').html(str);		
+			            
+			        $('#camp_btn').hide();
+			        
+			        
+			        let previousPageLink = '';
+			        previousPageLink += 
+			
+
+			        $('#camp_btn').html(previousPageLink);
+			        
+			        
+			        
 					
 				}
 			})
 		}
 		
 		
-		
+
 		
 
 	</script>
