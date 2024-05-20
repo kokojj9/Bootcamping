@@ -10,14 +10,15 @@ import com.kh.bootcamping.member.model.dao.MemberRepository;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.MyPageInfo;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	@Autowired
-	private MemberRepository memberRepository;
+	private final MemberRepository memberRepository;
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private final SqlSessionTemplate sqlSession;
 	
 	@Override
 	public Member login(Member member) {

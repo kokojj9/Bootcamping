@@ -24,7 +24,7 @@
                 <form action="members/searchId" method="post">
                     <div class="searchId_form">
                         <label for="email" class="">이메일 : </label>
-                        <input type="text" class="" placeholder="아이디" id="email" name="email"> <br>
+                        <input type="text" class="" placeholder="이메일을 입력해주세요" id="email" name="email"> <br>
                     </div>
                            
                     <div class="btn">
