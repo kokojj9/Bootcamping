@@ -47,7 +47,13 @@
 
     #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid #e2e2e2;} 
 
-    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
+    #camp_info {width: 70%; 
+    
+    
+    
+    
+    
+    margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
 
     #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid #e2e2e2;}
 
