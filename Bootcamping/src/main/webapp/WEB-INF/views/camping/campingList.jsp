@@ -428,12 +428,12 @@
 		
 		/*검색*/
 		
-		function searchBtn(){
+		function searchBtn(num){
 			
 			$.ajax({
 				url : 'searchCamping',
 				data : {keyword : $('#keyword').val(),
-						page: 1 },
+						page: num },
 				type : 'get',
 				success : result => {
 					console.log(result);
@@ -458,19 +458,23 @@
 					}
 					
 					
-					$('.items').html(str);		
-			            
-			        $('#camp_btn').hide();
-			        
-			        
-			        let previousPageLink = '';
-			        previousPageLink += 
-			
+					$('.items').html(str)
 
-			        $('#camp_btn').html(previousPageLink);
-			        
-			        
-			        
+					
+			var pagination = $('#camp_btn');
+            pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+            var pageInfo = result.pageInfo;
+            if (pageInfo.currentPage > 1) {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+            }
+            for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+            }
+            if (pageInfo.currentPage < pageInfo.maxPage) {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+            }
+
 					
 				}
 			})

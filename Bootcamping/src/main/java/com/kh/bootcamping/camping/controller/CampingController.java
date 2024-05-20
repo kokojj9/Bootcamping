@@ -179,7 +179,7 @@ public class CampingController {
 	@GetMapping(value="searchCamping", produces="application/json; charset=UTF-8")
 	public String searchCamping(@RequestParam(value="page", defaultValue="1") int page, String keyword) {
 		
-		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 5);
+		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 3);
 		
 		 HashMap<String, Object> map = new HashMap();
 		 
