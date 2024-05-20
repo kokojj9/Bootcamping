@@ -227,11 +227,8 @@
              <!--검색창 부분-->
              <div id="search_form">
                 <div id="search_1">
-                    
-                    <form action="searchCamping" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" name="keyword">
-                        <input type="submit" value="검색" id="submit_btn">
-                    </form>
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" id="keyword">
+                        <input type="button" value="검색" id="submit_btn" onclick="searchBtn();">
                 </div>
             </div> 
             <!-- 여기까지 -->
@@ -435,9 +432,6 @@
 				        // 클러스터러에 마커들을 추가합니다
 				        clusterer.addMarkers(markers);
 						
-						
-					
-					
 					
 				}
 			})
@@ -445,8 +439,41 @@
 		})
 		
 		
+		/*검색*/
 		
-
+		function searchBtn(){
+			
+			$.ajax({
+				url : 'searchCamping',
+				data : {keyword : $('#keyword').val() },
+				type : 'get',
+				success : result => {
+					console.log(result);
+					
+					$('#totalCamp').text(result.length);
+					
+					let str = '';
+					
+					for(let i = 0; i <result.length; i++){
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a href="/bootcamping/detailCamping?contentId='+ result[i].campNo +'">'
+							 + '<img class="card-img-top" src="'+result[i].campImg+'">'
+							 + '<div class="card-body">'
+							 + '<h4 class="card-title">'+result[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result[i].address+'</h5>'
+					    	 + '<p>'+result[i].type+'</p>'
+					    	 + '</a>'
+					    	 + '</div>'
+							 + '</div>'
+					}
+					
+					
+					$('.items').html(str);					
+					
+				}
+			})
+		}
 		
 		
 		

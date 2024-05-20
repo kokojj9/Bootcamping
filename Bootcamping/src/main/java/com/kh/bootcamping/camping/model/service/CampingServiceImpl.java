@@ -49,10 +49,8 @@ public class CampingServiceImpl implements CampingService {
 	}
 
 	@Override
-	public List<Camping> searchList(PageInfo pi, String keyword) {
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return campingRepository.searchList(sqlSession, keyword, rowBounds);
+	public List<Camping> searchList(String keyword) {
+		return campingRepository.searchList(sqlSession, keyword);
 	}
 
 

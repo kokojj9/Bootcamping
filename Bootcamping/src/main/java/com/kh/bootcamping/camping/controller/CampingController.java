@@ -174,21 +174,15 @@ public class CampingController {
 	/**
 	 * 캠핑장 검색
 	 */
-	@GetMapping("searchCamping")
-	public String searchCamping(@RequestParam(value="page", defaultValue="1")int page, String keyword, Model model) {
+	@ResponseBody
+	@GetMapping(value="searchCamping", produces="application/json; charset=UTF-8")
+	public String searchCamping(String keyword) {
 		
-		
-		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 5);
-	
-		List<Camping> searchCampingList = campingService.searchList(pi, keyword);
-		
-		model.addAttribute("keyword", keyword);
-		model.addAttribute("campingList", searchCampingList);
-		model.addAttribute("pageInfo", pi);
+		List<Camping> searchCampingList = campingService.searchList(keyword);
 		
 		System.out.println(searchCampingList);
-	
-		return "camping/campingList";
+		
+		return new Gson().toJson(searchCampingList);
 	
 	}
 
