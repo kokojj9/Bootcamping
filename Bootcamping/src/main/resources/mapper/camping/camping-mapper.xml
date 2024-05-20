@@ -11,7 +11,7 @@
 		<result column="CAMP_INTRO" property="campIntro" />
 		<result column="INTRO" property="intro" />
 		<result column="TYPE" property="type" />
-		<result column="ADRRESS" property="address" />
+		<result column="ADDRESS" property="address" />
 		<result column="DETAIL_ADDRRESS" property="detailAddress" />
 		<result column="MAP_X" property="mapX"/>
 		<result column="MAP_Y" property="mapY" />
@@ -38,7 +38,6 @@
 		<result column="CAMP_NAME" property="campName" />
 		<result column="CAMP_IMG" property="campImg" />
 	</resultMap>
-		
 	
 
 	<select id="detailCamping" parameterType="string" resultMap="campingResultMap">
@@ -102,5 +101,58 @@
 		        SITE_NO = #{siteNo}		
 	</select>
 
+	<select id="selectDate" parameterType="list" resultMap="siteResultMap">
+        
+		SELECT
+					TB_SITE.SITE_NO,
+			        SITE_PATH,
+			        SITE_NAME,
+			        SITE_PRICE,
+			        TYPE_NAME
+			  FROM
+			        TB_SITE
+			  LEFT     
+			  JOIN
+			        TB_PRICE ON (TB_PRICE.TYPE_CODE = TB_SITE.TYPE_CODE)
+			  JOIN
+			        TB_CAMP ON (TB_CAMP.CAMP_NO = TB_SITE.CAMP_NO)
+			  JOIN
+			  		TB_TYPE ON (TB_TYPE.TYPE_CODE = TB_PRICE.TYPE_CODE)
+              LEFT
+              JOIN
+                    TB_RESERVATION ON (TB_SITE.SITE_NO = TB_RESERVATION.SITE_NO)
+			 WHERE
+			        TB_CAMP.CAMP_NO = #{campNo}
+               AND
+                    CHECKIN_DATE BETWEEN #{startDate} AND #{endDate}
+               OR
+                    CHECKOUT_DATE BETWEEN #{startDate} AND #{endDate}
+			ORDER
+			   BY
+			   		SITE_NO ASC    	
+	
+	</select>
+	
+	<select id="selectSearchCount" resultType="_int">
+		SELECT 
+		        COUNT(*)
+		  FROM
+		        TB_CAMP
+		  WHERE
+		        CAMP_NAME LIKE  '%' || #{keyword} || '%'		
+	</select>
+	
+	<select id="searchList" resultMap="campingResultMap">
+		SELECT 
+				CAMP_NO,
+				CAMP_IMG,
+		        CAMP_NAME,
+		        ADDRESS,
+		        TYPE
+		  FROM
+		        TB_CAMP
+		  WHERE
+		        CAMP_NAME LIKE  '%' || #{keyword} || '%'	
+	</select>
 
 </mapper>

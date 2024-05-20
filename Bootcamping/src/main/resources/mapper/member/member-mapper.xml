@@ -6,16 +6,18 @@
 <mapper namespace="memberMapper">
 
 	<resultMap id="memberResultSet" type="member">
-		<result column="MEMBER_NO"   property="memberNo"/>
-		<result column="MEMBER_ID"   property="memberId"/>
-		<result column="MEMBER_PWD"  property="memberPwd"/>
-		<result column="BIRTHDAY"    property="birthDay"/>
-		<result column="ADDRESS"     property="address"/>
-		<result column="EMAIL"       property="email"/>
-		<result column="ENROLL_DATE" property="enrollDate"/>
-		<result column="UPDATE_DATE" property="updateDate"/>
-		<result column="STATUS"      property="status"/>
-		<result column="PRIVILEGE"   property="privilege"/>
+		<result column="MEMBER_NO"     property="memberNo"/>
+		<result column="MEMBER_ID"     property="memberId"/>
+		<result column="MEMBER_PWD"    property="memberPwd"/>
+		<result column="EMAIL"         property="email"/>
+		<result column="ENROLL_DATE"   property="enrollDate"/>
+		<result column="UPDATE_DATE"   property="updateDate"/>
+		<result column="STATUS"        property="status"/>
+		<result column="PRIVILEGE"     property="privilege"/>
+		<result column="POSTCODE"      property="postCode"/>
+		<result column="ROADADDRESS"   property="roadAddress"/>
+		<result column="DETAILADDRESS" property="detailAddress"/>
+		<result column="SOCIAL"        property="social"/>
 	</resultMap>
 	
 	<resultMap id="myPageResultSet" type="myPageInfo">
@@ -46,16 +48,18 @@
 
 	<select id="login" parameterType="member" resultMap="memberResultSet">
 		SELECT 
-			   MEMBER_NO,
-		       MEMBER_ID,
-		       MEMBER_PWD,
-		       BIRTHDAY,
-		       ADDRESS,
-		       EMAIL,
-		       ENROLL_DATE,
-		       UPDATE_DATE,
-		       STATUS,
-		       PRIVILEGE
+		       MEMBER_NO,
+  			   MEMBER_ID,
+			   MEMBER_PWD,
+			   EMAIL,
+			   ENROLL_DATE,
+			   UPDATE_DATE,
+			   STATUS,
+			   PRIVILEGE,
+			   SOCIAL,
+			   POSTCODE,
+			   ROADADDRESS,
+			   DETAILADDRESS
           FROM 
           	   TB_MEMBER 
          WHERE 
@@ -70,28 +74,32 @@
 		       TB_MEMBER
 		       (
 		       MEMBER_NO,
-		       MEMBER_ID,
-		       MEMBER_PWD,
-		       BIRTHDAY,
-		       ADDRESS,
-		       EMAIL,
-		       ENROLL_DATE,
-		       UPDATE_DATE,
-		       STATUS,
-		       PRIVILEGE
+  			   MEMBER_ID,
+			   MEMBER_PWD,
+			   EMAIL,
+			   ENROLL_DATE,
+			   UPDATE_DATE,
+			   STATUS,
+			   PRIVILEGE,
+			   SOCIAL,
+			   POSTCODE,
+			   ROADADDRESS,
+			   DETAILADDRESS
 		       )
 		VALUES
 		       (
 		       SEQ_MEMBERNO.NEXTVAL,
 		       #{ memberId },
 		       #{ memberPwd },
-		       #{ birthDay },
-		       #{ address },
 		       #{ email },
 		       SYSDATE,
 		       SYSDATE,
 		       DEFAULT,
-		       DEFAULT
+		       DEFAULT,
+		       #{ social },
+		       #{ postCode },
+		       #{ roadAddress },
+		       #{ detailAddress }
 		       )
 	</insert>
 	
@@ -144,6 +152,18 @@
 		 WHERE
 		       MEMBER_ID = #{ memberId }
 	</select>
+	
+	<select id="searchPwd" parameterType="member" resultType="string">
+		SELECT
+		       MEMBER_ID
+		  FROM
+		       TB_MEMBER
+	     WHERE
+		       MEMBER_ID = #{ memberId }
+	       AND
+		       EMAIL = #{ email }
+	
+	</select>
 
 	<select id="searchMyPage" parameterType="string" resultMap="myPageResultSet">
 		SELECT
@@ -189,6 +209,44 @@
 		       TRADEBOARD_NO,
 		       BOARD_NO DESC
 	</select>
+
+	<update id="editMember" parameterType="member">
+		UPDATE 
+			   TB_MEMBER
+           SET
+	    	<if test='changePwdType == "Y"'>
+	           MEMBER_PWD = #{ memberPwd },
+	        </if>
+	           POSTCODE = #{ postCode },
+			   ROADADDRESS = #{ roadAddress },
+			   DETAILADDRESS = #{ detailAddress },
+	           EMAIL = #{ email }
+	     WHERE 
+	           MEMBER_ID = #{memberId}
+	</update>
+
+	<select id="searchId" parameterType="string" resultType="string">
+		SELECT
+			   MEMBER_ID
+		  FROM
+			   TB_MEMBER
+	     WHERE
+			   EMAIL = #{ email }
+		   AND
+		   	   STATUS = 'Y'
+	</select>
+	
+
+
+
+
+
+
+
+
+
+
+
 
 
 

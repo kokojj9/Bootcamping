@@ -1,0 +1,40 @@
+#wrap {
+    width: 500px;
+    height: 300px;
+    margin: 50px auto;
+}
+
+.title > div {
+    width: 300px;
+    font-size: 36px;
+    font-weight: 500;
+    text-align: center;
+    margin: auto;
+}
+
+.searchId_form {
+    width: 300px;
+    height: 50px;
+    margin: 25px auto;
+}
+
+.btn {
+    width: 500px;
+    margin: auto;
+}
+
+.btn > button{
+    width: 137px;
+    border: 0;
+    border-radius: 5px;
+    height: 40px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.searchId { 
+    margin-right: 20px;
+    background-color: #1dc078;
+    color: #f6f6f6;
+}
+

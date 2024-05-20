@@ -10,14 +10,15 @@ import com.kh.bootcamping.member.model.dao.MemberRepository;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.MyPageInfo;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	@Autowired
-	private MemberRepository memberRepository;
+	private final MemberRepository memberRepository;
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private final SqlSessionTemplate sqlSession;
 	
 	@Override
 	public Member login(Member member) {
@@ -52,6 +53,21 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MyPageInfo searchMyPage(String memberId) {
 		return memberRepository.searchMyPage(sqlSession, memberId);
+	}
+
+	@Override
+	public int editMember(Member member) {
+		return memberRepository.editMember(sqlSession, member);
+	}
+
+	@Override
+	public String searchId(String email) {
+		return memberRepository.searchId(sqlSession, email);
+	}
+
+	@Override
+	public String searchPwd(Member member) {
+		return memberRepository.searchPwd(sqlSession, member);
 	}
 
 }

@@ -18,7 +18,7 @@ memberIdTag.onkeyup = () => {
                 url : 'members/' + memberIdTag.value,
                 type : 'GET',
                 success : result => {
-                    if (result == null) {
+                    if (result === '') {
                         checkInfo('id', 'green', '사용 가능한 아이디입니다.')
                     } else {
                         checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)')
@@ -31,6 +31,8 @@ memberIdTag.onkeyup = () => {
         checkInfo('id', 'crimson', '영문/숫자만 입력')
     };
 };
+
+let countdown;
 
 // 이메일 인증
 document.getElementById('checkEmailBtn').onclick = () => {
@@ -56,7 +58,7 @@ document.getElementById('checkEmailBtn').onclick = () => {
 
                     var totalTime = 180;
 
-                    let countdown = setInterval(() => {
+                    countdown = setInterval(() => {
                         document.getElementById('timer').style.color = 'black';
                         
                         if(totalTime > 0) {
@@ -71,7 +73,6 @@ document.getElementById('checkEmailBtn').onclick = () => {
                             document.getElementById('timer').style.color = 'crimson';
                             document.getElementById('checkAuthCode').disabled = true;
                             enrollFormSubmit.disabled = true;
-                            totalTime = 180;
                         }
                     }, 1000);
                 }

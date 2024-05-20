@@ -2,6 +2,7 @@ package com.kh.bootcamping.board.model.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -84,4 +85,16 @@ public class BoardServiceImpl implements BoardService {
 		return null;
 	}
 
+	@Override
+	public int selectBoardListCount(String memberId) {
+		return boardRepository.selectBoardListCount(sqlSession, memberId);
+	}
+
+	@Override
+	public List<Board> selectBoardList(PageInfo pi, String memberId) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return boardRepository.seleBoardList(sqlSession, memberId, rowBounds);
+	}
+	
 }
