@@ -35,123 +35,134 @@
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
 	<!-- Semantic UI theme -->
 	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
-
+	
+	<!-- 폰트 -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 
 	<style>
-		div {
-            box-sizing: border-box;
-        } 
+*{
+  font-family: "Nanum Gothic", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
 
-        #header_wrap {
-            width: 1200px;
-            height: 100px;
-            margin: auto;
-            border-bottom: 1px solid #f1f3f5;
-        }
+}
+div {
+          box-sizing: border-box;
+      } 
 
-        #header_status{
-            width: 1200px;
-            height: 40px;
-            border-bottom: 1px solid #f1f3f5;
-        }
+      #header_wrap {
+          width: 1200px;
+          height: 100px;
+          margin: auto;
+          border-bottom: 1px solid #f1f3f5;
+      }
 
-        #header_content {
-            display: flex;
-            height: 60px;
-        }
+      #header_status{
+          width: 1200px;
+          height: 40px;
+          border-bottom: 1px solid #f1f3f5;
+      }
 
-        #header_left > a {
-            height: 50px;
-            width: 180px;
-        }
+      #header_content {
+          display: flex;
+          height: 60px;
+      }
 
-        #header_left {
-            width: 300px;
-            height: 100%;
-            text-align: center;
-            line-height: 50px;
-        }
+      #header_left > a {
+          height: 50px;
+          width: 180px;
+      }
 
-        #header_left img{ 
-            margin: 0 auto;
-            width: 100%;
-            height: 100%;
-        }
+      #header_left {
+          width: 300px;
+          height: 100%;
+          text-align: center;
+          line-height: 50px;
+      }
 
-        #header_center {
-            width: 500px;
-            height: 100%;
-            display: flex;
-        }
+      #header_left img{ 
+          margin: 0 auto;
+          width: 100%;
+          height: 100%;
+      }
 
-        #header_menu{
-            height: 100%;
-            line-height: 60px;
-        }
+      #header_center {
+          width: 500px;
+          height: 100%;
+          display: flex;
+      }
 
-        #header_search {
-            width: 400px;
-            line-height: 60px;
-        }
+      #header_menu{
+          height: 100%;
+          line-height: 60px;
+      }
 
-        #header_search > input {
-            width: 350px;
-            height: 35px;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-            border: 1px solid transparent;
-            background-color: #f6f6f6;
-        }
+      #header_search {
+          width: 400px;
+          line-height: 60px;
+      }
 
-        #header_search > span {
-            border-top-right-radius: 8px;
-            border-bottom-right-radius: 8px;
-            border: 1px solid transparent;
-            background-color: #f6f6f6;
-        }
+      #header_search > input {
+          width: 350px;
+          height: 35px;
+          border-top-left-radius: 8px;
+          border-bottom-left-radius: 8px;
+          border: 1px solid transparent;
+          background-color: #f6f6f6;
+      }
 
-        #header_menu > ul {
-            list-style: none;
-            display: flex;
-            height: 100%;
-            margin: 0;
-            padding-left: 20px;
-        }
+      #header_search > span {
+          border-top-right-radius: 8px;
+          border-bottom-right-radius: 8px;
+          border: 1px solid transparent;
+          background-color: #f6f6f6;
+      }
 
-        #header_menu > ul > li {
-            margin-right: 30px;
-        }
+      #header_menu > ul {
+          list-style: none;
+          display: flex;
+          height: 100%;
+          margin: 0;
+          padding-left: 20px;
+      }
 
-        #header_menu > ul > li > a {
-            text-decoration: none;
-            color: #4a4a4a;
-            font-weight: 400;
-            font-size: 16px;
-        }
+      #header_menu > ul > li {
+          margin-right: 30px;
+      }
 
-        #header_menu > ul > li > a:hover{
-            cursor: pointer;
-            color: #1dc078; 
-        }
+      #header_menu > ul > li > a {
+          text-decoration: none;
+          color: #4a4a4a;
+          font-weight: 400;
+          font-size: 16px;
+      }
 
-        #header_right {
-            width: 400px;
-            height: 100%;
-        }
+      #header_menu > ul > li > a:hover{
+          cursor: pointer;
+          color: #1dc078; 
+      }
 
-        #header_memberArea{
-            margin: auto;
-            height: 100%;
-        }
+      #header_right {
+          width: 400px;
+          height: 100%;
+      }
 
-        #header_right a{
-            line-height: 60px;
-            text-decoration: none;
-            color: #4a4a4a;
-        }
+      #header_memberArea{
+          margin: auto;
+          height: 100%;
+      }
+
+      #header_right a{
+          line-height: 60px;
+          text-decoration: none;
+          color: #4a4a4a;
+      }
 
 
-	</style>
+</style>
 
 
 </head>

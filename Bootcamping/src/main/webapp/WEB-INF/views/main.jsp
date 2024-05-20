@@ -217,7 +217,7 @@
             <div class="items">
                 <div class="card" style="width:300px">
                         <a href="#">
-                        <img class="card-img-top" src="gg.png">
+                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
                         <div class="card-body">
                         <h4 class="card-title">캠핑장 이름</h4>
                         <h4 class="card-text">0원</h4>
@@ -228,7 +228,7 @@
 
                 <div class="card" style="width:300px">
                         <a href="#">
-                        <img class="card-img-top" src="gg.png">
+                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
                         <div class="card-body">
                         <h4 class="card-title">캠핑장 이름</h4>
                         <h4 class="card-text">0원</h4>
@@ -239,7 +239,7 @@
 
                 <div class="card" style="width:300px">
                     <a href="#">
-                    <img class="card-img-top" src="gg.png">
+                    <img class="card-img-top" src="resources/img/backgroundImg.jpg">
                     <div class="card-body">
                     <h4 class="card-title">캠핑장 이름</h4>
                     <h4 class="card-text">0원</h4>
