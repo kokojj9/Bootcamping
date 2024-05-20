@@ -1,6 +1,6 @@
 #wrap {
     width: 500px;
-    height: 300px;
+    height: 400px;
     margin: 50px auto;
 }
 
@@ -12,12 +12,17 @@
     margin: auto;
 }
 
-.searchId_form {
-    width: 300px;
-    height: 50px;
+.searchPwd_form {
+    text-align: center;
+    width: 350px;
+    height: auto;
     margin: 25px auto;
 }
 
+input{
+    width: 200px;
+    margin: auto;
+}
 .btn {
     width: 500px;
     margin: auto;
@@ -32,9 +37,29 @@
     font-weight: 600;
 }
 
-.searchId { 
-    margin-right: 20px;
+.searchPwd { 
     background-color: #1dc078;
     color: #f6f6f6;
 }
 
+#checkEmailBtn{
+    background-color: rgb(209, 209, 209);
+    width: 110px;
+    border: 0;
+    border-radius: 5px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+#checkAuthCode{
+    border: none;
+    background-color: #1dc078;
+    width: 150px;
+    margin: auto;
+}
+#authCode{
+    margin-top: 5px;
+    width: 200px;
+    margin: auto;
+}

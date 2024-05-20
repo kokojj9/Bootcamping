@@ -152,6 +152,18 @@
 		 WHERE
 		       MEMBER_ID = #{ memberId }
 	</select>
+	
+	<select id="searchPwd" parameterType="member" resultType="string">
+		SELECT
+		       MEMBER_ID
+		  FROM
+		       TB_MEMBER
+	     WHERE
+		       MEMBER_ID = #{ memberId }
+	       AND
+		       EMAIL = #{ email }
+	
+	</select>
 
 	<select id="searchMyPage" parameterType="string" resultMap="myPageResultSet">
 		SELECT

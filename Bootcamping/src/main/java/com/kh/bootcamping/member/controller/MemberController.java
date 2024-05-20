@@ -244,6 +244,15 @@ public class MemberController {
 		return "common/errorPage";
 	}
 	
+	@PostMapping("searchPwd")
+	public String searchPwd(HttpSession session, Member member) {
+		if(memberService.searchPwd(member) != null) {
+			return "member/editPwd";
+		}
+		
+		session.setAttribute("errorMsg", "아이디와 이메일이 일치하지 않습니다.");
+		return "member/searchMemberPwd";
+	}
 	
 	
 	

@@ -46,5 +46,9 @@ public class MemberRepository {
 	public String searchId(SqlSessionTemplate sqlSession, String email) {
 		return sqlSession.selectOne("memberMapper.searchId", email);
 	}
+
+	public String searchPwd(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.selectOne("memberMapper.searchPwd", member);
+	}
 	
 }
