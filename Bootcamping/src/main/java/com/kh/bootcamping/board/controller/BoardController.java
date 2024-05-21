@@ -33,14 +33,16 @@ public class BoardController {
 		// 한페이지에 몇개 ==5
 		// 페이징 바 몇개 ==5
 		
-		PageInfo pi=Pagination.getPageInfo(boardService.selectListCount(),
+		PageInfo pi=Pagination.getPageInfo(boardService.selectListCount() ,
 											page, 
 											5, 
 											5);
 		
 		//System.out.println("페이징 인포:"+pi);
 		
-		log.info("페이지인포={}",pi);
+		//log.info("페이지인포={}",pi);
+		
+		boardService.selectList(pi);
 		
 		return "board/boardList";
 	}

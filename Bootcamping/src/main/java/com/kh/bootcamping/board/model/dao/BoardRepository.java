@@ -13,8 +13,7 @@ import com.kh.bootcamping.board.model.vo.Board;
 public class BoardRepository {
 
 	public int selectListCount(SqlSessionTemplate sqlSession) {
-		
-		return sqlSession.select;
+		return sqlSession.selectOne;
 	}
  	
 	
@@ -25,6 +24,12 @@ public class BoardRepository {
    public List<Board> seleBoardList(SqlSessionTemplate sqlSession, String memberId, RowBounds rowBounds) {
       return sqlSession.selectList("boardMapper.seleBoardList", memberId, rowBounds);
    }
+
+
+public List<Board> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
+	
+	return null;
+}
 
 
 }
