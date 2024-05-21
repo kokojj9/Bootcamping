@@ -438,7 +438,13 @@
 					console.log(result);
 					
 					$('#totalCamp').text(result.pageInfo.listCount);
-					
+						
+						if(result.searchCampingList.length === 0 ){
+		 					alertify.alert('해당 캠핑장이 존재하지 않습니다.');
+		  					location.href = '/bootcamping/camping';
+		  					
+					} else {
+											
 					let str = '';
 					
 					for(let i = 0; i <result.searchCampingList.length; i++){
@@ -456,6 +462,7 @@
 							 + '</div>'
 					}
 					
+					}
 					
 					$('.items').html(str)
 
