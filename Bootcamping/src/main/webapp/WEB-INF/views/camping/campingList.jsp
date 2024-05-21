@@ -438,33 +438,35 @@
 					console.log(result);
 					
 					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					if(result.searchCampingList.length === 0){
 						
-						if(result.searchCampingList.length === 0 ){
-		 					alertify.alert('해당 캠핑장이 존재하지 않습니다.');
-		  					location.href = '/bootcamping/camping';
-		  					
+						alert("해당 캠핑장이 존재하지 않습니다.");
+						location.href = '/bootcamping/camping';
+						
 					} else {
-											
-					let str = '';
-					
-					for(let i = 0; i <result.searchCampingList.length; i++){
+						let str = '';
 						
-						str += '<div class="card" style="width:250px;">'
-							 + '<a href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
-						    
-							 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
-							 + '<div class="card-body">'
-							 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
-						     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
-					    	 + '<p>'+result.searchCampingList[i].type+'</p>'
-					    	 + '</a>'
-					    	 + '</div>'
-							 + '</div>'
+						for(let i = 0; i <result.searchCampingList.length; i++){
+							
+							str += '<div class="card" style="width:250px;">'
+								 + '<a href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
+							    
+								 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
+								 + '<div class="card-body">'
+								 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
+							     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
+						    	 + '<p>'+result.searchCampingList[i].type+'</p>'
+						    	 + '</a>'
+						    	 + '</div>'
+								 + '</div>'
+						}
+						
+						
+						$('.items').html(str);						
 					}
 					
-					}
-					
-					$('.items').html(str)
+
 
 					
 			var pagination = $('#camp_btn');
