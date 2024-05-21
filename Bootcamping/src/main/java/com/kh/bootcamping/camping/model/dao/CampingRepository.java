@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import com.kh.bootcamping.camping.model.vo.Camping;
+import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.Site;
 import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
@@ -40,9 +41,9 @@ public class CampingRepository {
 		return sqlSession.selectList("campingMapper.searchList", keyword, rowBounds);
 	}
 	
-/*
-	public List<Camping> searchList (SqlSession sqlSession, String keyword){
-		return sqlSession.selectList("campingMapper.searchList", keyword);
-		
-	}*/
+	public int checkCampingCount (SqlSession sqlSession, CampingCheck campingCheck){
+		return sqlSession.selectOne("campingMapper.checkCampingCount", campingCheck);
+	}
+	
+	
 }

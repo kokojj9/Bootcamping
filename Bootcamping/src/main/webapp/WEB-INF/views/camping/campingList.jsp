@@ -236,14 +236,14 @@
             </div>
             <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" name="type" class="list" value="서울">서울</label>
-                <label><input type="checkbox" name="type" class="list" value="경기">경기</label>
-                <label><input type="checkbox" name="type" class="list" value="인천">인천</label>
-                <label><input type="checkbox" name="type" class="list" value="충청">충청도</label>
-                <label><input type="checkbox" name="type" class="list" value="경상">경상도</label>
-                <label><input type="checkbox" name="type" class="list" value="강원">강원도</label>
-                <label><input type="checkbox" name="type" class="list" value="전라">전라도</label>
-                <label><input type="checkbox" name="type" class="list" value="제주">제주도</label>
+                <label><input type="checkbox" name="address" class="list" value="서울">서울</label>
+                <label><input type="checkbox" name="address" class="list" value="경기">경기</label>
+                <label><input type="checkbox" name="address" class="list" value="인천">인천</label>
+                <label><input type="checkbox" name="address" class="list" value="충청">충청도</label>
+                <label><input type="checkbox" name="address" class="list" value="경상">경상도</label>
+                <label><input type="checkbox" name="address" class="list" value="강원">강원도</label>
+                <label><input type="checkbox" name="address" class="list" value="전라">전라도</label>
+                <label><input type="checkbox" name="address" class="list" value="제주">제주도</label>
             </div>
 
             <!--여기까지-->
@@ -486,38 +486,39 @@
 		
 		
 		/*체크박스*/
-		$(function(){
-		    // 체크박스 상태 변화 감지
+		$(function() {
 		    $('input[type="checkbox"]').change(function() {
-		        // 체크된 체크박스의 값을 가져옴
-		        var checkedValues = $('input:checkbox[name="type"]:checked').map(function() {
+		        var checkedTypes = $('input:checkbox[name="type"]:checked').map(function() {
+		            return this.value;
+		        }).get();
+		        
+		        var checkedAddresses = $('input:checkbox[name="address"]:checked').map(function() {
 		            return this.value;
 		        }).get();
 		
-		        // 서버에 선택된 값을 전달하여 검색
-		        searchCheckedValues(checkedValues);
+		        searchCheckedValues(checkedTypes, checkedAddresses);
 		        
-		        console.log(checkedValues);
+		        console.log(checkedTypes);
+		        console.log(checkedAddresses);
 		    });
 		});
 		
-		function searchCheckedValues(values) {
-		    // AJAX를 통해 서버에 선택된 값 전달 및 검색
+		function searchCheckedValues(types, addresses, num) {
 		    $.ajax({
-		        url: 'searchCampingByType', // 검색을 위한 서버의 URL
-		        data: { types: values }, // 선택된 값들을 서버로 전달
+		        url: 'checkedCamping',
+		        data: { 
+		            types: types.join(','),
+		            addresses: addresses.join(','),
+		            page: num
+		        },
 		        type: 'GET',
 		        success: function(result) {
-		            // 검색 결과를 받아서 화면에 표시
-		            displaySearchResult(result);
+		            console.log(result);
 		        }
 		    });
 		}
+	
 		
-		function displaySearchResult(result) {
-		    // 검색 결과를 화면에 표시하는 코드
-		    // 이 부분을 알맞게 수정하여 검색 결과를 표시하도록 구현
-		}
 		
 				
 

@@ -157,5 +157,30 @@
 			 BY
 			 	CAMP_NO ASC
 	</select>
-
+	
+	<select id="checkCampingCount" resultMap="campingResultMap">
+	    SELECT
+	        COUNT(*)
+	    FROM
+	        TB_CAMP
+	    <where>
+	        <if test="types != null and types.length > 0">
+	            AND TYPE IN
+	            <foreach collection="types" item="type" open="(" separator="," close=")">
+	                #{type}
+	            </foreach>
+	        </if>
+	        <if test="addresses != null and addresses.length > 0">
+	            AND ADDRESS IN
+	            <foreach collection="addresses" item="address" open="(" separator="," close=")">
+	                #{address}
+	            </foreach>
+	        </if>
+	    </where>
+	    ORDER BY
+	        CAMP_NO ASC
+	</select>
+	
+	
+	
 </mapper>
