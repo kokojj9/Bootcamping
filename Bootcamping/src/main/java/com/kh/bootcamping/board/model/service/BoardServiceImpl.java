@@ -46,7 +46,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board selectBoard(int boardNo) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
@@ -58,7 +59,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int delete(int boardNo) {
-		// TODO Auto-generated method stub
+	
+		
 		return 0;
 	}
 

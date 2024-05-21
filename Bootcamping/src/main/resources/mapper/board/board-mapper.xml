@@ -17,12 +17,30 @@
      SELECT 
   					COUNT(*)		
        FROM	
-  					BAORD	
+  					TB_BOARD	
       WHERE	
   					STATUS='Y'
 
   	</select>
   	
+  	<select id="selectList" resultType="_boardResult">
+  		SELECT
+  				CATEGORY_CODE,
+  				BOARD_WRITER,
+  				BOARD_TITLE,
+  				BOARD_CONTENT,
+  				BOARD_CREATEDATE,
+  				COUNT
+  		FROM
+  				TB_BOARD	
+  		WHERE			
+  				STATUS='Y'
+  		ORDER
+  			BY
+  				BOARD_NO DESC		
+  	
+  	
+  	</select>
   	
   	
 =======
@@ -74,4 +92,4 @@
 
 </mapper>
 
->>>>>>> 4b3b6bf23df571db898a032bc80166f3a59f3a39
+
