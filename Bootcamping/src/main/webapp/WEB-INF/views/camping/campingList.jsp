@@ -513,7 +513,54 @@
 		        },
 		        type: 'GET',
 		        success: function(result) {
-		            //console.log(result);
+		            console.log(result);
+					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					let str = '';
+					
+					for(let i = 0; i <result.checkCamping.length; i++){
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.checkCamping[i].campNo +'">'
+						    
+							 + '<img class="card-img-top" src="'+result.checkCamping[i].campImg+'">'
+							 + '<div class="card-body">'
+							 + '<h4 class="card-title">'+result.checkCamping[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.checkCamping[i].address+'</h5>'
+					    	 + '<p>'+result.checkCamping[i].type+'</p>'
+					    	 + '</a>'
+					    	 + '</div>'
+							 + '</div>'
+					}
+					
+					
+					$('.items').html(str);						
+			
+				
+
+
+				
+		var pagination = $('#camp_btn');
+        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+        var pageInfo = result.pageInfo;
+        if(pageInfo.currentPage === 1){
+        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+        }else {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+        }
+        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+        }
+        if (pageInfo.currentPage === pageInfo.maxPage) {
+        	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+        }
+        	else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+        }
+	            
+	            		            
+		            
+		            
 		        }
 		    });
 		}
