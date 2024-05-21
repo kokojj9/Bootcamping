@@ -178,15 +178,15 @@
         <input type="hidden" name="reservationNo" value="${review.reservationNo }"/>
         <input type="hidden" name="memberNo" value="${sessionScope.loginMember.memberNo }" />
                 <div class="star-rating">
-	                <input type="radio" value="1" id="rate1" name="reviewScore"><label
+	                <input type="radio" value="1" id="rate1" name="reviewScore" required><label
 	                    for="rate1">★</label>
-	                <input type="radio" value="2" id="rate2" name="reviewScore"><label
+	                <input type="radio" value="2" id="rate2" name="reviewScore" required><label
 	                    for="rate2">★</label>
-	                <input type="radio" value="3" id="rate3" name="reviewScore"><label
+	                <input type="radio" value="3" id="rate3" name="reviewScore" required><label
 	                    for="rate3">★</label>
-	                <input type="radio" value="4" id="rate4" name="reviewScore"><label
+	                <input type="radio" value="4" id="rate4" name="reviewScore" required><label
 	                    for="rate4">★</label>
-	                <input type="radio" value="5" id="rate5" name="reviewScore"><label
+	                <input type="radio" value="5" id="rate5" name="reviewScore" required><label
 	                    for="rate5">★</label>
                 </div>
         </div>
@@ -203,7 +203,7 @@
                 <div id="file-area">
                       <input type="file" id="input-file"  name="reUpfile"/>
                 	  <br/><br/>  <div>현재 사진 : ${review.reviewPath }</div>
-                </div>/
+                </div>
             </div>           
 
         </div>

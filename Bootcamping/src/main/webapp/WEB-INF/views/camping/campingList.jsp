@@ -237,21 +237,21 @@
             <!--필터링-->
             <div id="kind"><h4>종류</h4></div>
             <div id="kind_list">
-                <label><input type="checkbox" class="list">글램핑</label>
-                <label><input type="checkbox" class="list">카라반</label>
-                <label><input type="checkbox" class="list">일반야영장</label>
-                <label><input type="checkbox" class="list">자동차야영장</label>
+                <label><input type="checkbox" name="type" class="list">글램핑</label>
+                <label><input type="checkbox" name="type" class="list">카라반</label>
+                <label><input type="checkbox" name="type" class="list">일반야영장</label>
+                <label><input type="checkbox" name="type" class="list">자동차야영장</label>
             </div>
             <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" class="list">서울</label>
-                <label><input type="checkbox" class="list">경기</label>
-                <label><input type="checkbox" class="list">인천</label>
-                <label><input type="checkbox" class="list">충청도</label>
-                <label><input type="checkbox" class="list">경상도</label>
-                <label><input type="checkbox" class="list">강원도</label>
-                <label><input type="checkbox" class="list">전라도</label>
-                <label><input type="checkbox" class="list">제주도</label>
+                <label><input type="checkbox" name="address" class="list">서울</label>
+                <label><input type="checkbox" name="address" class="list">경기</label>
+                <label><input type="checkbox" name="address" class="list">인천</label>
+                <label><input type="checkbox" name="address" class="list">충청도</label>
+                <label><input type="checkbox" name="address" class="list">경상도</label>
+                <label><input type="checkbox" name="address" class="list">강원도</label>
+                <label><input type="checkbox" name="address" class="list">전라도</label>
+                <label><input type="checkbox" name="address" class="list">제주도</label>
             </div>
 
             <!--여기까지-->
@@ -392,7 +392,7 @@
 		
 		
 		
-		/**/
+		/*지도*/
 		$(function(){
 			
 			$.ajax({
@@ -484,8 +484,39 @@
 		}
 		
 		
-
+		/*체크박스*/
+		$(function(){
+		    // 체크박스 상태 변화 감지
+		    $('input[type="checkbox"]').change(function() {
+		        // 체크된 체크박스의 값을 가져옴
+		        var checkedValues = $('input:checkbox[name="type"]:checked').map(function() {
+		            return this.value;
+		        }).get();
 		
+		        // 서버에 선택된 값을 전달하여 검색
+		        searchCheckedValues(checkedValues);
+		    });
+		});
+		
+		function searchCheckedValues(values) {
+		    // AJAX를 통해 서버에 선택된 값 전달 및 검색
+		    $.ajax({
+		        url: 'searchCampingByType', // 검색을 위한 서버의 URL
+		        data: { types: values }, // 선택된 값들을 서버로 전달
+		        type: 'GET',
+		        success: function(result) {
+		            // 검색 결과를 받아서 화면에 표시
+		            displaySearchResult(result);
+		        }
+		    });
+		}
+		
+		function displaySearchResult(result) {
+		    // 검색 결과를 화면에 표시하는 코드
+		    // 이 부분을 알맞게 수정하여 검색 결과를 표시하도록 구현
+		}
+		
+				
 
 	</script>
 
