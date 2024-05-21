@@ -82,9 +82,9 @@
     }
 
     .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    color: #fff; 
-    background-color: rgb(22, 160, 133);
-    border-color: rgb(22, 160, 133);
+	    color: #fff; 
+	    background-color: rgb(22, 160, 133);
+	    border-color: rgb(22, 160, 133);
     }
 
 
@@ -139,8 +139,7 @@
     }
     
     #kind_list input[type="checkbox"], #theme_list input[type="checkbox"] {
-    margin-right: 10px;
-    
+	    margin-right: 10px;
     }
 
     #total{
@@ -177,27 +176,20 @@
  
 
    .card-img-top{
-    border-radius: 5%;
+    	border-radius: 5%;
    }
 
    .card  a > h4{
-    text-decoration: none;
-    color: black;
+	    color: black;
    }
    
    .card a > p{
-    text-decoration: none;
-    color: #575757;
+	    color: #575757;
    }
 
    .card  a > h5{
     color: black;
    }
-
-    .card a {
-        text-decoration: none;
-    }
-	
 
     #camp_btn{
 		text-align: center;
@@ -237,21 +229,21 @@
             <!--필터링-->
             <div id="kind"><h4>종류</h4></div>
             <div id="kind_list">
-                <label><input type="checkbox" name="type" class="list">글램핑</label>
-                <label><input type="checkbox" name="type" class="list">카라반</label>
-                <label><input type="checkbox" name="type" class="list">일반야영장</label>
-                <label><input type="checkbox" name="type" class="list">자동차야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="1">글램핑</label>
+                <label><input type="checkbox" name="type" class="list" value="2">카라반</label>
+                <label><input type="checkbox" name="type" class="list" value="3">일반야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="4">자동차야영장</label>
             </div>
             <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" name="address" class="list">서울</label>
-                <label><input type="checkbox" name="address" class="list">경기</label>
-                <label><input type="checkbox" name="address" class="list">인천</label>
-                <label><input type="checkbox" name="address" class="list">충청도</label>
-                <label><input type="checkbox" name="address" class="list">경상도</label>
-                <label><input type="checkbox" name="address" class="list">강원도</label>
-                <label><input type="checkbox" name="address" class="list">전라도</label>
-                <label><input type="checkbox" name="address" class="list">제주도</label>
+                <label><input type="checkbox" name="type" class="list" value="5">서울</label>
+                <label><input type="checkbox" name="type" class="list" value="6">경기</label>
+                <label><input type="checkbox" name="type" class="list" value="7">인천</label>
+                <label><input type="checkbox" name="type" class="list" value="8">충청도</label>
+                <label><input type="checkbox" name="type" class="list" value="9">경상도</label>
+                <label><input type="checkbox" name="type" class="list" value="11">강원도</label>
+                <label><input type="checkbox" name="type" class="list" value="12">전라도</label>
+                <label><input type="checkbox" name="type" class="list" value="13">제주도</label>
             </div>
 
             <!--여기까지-->
@@ -355,7 +347,7 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;">'
-				 + '<a href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
+				 + '<a style="text-decoration:none;"  href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
 			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
@@ -450,7 +442,7 @@
 						for(let i = 0; i <result.searchCampingList.length; i++){
 							
 							str += '<div class="card" style="width:250px;">'
-								 + '<a href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
+								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
 							    
 								 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
 								 + '<div class="card-body">'
