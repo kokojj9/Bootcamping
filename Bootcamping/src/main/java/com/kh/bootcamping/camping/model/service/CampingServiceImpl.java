@@ -65,6 +65,14 @@ public class CampingServiceImpl implements CampingService {
 
 	}
 
+	@Override
+	public List<Camping> checkCamping(PageInfo pi, CampingCheck campingCheck) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+				
+		return campingRepository.checkCamping(sqlSession, campingCheck, rowBounds);
+	}
+
 
 
 

@@ -158,14 +158,14 @@
 			 	CAMP_NO ASC
 	</select>
 	
-	<select id="checkCampingCount" resultType="int">
+	<select id="checkCampingCount" resultType="_int">
 	    SELECT
 	        COUNT(*)
 	    FROM
 	        TB_CAMP
 	    <where>
 	        <if test="types != null and types.length > 0">
-	            <foreach collection="types" item="type" separator="AND">
+	            <foreach collection="types" item="type" open="(" separator="OR" close=")">
 	                TYPE LIKE '%' || #{type} || '%'
 	            </foreach>
 	        </if>
@@ -173,7 +173,33 @@
 	            <if test="types != null and types.length > 0">
 	                AND
 	            </if>
-	            <foreach collection="addresses" item="address" separator="AND">
+	            <foreach collection="addresses" item="address" open="(" separator="OR" close=")">
+	                ADDRESS LIKE '%' || #{address} || '%'
+	            </foreach>
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="checkCamping" resultMap="campingResultMap">
+	    SELECT
+	        CAMP_NO,
+	        CAMP_IMG,
+	        CAMP_NAME,
+	        ADDRESS,
+	        TYPE
+	    FROM
+	        TB_CAMP
+	    <where>
+	        <if test="types != null and types.length > 0">
+	            <foreach collection="types" item="type" open="(" separator="OR" close=")">
+	                TYPE LIKE '%' || #{type} || '%'
+	            </foreach>
+	        </if>
+	        <if test="addresses != null and addresses.length > 0">
+	            <if test="types != null and types.length > 0">
+	                AND
+	            </if>
+	            <foreach collection="addresses" item="address" open="(" separator="OR" close=")">
 	                ADDRESS LIKE '%' || #{address} || '%'
 	            </foreach>
 	        </if>
@@ -181,6 +207,6 @@
 	    ORDER BY
 	        CAMP_NO ASC
 	</select>
-	
+		
 	
 </mapper>

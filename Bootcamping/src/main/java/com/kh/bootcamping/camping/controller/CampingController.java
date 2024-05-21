@@ -186,9 +186,9 @@ public class CampingController {
 	     
 		 map.put("pageInfo", pi);
 		
-		System.out.println(map);
+		 System.out.println(map);
 		
-		return new Gson().toJson(map);
+		 return new Gson().toJson(map);
 	
 	}
 	
@@ -197,7 +197,7 @@ public class CampingController {
 	 */
 	@ResponseBody
 	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
-	public void checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
+	public String checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
 		
 		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 5);
 		
@@ -207,6 +207,13 @@ public class CampingController {
 		
 		HashMap<String, Object> map = new HashMap();
 		
+		map.put("checkCamping", campingService.checkCamping(pi, campingCheck));
+		
+		map.put("pageInfo", pi);
+		
+		System.out.println(map);
+		
+		return new Gson().toJson(map);
 		
 	}
 	

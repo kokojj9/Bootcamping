@@ -24,4 +24,5 @@ public interface CampingService {
 	
 	int checkCampingCount (CampingCheck campingCheck);
 	 
+	List<Camping> checkCamping (PageInfo pi, CampingCheck campingCheck);
 }

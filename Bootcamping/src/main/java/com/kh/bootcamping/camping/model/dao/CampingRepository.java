@@ -45,5 +45,9 @@ public class CampingRepository {
 		return sqlSession.selectOne("campingMapper.checkCampingCount", campingCheck);
 	}
 	
+	public List<Camping> checkCamping (SqlSession sqlSession, CampingCheck campingCheck, RowBounds rowBounds){
+		return sqlSession.selectList("campingMapper.checkCamping", campingCheck, rowBounds);
+	}
+	
 	
 }
