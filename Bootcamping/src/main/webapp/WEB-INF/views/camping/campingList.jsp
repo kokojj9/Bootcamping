@@ -229,21 +229,21 @@
             <!--필터링-->
             <div id="kind"><h4>종류</h4></div>
             <div id="kind_list">
-                <label><input type="checkbox" name="type" class="list" value="1">글램핑</label>
-                <label><input type="checkbox" name="type" class="list" value="2">카라반</label>
-                <label><input type="checkbox" name="type" class="list" value="3">일반야영장</label>
-                <label><input type="checkbox" name="type" class="list" value="4">자동차야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="글램핑">글램핑</label>
+                <label><input type="checkbox" name="type" class="list" value="카라반">카라반</label>
+                <label><input type="checkbox" name="type" class="list" value="일반야영장">일반야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="자동차야영장">자동차야영장</label>
             </div>
             <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" name="type" class="list" value="5">서울</label>
-                <label><input type="checkbox" name="type" class="list" value="6">경기</label>
-                <label><input type="checkbox" name="type" class="list" value="7">인천</label>
-                <label><input type="checkbox" name="type" class="list" value="8">충청도</label>
-                <label><input type="checkbox" name="type" class="list" value="9">경상도</label>
-                <label><input type="checkbox" name="type" class="list" value="11">강원도</label>
-                <label><input type="checkbox" name="type" class="list" value="12">전라도</label>
-                <label><input type="checkbox" name="type" class="list" value="13">제주도</label>
+                <label><input type="checkbox" name="type" class="list" value="서울">서울</label>
+                <label><input type="checkbox" name="type" class="list" value="경기">경기</label>
+                <label><input type="checkbox" name="type" class="list" value="인천">인천</label>
+                <label><input type="checkbox" name="type" class="list" value="충청">충청도</label>
+                <label><input type="checkbox" name="type" class="list" value="경상">경상도</label>
+                <label><input type="checkbox" name="type" class="list" value="강원">강원도</label>
+                <label><input type="checkbox" name="type" class="list" value="전라">전라도</label>
+                <label><input type="checkbox" name="type" class="list" value="제주">제주도</label>
             </div>
 
             <!--여기까지-->
