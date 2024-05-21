@@ -202,7 +202,14 @@
             <div id="imgUpload">
                 <div id="file-area">
                       <input type="file" id="input-file"  name="reUpfile"/>
-                	  <br/><br/>  <div>현재 사진 : ${review.reviewPath }</div>
+                      
+                      <c:if test="${not empty review.reviewPath }">
+                	  	<br/><br/>  <div>현재 사진 : ${review.reviewPath }</div>
+                		<input type="hidden" value="${review.reviewPath }" name="reviewPath"/>
+                	  </c:if>
+                
+                
+                
                 </div>
             </div>           
 

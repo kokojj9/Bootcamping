@@ -105,8 +105,14 @@
         <div id="reviewTitle"><h4><a href="/bootcamping/detailCamping?contentId=${campNo}">◁</a>&nbsp;리뷰 전체보기</h4></div>
             
         <div id="camp_review">
-     	
-     	
+        
+        <c:choose>
+	  	<c:when test="${empty requestScope.review }">
+        	   
+        	   	<h4 style="text-align:center; padding-top : 100px;">리뷰가 존재하지 않습니다.</h4>                       	   
+        	               		  	
+	  	</c:when>
+	  	<c:otherwise>
 
      	<c:forEach items="${review }" var="review">
             <div class="review_list">
@@ -137,6 +143,7 @@
 		</c:forEach>
 
 
+
             <div class="paging-area" align="center";>
                 <c:choose>
                 	<c:when test="${pageInfo.currentPage eq 1 }">
@@ -163,6 +170,8 @@
    				</c:choose>   					
             
             </div>
+           </c:otherwise>
+		</c:choose>
 	    </div>
 	  </div>
   

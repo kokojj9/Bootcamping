@@ -47,7 +47,7 @@
 		        NVL(CAMP_PHONE, '02-123-1234') "CAMP_PHONE",
 		        DETAIL_ADDRRESS,
 		        NVL(INTRO, '힐링이 되는 캠핑, 아름다운 추억이 될 수 있도록 오시는 모든 고객분들을 정성껏 모시겠습니다.소중한 시간 가족, 동료와 함께 할 캠핑장을 찾으신다면 저희 캠핑장으로 오세요. 후회없는 편안한 힐링쉼터, 아름다운 자연 경관과 함께 휴식을! 여러분들의 사랑 그리고 우정과 함께 따뜻한 추억을 만들 수 있도록 고객 한분 한분 가족처럼 모시겠습니다.') "INTRO", 
-		        REPLACE(NVL(SERVICE, '침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실'), ',' , '  ' ) "SERVICE",
+		        REPLACE(NVL(SERVICE, '침대,에어컨,냉장고,유무선인터넷,난방기구,취사도구,내부화장실'), ',' , '		' ) "SERVICE",
 		        NVL(CAMP_LOCATION, '산') "CAMP_LOCATION",
 		        TYPE,
 		        CAMP_IMG,
@@ -157,5 +157,56 @@
 			 BY
 			 	CAMP_NO ASC
 	</select>
-
+	
+	<select id="checkCampingCount" resultType="_int">
+	    SELECT
+	        COUNT(*)
+	    FROM
+	        TB_CAMP
+	    <where>
+	        <if test="types != null and types.length > 0">
+	            <foreach collection="types" item="type" open="(" separator="OR" close=")">
+	                TYPE LIKE '%' || #{type} || '%'
+	            </foreach>
+	        </if>
+	        <if test="addresses != null and addresses.length > 0">
+	            <if test="types != null and types.length > 0">
+	                AND
+	            </if>
+	            <foreach collection="addresses" item="address" open="(" separator="OR" close=")">
+	                ADDRESS LIKE '%' || #{address} || '%'
+	            </foreach>
+	        </if>
+	    </where>
+	</select>
+	
+	<select id="checkCamping" resultMap="campingResultMap">
+	    SELECT
+	        CAMP_NO,
+	        CAMP_IMG,
+	        CAMP_NAME,
+	        ADDRESS,
+	        TYPE
+	    FROM
+	        TB_CAMP
+	    <where>
+	        <if test="types != null and types.length > 0">
+	            <foreach collection="types" item="type" open="(" separator="OR" close=")">
+	                TYPE LIKE '%' || #{type} || '%'
+	            </foreach>
+	        </if>
+	        <if test="addresses != null and addresses.length > 0">
+	            <if test="types != null and types.length > 0">
+	                AND
+	            </if>
+	            <foreach collection="addresses" item="address" open="(" separator="OR" close=")">
+	                ADDRESS LIKE '%' || #{address} || '%'
+	            </foreach>
+	        </if>
+	    </where>
+	    ORDER BY
+	        CAMP_NO ASC
+	</select>
+		
+	
 </mapper>

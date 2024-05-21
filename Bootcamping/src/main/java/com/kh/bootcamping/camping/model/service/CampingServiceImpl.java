@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.camping.model.dao.CampingRepository;
 import com.kh.bootcamping.camping.model.vo.Camping;
+import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.Site;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
@@ -57,13 +58,22 @@ public class CampingServiceImpl implements CampingService {
 		
 		return campingRepository.searchList(sqlSession, keyword, rowBounds);
 	}
-	
-	/*
-	@Override
-	public List<Camping> searchList(String keyword) {
 
-		return campingRepository.searchList(sqlSession, keyword);
+	@Override
+	public int checkCampingCount(CampingCheck campingCheck) {
+		return campingRepository.checkCampingCount(sqlSession, campingCheck);
+
 	}
-*/
+
+	@Override
+	public List<Camping> checkCamping(PageInfo pi, CampingCheck campingCheck) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+				
+		return campingRepository.checkCamping(sqlSession, campingCheck, rowBounds);
+	}
+
+
+
 
 }

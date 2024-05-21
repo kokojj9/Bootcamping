@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
-import com.kh.bootcamping.camping.model.vo.Camping;
+import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.common.template.PropertyTemplate;
@@ -187,22 +186,36 @@ public class CampingController {
 	     
 		 map.put("pageInfo", pi);
 		
-		System.out.println(map);
+		 System.out.println(map);
 		
-		return new Gson().toJson(map);
+		 return new Gson().toJson(map);
 	
 	}
 	
 	/**
 	 * 캠핑장 체크박스 조회
 	 */
-	/*
 	@ResponseBody
 	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
-	public String checkedCamping(@RequestParam(value="page", defaultValue="1") int page, String types) {
+	public String checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
+		
+		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 5);
+		
+		System.out.println(campingCheck);
+		
+		System.out.println(campingService.checkCampingCount(campingCheck));
+		
+		HashMap<String, Object> map = new HashMap();
+		
+		map.put("checkCamping", campingService.checkCamping(pi, campingCheck));
+		
+		map.put("pageInfo", pi);
+		
+		System.out.println(map);
+		
+		return new Gson().toJson(map);
 		
 	}
-	*/
 	
 	
 }

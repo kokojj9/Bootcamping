@@ -157,7 +157,7 @@
     }
 
     .heart {
-        font-size: 50px;
+        font-size: 45px;
         font-weight: 100;
         cursor: pointer;
     }
@@ -338,7 +338,7 @@
         <!-- 시설 -->
         <div id="service">
             <h4>시설 환경</h4>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>${camping.service }</p></div>
+            <div id="service_list" style="width: 100%; float: left; text-align: center; margin-top: 10px;">${camping.service }</div>
         </div>
 
         <!-- 배치도 -->

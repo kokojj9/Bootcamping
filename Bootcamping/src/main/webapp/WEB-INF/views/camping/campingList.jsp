@@ -82,9 +82,9 @@
     }
 
     .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    color: #fff; 
-    background-color: rgb(22, 160, 133);
-    border-color: rgb(22, 160, 133);
+	    color: #fff; 
+	    background-color: rgb(22, 160, 133);
+	    border-color: rgb(22, 160, 133);
     }
 
 
@@ -139,8 +139,7 @@
     }
     
     #kind_list input[type="checkbox"], #theme_list input[type="checkbox"] {
-    margin-right: 10px;
-    
+	    margin-right: 10px;
     }
 
     #total{
@@ -175,29 +174,25 @@
       margin-top: 10px;
    }
  
+ 	.card-body {
+ 		color : black;
+ 	}
 
    .card-img-top{
-    border-radius: 5%;
+    	border-radius: 5%;
    }
 
    .card  a > h4{
-    text-decoration: none;
-    color: black;
+	    color: black;
    }
    
    .card a > p{
-    text-decoration: none;
-    color: #575757;
+	    color: #575757;
    }
 
    .card  a > h5{
     color: black;
    }
-
-    .card a {
-        text-decoration: none;
-    }
-	
 
     #camp_btn{
 		text-align: center;
@@ -237,21 +232,21 @@
             <!--필터링-->
             <div id="kind"><h4>종류</h4></div>
             <div id="kind_list">
-                <label><input type="checkbox" name="type" class="list">글램핑</label>
-                <label><input type="checkbox" name="type" class="list">카라반</label>
-                <label><input type="checkbox" name="type" class="list">일반야영장</label>
-                <label><input type="checkbox" name="type" class="list">자동차야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="글램핑">글램핑</label>
+                <label><input type="checkbox" name="type" class="list" value="카라반">카라반</label>
+                <label><input type="checkbox" name="type" class="list" value="일반야영장">일반야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="자동차야영장">자동차야영장</label>
             </div>
             <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" name="address" class="list">서울</label>
-                <label><input type="checkbox" name="address" class="list">경기</label>
-                <label><input type="checkbox" name="address" class="list">인천</label>
-                <label><input type="checkbox" name="address" class="list">충청도</label>
-                <label><input type="checkbox" name="address" class="list">경상도</label>
-                <label><input type="checkbox" name="address" class="list">강원도</label>
-                <label><input type="checkbox" name="address" class="list">전라도</label>
-                <label><input type="checkbox" name="address" class="list">제주도</label>
+                <label><input type="checkbox" name="address" class="list" value="서울">서울</label>
+                <label><input type="checkbox" name="address" class="list" value="경기">경기</label>
+                <label><input type="checkbox" name="address" class="list" value="인천">인천</label>
+                <label><input type="checkbox" name="address" class="list" value="충청">충청도</label>
+                <label><input type="checkbox" name="address" class="list" value="경상">경상도</label>
+                <label><input type="checkbox" name="address" class="list" value="강원">강원도</label>
+                <label><input type="checkbox" name="address" class="list" value="전라">전라도</label>
+                <label><input type="checkbox" name="address" class="list" value="제주">제주도</label>
             </div>
 
             <!--여기까지-->
@@ -355,15 +350,15 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;">'
-				 + '<a href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
+				 + '<a style="text-decoration:none;"  href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
 			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
 			     + '<h5 class="card-text">'+item.induty+'</h5>'
 		    	 + '<p>'+item.doNm+'</p>'
+		    	 + '</div>' 
 		    	 + '</a>'
-		    	 + '</div>'
 				 + '</div>'
 		}
 		
@@ -439,43 +434,58 @@
 					
 					$('#totalCamp').text(result.pageInfo.listCount);
 					
-					let str = '';
-					
-					for(let i = 0; i <result.searchCampingList.length; i++){
+					if(result.searchCampingList.length === 0){
 						
-						str += '<div class="card" style="width:250px;">'
-							 + '<a href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
-						    
-							 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
-							 + '<div class="card-body">'
-							 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
-						     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
-					    	 + '<p>'+result.searchCampingList[i].type+'</p>'
-					    	 + '</a>'
-					    	 + '</div>'
-							 + '</div>'
+						alert("해당 캠핑장이 존재하지 않습니다.");
+						location.href = '/bootcamping/camping';
+						
+					} else {
+						let str = '';
+						
+						for(let i = 0; i <result.searchCampingList.length; i++){
+							
+							str += '<div class="card" style="width:250px;">'
+								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
+							    
+								 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
+								 + '<div class="card-body">'
+								 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
+							     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
+						    	 + '<p>'+result.searchCampingList[i].type+'</p>'
+						    	 + '</div>'
+						    	 + '</a>'
+								 + '</div>'
+						}
+						
+						
+						$('.items').html(str);						
 					}
 					
-					
-					$('.items').html(str)
+
 
 					
 			var pagination = $('#camp_btn');
             pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
 
             var pageInfo = result.pageInfo;
-            if(pageInfo.currentPage === 1){
+
+			if(pageInfo.currentPage === 1){
             	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
-            }else {
+            }
+            
+			else {
                 pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
             }
-            for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            
+			for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
                 pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
             }
+            
             if (pageInfo.currentPage === pageInfo.maxPage) {
             	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
             }
-            	else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+            	
+            else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
             }
 
 					
@@ -485,36 +495,91 @@
 		
 		
 		/*체크박스*/
-		$(function(){
-		    // 체크박스 상태 변화 감지
+		$(function() {
 		    $('input[type="checkbox"]').change(function() {
-		        // 체크된 체크박스의 값을 가져옴
-		        var checkedValues = $('input:checkbox[name="type"]:checked').map(function() {
+		        var checkedTypes = $('input:checkbox[name="type"]:checked').map(function() {
+		            return this.value;
+		        }).get();
+		        
+		        var checkedAddresses = $('input:checkbox[name="address"]:checked').map(function() {
 		            return this.value;
 		        }).get();
 		
-		        // 서버에 선택된 값을 전달하여 검색
-		        searchCheckedValues(checkedValues);
+		        searchCheckedValues(checkedTypes, checkedAddresses);
+		        
 		    });
 		});
 		
-		function searchCheckedValues(values) {
-		    // AJAX를 통해 서버에 선택된 값 전달 및 검색
+		function searchCheckedValues(types, addresses, num) {
 		    $.ajax({
-		        url: 'searchCampingByType', // 검색을 위한 서버의 URL
-		        data: { types: values }, // 선택된 값들을 서버로 전달
+		        url: 'checkedCamping',
+		        data: { 
+		            types: types.join(','),
+		            addresses: addresses.join(','),
+		            page: num
+		        },
 		        type: 'GET',
 		        success: function(result) {
-		            // 검색 결과를 받아서 화면에 표시
-		            displaySearchResult(result);
+		        	
+					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					let str = '';
+					
+					for(let i = 0; i <result.checkCamping.length; i++){
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.checkCamping[i].campNo +'">'
+						    
+							 + '<img class="card-img-top" src="'+result.checkCamping[i].campImg+'">'
+							 + '<div class="card-body">'
+							 + '<h4 class="card-title">'+result.checkCamping[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.checkCamping[i].address+'</h5>'
+					    	 + '<p>'+result.checkCamping[i].type+'</p>'					    	 
+					    	 + '</div>'
+					    	 + '</a>'
+							 + '</div>'
+					}
+					
+					
+					$('.items').html(str);						
+			
+				
+
+
+				
+		var pagination = $('#camp_btn');
+		
+        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+        var pageInfo = result.pageInfo;
+        
+        if(pageInfo.currentPage === 1){
+        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+        }
+        
+        else {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+        }
+        
+        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+        }
+       
+        if (pageInfo.currentPage === pageInfo.maxPage) {
+        	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+        }
+        	
+        else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+        }
+	            
+	            		            
+		            
+		            
 		        }
 		    });
 		}
+	
 		
-		function displaySearchResult(result) {
-		    // 검색 결과를 화면에 표시하는 코드
-		    // 이 부분을 알맞게 수정하여 검색 결과를 표시하도록 구현
-		}
 		
 				
 
