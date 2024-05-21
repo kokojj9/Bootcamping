@@ -513,7 +513,7 @@
 		        },
 		        type: 'GET',
 		        success: function(result) {
-		            console.log(result);
+		            //console.log(result);
 		        }
 		    });
 		}

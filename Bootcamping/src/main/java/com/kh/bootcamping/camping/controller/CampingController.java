@@ -194,19 +194,21 @@ public class CampingController {
 	
 	/**
 	 * 캠핑장 체크박스 조회
-	 *//*
+	 */
 	@ResponseBody
 	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
 	public void checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
 		
 		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 5);
 		
+		System.out.println(campingCheck);
+		
 		System.out.println(campingService.checkCampingCount(campingCheck));
 		
 		HashMap<String, Object> map = new HashMap();
 		
 		
-	}*/
+	}
 	
 	
 }
