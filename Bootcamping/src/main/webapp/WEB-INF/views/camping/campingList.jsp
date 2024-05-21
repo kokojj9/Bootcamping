@@ -494,8 +494,7 @@
 		            return this.value;
 		        }).get();
 		
-		        // 서버에 선택된 값을 전달하여 검색
-		        searchCheckedValues(checkedValues);
+		        console.log(checkedValues);
 		    });
 		});
 		
