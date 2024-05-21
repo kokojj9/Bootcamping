@@ -174,6 +174,9 @@
       margin-top: 10px;
    }
  
+ 	.card-body {
+ 		color : black;
+ 	}
 
    .card-img-top{
     	border-radius: 5%;
@@ -354,8 +357,8 @@
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
 			     + '<h5 class="card-text">'+item.induty+'</h5>'
 		    	 + '<p>'+item.doNm+'</p>'
+		    	 + '</div>' 
 		    	 + '</a>'
-		    	 + '</div>'
 				 + '</div>'
 		}
 		
@@ -449,8 +452,8 @@
 								 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
 							     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
 						    	 + '<p>'+result.searchCampingList[i].type+'</p>'
-						    	 + '</a>'
 						    	 + '</div>'
+						    	 + '</a>'
 								 + '</div>'
 						}
 						
@@ -531,9 +534,9 @@
 							 + '<div class="card-body">'
 							 + '<h4 class="card-title">'+result.checkCamping[i].campName+'</h4>'
 						     + '<h5 class="card-text">'+result.checkCamping[i].address+'</h5>'
-					    	 + '<p>'+result.checkCamping[i].type+'</p>'
-					    	 + '</a>'
+					    	 + '<p>'+result.checkCamping[i].type+'</p>'					    	 
 					    	 + '</div>'
+					    	 + '</a>'
 							 + '</div>'
 					}
 					

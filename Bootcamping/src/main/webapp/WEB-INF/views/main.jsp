@@ -15,7 +15,7 @@
 
     #content{
         width: 1200px;
-        height: 1120px;
+        height: 1200px;
         margin: auto;
     }
 
@@ -156,6 +156,7 @@
    
    .card-body{
     height: 100px;
+    color : black;
    }
 
    .card-img-top{
@@ -212,56 +213,51 @@
         <div id="content_3">
             <h4 id="content3_title">추천 캠핑장</h4>
 
-            <div id="all"><a href="">전체보기></a></div>
+            <div id="all"><a href="/bootcamping/camping">전체보기></a></div>
 
-            <div class="items">
-                <div class="card" style="width:300px">
-                        <a href="#">
+             <div class="items" style="padding:50px;">
+   
+                    <div class="card" style="width:250px;">
+                        <a style="text-decoration:none;" href="#">
                         <img class="card-img-top" src="resources/img/backgroundImg.jpg">
                         <div class="card-body">
-                        <h4 class="card-title">캠핑장 이름</h4>
+                        <h5 class="card-text">캠핑장 이름</h5>
                         <h4 class="card-text">종류</h4>
-                        <h5>지역명</h5>
+                        <p>지역명</p>
+                        </div>
                         </a>
                     </div>
-                </div>
-
-                <div class="card" style="width:300px">
-                        <a href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h4 class="card-title">캠핑장 이름</h4>
-                        <h4 class="card-text">종류</h4>
-                        <h5>지역명</h5>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="card" style="width:300px">
-                    <a href="#">
-                    <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                    <div class="card-body">
-                    <h4 class="card-title">캠핑장 이름</h4>
-                    <h4 class="card-text">종류</h4>
-                    <h5>지역명</h5>
-                    </a>
-                </div>
-
-                
-
-            </div>
                     
-            </div>
+                    
+         
+                    <div class="card" style="width:250px;">
+                        <a style="text-decoration:none;" href="#">
+                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
+                        <div class="card-body">
+                        <h5 class="card-text">캠핑장 이름</h5>
+                        <h4 class="card-text">종류</h4>
+                        <p>지역명</p>
+                        </div>
+                        </a>
+                    </div>
+                    
+                    
 
+                    <div class="card" style="width:250px;">
+                        <a style="text-decoration:none;" href="#">
+                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
+                        <div class="card-body">
+                        <h5 class="card-text">캠핑장 이름</h5>
+                        <h4 class="card-text">종류</h4>
+                        <p>지역명</p>
+                        </div>
+                        </a>
+                    </div>
 
-                
-
-              </div>
-        </div>
-
-        <br><br>
-    </div>
-	
+           </div>
+          </div>
+                    
+  
 	<br>
 	<jsp:include page="common/footer.jsp"/>
 
