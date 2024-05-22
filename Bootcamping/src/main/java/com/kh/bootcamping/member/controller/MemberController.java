@@ -27,13 +27,10 @@ import lombok.RequiredArgsConstructor;
 @Controller
 public class MemberController {
 
-	private final MemberService memberService;
-	
-	private final ReservationService reservationService;
-	
-	private final BoardService boardService;
-	
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
+	private final ReservationService reservationService;
+	private final MemberService memberService;
+	private final BoardService boardService;
 	
 	@GetMapping("loginForm")
 	public String forwardToLoginPage() {
