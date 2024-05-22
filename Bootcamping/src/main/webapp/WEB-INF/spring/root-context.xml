@@ -30,6 +30,8 @@
 	</bean>
 	
 	<mybatis-spring:scan base-package="com.kh.bootcamping.member.model.dao"/>
+	<mybatis-spring:scan base-package="com.kh.bootcamping.reservation.model.dao"/>
+	<mybatis-spring:scan base-package="com.kh.bootcamping.board.model.dao"/>
 	
 
 </beans>
