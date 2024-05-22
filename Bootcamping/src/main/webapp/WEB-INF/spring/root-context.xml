@@ -32,4 +32,5 @@
 	
 
 	<mybatis-spring:scan base-package="com.kh.bootcamping.camping.model.dao"/>
+	<mybatis-spring:scan base-package="com.kh.bootcamping.review.model.dao"/>
 </beans>
