@@ -23,7 +23,17 @@ public class ReviewRepository {
 		return sqlSession.selectList("reviewMapper.selectReviewList", campNo, rowBounds);
 	}
 	
+	public Review selectReviewOne(SqlSession sqlSession, int reservationNo) {
+		return sqlSession.selectOne("reviewMapper.selectReviewOne", reservationNo);
+	}
 	
+	public int updateReview(SqlSession sqlSession, Review review) {
+		return sqlSession.update("reviewMapper.updateReview", review);
+	}
+	
+	public int deleteReivew(SqlSession sqlSession, int reservationNo) {
+		return sqlSession.update("reviewMapper.deleteReivew", reservationNo);
+	}
 	
 	
 	

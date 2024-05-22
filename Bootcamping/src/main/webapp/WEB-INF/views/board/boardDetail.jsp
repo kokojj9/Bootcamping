@@ -7,6 +7,20 @@
 <title>게시판 상세보기</title>
 </head>
 <body>
-
+		<jsp:include page="../common/header.jsp"/>
+		
+		
+		
+		<button>수정하기</button>
+		<button>삭제하기</button>
+		
+		
+		
+		
+		
+		
+		
+		<jsp:include page="../common/footer.jsp"/>
+	
 </body>
 </html>

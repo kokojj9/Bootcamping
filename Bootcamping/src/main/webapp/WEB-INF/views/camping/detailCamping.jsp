@@ -47,7 +47,13 @@
 
     #camp_name{width: 70%; height: 5%; margin: auto; border-bottom: 1px solid #e2e2e2;} 
 
-    #camp_info {width: 70%; height: 6%; margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
+    #camp_info {width: 70%; 
+    
+    
+    
+    
+    
+    margin: auto; padding-left: 50px; padding-top: 20px; border-bottom: 1px solid #e2e2e2;} 
 
     #service {width: 70%; height: 3%; margin: auto; padding-top: 20px; border-bottom: 1px solid #e2e2e2;}
 
@@ -151,7 +157,7 @@
     }
 
     .heart {
-        font-size: 50px;
+        font-size: 45px;
         font-weight: 100;
         cursor: pointer;
     }
@@ -256,7 +262,7 @@
 	    height : 180px;
 	   }
     
-    #service_list > p { width : 550px; }
+    #service_list > p { width : 660px; }
     
     #service > h4 { padding-left: 50px;}
     
@@ -271,6 +277,13 @@
     	width : 790px;
     	height : 400px;
     }
+    
+    #reviewScoreColor{
+    	color : #FFBF00;
+    	
+    }
+        
+    
 </style>
 </head>
 <body>
@@ -309,7 +322,7 @@
             </div>
 
             <div id="camp_heart">
-                <div id="camp_share"><a><img src="../resources/img/share.png" width="30px"/></a></div>
+                <div id="camp_share"><a><img src="resources/img/share.png" width="30px"/></a></div>
                 <h1 class="heart white" >♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
@@ -325,7 +338,7 @@
         <!-- 시설 -->
         <div id="service">
             <h4>시설 환경</h4>
-            <div id="service_list" style="width: 70px; float: left; text-align: center; margin-top: 10px;"><p>${camping.service }</p></div>
+            <div id="service_list" style="width: 100%; float: left; text-align: center; margin-top: 10px;">${camping.service }</div>
         </div>
 
         <!-- 배치도 -->
@@ -384,7 +397,7 @@
 			<c:choose>
       		  	<c:when test="${ empty requestScope.site}">
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-10</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -392,7 +405,7 @@
 		                </div>
 		            </div>	 
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-11</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -400,7 +413,7 @@
 		                </div>
 		            </div>			                    		  	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-12</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -408,7 +421,7 @@
 		                </div>
 		            </div>	
 		            <div class="siteList">
-		                <div class="siteImg"><img src="../resources/siteImage/free.webp" width="255"/></div>
+		                <div class="siteImg"><img src="resources/siteImage/free.webp" width="255"/></div>
 		                <div class="siteName">
 		                    <h4>A-13</h4>
 		                    <p>해당 캠핑장 예약하러 가기</p>
@@ -420,7 +433,7 @@
 				<c:when test="${requestScope.site ne null}">
 					<c:forEach var="site" items="${requestScope.site }">
 			            <div class="siteList">
-			                <div class="siteImg"><img src="../${site.sitePath }" width="255"/></div>
+			                <div class="siteImg"><img src="${site.sitePath }" width="255"/></div>
 			                <div class="siteName">
 			                    <h4>${site.siteName }</h4><p>${site.typeName}</p>
 			                    <h5>${site.sitePrice}원</h5>
@@ -459,7 +472,7 @@
 
         <!-- 후기 -->
         <div id="camp_review">
-            <div id="reviewTitle"><h4>리뷰<span id="reviewCount"></span></h4></div>
+            <div id="reviewTitle"><h4><span id="reviewCount"></span></h4></div>
             <div id="reviewEtc"><a href="/bootcamping/review?campNo=${camping.campNo }">더보기 > </a></div>
             
             <div id="reviewListSelect">
@@ -642,11 +655,11 @@
 	                    for(let i in result){
 	                    
 	                    reviewResult += '<div class="review_list">'
-	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ result[i].reviewScore + '</h4>'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result[i].reviewScore + '</span>' + '</h4>'
 	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
 	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
-	                    			  + '<div class="review_img"><img src="../'+ result[i].reviewPath+'"></div>'
+	                    			  + '<div class="review_img"><img src="'+ result[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}

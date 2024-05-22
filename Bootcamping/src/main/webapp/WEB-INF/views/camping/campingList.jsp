@@ -82,9 +82,9 @@
     }
 
     .btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle {
-    color: #fff; 
-    background-color: rgb(22, 160, 133);
-    border-color: rgb(22, 160, 133);
+	    color: #fff; 
+	    background-color: rgb(22, 160, 133);
+	    border-color: rgb(22, 160, 133);
     }
 
 
@@ -139,8 +139,7 @@
     }
     
     #kind_list input[type="checkbox"], #theme_list input[type="checkbox"] {
-    margin-right: 10px;
-    
+	    margin-right: 10px;
     }
 
     #total{
@@ -175,33 +174,28 @@
       margin-top: 10px;
    }
  
+ 	.card-body {
+ 		color : black;
+ 	}
 
    .card-img-top{
-    border-radius: 5%;
+    	border-radius: 5%;
    }
 
    .card  a > h4{
-    text-decoration: none;
-    color: black;
+	    color: black;
    }
    
    .card a > p{
-    text-decoration: none;
-    color: #575757;
+	    color: #575757;
    }
 
    .card  a > h5{
     color: black;
    }
 
-    .card a {
-        text-decoration: none;
-    }
-	
-
     #camp_btn{
-    	width:25%;
-        margin: auto;
+		text-align: center;
     }
     
     #camp_btn a {
@@ -227,22 +221,8 @@
              <!--검색창 부분-->
              <div id="search_form">
                 <div id="search_1">
-                    <div class="dropdown">
-                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                          지역별
-                        </button>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" href="#">서울</a>
-                          <a class="dropdown-item" href="#">경기</a>
-                          <a class="dropdown-item" href="#">강원</a>
-                        </div>
-                      
-                    </div>
-                    
-                    <form action="#" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!">
-                        <input type="submit" value="검색" id="submit_btn">
-                    </form>
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" id="keyword">
+                        <input type="button" value="검색" id="submit_btn" onclick="searchBtn();">
                 </div>
             </div> 
             <!-- 여기까지 -->
@@ -252,20 +232,21 @@
             <!--필터링-->
             <div id="kind"><h4>종류</h4></div>
             <div id="kind_list">
-                <label><input type="checkbox" class="list">글램핑</label>
-                <label><input type="checkbox" class="list">카라반</label>
-                <label><input type="checkbox" class="list">일반야영장</label>
-                <label><input type="checkbox" class="list">자동차야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="글램핑">글램핑</label>
+                <label><input type="checkbox" name="type" class="list" value="카라반">카라반</label>
+                <label><input type="checkbox" name="type" class="list" value="일반야영장">일반야영장</label>
+                <label><input type="checkbox" name="type" class="list" value="자동차야영장">자동차야영장</label>
             </div>
-            <div id="theme"><h4>시설</h4></div>
+            <div id="theme"><h4>지역</h4></div>
             <div id="theme_list">
-                <label><input type="checkbox" class="list">침대</label>
-                <label><input type="checkbox" class="list">에어컨</label>
-                <label><input type="checkbox" class="list">냉장고</label>
-                <label><input type="checkbox" class="list">유무선인터넷</label>
-                <label><input type="checkbox" class="list">난방기구</label>
-                <label><input type="checkbox" class="list">취사도구</label>
-                <label><input type="checkbox" class="list">내부화장실</label>
+                <label><input type="checkbox" name="address" class="list" value="서울">서울</label>
+                <label><input type="checkbox" name="address" class="list" value="경기">경기</label>
+                <label><input type="checkbox" name="address" class="list" value="인천">인천</label>
+                <label><input type="checkbox" name="address" class="list" value="충청">충청도</label>
+                <label><input type="checkbox" name="address" class="list" value="경상">경상도</label>
+                <label><input type="checkbox" name="address" class="list" value="강원">강원도</label>
+                <label><input type="checkbox" name="address" class="list" value="전라">전라도</label>
+                <label><input type="checkbox" name="address" class="list" value="제주">제주도</label>
             </div>
 
             <!--여기까지-->
@@ -287,61 +268,68 @@
 			
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
-  
-                </div>
+
+            </div>
                 
                 
            
                 
-                    <div id="camp_btn">
-	                	<c:choose>
-	                		<c:when test="${pageInfo.currentPage eq 1}">
-		                    	<a class="btn btn-outline-success disabled" href="#"><</a>
-	    					</c:when>
-	    					<c:otherwise>
-	    							<a class="btn btn-outline-success" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
-	    								<
-	    							</a>
-	    					</c:otherwise>				
-	    				</c:choose>
- 
-	                	<c:choose>
-	                		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
-		                    	<a class="btn btn-outline-success disabled" href="#">></a>
-	    					</c:when>
-	    					<c:otherwise>
-	    							<a class="btn btn-outline-success" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
-	    								>
-	    							</a>
-	    					</c:otherwise>				
-	    				</c:choose>   
+            <div id="camp_btn">
+               	<c:choose>
+	               		<c:when test="${pageInfo.currentPage eq 1}">
+	                    	<a class="btn btn-sm disabled" href="#"><</a>
+	   					</c:when>
+	   					<c:otherwise>
+	   							<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage - 1}">
+	   								<
+	   							</a>
+	   					</c:otherwise>				
+	   				</c:choose>
+	   				
+	   				<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
+	                  	<a class="btn btn-sm" href="/bootcamping/camping?page=${p}">${p}</a>
+					</c:forEach>	
+	
+	               	<c:choose>
+	               		<c:when test="${pageInfo.currentPage eq pageInfo.maxPage}">
+	                    	<a class="btn btn-sm disabled" href="#">></a>
+	   					</c:when>
+	   				<c:otherwise>
+	   						<a class="btn btn-sm" href="/bootcamping/camping?page=${pageInfo.currentPage + 1}">
+	   							>
+	   						</a>
+	   				</c:otherwise>				
+   				</c:choose>   
 
                  
-                    </div>
-            </div>
+	              </div>
+	              
+	              
+	       	</div>
+	
+	
+	     </div>
+	            
 
+	
+	     <div id="content_5">
+			<!-- 지도를 표시할 div 입니다 -->
+			<div id="map" style="width:100%;height:880px;"></div>
+			
+			
+	
+			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051&libraries=clusterer"></script>
 
-            </div>
-            
+	
+	
+	     </div>
+	
+	  </div>
 
-
-     <div id="content_5">
-		<!-- 지도를 표시할 div 입니다 -->
-		<div id="map" style="width:100%;height:880px;"></div>
-		
-		
-
-		
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c74456b30df305563e1436aa0f8eb051"></script>
-
-
-
-     </div>
-
-        </div>
-
-		<jsp:include page="../common/footer.jsp"/>
+	
+	 <jsp:include page="../common/footer.jsp"/>
    
+	
 	<script>
 
 		<%--캠핑장 전체 조회--%>
@@ -362,21 +350,20 @@
 			const item = data[i];
 			
 			str += '<div class="card" style="width:250px;">'
-				 + '<a href="camping/detail?contentId='+ item.contentId +'">'
+				 + '<a style="text-decoration:none;"  href="/bootcamping/detailCamping?contentId='+ item.contentId +'">'
 			    
 				 + '<img class="card-img-top" src="'+item.firstImageUrl+'">'
 				 + '<div class="card-body">'
 				 + '<h4 class="card-title">'+item.facltNm+'</h4>'
 			     + '<h5 class="card-text">'+item.induty+'</h5>'
 		    	 + '<p>'+item.doNm+'</p>'
+		    	 + '</div>' 
 		    	 + '</a>'
-		    	 + '</div>'
 				 + '</div>'
 		}
 		
 		
 		$('.items').html(str);
-		
 		
 
 		
@@ -389,65 +376,212 @@
 		// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
 		var map = new kakao.maps.Map(mapContainer, mapOption);
 		
-		// 지도에 마커를 표시합니다 
-		var markerPosition = [];
-		for(var i in data){
-			var positions = {
-			    LatLng: new kakao.maps.LatLng(data[i].mapY, data[i].mapX)
-			}
-			markerPosition.push(positions);
+		
+	    // 마커 클러스터러를 생성합니다 
+	    var clusterer = new kakao.maps.MarkerClusterer({
+	        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+	        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+	        minLevel: 10 // 클러스터 할 최소 지도 레벨 
+	    });
+	 		
+		
+		
+		
+		/*지도*/
+		$(function(){
+			
+			$.ajax({
+				url : 'mapCamping',
+				success : result => {
+					//console.log(result.response.body.items);
+					
+					let positions = result.response.body.items.item;
+					
+					console.log(data);
+
+				
+						
+						
+				        var markers = $(positions).map(function(i, position) {
+				            return new kakao.maps.Marker({
+				                position : new kakao.maps.LatLng(position.mapY, position.mapX)
+				            });
+				        });
+				        
+				        console.log(markers);
+
+				        // 클러스터러에 마커들을 추가합니다
+				        clusterer.addMarkers(markers);
+						
+					
+				}
+			})
+			
+		})
+		
+		
+		/*검색*/
+		
+		function searchBtn(num){
+			
+			$.ajax({
+				url : 'searchCamping',
+				data : {keyword : $('#keyword').val(),
+						page: num },
+				type : 'get',
+				success : result => {
+					console.log(result);
+					
+					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					if(result.searchCampingList.length === 0){
+						
+						alert("해당 캠핑장이 존재하지 않습니다.");
+						location.href = '/bootcamping/camping';
+						
+					} else {
+						let str = '';
+						
+						for(let i = 0; i <result.searchCampingList.length; i++){
+							
+							str += '<div class="card" style="width:250px;">'
+								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
+							    
+								 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
+								 + '<div class="card-body">'
+								 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
+							     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
+						    	 + '<p>'+result.searchCampingList[i].type+'</p>'
+						    	 + '</div>'
+						    	 + '</a>'
+								 + '</div>'
+						}
+						
+						
+						$('.items').html(str);						
+					}
+					
+
+
+					
+			var pagination = $('#camp_btn');
+            pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+            var pageInfo = result.pageInfo;
+
+			if(pageInfo.currentPage === 1){
+            	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+            }
+            
+			else {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+            }
+            
+			for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+            }
+            
+            if (pageInfo.currentPage === pageInfo.maxPage) {
+            	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+            }
+            	
+            else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+            }
+
+					
+				}
+			})
 		}
 		
-		console.log(markerPosition);
+		
+		/*체크박스*/
+		$(function() {
+		    $('input[type="checkbox"]').change(function() {
+		        var checkedTypes = $('input:checkbox[name="type"]:checked').map(function() {
+		            return this.value;
+		        }).get();
+		        
+		        var checkedAddresses = $('input:checkbox[name="address"]:checked').map(function() {
+		            return this.value;
+		        }).get();
+		
+		        searchCheckedValues(checkedTypes, checkedAddresses);
+		        
+		    });
+		});
+		
+		function searchCheckedValues(types, addresses, num) {
+		    $.ajax({
+		        url: 'checkedCamping',
+		        data: { 
+		            types: types.join(','),
+		            addresses: addresses.join(','),
+		            page: num
+		        },
+		        type: 'GET',
+		        success: function(result) {
+		        	
+					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					let str = '';
+					
+					for(let i = 0; i <result.checkCamping.length; i++){
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.checkCamping[i].campNo +'">'
+						    
+							 + '<img class="card-img-top" src="'+result.checkCamping[i].campImg+'">'
+							 + '<div class="card-body">'
+							 + '<h4 class="card-title">'+result.checkCamping[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.checkCamping[i].address+'</h5>'
+					    	 + '<p>'+result.checkCamping[i].type+'</p>'					    	 
+					    	 + '</div>'
+					    	 + '</a>'
+							 + '</div>'
+					}
+					
+					
+					$('.items').html(str);						
+			
+				
 
-		for (var i = 0; i < markerPosition.length; i++) {
-		    var marker = new kakao.maps.Marker({
-		        map: map,
-		        position: markerPosition[i].LatLng
+
+				
+		var pagination = $('#camp_btn');
+		
+        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+        var pageInfo = result.pageInfo;
+        
+        if(pageInfo.currentPage === 1){
+        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+        }
+        
+        else {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+        }
+        
+        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+        }
+       
+        if (pageInfo.currentPage === pageInfo.maxPage) {
+        	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+        }
+        	
+        else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+        }
+	            
+	            		            
+		            
+		            
+		        }
 		    });
 		}
-
-
-		// 커스텀 오버레이에 표시할 컨텐츠 입니다
-		// 커스텀 오버레이는 아래와 같이 사용자가 자유롭게 컨텐츠를 구성하고 이벤트를 제어할 수 있기 때문에
-		// 별도의 이벤트 메소드를 제공하지 않습니다 
-		var content = '<div class="wrap">' + 
-		            '    <div class="info">' + 
-		            '        <div class="title">' + 
-		            '            카카오 스페이스닷원' + 
-		            '            <div class="close" onclick="closeOverlay()" title="닫기"></div>' + 
-		            '        </div>' + 
-		            '        <div class="body">' + 
-		            '            <div class="img">' +
-		            '                <img src="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/thumnail.png" width="73" height="70">' +
-		            '           </div>' + 
-		            '            <div class="desc">' + 
-		            '                <div class="ellipsis">제주특별자치도 제주시 첨단로 242</div>' + 
-		            '                <div class="jibun ellipsis">(우) 63309 (지번) 영평동 2181</div>' + 
-		            '                <div><a href="https://www.kakaocorp.com/main" target="_blank" class="link">홈페이지</a></div>' + 
-		            '            </div>' + 
-		            '        </div>' + 
-		            '    </div>' +    
-		            '</div>';
-
-		// 마커 위에 커스텀오버레이를 표시합니다
-		// 마커를 중심으로 커스텀 오버레이를 표시하기위해 CSS를 이용해 위치를 설정했습니다
-		var overlay = new kakao.maps.CustomOverlay({
-		    content: content,
-		    map: map,
-		    position: marker.getPosition()       
-		});
-
-		// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-		kakao.maps.event.addListener(marker, 'click', function() {
-		    overlay.setMap(map);
-		});
-
-		// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다.
+	
 		
 		
-		
-		
+				
 
 	</script>
 

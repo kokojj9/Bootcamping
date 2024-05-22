@@ -7,10 +7,12 @@
 <title>게시판 수정하기</title>
 </head>
 <body>
+		<jsp:include page="../common/header.jsp"/>
+		
 
 
 
 		
-
+		<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

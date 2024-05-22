@@ -62,6 +62,7 @@
 							<th>제목</th>	
 							<th>본문내용</th>	
 							<th>작성일</th>	
+							<th>조회수</th>	
 						</tr>
 					</thead>
 					
@@ -79,7 +80,7 @@
 				<script>
 					$(function(){
 						
-						ajax
+						
 					});
 					
 				

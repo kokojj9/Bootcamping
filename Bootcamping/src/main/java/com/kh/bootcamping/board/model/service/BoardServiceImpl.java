@@ -26,14 +26,16 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public int selectListCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return boardRepository.selectListCount(sqlSession);
 	}
 
 	@Override
 	public List<Board> selectList(PageInfo pi) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		int offset=(pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds= new RowBounds(offset,pi.getBoardLimit());
+		return boardRepository.selectList(sqlSession,rowBounds);
 	}
 
 	@Override
@@ -44,7 +46,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public Board selectBoard(int boardNo) {
-		// TODO Auto-generated method stub
+		
+		
 		return null;
 	}
 
@@ -56,7 +59,8 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int delete(int boardNo) {
-		// TODO Auto-generated method stub
+	
+		
 		return 0;
 	}
 
