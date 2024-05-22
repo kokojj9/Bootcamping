@@ -217,5 +217,18 @@ public class CampingController {
 		
 	}
 	
+	/**
+	 * 캠핑장 찜하기
+	 */
+	@ResponseBody
+	@PostMapping("insert.heart")
+	public String insertHeart(@RequestParam("memberNo") String memberNo, @RequestParam("campNo") String campNo) {
+		
+		int result = campingService.insertHeart(memberNo, campNo);
+		
+		return result > 0 ? "success" : "fail";
+	}
+	
+	
 	
 }

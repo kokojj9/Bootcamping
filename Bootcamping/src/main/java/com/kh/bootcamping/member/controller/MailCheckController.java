@@ -52,7 +52,6 @@ public class MailCheckController {
 		return validateMail(email, request);
 	}
 	
-	
 	//인증이메일 전송 메서드
 	private String validateMail(String email, HttpServletRequest request) throws MessagingException {
 		Map<String, String> auth = new HashMap<String, String>();
@@ -123,6 +122,5 @@ public class MailCheckController {
 			return "NNNNN";
 		}
 	}
-	
-	
+
 }

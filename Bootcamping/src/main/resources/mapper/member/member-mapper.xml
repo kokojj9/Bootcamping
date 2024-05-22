@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="memberMapper">
+<mapper namespace="com.kh.bootcamping.member.model.dao.MemberMapper">
 
 	<resultMap id="memberResultSet" type="member">
 		<result column="MEMBER_NO"     property="memberNo"/>
@@ -219,8 +219,7 @@
 	        </if>
 	           POSTCODE = #{ postCode },
 			   ROADADDRESS = #{ roadAddress },
-			   DETAILADDRESS = #{ detailAddress },
-	           EMAIL = #{ email }
+			   DETAILADDRESS = #{ detailAddress }
 	     WHERE 
 	           MEMBER_ID = #{memberId}
 	</update>

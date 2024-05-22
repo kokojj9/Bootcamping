@@ -2,29 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="boardMapper">
+<mapper namespace="com.kh.bootcamping.board.model.dao.BoardMapper">
   	
- 	 <resultMap  id="boardResultSet" type="board">
-	    <result column="BOARD_NO" property="boardNo"/>
-	    <result column="BOARD_TITLE" property="boardNo"/>
-	    <result column="BOARD_CONTENT" property="boardNo"/>
-	    <result column="CREATE_DATE" property="boardNo"/>
-	    <result column="UPDATE_DATE" property="boardNo"/>
-	    <result column="STATUS" property="boardNo"/>
- 	 </resultMap>
+	<resultMap  id="boardResultSet" type="board">
+	    <result column="BOARD_NO"      property="boardNo"/>
+	    <result column="BOARD_TITLE"   property="boardTitle"/>
+	    <result column="BOARD_CONTENT" property="boardContent"/>
+	    <result column="CREATE_DATE"   property="createDate"/>
+	    <result column="UPDATE_DATE"   property="updateDate"/>
+	    <result column="STATUS"        property="status"/>
+	</resultMap>
 	    
- 	 <select id="selectListCount" resultType="_int">
+ 	<select id="selectListCount" resultType="_int">
     	 SELECT 
-				COUNT(*)		
-    	   FROM	
-				TB_BOARD	
-    	  WHERE	
-				STATUS='Y'
+  					COUNT(*)		
+  	     FROM	
+  					TB_BOARD	
+  	    WHERE	
+  					STATUS='Y'
 
 	</select>
   	
   	<select id="selectList" resultMap="boardResultSet">
-
   		SELECT
   				CATEGORY_CODE,
   				BOARD_WRITER,
@@ -39,7 +38,6 @@
   		ORDER
   			BY
   				BOARD_NO DESC		
-  	
   	</select>
 
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">
@@ -73,7 +71,6 @@
 		 WHERE
 		       MEMBER_ID = #{ memberId }
 	</select>
-
 
 
 </mapper>

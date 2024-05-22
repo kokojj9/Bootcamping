@@ -3,31 +3,30 @@ package com.kh.bootcamping.review.model.service;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.common.model.vo.PageInfo;
+import com.kh.bootcamping.review.model.dao.ReviewMapper;
 import com.kh.bootcamping.review.model.dao.ReviewRepository;
 import com.kh.bootcamping.review.model.vo.Review;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ReviewServiceImpl implements ReviewService {
 
-	@Autowired
-	private ReviewRepository reviewRepository;
-	
-	@Autowired
-	private SqlSession sqlSession;
+	private final ReviewRepository reviewRepository;
+	private final ReviewMapper reviewMapper;
 	
 	@Override
 	public List<Review> selectReview(String campNo) {
-		return reviewRepository.selectReview(sqlSession, campNo);
+		return reviewMapper.selectReview(campNo);
 	}
 
 	@Override
 	public int selectReviewCount(String campNo) {
-		return reviewRepository.selectReviewCount(sqlSession, campNo);
+		return reviewMapper.selectReviewCount(campNo);
 	}
 
 	@Override
@@ -35,23 +34,23 @@ public class ReviewServiceImpl implements ReviewService {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return reviewRepository.selectReviewList(sqlSession, campNo, rowBounds);
+		return reviewMapper.selectReviewList(campNo, rowBounds);
 	}
 
 	@Override
 	public Review selectReviewOne(int reservationNo) {
-		return reviewRepository.selectReviewOne(sqlSession, reservationNo);
+		return reviewMapper.selectReviewOne(reservationNo);
 	}
 	
 	@Override
 	public int updateReview(Review review) {
-		return reviewRepository.updateReview(sqlSession, review);
+		return reviewMapper.updateReview(review);
 	}
 
 
 	@Override
 	public int deleteReivew(int reservationNo) {
-		return reviewRepository.deleteReivew(sqlSession, reservationNo);
+		return reviewMapper.deleteReivew(reservationNo);
 	}
 
 

@@ -3,9 +3,11 @@ package com.kh.bootcamping.member.controller;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,11 +35,6 @@ public class MemberController {
 	private final ReservationService reservationService;
 	private final MemberService memberService;
 	private final BoardService boardService;
-	
-	@GetMapping("loginForm")
-	public String forwardToLoginPage() {
-		return "member/login";
-	}
 	
 	/**
 	 * 로그인 메서드 내부에서 쿠키저장 메서드를 호출함
@@ -74,33 +71,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-	/***
-	 * 쿠키 생성 메서드
-	 * @param saveId 사용자가 입력한 아이디
-	 * @param response
-	 */
-	private void saveIdCookie(String saveId, HttpServletResponse response) {
-		Cookie saveIdCookie = new Cookie("saveId", saveId);
-		saveIdCookie.setMaxAge(1*60*60*24);
-		response.addCookie(saveIdCookie);
-	}
-	
-	/***
-	 * 쿠키 삭제 메서드
-	 * @param response
-	 */
-	private void deleteIdCookie(HttpServletResponse response) {
-		Cookie saveIdCookie = new Cookie("saveId","");
-		saveIdCookie.setMaxAge(0);
-		response.addCookie(saveIdCookie);
-	}
-	
-	//회원가입 화면 포워딩 메서드
-	@GetMapping("enrollForm")
-	public String forwardToEnrollForm() {
-		return "member/enrollForm";
-	}
-	
 	//아이디 중복체크
 	@ResponseBody
 	@GetMapping("members/{memberId}")
@@ -110,9 +80,10 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("members")
-	public ModelAndView insertMember(Member member, HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(@Valid Member member, BindingResult br, 
+			                         HttpSession session, ModelAndView mv) {
 		
-		if(member.getEmail().equals("") && member.getMemberId().equals("") && member.getMemberPwd().equals("")) {
+		if(br.hasErrors()) {
 			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
 		} else {
 			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
@@ -127,20 +98,6 @@ public class MemberController {
 		}
 		
 		return mv; 
-	}
-	
-	
-	//마이페이지 메서드
-	@GetMapping("myPage")
-	public String forwardMyPage(String memberId, Model model) {
-		model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
-		return "member/myPage";
-	}
-	
-	// 회원 정보 수정 페이지 포워딩 메서드
-	@GetMapping("editForm")
-	public String forwardEditMember(Member member, Model model) {
-		return "member/editForm";
 	}
 	
 	// 회원정보 수정 로그인 메서드 활용
@@ -165,7 +122,7 @@ public class MemberController {
 	 */
 	@ResponseBody
 	@PostMapping("members/edit")
-	public String editMember(Member member) {
+	public String editMember(Member member, HttpSession session) {
 		String result = "NNNNN";
 		
 		if(member != null) {
@@ -177,6 +134,7 @@ public class MemberController {
 			result = memberService.editMember(member) > 0 ? "YYYYY" : "NNNNN";
 		}
 		
+		session.setAttribute("loginMember", memberService.login(member));
 		return result;
 	}
 	
@@ -222,16 +180,6 @@ public class MemberController {
 		return "member/myBoardList";
 	}
 	
-	@GetMapping("searchIdForm")
-	public String forwardSearchId() {
-		return "member/searchMemberId";
-	}
-	
-	@GetMapping("searchPwdForm")
-	public String forwardSearchPwd() {
-		return "member/searchMemberPwd";
-	}
-	
 	@PostMapping("searchId")
 	public String searchId(Model model, String email) {
 		String memberId = memberService.searchId(email);
@@ -253,13 +201,66 @@ public class MemberController {
 		return "member/searchMemberPwd";
 	}
 	
+	/***
+	 * 쿠키 생성 메서드
+	 * @param saveId 사용자가 입력한 아이디
+	 * @param response
+	 */
+	private void saveIdCookie(String saveId, HttpServletResponse response) {
+	    Cookie saveIdCookie = new Cookie("saveId", saveId);
+	    saveIdCookie.setMaxAge(60 * 60 * 24); // 1 day
+	    saveIdCookie.setPath("/"); // 쿠키가 사이트 전역에서 유효하도록 설정
+	    saveIdCookie.setHttpOnly(true); // 클라이언트 측 스크립트에서 쿠키에 접근하지 못하도록 설정
+	    response.addCookie(saveIdCookie);
+	}
+
+	/***
+	 * 쿠키 삭제 메서드
+	 * @param response
+	 */
+	private void deleteIdCookie(HttpServletResponse response) {
+	    Cookie saveIdCookie = new Cookie("saveId", "");
+	    saveIdCookie.setMaxAge(0); // 쿠키 만료
+	    saveIdCookie.setPath("/"); // 경로 설정 일치
+	    response.addCookie(saveIdCookie);
+	}
 	
-<<<<<<< Updated upstream
+	// 로그인 포워딩 메서드
+	@GetMapping("loginForm")
+	public String forwardToLoginPage() {
+		return "member/login";
+	}
 	
+	//회원가입 화면 포워딩 메서드
+	@GetMapping("enrollForm")
+	public String forwardToEnrollForm() {
+		return "member/enrollForm";
+	}
 	
+	//마이페이지 메서드
+	@GetMapping("myPage")
+	public String forwardMyPage(String memberId, Model model) {
+		model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
+		return "member/myPage";
+	}
 	
+	// 회원 정보 수정 페이지 포워딩 메서드
+	@GetMapping("editForm")
+	public String forwardEditMember(Member member, Model model) {
+		return "member/editForm";
+	}
+
+	// 아이디 찾기 포워딩 메서드
+	@GetMapping("searchIdForm")
+	public String forwardSearchId() {
+		return "member/searchMemberId";
+	}
 	
-=======
->>>>>>> Stashed changes
-	
+	// 비밀번호 찾기 포워딩 메서드
+	@GetMapping("searchPwdForm")
+	public String forwardSearchPwd() {
+		return "member/searchMemberPwd";
+	}
+		
+
 }
