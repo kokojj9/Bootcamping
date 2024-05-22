@@ -6,11 +6,11 @@
   	
 	<resultMap  id="boardResultSet" type="board">
 	    <result column="BOARD_NO"      property="boardNo"/>
-	    <result column="BOARD_TITLE"   property="boardNo"/>
-	    <result column="BOARD_CONTENT" property="boardNo"/>
-	    <result column="CREATE_DATE"   property="boardNo"/>
-	    <result column="UPDATE_DATE"   property="boardNo"/>
-	    <result column="STATUS"        property="boardNo"/>
+	    <result column="BOARD_TITLE"   property="boardTitle"/>
+	    <result column="BOARD_CONTENT" property="boardContent"/>
+	    <result column="CREATE_DATE"   property="createDate"/>
+	    <result column="UPDATE_DATE"   property="updateDate"/>
+	    <result column="STATUS"        property="status"/>
 	</resultMap>
 	    
  	<select id="selectListCount" resultType="_int">

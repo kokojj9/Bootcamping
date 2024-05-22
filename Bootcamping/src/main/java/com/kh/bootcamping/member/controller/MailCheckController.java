@@ -28,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class MailCheckController {
 	
 	private final MemberService memberService;
-
 	private final PropertyTemplate pt;
 	
 	/**
@@ -52,7 +51,6 @@ public class MailCheckController {
 	public String searchPwdMail(String email, HttpServletRequest request) throws MessagingException {
 		return validateMail(email, request);
 	}
-	
 	
 	//인증이메일 전송 메서드
 	private String validateMail(String email, HttpServletRequest request) throws MessagingException {
@@ -124,8 +122,6 @@ public class MailCheckController {
 			return "NNNNN";
 		}
 	}
-	
-	
 	
 	
 	
