@@ -178,9 +178,11 @@
 
     #service h4, #seat h4 {font-weight: 700;}
 
-    #seatImg {width: 700px; padding-top:10px} 
+    #seatImg {width: 740px; padding-top:10px} 
 
     #reser_info th {font-weight: 400;}
+    
+    #reser_info h4 {font-weight : 700;}
 
     #reser_info td {
         padding-left: 30px; 
@@ -266,16 +268,19 @@
     
     #service > h4 { padding-left: 50px;}
     
-
-
-  .carousel-inner img {
-    width: 100%;
-    height: 100%;
-  }
-
-   .carousel-inner {
+	.carousel-item {
     	width : 790px;
-    	height : 400px;
+    	height : 410px;
+	}
+	
+    .carousel-item img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-inner {
+    	width : 790px;
+    	height : 410px;
     }
     
     #reviewScoreColor{
@@ -338,7 +343,7 @@
         <!-- 시설 -->
         <div id="service">
             <h4>시설 환경</h4>
-            <div id="service_list" style="width: 100%; float: left; text-align: center; margin-top: 10px;">${camping.service }</div>
+            <div id="service_list" style="float: left; margin-top: 10px; padding-left: 50px;">${camping.service }</div>
         </div>
 
         <!-- 배치도 -->
@@ -347,20 +352,20 @@
             <div id="seatImg">
 
 
-		<div id="demo" class="carousel slide" data-ride="carousel">
+			<div id="demo" class="carousel slide" data-ride="carousel">
 		
-		  <!-- The slideshow -->
-		  <div class="carousel-inner">
-		
-		  </div>
-		  
-		  <!-- Left and right controls -->
-		  <a class="carousel-control-prev" href="#demo" data-slide="prev">
-		    <span class="carousel-control-prev-icon"></span>
-		  </a>
-		  <a class="carousel-control-next" href="#demo" data-slide="next">
-		    <span class="carousel-control-next-icon"></span>
-		  </a>
+		  	<!-- The slideshow -->
+			  <div class="carousel-inner">
+			
+			  </div>
+			  
+			  <!-- Left and right controls -->
+			  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+			    <span class="carousel-control-prev-icon"></span>
+			  </a>
+			  <a class="carousel-control-next" href="#demo" data-slide="next">
+			    <span class="carousel-control-next-icon"></span>
+			  </a>
 		</div>
 
             </div>
