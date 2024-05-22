@@ -174,8 +174,9 @@
 
    .card a {
     text-decoration: none;
-}
-    
+   }
+   
+
 </style>
 
 <body>

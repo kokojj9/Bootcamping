@@ -609,7 +609,6 @@
 	        /*이미지*/
 			var data = ${campImg}.response.body.items.item;
 			
-			console.log(data);
 			
 			let str = '';
 			
@@ -643,8 +642,6 @@
 	                type : 'get',
 	                data : {campNo : campNo},
 	                success : result => {
-	                    console.log(result);
-	      	
 	                    
 	                    let reviewResult = '';
 	                    
@@ -771,11 +768,11 @@
         				console.log(result);
         				if(result.length === 0){
         					$('#campReserBtn').attr("disabled", false);
-        					$('#campReserBtn').value = "예약하기";
+        					$('#campReserBtn').text("예약하기");
         					
         				}else{
         					$('#campReserBtn').attr("disabled", true);
-        					$('#campReserBtn').value = "예약마감";
+        					$('#campReserBtn').text("예약마감");
         				}
         			       
         			}
