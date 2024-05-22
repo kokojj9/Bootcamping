@@ -47,7 +47,6 @@ document.getElementById('checkEmailBtn').onclick = () => {
                 email : document.getElementById('email').value 
             },
             success : result => {
-                console.log(result);
                 if(result === 'YYYYY'){
                     document.getElementById('checkAuthCode').style.display = 'block';
                     document.getElementById('email').setAttribute('readonly', true);

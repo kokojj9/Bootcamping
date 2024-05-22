@@ -219,8 +219,7 @@
 	        </if>
 	           POSTCODE = #{ postCode },
 			   ROADADDRESS = #{ roadAddress },
-			   DETAILADDRESS = #{ detailAddress },
-	           EMAIL = #{ email }
+			   DETAILADDRESS = #{ detailAddress }
 	     WHERE 
 	           MEMBER_ID = #{memberId}
 	</update>

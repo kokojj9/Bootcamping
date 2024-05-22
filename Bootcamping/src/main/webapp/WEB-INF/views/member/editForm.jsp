@@ -43,7 +43,7 @@
                 <input type="hidden" id="pwdType" value="N">
 
                 <label for="email">* 이메일 </label>
-                <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" value="${ loginMember.email }" name="email" required> <br>
+                <input type="text" class="form-control" id="email" placeholder="이메일을 입력해주세요" value="${ loginMember.email }" name="email" readonly> <br>
 
                 <label for="address"> &nbsp; 주소 </label> &nbsp;&nbsp;<br>
                 <input type="text" name="postCode" id="postcode" placeholder="우편번호" value="${ loginMember.postCode }">
