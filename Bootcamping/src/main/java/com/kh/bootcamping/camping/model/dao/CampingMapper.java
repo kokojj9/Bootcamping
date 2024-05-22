@@ -8,7 +8,6 @@ import org.apache.ibatis.session.RowBounds;
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.Site;
-import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 @Mapper
