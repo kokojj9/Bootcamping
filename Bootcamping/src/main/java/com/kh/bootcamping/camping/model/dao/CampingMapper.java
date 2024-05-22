@@ -29,6 +29,6 @@ public interface CampingMapper {
 	
 	List<Camping> checkCamping(CampingCheck campingCheck, RowBounds rowBounds);
 	
-	
+	int insertHeart(String memberNo, String campNo);
 	
 }

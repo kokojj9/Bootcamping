@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.kh.bootcaming.review.model.dao.ReviewMapper">
+<mapper namespace="com.kh.bootcamping.review.model.dao.ReviewMapper">
 	
 	<resultMap type="review" id="reviewResultMap">
 		<result column="RESERVATION_NO" property="reservationNo" />
