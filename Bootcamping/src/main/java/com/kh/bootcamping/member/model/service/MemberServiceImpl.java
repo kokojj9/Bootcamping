@@ -3,9 +3,9 @@ package com.kh.bootcamping.member.model.service;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.bootcamping.member.model.dao.MemberMapper;
 import com.kh.bootcamping.member.model.dao.MemberRepository;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.MyPageInfo;
@@ -16,10 +16,53 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class MemberServiceImpl implements MemberService {
 
-	private final MemberRepository memberRepository;
+	//private final MemberRepository memberRepository;
+	//private final SqlSessionTemplate sqlSession;
+	private final MemberMapper memberMapper;
 	
-	private final SqlSessionTemplate sqlSession;
+	@Override
+	public Member login(Member member) {
+		return memberMapper.login(member);
+	}
+	@Override
+	public int insertAuthCode(Map<String, String> auth) {
+		return memberMapper.insertAuthCode(auth);
+	}
+	@Override
+	public int insertMember(Member member) {
+		return memberMapper.insertMember(member);
+	}
+	@Override
+	public String checkMemberEmail(String email) {
+		return memberMapper.checkMemberEmail(email);
+	}
+	@Override
+	public String checkAuthCode(Map<String, String> auth) {
+		return memberMapper.checkAuthCode(auth);
+	}
+	@Override
+	public String checkMemberId(String memberId) {
+		return memberMapper.checkMemberId(memberId);
+	}
+	@Override
+	public MyPageInfo searchMyPage(String memberId) {
+		return memberMapper.searchMyPage(memberId);
+	}
+	@Override
+	public int editMember(Member member) {
+		return memberMapper.editMember(member);
+	}
+	@Override
+	public String searchId(String email) {
+		return memberMapper.searchId(email);
+	}
+	@Override
+	public String searchPwd(Member member) {
+		return memberMapper.searchPwd(member);
+	}
 	
+	
+	/*
 	@Override
 	public Member login(Member member) {
 		return memberRepository.login(sqlSession, member);
@@ -69,5 +112,5 @@ public class MemberServiceImpl implements MemberService {
 	public String searchPwd(Member member) {
 		return memberRepository.searchPwd(sqlSession, member);
 	}
-
+	*/
 }
