@@ -5,13 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.bootcamping.board.model.service.BoardService;
@@ -24,7 +25,8 @@ import com.kh.bootcamping.reservation.model.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
+@RequestMapping("/members")
 public class MemberController {
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -124,7 +126,7 @@ public class MemberController {
 			}
 		}
 		
-		return mv;
+		return mv; 
 	}
 	
 	
@@ -252,9 +254,12 @@ public class MemberController {
 	}
 	
 	
+<<<<<<< Updated upstream
 	
 	
 	
 	
+=======
+>>>>>>> Stashed changes
 	
 }
