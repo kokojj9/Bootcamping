@@ -70,6 +70,11 @@ public class CampingServiceImpl implements CampingService {
 		return campingMapper.checkCamping(campingCheck, rowBounds);
 	}
 
+	@Override
+	public int insertHeart(String memberNo, String campNo) {
+		return campingMapper.insertHeart(memberNo, campNo);
+	}
+
 
 
 

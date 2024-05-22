@@ -328,7 +328,7 @@
 
             <div id="camp_heart">
                 <div id="camp_share"><a><img src="resources/img/share.png" width="30px"/></a></div>
-                <h1 class="heart white" >♡</h1>
+                <h1 class="heart white" id="white">♡</h1>
                 <h1 class="heart hide" id="red" >♥️</h1>
             </div>
 
@@ -799,6 +799,40 @@
         	        }
         	    });
         	});
+        	
+        	
+        	
+        	
+        	/*찜하기*/
+        	
+        	
+        	let memberNo = "${sessionScope.loginMember.memberNo}";
+
+        	
+        	console.log(memberNo);
+        	console.log(campNo);
+        	
+        	$('#white').click(function(){
+        		
+        		if (memberNo === null || memberNo === '') {
+        			alert('로그인이 필요합니다!');
+        		} else {
+        			$.ajax({
+	       	            url : 'insert.heart',
+	       	            type : 'post',
+	       	            data : { memberNo : memberNo, 
+	       	            		campNo : campNo },
+	       	            success : result => {
+	       	            	console.log(result);
+	       	            }
+        			
+        			});        		
+        			
+        		}
+        	
+        	
+        	})
+        	
         	
         </script>
         

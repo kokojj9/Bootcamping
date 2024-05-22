@@ -207,6 +207,18 @@
 	    ORDER BY
 	        CAMP_NO ASC
 	</select>
+	
+	<insert id="insertHeart">
+		INSERT
+		  INTO
+		  		TB_WISHLIST
+		 VALUES
+		 		(
+		 		#{memberNo},
+		 		#{campNo}
+		 		)
+		
+	</insert>
 		
 	
 </mapper>
