@@ -3,31 +3,26 @@ package com.kh.bootcamping.board.model.service;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.bootcamping.board.model.dao.BoardRepository;
+import com.kh.bootcamping.board.model.dao.BoardMapper;
 import com.kh.bootcamping.board.model.vo.Board;
 import com.kh.bootcamping.board.model.vo.Reply;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 
+import lombok.RequiredArgsConstructor;
 
+@RequiredArgsConstructor
 @Service
 public class BoardServiceImpl implements BoardService {
 
-	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
-	
-	@Autowired
-	private BoardRepository boardRepository;
-	
+	//private SqlSessionTemplate sqlSession;
+	//private BoardRepository boardRepository;
+	private final BoardMapper boardMapper;
 	
 	@Override
 	public int selectListCount() {
-		
-		return boardRepository.selectListCount(sqlSession);
+		return boardMapper.selectListCount();
 	}
 
 	@Override
@@ -35,25 +30,21 @@ public class BoardServiceImpl implements BoardService {
 		
 		int offset=(pi.getCurrentPage()-1)* pi.getBoardLimit();
 		RowBounds rowBounds= new RowBounds(offset,pi.getBoardLimit());
-		return boardRepository.selectList(sqlSession,rowBounds);
+		return boardMapper.selectList(rowBounds);
 	}
 
 	@Override
 	public int increaseCount(int boardNo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public Board selectBoard(int boardNo) {
-		
-		
 		return null;
 	}
 
 	@Override
 	public int select(Board board) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -66,38 +57,35 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int update(Board board) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public List<Reply> selectReply(int boardNo) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public int insertReply(Reply reply) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	public List<Board> findTopBoard() {
-		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	// 아래 메서드는 박재인이 작업함
 	@Override
 	public int selectBoardListCount(String memberId) {
-		return boardRepository.selectBoardListCount(sqlSession, memberId);
+		return boardMapper.selectBoardListCount(memberId);
 	}
 
 	@Override
 	public List<Board> selectBoardList(PageInfo pi, String memberId) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return boardRepository.seleBoardList(sqlSession, memberId, rowBounds);
+		return boardMapper.seleBoardList(memberId, rowBounds);
 	}
 	
 }

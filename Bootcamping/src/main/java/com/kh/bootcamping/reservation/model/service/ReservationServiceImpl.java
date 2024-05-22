@@ -3,38 +3,37 @@ package com.kh.bootcamping.reservation.model.service;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.common.model.vo.PageInfo;
-import com.kh.bootcamping.reservation.model.dao.ReservationRepository;
+import com.kh.bootcamping.reservation.model.dao.ReservationMapper;
 import com.kh.bootcamping.reservation.model.vo.Reservation;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-	@Autowired
-	private ReservationRepository reservationRepository;
-	
-	@Autowired
-	private SqlSession sqlSession;
+	//private ReservationRepository reservationRepository;
+	//private SqlSession sqlSession;
+	private final ReservationMapper reservationMapper;
 
 	@Override
 	public int insertReservation(Reservation reservation) {
-		return reservationRepository.insertReservation(sqlSession, reservation);
+		return reservationMapper.insertReservation(reservation);
 	}
 
 	@Override
 	public int selectReservationListCount(String memberId) {
-		return reservationRepository.selectReservationListCount(sqlSession, memberId);
+		return reservationMapper.selectReservationListCount(memberId);
 	}
 
 	@Override
 	public List<Reservation> selectReservationList(PageInfo pi, String memberId) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		return reservationRepository.selectReservationList(sqlSession, memberId, rowBounds);
+		return reservationMapper.selectReservationList(memberId, rowBounds);
 	}
 
 	
