@@ -13,26 +13,20 @@ import com.kh.bootcamping.board.model.vo.Board;
 public class BoardRepository {
 
 	public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne;
+		return sqlSession.selectOne("boardMapper.selectListCount");
 	}
- 	
 	
-   public int selectBoardListCount(SqlSessionTemplate sqlSession, String memberId) {
-      return sqlSession.selectOne("boardMapper.selectBoardListCount", memberId);
-   }
-
-   public List<Board> seleBoardList(SqlSessionTemplate sqlSession, String memberId, RowBounds rowBounds) {
-      return sqlSession.selectList("boardMapper.seleBoardList", memberId, rowBounds);
-   }
-
-
-public List<Board> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
+	public int selectBoardListCount(SqlSessionTemplate sqlSession, String memberId) {
+	   return sqlSession.selectOne("boardMapper.selectBoardListCount", memberId);
+	}
 	
-	return null;
+	public List<Board> seleBoardList(SqlSessionTemplate sqlSession, String memberId, RowBounds rowBounds) {
+	   return sqlSession.selectList("boardMapper.seleBoardList", memberId, rowBounds);
+	}
+
+	public List<Board> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
+		return null;
+	}
+
 }
 
-
-}
-
-
-}
