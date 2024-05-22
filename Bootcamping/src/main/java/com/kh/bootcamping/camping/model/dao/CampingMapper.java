@@ -3,6 +3,7 @@ package com.kh.bootcamping.camping.model.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
@@ -23,11 +24,11 @@ public interface CampingMapper {
 	
 	int selectSearchCount(String keyword);
 	
-	List<Camping> searchList(PageInfo pi, String keyword);
+	List<Camping> searchList(String keyword, RowBounds rowBounds);
 	
 	int checkCampingCount(CampingCheck campingCheck);
 	
-	List<Camping> checkCamping(PageInfo pi, CampingCheck campingCheck);
+	List<Camping> checkCamping(CampingCheck campingCheck, RowBounds rowBounds);
 	
 	
 	
