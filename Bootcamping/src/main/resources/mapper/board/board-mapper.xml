@@ -2,18 +2,18 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="boardMapper">
+<mapper namespace="boardMapper">
   	
-  <resultMap  id="boardResultSet" type="board">
+ 	 <resultMap  id="boardResultSet" type="board">
     <result column="BOARD_NO" property="boardNo"/>
     <result column="BOARD_TITLE" property="boardNo"/>
     <result column="BOARD_CONTENT" property="boardNo"/>
     <result column="CREATE_DATE" property="boardNo"/>
     <result column="UPDATE_DATE" property="boardNo"/>
     <result column="STATUS" property="boardNo"/>
-  </resultMap>
-    
-  <select id="selectListCount" resultType="_int">
+ 	 </resultMap>
+	    
+ 	 <select id="selectListCount" resultType="_int">
      SELECT 
   					COUNT(*)		
        FROM	
@@ -21,7 +21,7 @@
       WHERE	
   					STATUS='Y'
 
-  	</select>
+	</select>
   	
   	<select id="selectList" resultType="_boardResult">
   		SELECT
@@ -39,12 +39,8 @@
   			BY
   				BOARD_NO DESC		
   	
-  	
   	</select>
   	
-  	
-=======
-
     
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">
 		SELECT
