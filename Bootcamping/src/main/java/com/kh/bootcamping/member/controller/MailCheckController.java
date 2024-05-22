@@ -28,7 +28,6 @@ import lombok.RequiredArgsConstructor;
 public class MailCheckController {
 	
 	private final MemberService memberService;
-
 	private final PropertyTemplate pt;
 	
 	/**
@@ -124,10 +123,6 @@ public class MailCheckController {
 			return "NNNNN";
 		}
 	}
-	
-	
-	
-	
 	
 	
 }

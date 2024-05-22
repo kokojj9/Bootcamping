@@ -2,11 +2,9 @@ package com.kh.bootcamping.member.model.service;
 
 import java.util.Map;
 
-import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.member.model.dao.MemberMapper;
-import com.kh.bootcamping.member.model.dao.MemberRepository;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.MyPageInfo;
 
