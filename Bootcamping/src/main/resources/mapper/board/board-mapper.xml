@@ -4,17 +4,44 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="boardMapper">
+  	
+ 	 <resultMap  id="boardResultSet" type="board">
+	    <result column="BOARD_NO" property="boardNo"/>
+	    <result column="BOARD_TITLE" property="boardNo"/>
+	    <result column="BOARD_CONTENT" property="boardNo"/>
+	    <result column="CREATE_DATE" property="boardNo"/>
+	    <result column="UPDATE_DATE" property="boardNo"/>
+	    <result column="STATUS" property="boardNo"/>
+ 	 </resultMap>
+	    
+ 	 <select id="selectListCount" resultType="_int">
+    	 SELECT 
+				COUNT(*)		
+    	   FROM	
+				TB_BOARD	
+    	  WHERE	
+				STATUS='Y'
 
-	<resultMap  id="boardResultSet" type="board">
-		<result column="BOARD_NO" property="boardNo"/>
-		<result column="BOARD_TITLE" property="boardNo"/>
-		<result column="BOARD_CONTENT" property="boardNo"/>
-		<result column="CREATE_DATE" property="boardNo"/>
-		<result column="UPDATE_DATE" property="boardNo"/>
-		<result column="STATUS" property="boardNo"/>
-	</resultMap>
-	
-
+	</select>
+  	
+  	<select id="selectList" resultMap="boardResultSet">
+  		SELECT
+  				CATEGORY_CODE,
+  				BOARD_WRITER,
+  				BOARD_TITLE,
+  				BOARD_CONTENT,
+  				BOARD_CREATEDATE,
+  				COUNT
+  		FROM
+  				TB_BOARD	
+  		WHERE			
+  				STATUS='Y'
+  		ORDER
+  			BY
+  				BOARD_NO DESC		
+  	
+  	</select>
+  	
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">
 		SELECT
 		       COUNT(BOARD_NO)
@@ -46,16 +73,6 @@
 		 WHERE
 		       MEMBER_ID = #{ memberId }
 	</select>
-
-
-
-
-
-
-
-
-
-
 
 
 
