@@ -17,7 +17,6 @@
    
     <jsp:include page="../common/header.jsp"/>
 
-
     <div class="wrap">
         <h2> 부트캠핑 - 마이페이지</h2>
 
@@ -152,25 +151,7 @@
     
     <jsp:include page="../common/footer.jsp"/>
     
-    <script>
-        
-        let urlList = [
-            'editForm',
-            'myWishList',
-            'myReservations',
-            'myBoards',
-            'myTradeList'
-        ];
-
-        let btn = document.querySelectorAll('.btn');
-
-        btn.forEach((e, i) => {
-            e.onclick = () => {
-                location.href = urlList[i];
-            };
-        });
-
-    </script>
+    <script src="resources/js/member/myPage.js" ></script>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 package com.kh.bootcamping.member.controller;
 
+import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.HashMap;
@@ -11,20 +12,29 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.kh.bootcamping.common.template.PropertyTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
+import com.kh.bootcamping.member.model.vo.ResponseData;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Controller
+@RestController
+@RequestMapping("/mail")
 public class MailCheckController {
 	
 	private final MemberService memberService;
@@ -37,13 +47,25 @@ public class MailCheckController {
 	 * @throws MessagingException
 	 */
 	@ResponseBody
-	@PostMapping(value="mail", produces = "html/text; charset=UTF-8")
-	public String sendMail(String email, HttpServletRequest request) throws MessagingException {
-		if(memberService.checkMemberEmail(email) != null) {
-			return "NNNNN";
+	@PostMapping
+	public ResponseEntity<ResponseData> sendMail(@RequestBody Map<String, String> map
+												 , HttpServletRequest request) throws MessagingException {
+		
+		ResponseData rd = new ResponseData(); 
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+
+		if(memberService.checkMemberEmail(map.get("email")) != null) {
+			rd = ResponseData.builder().ResponseCode("NN")
+			            	 .resultMessage("인증번호 발급 실패 (이메일 중복)")
+			            	 .build();
 		} else {
-			return validateMail(email, request);
+			rd = ResponseData.builder().ResponseCode(validateMail(map.get("email"), request))
+            				 .resultMessage("인증번호 발급 성공")
+            				 .build();
 		}
+		
+		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
 	
 	@ResponseBody
@@ -76,7 +98,8 @@ public class MailCheckController {
 		auth.put("remoteAddr", remoteAddr);
 		auth.put("email", email);
 		auth.put("code", code);
-		if(memberService.insertAuthCode(auth) == 0) return "NNNNN";
+		
+		if(memberService.insertAuthCode(auth) == 0) return "NN";
 		
 		MimeMessage message = impl.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
@@ -86,7 +109,7 @@ public class MailCheckController {
 		helper.setText("인증번호 : " + code);
 		impl.send(message);
 		
-		return "YYYYY";
+		return "YY";
 	}
 	
 	/**
@@ -107,20 +130,31 @@ public class MailCheckController {
 	 * @param authCode 사용자가 입력한 인증코드
 	 */
 	@ResponseBody
-	@GetMapping("mail")
-	public String checkCode(String email, String authCode, HttpServletRequest request) {
-		String remoteAddr = request.getRemoteAddr();
+	@GetMapping
+	public ResponseEntity<ResponseData> checkCode(String email, String authCode
+												  ,HttpServletRequest request) {
 		
+		ResponseData rd = new ResponseData(); 
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		Map<String, String> auth = new HashMap<String, String>();
-		auth.put("authCode", authCode);
-		auth.put("email", email);
+		
+		String remoteAddr = request.getRemoteAddr();
 		auth.put("remoteAddr", remoteAddr);
+		auth.put("email", email);
+		auth.put("authCode", authCode);
 		
 		if(authCode.equals(memberService.checkAuthCode(auth))) {
-			return "YYYYY";
+			rd = ResponseData.builder().ResponseCode("YY")
+				        	 .resultMessage("인증에 성공하였습니다.")
+				        	 .build();
 		} else {
-			return "NNNNN";
+			rd = ResponseData.builder().ResponseCode("NN")
+						     .resultMessage("인증에 실패하였습니다.")
+						     .build();
 		}
+		
+		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
 
 }
