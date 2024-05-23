@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.Site;
+import com.kh.bootcamping.camping.model.vo.WishList;
 import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 @Mapper
@@ -29,6 +30,6 @@ public interface CampingMapper {
 	
 	List<Camping> checkCamping(CampingCheck campingCheck, RowBounds rowBounds);
 	
-	int insertHeart(String memberNo, String campNo);
+	int insertHeart(WishList wishList);
 	
 }

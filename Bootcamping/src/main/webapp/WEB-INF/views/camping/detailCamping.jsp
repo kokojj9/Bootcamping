@@ -807,15 +807,14 @@
         	
         	
         	let memberNo = "${sessionScope.loginMember.memberNo}";
-
-        	
+	
         	console.log(memberNo);
         	console.log(campNo);
         	
         	$('#white').click(function(){
         		
         		if (memberNo === null || memberNo === '') {
-        			alert('로그인이 필요합니다!');
+        			alertify.alert('실패','로그인이 필요합니다!');
         		} else {
         			$.ajax({
 	       	            url : 'insert.heart',
@@ -824,6 +823,7 @@
 	       	            		campNo : campNo },
 	       	            success : result => {
 	       	            	console.log(result);
+	       	            	alertify.alert('성공', '찜 완료!');
 	       	            }
         			
         			});        		
@@ -832,6 +832,8 @@
         	
         	
         	})
+        	
+        	/*찜하기 취소*/
         	
         	
         </script>

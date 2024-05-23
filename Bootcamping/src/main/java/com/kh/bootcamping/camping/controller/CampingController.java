@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
+import com.kh.bootcamping.camping.model.vo.WishList;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.common.template.PropertyTemplate;
@@ -222,9 +223,9 @@ public class CampingController {
 	 */
 	@ResponseBody
 	@PostMapping("insert.heart")
-	public String insertHeart(@RequestParam("memberNo") String memberNo, @RequestParam("campNo") String campNo) {
+	public String insertHeart(WishList wishList) {
 		
-		int result = campingService.insertHeart(memberNo, campNo);
+		int result = campingService.insertHeart(wishList);
 		
 		return result > 0 ? "success" : "fail";
 	}
