@@ -230,6 +230,20 @@ public class CampingController {
 		return result > 0 ? "success" : "fail";
 	}
 	
-	
+	/**
+	 * 캠핑장 찜취소
+	 *//*
+	@ResponseBody
+	@PostMapping("delete.heart")
+	public String deleteHeart(int memberNo) {
+		
+		int result = campingService.deleteHeart(memberNo);
+		
+		System.out.println(result);
+		
+		return result > 0 ? "success" : "fail";
+		
+	}
+	*/
 	
 }

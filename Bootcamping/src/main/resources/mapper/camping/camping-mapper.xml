@@ -219,6 +219,14 @@
 		 		)
 		
 	</insert>
+	
+	<delete id="deleteHeart" parameterType="_int">
+		DELETE
+		  FROM
+		  		TB_WISHLIST
+		 WHERE
+		 		MEMBER_NO = #{memberNo}
+	</delete>
 		
 	
 </mapper>

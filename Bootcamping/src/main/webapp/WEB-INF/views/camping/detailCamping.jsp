@@ -534,7 +534,7 @@
             });
 
 
-            /*하트*/
+            /*하트*//*
             const dislikeBtn = document.querySelector('.white');
             const likeBtn = document.querySelector('.hide');
 
@@ -546,7 +546,7 @@
             likeBtn.onclick = function () {    // 빈하트 클릭했을 때 
                 likeBtn.classList.add('hide');  // 빈하트에 .hide 적용
                 dislikeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
-            }
+            }*/ 
             
             
             /*지도*/
@@ -805,11 +805,23 @@
         	
         	/*찜하기*/
         	
-        	
         	let memberNo = "${sessionScope.loginMember.memberNo}";
+        	
+        	let wishList = window.localStorage.getItem(memberNo + '/' + campNo);
+			
+        	$(function() {
+			    if(wishList === 'red') {
+			        $('#white').addClass('hide');
+			        $('#red').removeClass('hide');
+			    }
+			});		
+        	
+        	
 	
         	console.log(memberNo);
         	console.log(campNo);
+        	
+        	
         	
         	$('#white').click(function(){
         		
@@ -823,7 +835,12 @@
 	       	            		campNo : campNo },
 	       	            success : result => {
 	       	            	console.log(result);
-	       	            	alertify.alert('성공', '찜 완료!');
+		       	             $('#white').addClass('hide'); 
+			       	          $('#red').removeClass('hide');
+			       	          alertify.alert('성공', '찜 완료!');
+			       	          
+			       	       window.localStorage.setItem(memberNo + '/' + campNo, 'red');
+			       	          
 	       	            }
         			
         			});        		
@@ -833,7 +850,20 @@
         	
         	})
         	
-        	/*찜하기 취소*/
+        	/*찜하기 취소
+        	
+        	$('#red').click(function(){
+        		
+        		$.ajax({
+        			url : 'delete.heart',
+        			type : 'post',
+        			data : {memberNo : memberNo},
+        			success : result => {
+        				console.log(result);
+        			}
+        		})
+        		
+        	})*/
         	
         	
         </script>
