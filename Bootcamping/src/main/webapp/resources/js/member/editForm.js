@@ -3,15 +3,17 @@ let memberPwdtag = document.getElementById('memberPwd');
 let changePwdType = document.getElementById('pwdType').value;
 
 document.getElementById('checkPwdBtn').onclick = () => {
+    const data = {
+        memberId : loginMemberId,
+        memberPwd : document.getElementById('checkPwd').value
+    };
+
     $.ajax({
-        url : 'members/editPassword',
+        url : 'members/edit-Password',
         type : 'post',
-        data : {
-            memberId : loginMemberId,
-            memberPwd : document.getElementById('checkPwd').value
-        },
+        data : JSON.stringify(data),
         success : result => {
-            if(result === 'YYYYY') {
+            if(result.responseCode === 'YY') {
                 memberPwdtag.style.display = 'block';
                 changePwdType = 'Y';
             }

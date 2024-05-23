@@ -18,10 +18,10 @@ memberIdTag.onkeyup = () => {
                 url : '/bootcamping/members/check-id/' + memberIdTag.value,
                 type : 'GET',
                 success : result => {
-                    if (result === '') {
-                        checkInfo('id', 'green', '사용 가능한 아이디입니다.')
+                    if (result.responseCode === 'YY') {
+                        checkInfo('id', 'green', result.resultMessage)
                     } else {
-                        checkInfo('id' , 'crimson', '사용할 수 없는 아이디입니다.(아이디 중복)')
+                        checkInfo('id' , 'crimson', result.resultMessage)
                     };
                 }
             });
@@ -40,20 +40,23 @@ document.getElementById('checkEmailBtn').onclick = () => {
         alert('이메일을 입력해주세요!');
     }
     else{
+        const data = {
+            email : document.getElementById('email').value
+        };
+
         $.ajax({
             url : 'mail',
             type : 'post',
-            data : {
-                email : document.getElementById('email').value 
-            },
+            contentType: 'application/json; charset=UTF-8',
+            data: JSON.stringify(data),
             success : result => {
-                if(result === 'YYYYY'){
+                if(result.responseCode === 'YY'){
                     document.getElementById('checkAuthCode').style.display = 'block';
                     document.getElementById('email').setAttribute('readonly', true);
                     document.getElementById('authCode').style.display = 'block';
                     document.getElementById('checkAuthCode').disabled = false;
 
-                    alert('인증번호가 발급되었습니다.');
+                    alert(result.resultMessage);
 
                     var totalTime = 180;
 
@@ -76,7 +79,7 @@ document.getElementById('checkEmailBtn').onclick = () => {
                     }, 1000);
                 }
                 else {
-                    alert('인증번호발급에 실패하였습니다. 이메일을 확인해주세요');
+                    alert(result.resultMessage);
                 }
             }
         });
@@ -84,25 +87,27 @@ document.getElementById('checkEmailBtn').onclick = () => {
 };
 // 코드 인증
 document.getElementById('checkAuthCode').onclick = () => {
+    const data = {
+        email : document.getElementById('email').value,
+        authCode : document.getElementById('authCode').value
+    };
+    
     $.ajax({
         url : 'mail',
         type : 'get',
-        data : {
-            email : document.getElementById('email').value,
-            authCode : document.getElementById('authCode').value
-        },
+        data: data,
         success : result => {
-            if(result == 'YYYYY'){
+            if(result.responseCode === 'YY'){
                 clearInterval(countdown);
-                document.getElementById('timer').textContent = '인증에 성공하였습니다.';
                 document.getElementById('timer').style.color = '#1dc078';
                 enrollFormSubmit.disabled = false;
             }
             else{
                 document.getElementById('email').setAttribute('readonly', false);
-                document.getElementById('timer').textContent = '인증에 실패하였습니다. 다시 입력해주세요';
                 document.getElementById('timer').style.color = 'crimson';
             }
+            
+            document.getElementById('timer').textContent = result.resultMessage;
         }
     });
 };
