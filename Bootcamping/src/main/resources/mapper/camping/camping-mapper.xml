@@ -220,12 +220,14 @@
 		
 	</insert>
 	
-	<delete id="deleteHeart" parameterType="_int">
+	<delete id="deleteHeart">
 		DELETE
 		  FROM
 		  		TB_WISHLIST
 		 WHERE
 		 		MEMBER_NO = #{memberNo}
+		   AND
+		   		CAMP_NO = #{campNo}
 	</delete>
 		
 	

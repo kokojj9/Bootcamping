@@ -857,7 +857,8 @@
         		$.ajax({
         			url : 'delete.heart',
         			type : 'post',
-        			data : {memberNo : memberNo},
+        			data : {memberNo : memberNo,
+        					campNo : campNo},
         			success : result => {
         				console.log(result);
         			}

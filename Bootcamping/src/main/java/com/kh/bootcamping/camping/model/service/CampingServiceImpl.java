@@ -77,8 +77,8 @@ public class CampingServiceImpl implements CampingService {
 	}
 
 	@Override
-	public int deleteHeart(int memberNo) {
-		return campingMapper.deleteHeart(memberNo);
+	public int deleteHeart(WishList wishList) {
+		return campingMapper.deleteHeart(wishList);
 	}
 
 

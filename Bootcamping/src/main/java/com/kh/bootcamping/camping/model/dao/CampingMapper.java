@@ -32,6 +32,6 @@ public interface CampingMapper {
 	
 	int insertHeart(WishList wishList);
 	
-	int deleteHeart(int memberNo);
+	int deleteHeart(WishList wishList);
 	
 }

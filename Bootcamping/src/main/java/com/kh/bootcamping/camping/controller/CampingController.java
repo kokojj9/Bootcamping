@@ -235,9 +235,9 @@ public class CampingController {
 	 */
 	@ResponseBody
 	@PostMapping("delete.heart")
-	public String deleteHeart(int memberNo) {
+	public String deleteHeart(WishList wishList) {
 		
-		int result = campingService.deleteHeart(memberNo);
+		int result = campingService.deleteHeart(wishList);
 		
 		System.out.println(result);
 		
