@@ -1,6 +1,5 @@
 package com.kh.bootcamping.member.controller;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bootcamping.board.controller.CookieController;
 import com.kh.bootcamping.board.model.service.BoardService;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
@@ -33,6 +33,7 @@ public class MemberController {
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	private final ReservationService reservationService;
+	private final CookieController cookieController;
 	private final MemberService memberService;
 	private final BoardService boardService;
 	
@@ -45,15 +46,15 @@ public class MemberController {
 	 * @param response
 	 * @return
 	 */
-	@PostMapping("members/login")
+	@PostMapping("/login")
 	public ModelAndView login(Member member, @RequestParam(defaultValue = "false")String rememberId,
 				              HttpSession session, ModelAndView mv,
 				              HttpServletResponse response) {
 		
 		Member loginMember = memberService.login(member);
 		
-		if(rememberId.equals("true")) saveIdCookie(member.getMemberId(), response);
-		else deleteIdCookie(response);
+		if(rememberId.equals("true")) cookieController.saveIdCookie(member.getMemberId(), response);
+		else cookieController.deleteIdCookie(response);
 				
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
@@ -65,26 +66,20 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("logout")
-	public String logout(HttpSession session) {
-		session.setAttribute("loginMember", null);
-		return "redirect:/";
-	}
-	
 	//아이디 중복체크
 	@ResponseBody
-	@GetMapping("members/{memberId}")
+	@GetMapping("/check-id/{memberId}")
 	public String checkMemberId(@PathVariable(name = "memberId") String memberId) {
 		return memberService.checkMemberId(memberId);
 	}
 	
 	//회원 가입 메서드
-	@PostMapping("members")
-	public ModelAndView insertMember(@Valid Member member, BindingResult br, 
-			                         HttpSession session, ModelAndView mv) {
+	@PostMapping("/register")
+	public ModelAndView insertMember(@Valid Member member, BindingResult br
+			                         ,HttpSession session, ModelAndView mv) {
 		
 		if(br.hasErrors()) {
-			mv.addObject("alertMsg", "회원 가입에 실패했습니다.").setViewName("common/errorPage");
+            mv.addObject("alertMsg", "유효성 검사 실패").setViewName("common/errorPage");
 		} else {
 			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 			member.setMemberPwd(encPwd);
@@ -102,7 +97,7 @@ public class MemberController {
 	
 	// 회원정보 수정 로그인 메서드 활용
 	@ResponseBody
-	@PostMapping("members/editPassword")
+	@PostMapping("/edit-Password")
 	public String editPassword(Member member) {
 		Member loginMember = memberService.login(member);
 		
@@ -121,7 +116,7 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@PostMapping("members/edit")
+	@PostMapping("/edit")
 	public String editMember(Member member, HttpSession session) {
 		String result = "NNNNN";
 		
@@ -145,7 +140,7 @@ public class MemberController {
 	 * @param page
 	 * @return
 	 */
-	@GetMapping("reservations")
+	@GetMapping("/reservations")
 	public String selectMemberReservationList(Model model, String memberId, int page) {
 		
 		PageInfo pi = Pagination.getPageInfo(reservationService.selectReservationListCount(memberId), 
@@ -166,7 +161,7 @@ public class MemberController {
 	 * @param page
 	 * @return
 	 */
-	@GetMapping("boards")
+	@GetMapping("/boards")
 	public String selectMemberBoardList(Model model, String memberId, int page) {
 		
 		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
@@ -180,7 +175,7 @@ public class MemberController {
 		return "member/myBoardList";
 	}
 	
-	@PostMapping("searchId")
+	@PostMapping("/search-Id")
 	public String searchId(Model model, String email) {
 		String memberId = memberService.searchId(email);
 		if(memberId != null) {
@@ -191,7 +186,7 @@ public class MemberController {
 		return "common/errorPage";
 	}
 	
-	@PostMapping("searchPwd")
+	@PostMapping("/search-Password")
 	public String searchPwd(HttpSession session, Member member) {
 		if(memberService.searchPwd(member) != null) {
 			return "member/editPwd";
@@ -201,30 +196,8 @@ public class MemberController {
 		return "member/searchMemberPwd";
 	}
 	
-	/***
-	 * 쿠키 생성 메서드
-	 * @param saveId 사용자가 입력한 아이디
-	 * @param response
-	 */
-	private void saveIdCookie(String saveId, HttpServletResponse response) {
-	    Cookie saveIdCookie = new Cookie("saveId", saveId);
-	    saveIdCookie.setMaxAge(60 * 60 * 24); // 1 day
-	    saveIdCookie.setPath("/"); // 쿠키가 사이트 전역에서 유효하도록 설정
-	    saveIdCookie.setHttpOnly(true); // 클라이언트 측 스크립트에서 쿠키에 접근하지 못하도록 설정
-	    response.addCookie(saveIdCookie);
-	}
 
-	/***
-	 * 쿠키 삭제 메서드
-	 * @param response
-	 */
-	private void deleteIdCookie(HttpServletResponse response) {
-	    Cookie saveIdCookie = new Cookie("saveId", "");
-	    saveIdCookie.setMaxAge(0); // 쿠키 만료
-	    saveIdCookie.setPath("/"); // 경로 설정 일치
-	    response.addCookie(saveIdCookie);
-	}
-	
+
 		
 
 }

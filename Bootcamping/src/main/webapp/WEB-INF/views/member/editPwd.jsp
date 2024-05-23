@@ -33,6 +33,7 @@
 
 </head>
 <body>
+
     <jsp:include page="../common/header.jsp"/>
 
     <div id="wrap">
@@ -40,7 +41,7 @@
             <div class="">비밀번호 변경</div>
         </div>
 
-        <form action="editPwd" method="post">
+        <form action="/bootcamping/members/edit-Password" method="post">
             <div class="editPwd_form">
                 <label for="memberPwd" class="">비밀번호 : </label>
                 <input type="text" id="memberId" placeholder="변경할 비밀번호를 입력해주세요" name="memberId" required> <br>
@@ -55,5 +56,6 @@
     </div>
 
     <jsp:include page="../common/footer.jsp"/>
+    
 </body>
 </html>

@@ -23,6 +23,17 @@
 	
 	<context:component-scan base-package="com.kh.bootcamping" />
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/myPage"/>
+			<mapping path="/editForm"/>
+			<mapping path="/myWishList"/>
+			<mapping path="/myReservations"/>
+			<mapping path="/myBoards"/>
+			<mapping path="/myTradeList"/>
+			<beans:bean id="myPage" class="com.kh.bootcamping.common.interceptor.LoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>

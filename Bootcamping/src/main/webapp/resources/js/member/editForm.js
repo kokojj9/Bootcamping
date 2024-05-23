@@ -46,7 +46,7 @@ document.getElementById('editBtn').onclick = () => {
 
 memberPwdtag.onkeyup = () => {
     if(memberPwdtag.style.display = 'block'){
-        let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
+        let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
         
         if(regExp.test(memberPwdtag.value)) checkInfo(false, 'green', '사용가능한 비밀번호입니다.');
         else checkInfo(true, 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.');

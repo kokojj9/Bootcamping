@@ -15,7 +15,7 @@ memberIdTag.onkeyup = () => {
 
         if(memberIdTag.value.length >= 5){
             $.ajax({
-                url : 'members/' + memberIdTag.value,
+                url : '/bootcamping/members/check-id/' + memberIdTag.value,
                 type : 'GET',
                 success : result => {
                     if (result === '') {
@@ -109,7 +109,7 @@ document.getElementById('checkAuthCode').onclick = () => {
 
 // 비밀번호 정규표현식
 memberPwdtag.onkeyup = () => {
-    let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]+$/;
+    let regExp = /^(?=.+[a-zA-Z])(?=.+\d)(?=.+[!@#$%^&*])[\w!@#$%^&*]{8,}$/;
 
     if(regExp.test(memberPwdtag.value)) checkInfo('password', 'green', '사용가능한 비밀번호입니다.')
     else checkInfo('password', 'crimson', '영문 / 숫자 / 특수문자를 포함해야합니다.')

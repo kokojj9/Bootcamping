@@ -1,5 +1,8 @@
 package com.kh.bootcamping.member.controller;
 
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +24,18 @@ public class MemberForwardController {
 		return "member/login";
 	}
 	
+	@GetMapping("logout")
+	public String logout(HttpSession session) {
+		session.setAttribute("loginMember", null);
+		return "redirect:/";
+	}
+
 	//회원가입 화면 포워딩 메서드
 	@GetMapping("enrollForm")
 	public String forwardToEnrollForm() {
 		return "member/enrollForm";
 	}
-	
+
 	//마이페이지 메서드
 	@GetMapping("myPage")
 	public String forwardMyPage(String memberId, Model model) {
@@ -35,7 +44,7 @@ public class MemberForwardController {
 	}
 	
 	// 회원 정보 수정 페이지 포워딩 메서드
-	@GetMapping("editForm")
+  @GetMapping("editForm")
 	public String forwardEditMember(Member member, Model model) {
 		return "member/editForm";
 	}
@@ -51,4 +60,25 @@ public class MemberForwardController {
 	public String forwardSearchPwd() {
 		return "member/searchMemberPwd";
 	}
+	
+	@GetMapping("myWishList")
+	public String forwardMyWishList() {
+		return "member/myWishlist";
+	}
+	
+	@GetMapping("myReservations")
+	public String forwardMyReservations() {
+		return "member/myReservations";
+	}
+	
+	@GetMapping("myBoards")
+	public String forwardMyBoards() {
+		return "member/myBoards";
+	}
+	
+	@GetMapping("myTradeList")
+	public String forwardMyTradeList() {
+		return "member/myTradeList";
+	}
+
 }
