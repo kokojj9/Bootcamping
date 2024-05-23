@@ -18,7 +18,7 @@ memberIdTag.onkeyup = () => {
                 url : '/bootcamping/members/check-id/' + memberIdTag.value,
                 type : 'GET',
                 success : result => {
-                    if (result === 'YY') {
+                    if (result.responseCode === 'YY') {
                         checkInfo('id', 'green', result.resultMessage)
                     } else {
                         checkInfo('id' , 'crimson', result.resultMessage)
@@ -50,7 +50,7 @@ document.getElementById('checkEmailBtn').onclick = () => {
             contentType: 'application/json; charset=UTF-8',
             data: JSON.stringify(data),
             success : result => {
-                if(result.ResponseCode === 'YY'){
+                if(result.responseCode === 'YY'){
                     document.getElementById('checkAuthCode').style.display = 'block';
                     document.getElementById('email').setAttribute('readonly', true);
                     document.getElementById('authCode').style.display = 'block';
@@ -97,7 +97,7 @@ document.getElementById('checkAuthCode').onclick = () => {
         type : 'get',
         data: data,
         success : result => {
-            if(result.ResponseCode === 'YY'){
+            if(result.responseCode === 'YY'){
                 clearInterval(countdown);
                 document.getElementById('timer').style.color = '#1dc078';
                 enrollFormSubmit.disabled = false;

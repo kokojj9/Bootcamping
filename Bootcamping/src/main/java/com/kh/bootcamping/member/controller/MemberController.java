@@ -81,12 +81,12 @@ public class MemberController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		if(memberService.checkMemberId(memberId) != null) {
-			rd = ResponseData.builder().ResponseCode("YY")
+		if(memberService.checkMemberId(memberId) == null) {
+			rd = ResponseData.builder().responseCode("YY")
 						     .resultMessage("사용 가능한 아이디입니다")
 						     .build();
 		} else {
-			rd = ResponseData.builder().ResponseCode("NN")
+			rd = ResponseData.builder().responseCode("NN")
 						     .resultMessage("사용할 수 없는 아이디입니다.(아이디 중복)")
 						     .build();
 		}
@@ -120,6 +120,7 @@ public class MemberController {
 	@ResponseBody
 	@PostMapping("/edit-Password")
 	public String editPassword(Member member) {
+		
 		Member loginMember = memberService.login(member);
 		
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
@@ -149,7 +150,6 @@ public class MemberController {
 			
 			result = memberService.editMember(member) > 0 ? "YYYYY" : "NNNNN";
 		}
-		
 		session.setAttribute("loginMember", memberService.login(member));
 		
 		return result;

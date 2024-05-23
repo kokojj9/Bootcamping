@@ -56,11 +56,11 @@ public class MailCheckController {
 		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 
 		if(memberService.checkMemberEmail(map.get("email")) != null) {
-			rd = ResponseData.builder().ResponseCode("NN")
+			rd = ResponseData.builder().responseCode("NN")
 			            	 .resultMessage("인증번호 발급 실패 (이메일 중복)")
 			            	 .build();
 		} else {
-			rd = ResponseData.builder().ResponseCode(validateMail(map.get("email"), request))
+			rd = ResponseData.builder().responseCode(validateMail(map.get("email"), request))
             				 .resultMessage("인증번호 발급 성공")
             				 .build();
 		}
@@ -145,11 +145,11 @@ public class MailCheckController {
 		auth.put("authCode", authCode);
 		
 		if(authCode.equals(memberService.checkAuthCode(auth))) {
-			rd = ResponseData.builder().ResponseCode("YY")
+			rd = ResponseData.builder().responseCode("YY")
 				        	 .resultMessage("인증에 성공하였습니다.")
 				        	 .build();
 		} else {
-			rd = ResponseData.builder().ResponseCode("NN")
+			rd = ResponseData.builder().responseCode("NN")
 						     .resultMessage("인증에 실패하였습니다.")
 						     .build();
 		}

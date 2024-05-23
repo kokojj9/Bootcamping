@@ -13,7 +13,7 @@ import lombok.Setter;
 @Builder
 public class ResponseData {
 
-	private String ResponseCode;
+	private String responseCode;
 	private String resultMessage;
 	private Member data;
 	
