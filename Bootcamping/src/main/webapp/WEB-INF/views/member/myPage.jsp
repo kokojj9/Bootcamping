@@ -14,14 +14,7 @@
 
 </head>
 <body>
-
-    <c:if test="${ empty loginMember }">
-    	<script>
-    		alert('회원 전용 서비스입니다. 로그인해주세요');
-    		location.href = 'errorPage';
-    	</script>
-    </c:if>
-    
+   
     <jsp:include page="../common/header.jsp"/>
 
 
@@ -163,10 +156,10 @@
         
         let urlList = [
             'editForm',
-            'members/wishList',
-            'members/reservations?memberId=${loginMember.memberId}&page=1',
-            'members/boards?memberId=${loginMember.memberId}&page=1',
-            'members/tradeList'
+            'myWishList',
+            'myReservations',
+            'myBoards',
+            'myTradeList'
         ];
 
         let btn = document.querySelectorAll('.btn');

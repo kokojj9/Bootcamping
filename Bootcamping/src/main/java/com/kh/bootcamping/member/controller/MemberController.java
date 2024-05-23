@@ -73,8 +73,8 @@ public class MemberController {
 	
 	//회원 가입 메서드
 	@PostMapping("/register")
-	public ModelAndView insertMember(@Valid Member member, BindingResult br, 
-			                         HttpSession session, ModelAndView mv) {
+	public ModelAndView insertMember(@Valid Member member, BindingResult br
+			                         ,HttpSession session, ModelAndView mv) {
 		
 		if(br.hasErrors()) {
             mv.addObject("alertMsg", "유효성 검사 실패").setViewName("common/errorPage");

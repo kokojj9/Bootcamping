@@ -33,6 +33,7 @@
 
 </head>
 <body>
+
     <jsp:include page="../common/header.jsp"/>
 
     <div id="wrap">
@@ -55,5 +56,6 @@
     </div>
 
     <jsp:include page="../common/footer.jsp"/>
+    
 </body>
 </html>
