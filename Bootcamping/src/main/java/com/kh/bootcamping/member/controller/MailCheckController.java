@@ -122,8 +122,5 @@ public class MailCheckController {
 			return "NNNNN";
 		}
 	}
-	
-	
-	
-	
+
 }

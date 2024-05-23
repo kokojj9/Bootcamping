@@ -9,7 +9,9 @@ import lombok.ToString;
 @Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
 public class Camping {
 	
+	
 	private String campNo;
+	
 	private String campName;
 	private String campIntro;
 	private String intro;

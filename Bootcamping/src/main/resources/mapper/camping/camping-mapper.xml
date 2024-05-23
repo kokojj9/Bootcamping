@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="campingMapper">
+<mapper namespace="com.kh.bootcamping.camping.model.dao.CampingMapper">
 
 	<resultMap type="camping" id="campingResultMap">
 		<result column="CAMP_NO" property="campNo" />
@@ -207,6 +207,18 @@
 	    ORDER BY
 	        CAMP_NO ASC
 	</select>
+	
+	<insert id="insertHeart">
+		INSERT
+		  INTO
+		  		TB_WISHLIST
+		 VALUES
+		 		(
+		 		#{memberNo},
+		 		#{campNo}
+		 		)
+		
+	</insert>
 		
 	
 </mapper>
