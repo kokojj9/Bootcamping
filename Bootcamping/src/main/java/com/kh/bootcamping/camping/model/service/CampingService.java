@@ -5,6 +5,7 @@ import java.util.List;
 import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.Site;
+import com.kh.bootcamping.camping.model.vo.WishList;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
@@ -26,5 +27,5 @@ public interface CampingService {
 	 
 	List<Camping> checkCamping (PageInfo pi, CampingCheck campingCheck);
 	
-	int insertHeart (String memberNo, String campNo);
+	int insertHeart (WishList wishList);
 }
