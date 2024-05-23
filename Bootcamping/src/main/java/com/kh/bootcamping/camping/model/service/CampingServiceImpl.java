@@ -76,6 +76,11 @@ public class CampingServiceImpl implements CampingService {
 		return campingMapper.insertHeart(wishList);
 	}
 
+	@Override
+	public int deleteHeart(WishList wishList) {
+		return campingMapper.deleteHeart(wishList);
+	}
+
 
 
 
