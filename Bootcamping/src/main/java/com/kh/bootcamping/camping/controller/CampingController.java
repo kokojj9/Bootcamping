@@ -232,7 +232,7 @@ public class CampingController {
 	
 	/**
 	 * 캠핑장 찜취소
-	 *//*
+	 */
 	@ResponseBody
 	@PostMapping("delete.heart")
 	public String deleteHeart(int memberNo) {
@@ -244,6 +244,6 @@ public class CampingController {
 		return result > 0 ? "success" : "fail";
 		
 	}
-	*/
+	
 	
 }

@@ -834,12 +834,12 @@
 	       	            data : { memberNo : memberNo, 
 	       	            		campNo : campNo },
 	       	            success : result => {
-	       	            	console.log(result);
+	       	            	
 		       	             $('#white').addClass('hide'); 
-			       	          $('#red').removeClass('hide');
-			       	          alertify.alert('성공', '찜 완료!');
+			       	         $('#red').removeClass('hide');
+			       	         alertify.alert('성공', '찜 완료!');
 			       	          
-			       	       window.localStorage.setItem(memberNo + '/' + campNo, 'red');
+			       	       	 window.localStorage.setItem(memberNo + '/' + campNo, 'red');
 			       	          
 	       	            }
         			
@@ -850,7 +850,7 @@
         	
         	})
         	
-        	/*찜하기 취소
+        	/*찜하기 취소*/
         	
         	$('#red').click(function(){
         		
@@ -863,7 +863,7 @@
         			}
         		})
         		
-        	})*/
+        	})
         	
         	
         </script>
