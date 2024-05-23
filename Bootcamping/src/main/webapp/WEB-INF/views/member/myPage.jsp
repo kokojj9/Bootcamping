@@ -163,10 +163,10 @@
         
         let urlList = [
             'editForm',
-            'wishList',
-            'reservations?memberId=${loginMember.memberId}&page=1',
-            'boards?memberId=${loginMember.memberId}&page=1',
-            'tradeList'
+            'members/wishList',
+            'members/reservations?memberId=${loginMember.memberId}&page=1',
+            'members/boards?memberId=${loginMember.memberId}&page=1',
+            'members/tradeList'
         ];
 
         let btn = document.querySelectorAll('.btn');

@@ -19,14 +19,14 @@
             <h2>부트캠핑 - 회원가입</h2>
             <br>
 
-            <form id="insertForm" action="members" method="post">
+            <form id="insertForm" action="/bootcamping/members/register" method="post">
                 <div class="form-group">
                     <label for="memberId">* 아이디 </label>											
                     <input type="text" class="form-control" id="memberId" placeholder="아이디(영문, 숫자, 최대 12자)" name="memberId" maxlength="12" required>
                     <div id="checkIdResult" style="font-size:12px; display:none;"></div><br>
 
                     <label for="memberPwd">* 비밀번호 </label>
-                    <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" maxlength="16" required>
+                    <input type="password" class="form-control" id="memberPwd" placeholder="비밀번호(영문, 숫자, 특수문자 포함)" name="memberPwd" minlength="8" maxlength="16" required>
                     <div id="checkPwdResult" style="font-size:12px; display:none;"></div><br>
 
                     <label for="checkPwd">* 비밀번호 확인 </label>
