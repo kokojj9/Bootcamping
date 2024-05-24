@@ -239,8 +239,6 @@ public class CampingController {
 		
 		int result = campingService.deleteHeart(wishList);
 		
-		System.out.println(result);
-		
 		return result > 0 ? "success" : "fail";
 		
 	}

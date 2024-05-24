@@ -70,11 +70,8 @@ public class ReviewController {
 	@PostMapping("updateForm.review")
 	public ModelAndView selectReviewOne(int reservationNo, ModelAndView mv) {
 		
-		System.out.println(reservationNo);
 		mv.addObject("review", reviewService.selectReviewOne(reservationNo)).setViewName("review/updateReview");
-	
-		System.out.println(reviewService.selectReviewOne(reservationNo));
-		
+
 		return mv;
 	}
 	
@@ -161,6 +158,25 @@ public class ReviewController {
 		}
 		
 	}
+	
+	/**
+	 * 리뷰 등록 페이지 이동
+	 */
+	@PostMapping("insertForm.review")
+	public ModelAndView insertReviewForm(int reservationNo, ModelAndView mv) {
+		mv.addObject("review", reviewService.selectReviewOne(reservationNo)).setViewName("review/reviewEnrollForm");
+		
+		return mv;
+	}
+	
+	/**
+	 * 리뷰 등록
+	 *//*
+	@PostMapping("insert.review")
+	public String insertReview(int reservationNo, String filePath) {
+		
+	}*/
+	
 	
 	
 	
