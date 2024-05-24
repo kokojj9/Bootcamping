@@ -111,22 +111,22 @@ public class MemberForwardController {
 		return "member/myTradeList";
 	}
 	
-	@PostMapping("/search-Id")
+	@PostMapping("/search-id")
 	public String searchId(Model model, String email) {
 		String memberId = memberService.searchId(email);
+
 		if(memberId != null) {
 			model.addAttribute("memberId", memberId);
-			return "member/resultSearchId";
 		}
 		
-		return "common/errorPage";
+		return "member/resultSearchId";
 	}
 	
-	@PostMapping("/search-Password")
+	@PostMapping("/search-password")
 	public String searchPwd(HttpSession session, Member member) {
 		if(memberService.searchPwd(member) != null) return "member/editPwd";
-		
 		session.setAttribute("errorMsg", "아이디와 이메일이 일치하지 않습니다.");
+		
 		return "member/searchMemberPwd";
 	}
 	

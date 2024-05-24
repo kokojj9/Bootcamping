@@ -69,7 +69,7 @@ public class MailCheckController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value = "searchPwdMail", produces = "html/text; charset=UTF-8")
+	@PostMapping("/searchPwdMail")
 	public String searchPwdMail(String email, HttpServletRequest request) throws MessagingException {
 		return validateMail(email, request);
 	}

@@ -21,7 +21,7 @@
                     <div class="">아이디 찾기</div>
                 </div>
         
-                <form action="searchId" method="post">
+                <form action="search-id" method="post">
                     <div class="searchId_form">
                         <label for="email" class="">이메일 : </label>
                         <input type="text" class="" placeholder="이메일을 입력해주세요" id="email" name="email"> <br>

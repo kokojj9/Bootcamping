@@ -124,9 +124,9 @@ public class MemberController {
 		Member loginMember = memberService.login(member);
 		
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			return "YYYYY";
+			return "YY";
 		}
-			return "NNNNN";
+			return "NN";
 	}
 	
 	/**
