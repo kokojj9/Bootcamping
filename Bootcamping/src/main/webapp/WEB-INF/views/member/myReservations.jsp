@@ -82,12 +82,12 @@
                         <li class="page-item disabled"><a class="page-link" href="#">이전</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="reservations?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage - 1 }">이전</a></li>
+                        <li class="page-item"><a class="page-link" href="myReservations?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage - 1 }">이전</a></li>
                     </c:otherwise>
                 </c:choose>
                     
                 <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="p">
-                            <li class="page-item"><a class="page-link" href="reservations?memberId=${ loginMember.memberId }&page=${ p }">${ p }</a></li>
+                            <li class="page-item"><a class="page-link" href="myReservations?memberId=${ loginMember.memberId }&page=${ p }">${ p }</a></li>
                 </c:forEach>
                             
                 <c:choose>
@@ -95,26 +95,15 @@
                         <li class="page-item disabled"><a class="page-link" href="#">다음</a></li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="reservations?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage + 1 }">다음</a></li>
+                        <li class="page-item"><a class="page-link" href="myReservations?memberId=${ loginMember.memberId }&page=${ pageInfo.currentPage + 1 }">다음</a></li>
                     </c:otherwise>
                 </c:choose>                    
                 
             </ul>
         </div>
-
-
-
     </div>
 
     <jsp:include page="../common/footer.jsp"/>
-
-    <script>
-
-
-
-
-
-    </script>
 
 </body>
 </html>

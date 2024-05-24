@@ -67,7 +67,7 @@ public class MemberController {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
 		} else {
-			mv.addObject("errorMsg", "로그인 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "로그인 실패").setViewName("redirect:/loginForm");
 		}
 		
 		return mv;
@@ -124,9 +124,9 @@ public class MemberController {
 		Member loginMember = memberService.login(member);
 		
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			return "YYYYY";
+			return "YY";
 		}
-			return "NNNNN";
+			return "NN";
 	}
 	
 	/**
@@ -155,71 +155,6 @@ public class MemberController {
 		return result;
 	}
 	
-	/**
-	 * 마이페이지 예약 내역 리스트
-	 * @param model
-	 * @param memberId
-	 * @param page
-	 * @return
-	 */
-	@GetMapping("/reservations")
-	public String selectMemberReservationList(Model model, String memberId, int page) {
-		
-		PageInfo pi = Pagination.getPageInfo(reservationService.selectReservationListCount(memberId), 
-											 page,
-											 10,
-											 5);
-		
-		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
-		model.addAttribute("pageInfo", pi);
-		
-		return "member/myReservationList";
-	}
-	
-	/**
-	 * 마이페이지 내가 쓴 글 리스트
-	 * @param model
-	 * @param memberId
-	 * @param page
-	 * @return
-	 */
-	@GetMapping("/boards")
-	public String selectMemberBoardList(Model model, String memberId, int page) {
-		
-		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
-				 page,
-				 10,
-				 5);
-
-		model.addAttribute("boardslist", boardService.selectBoardList(pi, memberId));
-		model.addAttribute("pageInfo", pi);
-		
-		return "member/myBoardList";
-	}
-	
-	@PostMapping("/search-Id")
-	public String searchId(Model model, String email) {
-		String memberId = memberService.searchId(email);
-		if(memberId != null) {
-			model.addAttribute("memberId", memberId);
-			return "member/resultSearchId";
-		}
-		
-		return "common/errorPage";
-	}
-	
-	@PostMapping("/search-Password")
-	public String searchPwd(HttpSession session, Member member) {
-		if(memberService.searchPwd(member) != null) {
-			return "member/editPwd";
-		}
-		
-		session.setAttribute("errorMsg", "아이디와 이메일이 일치하지 않습니다.");
-		return "member/searchMemberPwd";
-	}
-	
-
-
 		
 
 }
