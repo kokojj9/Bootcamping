@@ -177,7 +177,7 @@
   
 	  <script>
 	            		
-		$('.reviewBtn').click(function(){
+		$('.reviewBtn').click(() => {
 		        			
 			if($(this).text() == '수정'){
 				

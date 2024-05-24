@@ -284,7 +284,7 @@
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone
  					
- 			  }, function (rsp) { // callback
+ 			  }, rsp => { // callback
  					if (rsp.success) {
  			          
  						$.ajax({

@@ -495,17 +495,17 @@
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: today,
-                maxDate: function () {
+                maxDate:  () => {
                     return $('#endDate').val();
                 },
-                onSelect: function (date) {
+                onSelect:  date => {
                     // 체크인 날짜를 startDate의 값으로 설정
                     $('#startDate').val(date); // 수정된 부분
                     let selectedDate = $('#startDate').val(); // 수정된 부분
                     console.log("체크인 날짜:", selectedDate); // 수정된 부분
                 },
                 defaultDate: today, // 오늘 날짜로 기본값 설정
-                onClose: function (selectedDate) {
+                onClose: selectedDate => {
                     // 체크인을 선택하지 않았을 때, 오늘 날짜로 설정
                     if (selectedDate === "") {
                         $('#startDate').datepicker('setDate', today);
@@ -517,13 +517,13 @@
             $('#endDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
-                minDate: function () {
+                minDate:  () => {
                     return $('#startDate').val();
                 },
-                onSelect: function (date) {
+                onSelect: date => {
                     console.log("체크아웃 날짜:", date);
                 },
-                onClose: function (selectedDate) {
+                onClose: selectedDate => {
                     // 체크아웃을 선택하지 않았을 때, 다음 날짜로 설정
                     if (selectedDate === "") {
                         let tomorrow = new Date();
@@ -533,21 +533,6 @@
                 }
             });
 
-
-            /*하트*//*
-            const dislikeBtn = document.querySelector('.white');
-            const likeBtn = document.querySelector('.hide');
-
-            dislikeBtn.onclick = function () {    // 빈하트 클릭했을 때 
-                dislikeBtn.classList.add('hide');  // 빈하트에 .hide 적용
-                likeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
-            }
-
-            likeBtn.onclick = function () {    // 빈하트 클릭했을 때 
-                likeBtn.classList.add('hide');  // 빈하트에 .hide 적용
-                dislikeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
-            }*/ 
-            
             
             /*지도*/
             var mapX = ${camping.mapX}
@@ -675,7 +660,7 @@
 	            });
         }
         
-        $(function(){
+        $(() => {
             selectReview();
         });
         
@@ -787,7 +772,7 @@
         	}  
         	
         	
-        	$(document).ready(function() {
+        	$(document).ready(() => {
         	    $('.campingReserBtn').click(function(event) {
         	        var startDate = $('.startDateInput').val();
         	        var endDate = $('.endDateInput').val();
@@ -809,7 +794,7 @@
         	
         	let wishList = window.localStorage.getItem(memberNo + '/' + campNo);
 			
-        	$(function() {
+        	$(() => {
 			    if(wishList === 'red') {
 			        $('#white').addClass('hide');
 			        $('#red').removeClass('hide');
@@ -826,7 +811,7 @@
         	
         	
         	
-        	$('#white').click(function(){
+        	$('#white').click(() => {
         		
         		if (memberNo === null || memberNo === '') {
         			alertify.alert('실패','로그인이 필요합니다!');
@@ -855,7 +840,7 @@
         	
         	/*찜하기 취소*/
         	
-        	$('#red').click(function(){
+        	$('#red').click(() => {
         		
         		$.ajax({
         			url : 'delete.heart',
