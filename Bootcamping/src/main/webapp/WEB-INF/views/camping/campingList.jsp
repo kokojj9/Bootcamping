@@ -495,7 +495,7 @@
 		
 		
 		/*체크박스*/
-		$(function() {
+		$(() => {
 		    $('input[type="checkbox"]').change(function() {
 		        var checkedTypes = $('input:checkbox[name="type"]:checked').map(function() {
 		            return this.value;
@@ -519,7 +519,7 @@
 		            page: num
 		        },
 		        type: 'GET',
-		        success: function(result) {
+		        success: result => {
 		        	
 					$('#totalCamp').text(result.pageInfo.listCount);
 					

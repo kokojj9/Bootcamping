@@ -17,8 +17,7 @@ public class ReservationController {
 	@ResponseBody
 	@PostMapping("successReservation")
 	public String insertResrvation(Reservation reservation) {
-		System.out.println(reservation);
-		
+
 		int result  = reservationService.insertReservation(reservation);
 		
 		return result > 0 ? "success" : "fail";

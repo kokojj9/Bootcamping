@@ -284,7 +284,7 @@
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone
  					
- 			  }, function (rsp) { // callback
+ 			  }, rsp => { // callback
  					if (rsp.success) {
  			          
  						$.ajax({
@@ -306,7 +306,7 @@
  								if(result == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			            location.href='/bootcamping/';
+ 	 		 			            location.href='/bootcamping/myReservations';
  									
  								}
  		   			            
