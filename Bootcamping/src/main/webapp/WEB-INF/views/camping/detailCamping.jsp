@@ -813,6 +813,9 @@
 			    if(wishList === 'red') {
 			        $('#white').addClass('hide');
 			        $('#red').removeClass('hide');
+			    } else{
+			    	$('#red').addClass('hide');
+			    	$('#white').removeClass('hide');
 			    }
 			});		
         	
@@ -860,7 +863,12 @@
         			data : {memberNo : memberNo,
         					campNo : campNo},
         			success : result => {
-        				console.log(result);
+        				console.log(result); 
+        				$('#red').addClass('hide');
+        				$('#white').removeClass('hide'); 
+        				alertify.alert('성공', '찜 삭제!');
+        				
+        				window.localStorage.setItem(memberNo + '/' + campNo, 'white');
         			}
         		})
         		
