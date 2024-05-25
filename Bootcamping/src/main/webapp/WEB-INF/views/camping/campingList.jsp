@@ -391,7 +391,7 @@
 		$(function(){
 			
 			$.ajax({
-				url : 'mapCamping',
+				url : '/bootcamping/camping/mapCamping',
 				success : result => {
 					//console.log(result.response.body.items);
 					
@@ -425,7 +425,7 @@
 		function searchBtn(num){
 			
 			$.ajax({
-				url : 'searchCamping',
+				url : '/bootcamping/camping/searchCamping',
 				data : {keyword : $('#keyword').val(),
 						page: num },
 				type : 'get',
@@ -512,7 +512,7 @@
 		
 		function searchCheckedValues(types, addresses, num) {
 		    $.ajax({
-		        url: 'checkedCamping',
+		        url: '/bootcamping/camping/checkedCamping',
 		        data: { 
 		            types: types.join(','),
 		            addresses: addresses.join(','),
