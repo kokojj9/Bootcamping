@@ -29,7 +29,7 @@
 
 
     #content_title{
-        padding-top: 20%;
+        padding-top: 23%;
         padding-left: 25%;
     }
 
