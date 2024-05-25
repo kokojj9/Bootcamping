@@ -138,7 +138,7 @@ public class CampingController {
 	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
 	public String checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
 		
-		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 5);
+		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 3);
 		
 		System.out.println(campingCheck);
 		
