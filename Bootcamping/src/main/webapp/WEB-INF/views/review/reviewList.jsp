@@ -177,17 +177,19 @@
   
 	  <script>
 	            		
-		$('.reviewBtn').click(function(){
-		        			
-			if($(this).text() == '수정'){
-				
-				$(this).parent().next().attr('action', 'updateForm.review').submit();
-			
-			} else {
-				
-				$(this).parent().next().attr('action', 'delete.review').submit();
-			
-			} 						
+	    $('.reviewBtn').click((event) => {
+	    	
+            const eventTarget = $(event.currentTarget);
+            
+            if (eventTarget.text() === '수정') {
+               
+            	eventTarget.parent().next().attr('action', 'updateForm.review').submit();
+            
+            } else {
+               
+            	eventTarget.parent().next().attr('action', 'delete.review').submit();
+           
+            }				
 		})
 	
 	  </script>
