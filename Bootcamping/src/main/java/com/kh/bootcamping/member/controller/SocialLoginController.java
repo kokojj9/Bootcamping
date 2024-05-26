@@ -141,7 +141,6 @@ public class SocialLoginController {
 		String responseDate = br.readLine();
 		Member sm = new Member();
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseDate);
-		//JSONObject propObj = (JSONObject)responseObj.get("properties");
 		sm.setMemberId(responseObj.get("id").toString());
 		
 		return sm;

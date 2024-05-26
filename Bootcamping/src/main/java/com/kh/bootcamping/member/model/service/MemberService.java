@@ -2,8 +2,14 @@ package com.kh.bootcamping.member.model.service;
 
 import java.util.Map;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.ResponseEntity;
+
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.MyPageInfo;
+import com.kh.bootcamping.member.model.vo.ResponseData;
 
 public interface MemberService {
 
@@ -13,11 +19,11 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
-	String checkMemberEmail(String email);
+	ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request) throws MessagingException;
 
-	String checkAuthCode(Map<String, String> auth);
+	ResponseEntity<ResponseData> checkAuthCode(Map<String, String> auth);
 
-	String checkMemberId(String memberId);
+	ResponseEntity<ResponseData> checkMemberId(String memberId);
 
 	MyPageInfo searchMyPage(String memberId);
 
@@ -26,5 +32,7 @@ public interface MemberService {
 	String searchId(String email);
 
 	String searchPwd(Member member);
+
+	String validateMail(String email, HttpServletRequest request) throws MessagingException;
 
 }
