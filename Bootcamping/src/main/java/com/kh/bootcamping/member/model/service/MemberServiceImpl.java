@@ -103,7 +103,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public String validateMail(String email, HttpServletRequest request) throws MessagingException {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		Map<String, String> auth = new HashMap<>();
+		Map<String, String> auth = new HashMap<String, String>();
 		setupMailSender(mailSender);
 
 		String code = getAuthCode();
