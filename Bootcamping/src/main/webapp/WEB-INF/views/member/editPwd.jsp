@@ -44,9 +44,9 @@
         <form action="/bootcamping/members/edit-Password" method="post">
             <div class="editPwd_form">
                 <label for="memberPwd" class="">비밀번호 : </label>
-                <input type="text" id="memberId" placeholder="변경할 비밀번호를 입력해주세요" name="memberId" required> <br>
+                <input type="password" id="memberPwd" placeholder="변경할 비밀번호를 입력해주세요" name="memberPwd" required> <br>
                 <label for="checkPwd" class="">비밀번호 확인 : </label>
-                <input type="text" id="memberId" placeholder="비밀번호를 확인해주세요" name="memberId" required> <br>
+                <input type="password" id="checkPwd" placeholder="비밀번호를 확인해주세요" name="checkPwd" required> <br>
             </div>
                     
             <div class="btn">

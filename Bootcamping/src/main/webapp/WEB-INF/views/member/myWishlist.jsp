@@ -5,6 +5,23 @@
 <head>
 <meta charset="UTF-8">
 <title>부트캠핑 - 즐겨찾기</title>
+    <style>
+        #wrap{
+            margin: 5% auto 5%;
+            width: 1000px;
+        }
+        .title{
+            margin: 5px auto 50px;
+            width: fit-content;
+            font-size: 32px;
+            font-weight: 400;
+        }
+        #pagingArea {
+            width:fit-content; 
+            margin:auto;
+        }
+    </style>
+
 </head>
 <body>
 	    

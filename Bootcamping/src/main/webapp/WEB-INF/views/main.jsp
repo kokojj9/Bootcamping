@@ -29,7 +29,7 @@
 
 
     #content_title{
-        padding-top: 20%;
+        padding-top: 23%;
         padding-left: 25%;
     }
 
@@ -102,8 +102,8 @@
         height: 100px;
         border: none;
         border-radius: 50px;
-        background-color: rgb(255, 244, 202);
-        color: rgb(219, 180, 23);
+        background-color: #ffeda7;
+        color: rgb(213 172 10);
         font-size: 20px;
     }
     .color_green {
@@ -113,7 +113,7 @@
         height: 100px;
         border: none;
         border-radius: 50px;
-        background-color: rgb(217, 255, 202);
+        background-color: #c7ffb1;
         color: rgb(46, 204, 113);
         font-size: 20px;
     }

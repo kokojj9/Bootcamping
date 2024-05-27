@@ -772,7 +772,7 @@
         	}  
         	
         	
-        	$(document).ready(() => {
+        	$(() => {
         	    $('.campingReserBtn').click(function(event) {
         	        var startDate = $('.startDateInput').val();
         	        var endDate = $('.endDateInput').val();
@@ -780,7 +780,7 @@
         	        
         	        if (!startDate || !endDate || !countPeople) {
         	            event.preventDefault();
-        	            alert('일정과 인원수를 선택해주세요');
+        	            alertify.alert('알림', '일정과 인원수를 선택해주세요');
         	        }
         	    });
         	});
@@ -817,7 +817,7 @@
         			alertify.alert('실패','로그인이 필요합니다!');
         		} else {
         			$.ajax({
-	       	            url : 'insert.heart',
+	       	            url : '/bootcamping/camping/insert.heart',
 	       	            type : 'post',
 	       	            data : { memberNo : memberNo, 
 	       	            		campNo : campNo },
@@ -843,7 +843,7 @@
         	$('#red').click(() => {
         		
         		$.ajax({
-        			url : 'delete.heart',
+        			url : '/bootcamping/camping/delete.heart',
         			type : 'post',
         			data : {memberNo : memberNo,
         					campNo : campNo},

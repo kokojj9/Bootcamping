@@ -151,6 +151,10 @@
     
     <jsp:include page="../common/footer.jsp"/>
     
+    <script>
+        let memberId = '${ sessionScope.loginMember.memberId }';
+    </script>
+
     <script src="resources/js/member/myPage.js" ></script>
 
 </body>

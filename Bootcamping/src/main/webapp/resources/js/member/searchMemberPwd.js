@@ -6,14 +6,14 @@ let searchPwdSubmit = document.getElementById('searchPwd');
             }
             else{
                 $.ajax({
-                    url : 'searchPwdMail',
+                    url : 'mail/searchPwdMail',
                     type : 'post',
                     data : {
                         email : document.getElementById('email').value 
                     },
                     success : result => {
                         console.log(result);
-                        if(result === 'YYYYY'){
+                        if(result === 'YY'){
                             document.getElementById('checkAuthCode').style.display = 'block';
                             document.getElementById('email').setAttribute('readonly', true);
                             document.getElementById('authCode').style.display = 'block';
@@ -58,7 +58,7 @@ let searchPwdSubmit = document.getElementById('searchPwd');
                     authCode : document.getElementById('authCode').value
                 },
                 success : result => {
-                    if(result == 'YYYYY'){
+                    if(result.responseCode == 'YY'){
                         clearInterval(countdown);
                         document.getElementById('timer').textContent = '인증에 성공하였습니다.';
                         document.getElementById('timer').style.color = '#1dc078';

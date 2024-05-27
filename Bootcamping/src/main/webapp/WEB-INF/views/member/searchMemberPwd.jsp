@@ -17,7 +17,7 @@
             <div class="">비밀번호 찾기</div>
         </div>
 
-        <form action="searchPwd" method="post">
+        <form action="search-password" method="post">
             <div class="searchPwd_form">
                 <label for="memberId" class="">아이디 : </label>
                 <input type="text" id="memberId" placeholder="아이디를 입력해주세요" name="memberId" required> <br>
