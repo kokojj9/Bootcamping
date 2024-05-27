@@ -514,6 +514,7 @@
 		
 		
 		function searchCheckedValues(types, addresses, num) {
+			
 		    $.ajax({
 		        url: '/bootcamping/camping/checkedCamping',
 		        data: { 
