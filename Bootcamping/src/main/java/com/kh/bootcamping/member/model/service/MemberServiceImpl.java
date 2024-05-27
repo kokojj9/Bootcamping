@@ -32,9 +32,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Service
 public class MemberServiceImpl implements MemberService {
-
+	
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
-	private final JavaMailSenderImpl mailSender;
 	private final MemberMapper memberMapper;
 	private final PropertyTemplate pt;
 	
@@ -63,6 +62,53 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
+	public String checkMemberEmail(String email) {
+		return memberMapper.checkMemberEmail(email);
+	}
+	@Override
+	public String checkAuthCode(Map<String, String> auth) {
+		return memberMapper.checkAuthCode(auth);
+	}
+	@Override
+	public String checkMemberId(String memberId) {
+		return memberMapper.checkMemberId(memberId);
+
+	public String validateMail(String email, HttpServletRequest request) throws MessagingException {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		Map<String, String> auth = new HashMap<String, String>();
+		setupMailSender();
+
+		String code = getAuthCode();
+		String remoteAddr = request.getRemoteAddr();
+
+		auth.put("remoteAddr", remoteAddr);
+		auth.put("email", email);
+		auth.put("code", code);
+
+		if (memberMapper.insertAuthCode(auth) == 0) return "NN";
+
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+		helper.setTo(email);
+		helper.setSubject("인증번호 전송");
+		helper.setText("인증번호 : " + code);
+		mailSender.send(message);
+
+		return "YY";
+	}
+	@Override
+	public MyPageInfo searchMyPage(String memberId) {
+		return memberMapper.searchMyPage(memberId);
+	}
+	@Override
+	public int editMember(Member member) {
+		return memberMapper.editMember(member);
+	}
+	@Override
+	public String searchId(String email) {
+		return memberMapper.searchId(email);
+
 	public ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request) throws MessagingException {
 		ResponseData rd = new ResponseData(); 
 		HttpHeaders headers = new HttpHeaders();
