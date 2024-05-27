@@ -163,7 +163,7 @@ public class CampingController {
 	 * 캠핑장 체크박스 조회
 	 */
 	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
-	public String checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
+	public ResponseEntity<ResponseData> checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
 		
 		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 3);
 		
@@ -177,9 +177,16 @@ public class CampingController {
 		
 		map.put("pageInfo", pi);
 		
-		System.out.println(map);
+		 HttpHeaders header = new HttpHeaders();
+		 header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		return new Gson().toJson(map);
+		 ResponseData rd = ResponseData.builder()
+				 					   .data(map)
+				 					   .message("성공")
+				 					   .responseCode("C-00")
+				 					   .build();
+		 
+		 return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 		
 	}
 	
