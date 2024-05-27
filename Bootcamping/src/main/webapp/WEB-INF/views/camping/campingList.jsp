@@ -525,6 +525,8 @@
 		        type: 'GET',
 		        success: result => {
 		        	
+		        	console.log(result);
+		        	
 					$('#totalCamp').text(result.data.pageInfo.listCount);
 					
 					let str = '';
@@ -556,6 +558,8 @@
 	        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
 	
 	        var pageInfo = result.data.pageInfo;
+	        
+	        console.log(pageInfo);
 	        
 	        if(pageInfo.currentPage === 1){
 	        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
