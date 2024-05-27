@@ -149,8 +149,9 @@ public class MemberServiceImpl implements MemberService {
 	//인증이메일 전송 메서드
 	@Override
 	public String validateMail(String email, HttpServletRequest request) throws MessagingException {
-		Map<String, String> auth = new HashMap<>();
-		setupMailSender();
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		Map<String, String> auth = new HashMap<String, String>();
+		setupMailSender(mailSender);
 
 		String code = getAuthCode();
 		String remoteAddr = request.getRemoteAddr();
@@ -172,7 +173,7 @@ public class MemberServiceImpl implements MemberService {
 		return "YY";
 	}
 	
-	private void setupMailSender() {
+	private void setupMailSender(JavaMailSenderImpl mailSender) {
 		Properties prop = new Properties();
 		mailSender.setPort(Integer.parseInt(pt.getProperties().getProperty("port")));
 		mailSender.setUsername(pt.getProperties().getProperty("username"));
@@ -231,6 +232,7 @@ public class MemberServiceImpl implements MemberService {
 		}
 		return memberMapper.editMember(member);
 	}
+	
 	@Override
 	public String searchId(String email) {
 		return memberMapper.searchId(email);
