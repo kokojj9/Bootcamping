@@ -295,7 +295,7 @@
  							},
  							success : result => {
  								console.log(result);
- 								if(result == 'success'){
+ 								if(result.message == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
  	 		 			            location.href='/bootcamping/myPage';
