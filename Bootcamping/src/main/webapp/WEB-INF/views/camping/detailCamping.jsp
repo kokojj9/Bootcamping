@@ -632,6 +632,7 @@
 	                type : 'get',
 	                data : {campNo : campNo},
 	                success : result => {
+	                	console.log(result);
 	                    
 	                    let reviewResult = '';
 	                    

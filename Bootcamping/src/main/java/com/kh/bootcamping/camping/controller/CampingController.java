@@ -177,16 +177,16 @@ public class CampingController {
 		
 		map.put("pageInfo", pi);
 		
-		 HttpHeaders header = new HttpHeaders();
-		 header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		 ResponseData rd = ResponseData.builder()
-				 					   .data(map)
-				 					   .message("성공")
-				 					   .responseCode("C-00")
-				 					   .build();
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+	
+		ResponseData rd = ResponseData.builder()
+				 					  .data(map)
+				 					  .message("성공")
+				 					  .responseCode("C-00")
+				 					  .build();
 		 
-		 return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
+		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 		
 	}
 	

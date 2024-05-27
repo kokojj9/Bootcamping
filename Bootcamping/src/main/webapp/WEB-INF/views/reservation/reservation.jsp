@@ -296,9 +296,9 @@
  							success : result => {
  								console.log(result);
  								if(result == 'success'){
- 									alertify.alert('결제가 성공했습니다.');
+ 									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			            location.href='/bootcamping/myReservations';
+ 	 		 			            location.href='/bootcamping/myPage';
  									
  								}
  		   			            
