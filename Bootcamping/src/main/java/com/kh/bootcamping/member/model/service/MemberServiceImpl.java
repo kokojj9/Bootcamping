@@ -53,6 +53,7 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.insertAuthCode(auth);
 	}
 	
+	
 	// 컨트롤러에서 비즈니스 로직 분리
 	@Override
 	public int insertMember(Member member) {
