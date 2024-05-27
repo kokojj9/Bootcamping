@@ -5,21 +5,28 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
+import com.kh.bootcamping.camping.model.vo.ResponseData;
+import com.kh.bootcamping.camping.model.vo.Site;
 import com.kh.bootcamping.camping.model.vo.WishList;
 import com.kh.bootcamping.common.model.vo.PageInfo;
 import com.kh.bootcamping.common.template.Pagination;
@@ -28,6 +35,7 @@ import com.kh.bootcamping.reservation.model.vo.ReservationInfo;
 
 @RestController
 @RequestMapping("camping")
+@CrossOrigin("*")
 public class CampingController {
 	
 	@Autowired
@@ -105,9 +113,20 @@ public class CampingController {
 	 * 
 	 */
     @PostMapping(value="selectDate", produces="application/json; charset-UTF-8")
-    public String selectDate(ReservationInfo reservationInfo) {
-	       
-		return new Gson().toJson(campingService.selectDate(reservationInfo));
+    public ResponseEntity<ResponseData> selectDate(ReservationInfo reservationInfo) {
+	    
+    	List<Site> site = campingService.selectDate(reservationInfo);
+    	
+    	HttpHeaders header = new HttpHeaders();
+    	header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+    	
+    	ResponseData rd = ResponseData.builder()
+    								  .data(site)
+    								  .message("성공")
+    								  .responseCode("C-00")
+    								  .build();
+    	
+		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 	}
 
 	
@@ -115,10 +134,11 @@ public class CampingController {
 	/**
 	 * 캠핑장 검색
 	 */
-	@GetMapping(value="searchCamping", produces="application/json; charset=UTF-8")
-	public String searchCamping(@RequestParam(value="page", defaultValue="1") int page, String keyword) {
+
+	@GetMapping(value="searchCamping")
+	public ResponseEntity<ResponseData> searchCamping(@RequestParam(value="page", defaultValue="1") int page, String keyword) {
 		
-		PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 3);
+		 PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 3);
 		
 		 HashMap<String, Object> map = new HashMap();
 		 
@@ -126,9 +146,16 @@ public class CampingController {
 	     
 		 map.put("pageInfo", pi);
 		
-		 System.out.println(map);
+		 HttpHeaders header = new HttpHeaders();
+		 header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
-		 return new Gson().toJson(map);
+		 ResponseData rd = ResponseData.builder()
+				 					   .data(map)
+				 					   .message("성공")
+				 					   .responseCode("C-00")
+				 					   .build();
+		 
+		 return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 	
 	}
 	
@@ -160,22 +187,41 @@ public class CampingController {
 	 * 캠핑장 찜하기
 	 */
 	@PostMapping("insert.heart")
-	public String insertHeart(WishList wishList) {
+	public ResponseEntity<ResponseData> insertHeart(WishList wishList) {
 		
 		int result = campingService.insertHeart(wishList);
 		
-		return result > 0 ? "success" : "fail";
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		ResponseData rd = ResponseData.builder()
+									  .data(result)
+									  .message("성공")
+									  .responseCode("C-00")
+									  .build();
+		
+		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
+		
 	}
 	
 	/**
 	 * 캠핑장 찜취소
 	 */
 	@PostMapping("delete.heart")
-	public String deleteHeart(WishList wishList) {
+	public ResponseEntity<ResponseData> deleteHeart(WishList wishList) {
 		
 		int result = campingService.deleteHeart(wishList);
 		
-		return result > 0 ? "success" : "fail";
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		ResponseData rd = ResponseData.builder()
+									  .data(result)
+									  .message("성공")
+									  .responseCode("C-00")
+									  .build();
+		
+		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 		
 	}
 	
