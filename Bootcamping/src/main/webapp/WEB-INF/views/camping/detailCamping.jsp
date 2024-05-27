@@ -755,7 +755,9 @@
 	        				
         				},
         			success : result => {
+        				
         				console.log(result);
+        				
         				if(result.length === 0){
         					$('#campReserBtn').attr("disabled", false);
         					$('#campReserBtn').text("예약하기");
@@ -823,8 +825,11 @@
 	       	            		campNo : campNo },
 	       	            success : result => {
 	       	            	
+	       	            	console.log(result);
+	       	            	
 		       	             $('#white').addClass('hide'); 
 			       	         $('#red').removeClass('hide');
+			       	         
 			       	         alertify.alert('성공', '찜 완료!');
 			       	          
 			       	       	 window.localStorage.setItem(memberNo + '/' + campNo, 'red');
@@ -848,9 +853,12 @@
         			data : {memberNo : memberNo,
         					campNo : campNo},
         			success : result => {
+        				
         				console.log(result); 
+        				
         				$('#red').addClass('hide');
         				$('#white').removeClass('hide'); 
+        				
         				alertify.alert('성공', '찜 삭제!');
         				
         				window.localStorage.setItem(memberNo + '/' + campNo, 'white');
