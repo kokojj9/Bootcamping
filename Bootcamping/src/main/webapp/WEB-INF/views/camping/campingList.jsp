@@ -463,7 +463,7 @@
 
 					
 			var pagination = $('#camp_btn');
-            pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+            pagination.empty();
 
             var pageInfo = result.data.pageInfo;
 
@@ -555,7 +555,7 @@
 					
 			var pagination = $('#camp_btn');
 			
-	        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+	        pagination.empty();
 	
 	        var pageInfo = result.data.pageInfo;
 	        
