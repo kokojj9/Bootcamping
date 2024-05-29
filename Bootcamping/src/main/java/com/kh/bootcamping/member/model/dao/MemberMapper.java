@@ -1,5 +1,6 @@
 package com.kh.bootcamping.member.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -22,7 +23,7 @@ public interface MemberMapper {
 
 	String checkMemberId(String memberId);
 
-	MyPageInfo searchMyPage(String memberId);
+	List<MyPageInfo> searchMyPage(String memberId);
 
 	int editMember(Member member);
 

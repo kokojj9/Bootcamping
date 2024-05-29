@@ -21,28 +21,28 @@
 	</resultMap>
 	
 	<resultMap id="myPageResultSet" type="myPageInfo">
-		<association property="member" javaType="Member">
-			<result column="MEMBER_NO" property="memberNo"/>
-			<result column="MEMBER_ID" property="memberId"/>
-		</association>
-		<association property="boardList"  javaType="Board">
-			<result column="CATEGOTY_NAME" property="categoryName"/>			
-			<result column="CREATE_DATE"   property="createDate"/>			
-			<result column="BOARD_TITLE"   property="boardTitle"/>			
-			<result column="BOARD_NO"      property="boardNo"/>			
-		</association>
-		<association property="tradeBoard" javaType="TradeBoard">
-			<result column="TRADEBOARD_NO" property="tradeBoardNo"/>		
-			<result column="TRADE_STAUTS"  property="tradeStatus"/>		
-		</association>
-		<association property="reservation" javaType="Reservation">
-			<result column="RESERVATION_NO" property="reservationNo"/>
-			<result column="CHECKOUT_DATE"  property="checkOutDate"/>
-			<result column="CHECKIN_DATE"   property="checkInDate"/>
-			<result column="RESER_STATUS"   property="reserStatus"/>
-			<result column="CAMP_NAME"      property="campName"/>
-			<result column="PEOPLE"         property="people"/>
-		</association>
+	    <association property="member" javaType="Member">
+	        <result column="MEMBER_NO" property="memberNo"/>
+	        <result column="MEMBER_ID" property="memberId"/>
+	    </association>
+	    <collection property="boardList" ofType="Board">
+	        <result column="BOARD_NO"      property="boardNo"/>            
+	        <result column="BOARD_TITLE"   property="boardTitle"/>            
+	        <result column="CATEGORY_NAME" property="categoryName"/>            
+	        <result column="CREATE_DATE"   property="createDate"/>            
+	    </collection>
+	    <collection property="tradeBoardList" ofType="TradeBoard">
+	        <result column="TRADEBOARD_NO" property="tradeBoardNo"/>        
+	        <result column="TRADE_STATUS"  property="tradeStatus"/>        
+	    </collection>
+	    <collection property="reservationList" ofType="Reservation">
+	        <result column="RESERVATION_NO" property="reservationNo"/>
+	        <result column="CHECKOUT_DATE"  property="checkOutDate"/>
+	        <result column="CHECKIN_DATE"   property="checkInDate"/>
+	        <result column="RESER_STATUS"   property="reserStatus"/>
+	        <result column="CAMP_NAME"      property="campName"/>
+	        <result column="PEOPLE"         property="people"/>
+	    </collection>
 	</resultMap>
 	
 
@@ -182,27 +182,21 @@
 		       PEOPLE,
 		       RESER_STATUS
 		  FROM
-		       TB_MEMBER
-		  LEFT
-		  JOIN
+		       TB_MEMBER m
+          LEFT JOIN
 		       TB_RESERVATION r USING(MEMBER_NO)
-		  LEFT
-		  JOIN
+          LEFT JOIN
 		       TB_BOARD b USING(MEMBER_NO)
-		  LEFT
-		  JOIN
+          LEFT JOIN
 		       TB_TRADEBOARD tb USING(MEMBER_NO)
-		  LEFT
-		  JOIN
+          LEFT JOIN
 		       TB_CATEGORY c ON(b.CATEGORY_CODE = c.CATEGORY_CODE)
-		  LEFT
-		  JOIN
+          JOIN
 		       TB_SITE USING(SITE_NO)
-		  LEFT
 		  JOIN
 		       TB_CAMP USING(CAMP_NO)
 		 WHERE
-		       MEMBER_NO = #{ memberNo }
+		       MEMBER_ID = #{ memberId }
 		 ORDER
 		    BY
 		       RESERVATION_NO,

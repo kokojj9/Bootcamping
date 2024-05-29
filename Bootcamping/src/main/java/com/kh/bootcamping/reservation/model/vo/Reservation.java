@@ -16,7 +16,7 @@ public class Reservation {
 	private String checkOutDate;
 	private String reservationDate;
 	private int people;
-	private String  reserName;
+	private String reserName;
 	private String reserPhone;
 	private int price;
 	private String reserStatus;
