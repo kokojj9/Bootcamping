@@ -218,42 +218,10 @@
 
              <div class="items" style="padding:50px;">
    
-                    <div class="card" style="width:250px;">
-                        <a style="text-decoration:none;" href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h5 class="card-text">캠핑장 이름</h5>
-                        <h4 class="card-text">종류</h4>
-                        <p>지역명</p>
-                        </div>
-                        </a>
-                    </div>
-                    
-                    
-         
-                    <div class="card" style="width:250px;">
-                        <a style="text-decoration:none;" href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h5 class="card-text">캠핑장 이름</h5>
-                        <h4 class="card-text">종류</h4>
-                        <p>지역명</p>
-                        </div>
-                        </a>
-                    </div>
-                    
-                    
-
-                    <div class="card" style="width:250px;">
-                        <a style="text-decoration:none;" href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h5 class="card-text">캠핑장 이름</h5>
-                        <h4 class="card-text">종류</h4>
-                        <p>지역명</p>
-                        </div>
-                        </a>
-                    </div>
+ 
+ 
+ 
+ 
 
            </div>
           </div>
@@ -272,6 +240,25 @@
 				type : 'get',
 				success : result => {
 					console.log(result);
+					
+					let str = '';
+					
+					for(let i = 0; i < result.data.length; i++) {
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.data[i].campNo +'">'
+                        	 + '<img class="card-img-top" src="' + result.data[i].campImg + '">'
+                        	 + '<div class="card-body">'
+		                     + '<h5 class="card-text">'+ result.data[i].campName +'</h5>'
+                        	 + '<h4 class="card-text">'+ result.data[i].address +'</h4>'
+			                 + '<p>'+ result.data[i].type +'</p>'
+                        	 + '</div>'
+                        	 + '</a>'
+	                    	 + '</div>'
+					}
+					
+					$('.items').html(str);
+					
 				}
 			})
 			

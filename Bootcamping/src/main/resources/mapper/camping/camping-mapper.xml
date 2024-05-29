@@ -232,6 +232,7 @@
 		
 	<select id="selectMainCamping" resultMap="campingResultMap">
 SELECT
+		CAMP_NO,
         CAMP_IMG,
         CAMP_NAME,
         ADDRESS,
@@ -241,6 +242,7 @@ SELECT
 		  (
 		SELECT
 		        COUNT(*),
+		        CAMP_NO,
 				CAMP_IMG,
 		        CAMP_NAME,
 		        ADDRESS,
@@ -253,7 +255,7 @@ SELECT
 		        TB_CAMP USING(CAMP_NO)
 		GROUP
 		   BY
-		        CAMP_IMG, CAMP_NAME, ADDRESS, TYPE)
+		        CAMP_NO, CAMP_IMG, CAMP_NAME, ADDRESS, TYPE)
         <![CDATA[WHERE ROWNUM <= 3]]>  
 
 	</select>
