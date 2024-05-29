@@ -60,8 +60,6 @@ public class CampingController {
 		   url += "&pageNo=" + page;
 		   url += "&_type=json";
 		   
-		   // System.out.println(url);
-		   
 		   URL requestUrl = new URL(url);
 		   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
 		   BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -90,8 +88,6 @@ public class CampingController {
 			   url += "&MobileApp=TestApp";
 			   url += "&numOfRows=3825";
 			   url += "&_type=json";
-			   
-			   // System.out.println(url);
 			   
 			   URL requestUrl = new URL(url);
 			   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
@@ -166,10 +162,6 @@ public class CampingController {
 	public ResponseEntity<ResponseData> checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
 		
 		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 3);
-		
-		System.out.println(campingCheck);
-		
-		System.out.println(campingService.checkCampingCount(campingCheck));
 		
 		HashMap<String, Object> map = new HashMap();
 		
