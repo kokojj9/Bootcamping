@@ -255,8 +255,15 @@
 				        TB_CAMP USING(CAMP_NO)
 				GROUP
 				   BY
-				        CAMP_NO, CAMP_IMG, CAMP_NAME, ADDRESS, TYPE)
-		        <![CDATA[WHERE ROWNUM <= 3]]>  
+				        CAMP_NO, CAMP_IMG, CAMP_NAME, ADDRESS, TYPE
+				ORDER
+              	   BY
+                    	COUNT(*) DESC)
+    <![CDATA[WHERE ROWNUM <= 3]]>  
+    ORDER
+       BY
+            CAMP_NO ASC 
+    
 	</select>
 	
 </mapper>
