@@ -269,7 +269,6 @@
 					data : {keyword : $('#keyword').val()},
 					success : result => {
 						console.log(result);
-						searchBtn(result);
 					}
 					
 				})
