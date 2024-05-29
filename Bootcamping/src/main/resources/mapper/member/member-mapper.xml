@@ -60,12 +60,11 @@
 			   POSTCODE,
 			   ROADADDRESS,
 			   DETAILADDRESS
-          FROM 
-          	   TB_MEMBER 
-         WHERE 
-         	   MEMBER_ID = #{ memberId }
-		   AND 
-		   	   STATUS = 'Y'
+			   
+          FROM TB_MEMBER 
+          
+         WHERE MEMBER_ID = #{ memberId }
+		   AND STATUS = 'Y'
 	</select>
 	
 	<insert id="insertMember" parameterType="member">
@@ -123,45 +122,38 @@
 	</insert>
 	
 	<select id="checkAuthCode" parameterType="hashmap" resultType="string">
-		SELECT
-		       CODE
-		  FROM
-		       TB_AUTHCODE
-		 WHERE
-		       REMOTEADDR = #{ remoteAddr }
-		   AND       
-		       CODE = #{ authCode }
-		   AND
-		   	   EMAIL = #{ email }
+		SELECT CODE
+		       
+		  FROM TB_AUTHCODE
+		  
+		 WHERE REMOTEADDR = #{ remoteAddr }
+		   AND CODE = #{ authCode }
+		   AND EMAIL = #{ email }
 	</select>
 	
 	<select id="checkMemberEmail" parameterType="string" resultType="string">
-		SELECT
-		       EMAIL
-		  FROM
-		       TB_MEMBER
-		 WHERE
-		       EMAIL = #{ email }
+		SELECT EMAIL
+		       
+		  FROM TB_MEMBER
+		  
+		 WHERE EMAIL = #{ email }
 	</select>
 
 	<select id="checkMemberId" parameterType="string" resultType="string">
-		SELECT
-		       MEMBER_ID
-		  FROM
-		       TB_MEMBER
-		 WHERE
-		       MEMBER_ID = #{ memberId }
+		SELECT MEMBER_ID
+		       
+		  FROM TB_MEMBER
+		  
+		 WHERE MEMBER_ID = #{ memberId }
 	</select>
 	
 	<select id="searchPwd" parameterType="member" resultType="string">
-		SELECT
-		       MEMBER_ID
-		  FROM
-		       TB_MEMBER
-	     WHERE
-		       MEMBER_ID = #{ memberId }
-	       AND
-		       EMAIL = #{ email }
+		SELECT MEMBER_ID
+		       
+		  FROM TB_MEMBER
+		  
+	     WHERE MEMBER_ID = #{ memberId }
+	       AND EMAIL = #{ email }
 	
 	</select>
 
@@ -181,27 +173,20 @@
 		       TO_CHAR(CHECKOUT_DATE, 'YYYY-MM-DD') AS CHECKOUT_DATE,
 		       PEOPLE,
 		       RESER_STATUS
-		  FROM
-		       TB_MEMBER m
-          LEFT JOIN
-		       TB_RESERVATION r USING(MEMBER_NO)
-          LEFT JOIN
-		       TB_BOARD b USING(MEMBER_NO)
-          LEFT JOIN
-		       TB_TRADEBOARD tb USING(MEMBER_NO)
-          LEFT JOIN
-		       TB_CATEGORY c ON(b.CATEGORY_CODE = c.CATEGORY_CODE)
-          JOIN
-		       TB_SITE USING(SITE_NO)
-		  JOIN
-		       TB_CAMP USING(CAMP_NO)
-		 WHERE
-		       MEMBER_ID = #{ memberId }
-		 ORDER
-		    BY
-		       RESERVATION_NO,
-		       TRADEBOARD_NO,
-		       BOARD_NO DESC
+		       
+		  FROM TB_MEMBER m
+          LEFT JOIN TB_RESERVATION r USING(MEMBER_NO)
+          LEFT JOIN TB_BOARD b USING(MEMBER_NO)
+          LEFT JOIN TB_TRADEBOARD tb USING(MEMBER_NO)
+          LEFT JOIN TB_CATEGORY c ON(b.CATEGORY_CODE = c.CATEGORY_CODE)
+          JOIN TB_SITE USING(SITE_NO)
+		  JOIN TB_CAMP USING(CAMP_NO)
+		  
+		 WHERE MEMBER_ID = #{ memberId }
+		 
+		 ORDER BY RESERVATION_NO,
+		      	  TRADEBOARD_NO,
+		      	  BOARD_NO DESC
 	</select>
 
 	<update id="editMember" parameterType="member">
@@ -214,19 +199,17 @@
 	           POSTCODE = #{ postCode },
 			   ROADADDRESS = #{ roadAddress },
 			   DETAILADDRESS = #{ detailAddress }
-	     WHERE 
-	           MEMBER_ID = #{memberId}
+			   
+	     WHERE MEMBER_ID = #{memberId}
 	</update>
 
 	<select id="searchId" parameterType="string" resultType="string">
-		SELECT
-			   MEMBER_ID
-		  FROM
-			   TB_MEMBER
-	     WHERE
-			   EMAIL = #{ email }
-		   AND
-		   	   STATUS = 'Y'
+		SELECT MEMBER_ID
+			   
+		  FROM TB_MEMBER
+		  
+	     WHERE EMAIL = #{ email }
+		   AND STATUS = 'Y'
 	</select>
 	
 

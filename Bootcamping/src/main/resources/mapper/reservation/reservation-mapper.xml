@@ -55,14 +55,10 @@
 	<select id="selectReservationListCount" parameterType="string" resultType="_int">
 		SELECT 
 		       COUNT(RESERVATION_NO) 
-		  FROM 
-		       TB_RESERVATION
-		  JOIN
-		       TB_MEMBER USING(MEMBER_NO)
-		 WHERE 
-		       MEMBER_ID = #{ memberId }
-		   AND
-		       RESER_STATUS = 'Y'
+		  FROM TB_RESERVATION
+		  JOIN TB_MEMBER USING(MEMBER_NO)
+		 WHERE MEMBER_ID = #{ memberId }
+		   AND RESER_STATUS = 'Y'
 	</select>
 	
 	<select id="selectReservationList" parameterType="string" resultMap="reservationResultMap">
@@ -74,19 +70,12 @@
 		       TO_CHAR(CHECKIN_DATE, 'YYYY-MM-DD') AS CHECKIN_DATE,
 		       TO_CHAR(CHECKOUT_DATE, 'YYYY-MM-DD') AS CHECKOUT_DATE,
 		       RESER_STATUS
-		  FROM
-		       TB_RESERVATION
-          JOIN
-               TB_MEMBER USING(MEMBER_NO)
-		  JOIN
-		       TB_SITE USING(SITE_NO)
-		  JOIN
-		       TB_PRICE USING(TYPE_CODE)
-		 WHERE
-		       MEMBER_ID = #{ memberId }
-		 ORDER
-		    BY
-		       RESERVATION_NO DESC
+		  FROM TB_RESERVATION
+          JOIN TB_MEMBER USING(MEMBER_NO)
+		  JOIN TB_SITE USING(SITE_NO)
+		  JOIN TB_PRICE USING(TYPE_CODE)
+		 WHERE MEMBER_ID = #{ memberId }
+		 ORDER BY RESERVATION_NO DESC
 	</select>
 	                
 
