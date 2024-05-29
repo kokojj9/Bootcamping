@@ -421,7 +421,6 @@
 		
 		
 		/*검색*/
-		
 		function searchBtn(num){
 			
 			$.ajax({
@@ -429,29 +428,28 @@
 				data : {keyword : $('#keyword').val(),
 						page: num },
 				type : 'get',
-				success : result => {
+				success : result => { 
 					console.log(result);
 					
-					$('#totalCamp').text(result.pageInfo.listCount);
-					
-					if(result.searchCampingList.length === 0){
-						
-						alert("해당 캠핑장이 존재하지 않습니다.");
-						location.href = '/bootcamping/camping';
+					$('#totalCamp').text(result.data.pageInfo.listCount);
+					 
+					if(result.data.searchCampingList.length === 0){
+					    alert("해당 캠핑장이 존재하지 않습니다.");
+					    location.href = '/bootcamping/camping';
 						
 					} else {
 						let str = '';
 						
-						for(let i = 0; i <result.searchCampingList.length; i++){
+						for(let i = 0; i <result.data.searchCampingList.length; i++){
 							
 							str += '<div class="card" style="width:250px;">'
-								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
+								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.data.searchCampingList[i].campNo +'">'
 							    
-								 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
+								 + '<img class="card-img-top" src="'+result.data.searchCampingList[i].campImg+'">'
 								 + '<div class="card-body">'
-								 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
-							     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
-						    	 + '<p>'+result.searchCampingList[i].type+'</p>'
+								 + '<h4 class="card-title">'+result.data.searchCampingList[i].campName+'</h4>'
+							     + '<h5 class="card-text">'+result.data.searchCampingList[i].address+'</h5>'
+						    	 + '<p>'+result.data.searchCampingList[i].type+'</p>'
 						    	 + '</div>'
 						    	 + '</a>'
 								 + '</div>'
@@ -465,9 +463,9 @@
 
 					
 			var pagination = $('#camp_btn');
-            pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+            pagination.empty();
 
-            var pageInfo = result.pageInfo;
+            var pageInfo = result.data.pageInfo;
 
 			if(pageInfo.currentPage === 1){
             	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
@@ -492,7 +490,11 @@
 				}
 			})
 		}
-		
+
+
+
+
+
 		
 		/*체크박스*/
 		$(() => {
@@ -512,6 +514,7 @@
 		
 		
 		function searchCheckedValues(types, addresses, num) {
+			
 		    $.ajax({
 		        url: '/bootcamping/camping/checkedCamping',
 		        data: { 
@@ -522,20 +525,22 @@
 		        type: 'GET',
 		        success: result => {
 		        	
-					$('#totalCamp').text(result.pageInfo.listCount);
+		        	console.log(result);
+		        	
+					$('#totalCamp').text(result.data.pageInfo.listCount);
 					
 					let str = '';
 					
-					for(let i = 0; i <result.checkCamping.length; i++){
+					for(let i = 0; i <result.data.checkCamping.length; i++){
 						
 						str += '<div class="card" style="width:250px;">'
-							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.checkCamping[i].campNo +'">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.data.checkCamping[i].campNo +'">'
 						    
-							 + '<img class="card-img-top" src="'+result.checkCamping[i].campImg+'">'
+							 + '<img class="card-img-top" src="'+result.data.checkCamping[i].campImg+'">'
 							 + '<div class="card-body">'
-							 + '<h4 class="card-title">'+result.checkCamping[i].campName+'</h4>'
-						     + '<h5 class="card-text">'+result.checkCamping[i].address+'</h5>'
-					    	 + '<p>'+result.checkCamping[i].type+'</p>'					    	 
+							 + '<h4 class="card-title">'+result.data.checkCamping[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.data.checkCamping[i].address+'</h5>'
+					    	 + '<p>'+result.data.checkCamping[i].type+'</p>'					    	 
 					    	 + '</div>'
 					    	 + '</a>'
 							 + '</div>'
@@ -550,9 +555,11 @@
 					
 			var pagination = $('#camp_btn');
 			
-	        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+	        pagination.empty();
 	
-	        var pageInfo = result.pageInfo;
+	        var pageInfo = result.data.pageInfo;
+	        
+	        console.log(pageInfo);
 	        
 	        if(pageInfo.currentPage === 1){
 	        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');

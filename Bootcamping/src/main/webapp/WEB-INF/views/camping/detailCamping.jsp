@@ -632,21 +632,22 @@
 	                type : 'get',
 	                data : {campNo : campNo},
 	                success : result => {
+	                	console.log(result);
 	                    
 	                    let reviewResult = '';
 	                    
-	                    if(result.length === 0) {
+	                    if(result.data.length === 0) {
 	                    	reviewResult += '<div><br><br><h5 style="text-align:center;">리뷰가 존재하지 않습니다<h5></div>'
 	               		} else {
 	                    
-	                    for(let i in result){
+	               			for(let i = 0; i <result.data.length; i++){
 	                    
 	                    reviewResult += '<div class="review_list">'
-	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result[i].reviewScore + '</span>' + '</h4>'
-	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
+	                    			  + '<h4 class="memberName">'+ result.data[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result.data[i].reviewScore + '</span>' + '</h4>'
+	                    			  + '<div class=review_date><p>'+ result.data[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
-	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
-	                    			  + '<div class="review_img"><img src="'+ result[i].reviewPath+'"></div>'
+	                    			  + '<div class="story_text"><p>'+result.data[i].reviewContent+'</p></div>'                    			  
+	                    			  + '<div class="review_img"><img src="'+ result.data[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}
@@ -755,7 +756,9 @@
 	        				
         				},
         			success : result => {
+        				
         				console.log(result);
+        				
         				if(result.length === 0){
         					$('#campReserBtn').attr("disabled", false);
         					$('#campReserBtn').text("예약하기");
@@ -823,8 +826,11 @@
 	       	            		campNo : campNo },
 	       	            success : result => {
 	       	            	
+	       	            	console.log(result);
+	       	            	
 		       	             $('#white').addClass('hide'); 
 			       	         $('#red').removeClass('hide');
+			       	         
 			       	         alertify.alert('성공', '찜 완료!');
 			       	          
 			       	       	 window.localStorage.setItem(memberNo + '/' + campNo, 'red');
@@ -848,9 +854,12 @@
         			data : {memberNo : memberNo,
         					campNo : campNo},
         			success : result => {
+        				
         				console.log(result); 
+        				
         				$('#red').addClass('hide');
         				$('#white').removeClass('hide'); 
+        				
         				alertify.alert('성공', '찜 삭제!');
         				
         				window.localStorage.setItem(memberNo + '/' + campNo, 'white');
