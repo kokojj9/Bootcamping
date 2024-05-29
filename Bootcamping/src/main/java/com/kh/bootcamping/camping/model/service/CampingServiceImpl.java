@@ -81,6 +81,11 @@ public class CampingServiceImpl implements CampingService {
 		return campingMapper.deleteHeart(wishList);
 	}
 
+	@Override
+	public List<Camping> selectMainCamping() {
+		return campingMapper.selectMainCamping();
+	}
+
 
 
 

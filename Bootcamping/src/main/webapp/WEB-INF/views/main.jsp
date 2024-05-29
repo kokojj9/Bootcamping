@@ -172,10 +172,10 @@
     color: black;
    }
 
-   .card a {
+   .card a, 	#content_2 > a  {
     text-decoration: none;
    }
-   
+
 
 </style>
 
@@ -191,20 +191,15 @@
                     <h2>캠핑장을 찾고 계신가요?</h2>
                 </div>
                 <div id="search_1">
-                   
-                    
-                    <form action="#" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!">
-                        <input type="submit" value="검색" id="submit_btn">
-                    </form>
-                    
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" id="keyword">
+                        <input type="button" value="검색" id="submit_btn">
                 </div>
                 
             </div>
         </div>
 
         <div id="content_2">
-            <button class="color_green">전체</button>
+            <a href="/bootcamping/camping"><button class="color_green">전체</button></a>
             <button class="color_yellow">글램핑</button>
             <button class="color_green">카라반</button>
             <button class="color_yellow">일반</button>
@@ -218,42 +213,10 @@
 
              <div class="items" style="padding:50px;">
    
-                    <div class="card" style="width:250px;">
-                        <a style="text-decoration:none;" href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h5 class="card-text">캠핑장 이름</h5>
-                        <h4 class="card-text">종류</h4>
-                        <p>지역명</p>
-                        </div>
-                        </a>
-                    </div>
-                    
-                    
-         
-                    <div class="card" style="width:250px;">
-                        <a style="text-decoration:none;" href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h5 class="card-text">캠핑장 이름</h5>
-                        <h4 class="card-text">종류</h4>
-                        <p>지역명</p>
-                        </div>
-                        </a>
-                    </div>
-                    
-                    
-
-                    <div class="card" style="width:250px;">
-                        <a style="text-decoration:none;" href="#">
-                        <img class="card-img-top" src="resources/img/backgroundImg.jpg">
-                        <div class="card-body">
-                        <h5 class="card-text">캠핑장 이름</h5>
-                        <h4 class="card-text">종류</h4>
-                        <p>지역명</p>
-                        </div>
-                        </a>
-                    </div>
+ 
+ 
+ 
+ 
 
            </div>
           </div>
@@ -261,6 +224,60 @@
   
 	<br>
 	<jsp:include page="common/footer.jsp"/>
+	
+	<script>
+		
+		$(() => {
+			
+			$.ajax({
+				
+				url : 'camping/mainCamping',
+				type : 'get',
+				success : result => {
+					console.log(result);
+					
+					let str = '';
+					
+					for(let i = 0; i < result.data.length; i++) {
+						
+						str += '<div class="card" style="width:250px;">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.data[i].campNo +'">'
+                        	 + '<img class="card-img-top" src="' + result.data[i].campImg + '">'
+                        	 + '<div class="card-body">'
+		                     + '<h5 class="card-text">'+ result.data[i].campName +'</h5>'
+                        	 + '<h4 class="card-text">'+ result.data[i].address +'</h4>'
+			                 + '<p>'+ result.data[i].type +'</p>'
+                        	 + '</div>'
+                        	 + '</a>'
+	                    	 + '</div>'
+					}
+					
+					$('.items').html(str);
+					
+				}
+			})
+			
+		})
+		
+		
+		$(() => {
+			
+			$('#submit_btn').click(() => {
+				
+				$.ajax({
+					url : '/bootcamping/camping/searchCamping',
+					data : {keyword : $('#keyword').val()},
+					success : result => {
+						console.log(result);
+					}
+					
+				})
+				
+			})
+			
+		})
+	
+	</script>
 
 </body>
 </html>

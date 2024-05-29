@@ -286,7 +286,7 @@
  								priceNo : rsp.merchant_uid,
  								reserName : reservationName,
  								reserPhone : reservationPhone,
- 								checkInDate : checkIdDate,
+ 								checkInDate : checkInDate,
  								checkOutDate : checkOutDate,
  								people : people,
  								memberNo : memberNo,

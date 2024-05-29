@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
+import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.ResponseData;
 import com.kh.bootcamping.camping.model.vo.Site;
@@ -60,8 +60,6 @@ public class CampingController {
 		   url += "&pageNo=" + page;
 		   url += "&_type=json";
 		   
-		   // System.out.println(url);
-		   
 		   URL requestUrl = new URL(url);
 		   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
 		   BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -90,8 +88,6 @@ public class CampingController {
 			   url += "&MobileApp=TestApp";
 			   url += "&numOfRows=3825";
 			   url += "&_type=json";
-			   
-			   // System.out.println(url);
 			   
 			   URL requestUrl = new URL(url);
 			   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
@@ -167,10 +163,6 @@ public class CampingController {
 		
 		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 3);
 		
-		System.out.println(campingCheck);
-		
-		System.out.println(campingService.checkCampingCount(campingCheck));
-		
 		HashMap<String, Object> map = new HashMap();
 		
 		map.put("checkCamping", campingService.checkCamping(pi, campingCheck));
@@ -231,6 +223,25 @@ public class CampingController {
 		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping(value="mainCamping")
+	public ResponseEntity<ResponseData> selectMainCamping(){
+		
+		List<Camping> camping = campingService.selectMainCamping();
+		
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		ResponseData rd = ResponseData.builder()
+									  .data(camping)
+									  .message("성공")
+									  .responseCode("C-00")
+									  .build();
+		
+		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
+	
+	}
+	
 	
 	
 }
