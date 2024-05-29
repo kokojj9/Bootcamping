@@ -124,3 +124,8 @@
     cursor: pointer;
     font-weight: bolder;
 }
+
+.table .thead-light th, td{
+    text-align: center;
+    vertical-align: middle;
+}

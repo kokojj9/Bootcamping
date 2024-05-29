@@ -178,7 +178,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public MyPageInfo searchMyPage(String memberId) {
 		List<MyPageInfo> myPageInfoList = memberMapper.searchMyPage(memberId);
-	    System.out.println(myPageInfoList.get(0));    
 		if (myPageInfoList.isEmpty()) {
 			return null;
         }

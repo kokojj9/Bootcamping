@@ -86,7 +86,7 @@ public class MemberForwardController {
 		
 		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
 		model.addAttribute("pageInfo", pi);
-		
+		System.out.println(reservationService.selectReservationList(pi, memberId));
 		return "member/myReservations";
 	}
 	

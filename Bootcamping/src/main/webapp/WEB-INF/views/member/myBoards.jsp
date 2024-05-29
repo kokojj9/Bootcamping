@@ -23,7 +23,10 @@
         margin:auto;
     }
 
-
+    .table .thead-light th, td{
+    text-align: center;
+    vertical-align: middle;
+}
 
 
 </style>
@@ -47,8 +50,8 @@
             </thead>
             <tbody>
                 <c:choose>
-                    <c:when test="${ not empty myPageInfo.boardList }" >
-                        <c:forEach items="${ myPageInfo.boardList }" var="b" varStatus="loop">
+                    <c:when test="${ not empty boardList }" >
+                        <c:forEach items="${ boardList }" var="b" varStatus="loop">
                             <c:if test="${ loop.index < 5 }">
                                 <tr>
                                     <td>${ b.boardNo }</td>
