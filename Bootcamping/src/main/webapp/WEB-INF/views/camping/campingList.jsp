@@ -462,29 +462,29 @@
 
 
 					
-			var pagination = $('#camp_btn');
-            pagination.empty();
-
-            var pageInfo = result.data.pageInfo;
-
-			if(pageInfo.currentPage === 1){
-            	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
-            }
-            
-			else {
-                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
-            }
-            
-			for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
-            }
-            
-            if (pageInfo.currentPage === pageInfo.maxPage) {
-            	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
-            }
-            	
-            else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
-            }
+					var pagination = $('#camp_btn');
+		            pagination.empty();
+		
+		            var pageInfo = result.data.pageInfo;
+		
+					if(pageInfo.currentPage === 1){
+		            	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+		            }
+		            
+					else {
+		                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+		            }
+		            
+					for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+		                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+		            }
+		            
+		            if (pageInfo.currentPage === pageInfo.maxPage) {
+		            	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+		            }
+		            	
+		            else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+		            }
 
 					
 				}
