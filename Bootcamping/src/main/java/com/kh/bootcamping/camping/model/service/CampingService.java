@@ -30,4 +30,7 @@ public interface CampingService {
 	int insertHeart (WishList wishList);
 	
 	int deleteHeart (WishList wishList);
+	
+	List<Camping> selectMainCamping();
+	
 }

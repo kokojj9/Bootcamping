@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.kh.bootcamping.camping.model.service.CampingService;
+import com.kh.bootcamping.camping.model.vo.Camping;
 import com.kh.bootcamping.camping.model.vo.CampingCheck;
 import com.kh.bootcamping.camping.model.vo.ResponseData;
 import com.kh.bootcamping.camping.model.vo.Site;
@@ -223,6 +223,27 @@ public class CampingController {
 		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping(value="mainCamping")
+	public ResponseEntity<ResponseData> selectMainCamping(){
+		
+		List<Camping> camping = campingService.selectMainCamping();
+		
+		System.out.println(camping);
+		
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		
+		ResponseData rd = ResponseData.builder()
+									  .data(camping)
+									  .message("성공")
+									  .responseCode("C-00")
+									  .build();
+		
+		return new ResponseEntity<ResponseData>(rd, header, HttpStatus.OK);
+	
+	}
+	
 	
 	
 }

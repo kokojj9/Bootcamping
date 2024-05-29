@@ -261,6 +261,23 @@
   
 	<br>
 	<jsp:include page="common/footer.jsp"/>
+	
+	<script>
+		
+		$(() => {
+			
+			$.ajax({
+				
+				url : 'camping/mainCamping',
+				type : 'get',
+				success : result => {
+					console.log(result);
+				}
+			})
+			
+		})
+	
+	</script>
 
 </body>
 </html>

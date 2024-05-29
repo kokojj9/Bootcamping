@@ -34,4 +34,5 @@ public interface CampingMapper {
 	
 	int deleteHeart(WishList wishList);
 	
+	List<Camping> selectMainCamping();
 }

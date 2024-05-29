@@ -230,5 +230,32 @@
 		   		CAMP_NO = #{campNo}
 	</delete>
 		
+	<select id="selectMainCamping" resultMap="campingResultMap">
+SELECT
+        CAMP_IMG,
+        CAMP_NAME,
+        ADDRESS,
+        TYPE
+        
+  FROM
+		  (
+		SELECT
+		        COUNT(*),
+				CAMP_IMG,
+		        CAMP_NAME,
+		        ADDRESS,
+		        TYPE
+		  FROM
+		        TB_RESERVATION
+		JOIN
+		        TB_SITE USING(SITE_NO)
+		JOIN
+		        TB_CAMP USING(CAMP_NO)
+		GROUP
+		   BY
+		        CAMP_IMG, CAMP_NAME, ADDRESS, TYPE)
+        <![CDATA[WHERE ROWNUM <= 3]]>  
+
+	</select>
 	
 </mapper>

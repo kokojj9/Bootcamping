@@ -808,11 +808,6 @@
 			});		
         	
         	
-	
-        	console.log(memberNo);
-        	console.log(campNo);
-        	
-        	
         	
         	$('#white').click(() => {
         		
