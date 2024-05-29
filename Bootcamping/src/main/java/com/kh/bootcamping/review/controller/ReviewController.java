@@ -36,6 +36,9 @@ public class ReviewController {
    @Autowired
    private ReviewService reviewService;
    
+	@Autowired
+	private Pagination pagination;
+   
    /**
     * 리뷰 조회
     */
@@ -65,7 +68,7 @@ public class ReviewController {
    @GetMapping("review")
    public ModelAndView reviewList(@RequestParam("campNo") String campNo, @RequestParam(value="page", defaultValue="1") int page, ModelAndView mv) {
       
-      PageInfo pi = Pagination.getPageInfo(reviewService.selectReviewCount(campNo), page, 3, 5);
+      PageInfo pi = pagination.getPageInfo(reviewService.selectReviewCount(campNo), page, 3, 5);
       
       if(!reviewService.selectReviewList(pi, campNo).isEmpty()) {
                
