@@ -9,6 +9,7 @@ import com.kh.bootcamping.board.model.dao.BoardMapper;
 import com.kh.bootcamping.board.model.vo.Board;
 import com.kh.bootcamping.board.model.vo.Reply;
 import com.kh.bootcamping.common.model.vo.PageInfo;
+import com.kh.bootcamping.common.template.Pagination;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,9 +17,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class BoardServiceImpl implements BoardService {
 
-	//private SqlSessionTemplate sqlSession;
-	//private BoardRepository boardRepository;
 	private final BoardMapper boardMapper;
+	private final Pagination pagination;
 	
 	@Override
 	public int selectListCount() {
@@ -77,15 +77,17 @@ public class BoardServiceImpl implements BoardService {
 	
 	// 아래 메서드는 박재인이 작업함
 	@Override
-	public int selectBoardListCount(String memberId) {
-		return boardMapper.selectBoardListCount(memberId);
+	public PageInfo getBoardPageInfo(String memberId, int page, int boardLimit, int pageLimit) {
+		int count = boardMapper.selectBoardListCount(memberId);
+		
+		return pagination.getPageInfo(count, page, boardLimit, pageLimit);
 	}
-
+	
 	@Override
 	public List<Board> selectBoardList(PageInfo pi, String memberId) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return boardMapper.seleBoardList(memberId, rowBounds);
 	}
-	
+
 }

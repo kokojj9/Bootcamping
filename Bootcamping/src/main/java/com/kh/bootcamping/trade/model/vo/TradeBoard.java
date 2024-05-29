@@ -6,13 +6,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class TradeBoard {
-	private int boardNo;
+	private int tradeBoardNo;
 	private int memberNo;
 	private String categoryName;
 	private String boardtitle;

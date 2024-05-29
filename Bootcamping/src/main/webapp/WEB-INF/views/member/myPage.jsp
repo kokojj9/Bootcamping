@@ -50,14 +50,16 @@
 				                        <td>${ r.reservationNo }</td>
 				                        <td>${ r.campName }</td>
 				                        <td>${ r.people }</td>
-				                        <td>${ r.checkInDate } ~ ${ r.checkoutDate }</td>
+				                        <td>${ r.checkInDate } ~ ${ r.checkOutDate }</td>
 				                        <td>
-				                        	<c:if test="${ r.reserStatus eq 'Y' }">
-				                        		예약 완료
-				                        	</c:if>
-				                        	<c:if test="${ r.reserStatus eq 'N' }">
-				                        		취소
-				                        	</c:if>
+                                            <c:choose>
+                                                <c:when test="${ r.reserStatus eq 'Y' }">
+                                                    예약 완료
+                                                </c:when>
+                                                <c:otherwise >
+                                                    취소
+                                                </c:otherwise>
+                                            </c:choose>
 			                        	</td>
 				                    </tr>
 			                    </c:if>
@@ -109,21 +111,19 @@
             </table>
         </div>
 
-		<c:set var="tradeStatusList" value="${myPageInfo.tradeBoardList}" />
-
 		<c:set var="countInProgress" value="0" />
 		<c:set var="countCompleted" value="0" />
 		<c:set var="countCancelled" value="0" />
 		
-		<c:forEach var="status" items="${tradeStatusList}">
+		<c:forEach var="trade" items="${myPageInfo.tradeBoardList}">
 		    <c:choose>
-		        <c:when test="${status eq 1}">
+		        <c:when test="${trade.tradeStatus eq 1}">
 		            <c:set var="countInProgress" value="${countInProgress + 1}" />
 		        </c:when>
-		        <c:when test="${status eq 2}">
+		        <c:when test="${trade.tradeStatus eq 2}">
 		            <c:set var="countCompleted" value="${countCompleted + 1}" />
 		        </c:when>
-		        <c:when test="${status eq 3}">
+		        <c:when test="${trade.tradeStatus eq 3}">
 		            <c:set var="countCancelled" value="${countCancelled + 1}" />
 		        </c:when>
 		    </c:choose>

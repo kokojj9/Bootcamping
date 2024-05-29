@@ -6,6 +6,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.common.model.vo.PageInfo;
+import com.kh.bootcamping.common.template.Pagination;
 import com.kh.bootcamping.reservation.model.dao.ReservationMapper;
 import com.kh.bootcamping.reservation.model.vo.Reservation;
 
@@ -15,9 +16,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class ReservationServiceImpl implements ReservationService {
 
-	//private ReservationRepository reservationRepository;
-	//private SqlSession sqlSession;
 	private final ReservationMapper reservationMapper;
+	private final Pagination pagination;
 
 	@Override
 	public int insertReservation(Reservation reservation) {
@@ -25,8 +25,10 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public int selectReservationListCount(String memberId) {
-		return reservationMapper.selectReservationListCount(memberId);
+	public PageInfo getReservationPageInfo(String memberId, int page, int boardLimit, int pageLimit) {
+		int count = reservationMapper.selectReservationListCount(memberId);
+		
+		return pagination.getPageInfo(count, page, boardLimit, pageLimit);
 	}
 
 	@Override
@@ -35,6 +37,7 @@ public class ReservationServiceImpl implements ReservationService {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return reservationMapper.selectReservationList(memberId, rowBounds);
 	}
+
 
 	
 

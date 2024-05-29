@@ -79,24 +79,17 @@ public class MemberForwardController {
 	@GetMapping("myReservations")
 	public String forwardMyReservations(Model model, String memberId, int page) {
 		
-		PageInfo pi = Pagination.getPageInfo(reservationService.selectReservationListCount(memberId), 
-											 page,
-											 10,
-											 5);
+		PageInfo pi = reservationService.getReservationPageInfo(memberId, page, 10, 5);
 		
 		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
 		model.addAttribute("pageInfo", pi);
-		
 		return "member/myReservations";
 	}
 	
 	@GetMapping("myBoards")
 	public String forwardMyBoards(Model model, String memberId, int page) {
 		
-		PageInfo pi = Pagination.getPageInfo(boardService.selectBoardListCount(memberId), 
-				 page,
-				 10,
-				 5);
+		PageInfo pi = boardService.getBoardPageInfo(memberId, page, 10, 5);
 
 		model.addAttribute("boardslist", boardService.selectBoardList(pi, memberId));
 		model.addAttribute("pageInfo", pi);
@@ -106,7 +99,6 @@ public class MemberForwardController {
 	
 	@GetMapping("myTradeList")
 	public String forwardMyTradeList(Model model, String memberId, int page) {
-		
 		
 		return "member/myTradeList";
 	}

@@ -9,8 +9,8 @@ public interface ReservationService {
 	
 	int insertReservation(Reservation reservation);
 	
-	int selectReservationListCount(String memberId);
-
 	List<Reservation> selectReservationList(PageInfo pi, String memberId);
+
+	PageInfo getReservationPageInfo(String memberId, int page, int i, int j);
 
 }

@@ -4,6 +4,7 @@ import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
@@ -176,7 +177,12 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public MyPageInfo searchMyPage(String memberId) {
-		return memberMapper.searchMyPage(memberId);
+		List<MyPageInfo> myPageInfoList = memberMapper.searchMyPage(memberId);
+		if (myPageInfoList.isEmpty()) {
+			return null;
+        }
+        
+        return myPageInfoList.get(0);
 	}
 	
 	@Override

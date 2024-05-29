@@ -22,8 +22,11 @@
             width:fit-content; 
             margin:auto;
         }
+        .table .thead-light th, td{
+            text-align: center;
+            vertical-align: middle;
+        }
     </style>
-
 
 </head>
 <body>
@@ -45,21 +48,23 @@
             </thead>
             <tbody>
                 <c:choose>
-                    <c:when test="${ not empty myPageInfo.reservationList }" >
-                        <c:forEach items="${ myPageInfo.reservationList }" var="r">
+                    <c:when test="${ not empty reservationlist }" >
+                        <c:forEach items="${ reservationlist }" var="r">
                             
                                 <tr>
                                     <td>${ r.reservationNo }</td>
                                     <td>${ r.campName }</td>
                                     <td>${ r.people }</td>
-                                    <td>${ r.checkInDate } ~ ${ r.checkoutDate }</td>
+                                    <td>${ r.checkInDate } ~ ${ r.checkOutDate }</td>
                                     <td>
-                                        <c:if test="${ r.reserStatus eq 'Y' }">
-                                            예약 완료
-                                        </c:if>
-                                        <c:if test="${ r.reserStatus eq 'N' }">
-                                            취소
-                                        </c:if>
+                                        <c:choose>
+                                            <c:when test="${ r.reserStatus eq 'Y' }">
+                                                예약 완료
+                                            </c:when>
+                                            <c:otherwise >
+                                                취소
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                 </tr>
                         

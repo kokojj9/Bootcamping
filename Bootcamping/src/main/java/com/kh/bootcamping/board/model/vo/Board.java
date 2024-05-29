@@ -6,14 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
+@ToString
 public class Board {
 	
 	private int boardNo;
@@ -24,6 +26,7 @@ public class Board {
 	private String status;
 	private int memberNo;
 	private String categoryCode;
+	private String categoryName;
 	private int count;
 
 }
