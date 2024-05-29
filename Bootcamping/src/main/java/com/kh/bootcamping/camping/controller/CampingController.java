@@ -229,8 +229,6 @@ public class CampingController {
 		
 		List<Camping> camping = campingService.selectMainCamping();
 		
-		System.out.println(camping);
-		
 		HttpHeaders header = new HttpHeaders();
 		header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		
