@@ -83,7 +83,7 @@
 	  JOIN
 	       TB_PRICE USING(TYPE_CODE)
 	 WHERE
-	       MEMBER_NO = #{ memberId }
+	       MEMBER_ID = #{ memberId }
 	 ORDER
 	    BY
 	       RESERVATION_NO DESC
