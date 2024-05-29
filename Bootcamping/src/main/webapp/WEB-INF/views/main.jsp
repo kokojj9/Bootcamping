@@ -172,10 +172,10 @@
     color: black;
    }
 
-   .card a {
+   .card a, 	#content_2 > a  {
     text-decoration: none;
    }
-   
+
 
 </style>
 
@@ -191,20 +191,15 @@
                     <h2>캠핑장을 찾고 계신가요?</h2>
                 </div>
                 <div id="search_1">
-                   
-                    
-                    <form action="#" method="get">
-                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!">
-                        <input type="submit" value="검색" id="submit_btn">
-                    </form>
-                    
+                        <input type="text" placeholder="캠핑장 이름을 입력해주세요!" id="keyword">
+                        <input type="button" value="검색" id="submit_btn">
                 </div>
                 
             </div>
         </div>
 
         <div id="content_2">
-            <button class="color_green">전체</button>
+            <a href="/bootcamping/camping"><button class="color_green">전체</button></a>
             <button class="color_yellow">글램핑</button>
             <button class="color_green">카라반</button>
             <button class="color_yellow">일반</button>
@@ -260,6 +255,25 @@
 					$('.items').html(str);
 					
 				}
+			})
+			
+		})
+		
+		
+		$(() => {
+			
+			$('#submit_btn').click(() => {
+				
+				$.ajax({
+					url : '/bootcamping/camping/searchCamping',
+					data : {keyword : $('#keyword').val()},
+					success : result => {
+						console.log(result);
+						searchBtn(result);
+					}
+					
+				})
+				
 			})
 			
 		})
