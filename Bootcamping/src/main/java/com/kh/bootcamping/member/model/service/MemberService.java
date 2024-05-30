@@ -19,7 +19,7 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
-	ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request) throws MessagingException;
+	ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request);
 
 	ResponseEntity<ResponseData> checkAuthCode(Map<String, String> auth);
 

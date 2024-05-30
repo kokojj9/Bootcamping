@@ -1,6 +1,5 @@
 package com.kh.bootcamping.member.model.service;
 
-import java.nio.charset.Charset;
 import java.text.DecimalFormat;
 import java.text.Format;
 import java.util.HashMap;
@@ -13,9 +12,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -23,6 +20,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.common.template.PropertyTemplate;
+import com.kh.bootcamping.common.template.ResponseTemplate;
 import com.kh.bootcamping.member.model.dao.MemberMapper;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.MyPageInfo;
@@ -37,23 +35,17 @@ public class MemberServiceImpl implements MemberService {
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	private final MemberMapper memberMapper;
 	private final PropertyTemplate pt;
+	private final ResponseTemplate responseTemplate;
 	
 	@Override
 	public Member login(Member member) {
-		Member loginMember = memberMapper.login(member);
-		
-		if (loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			return loginMember;
-		} else {
-			return null;
-		}
+		return memberMapper.login(member);
 	}
 	
 	@Override
 	public int insertAuthCode(Map<String, String> auth) {
 		return memberMapper.insertAuthCode(auth);
 	}
-	
 	
 	// 컨트롤러에서 비즈니스 로직 분리
 	@Override
@@ -64,41 +56,27 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request) throws MessagingException {
-		ResponseData rd = new ResponseData(); 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-
-		if(memberMapper.checkMemberEmail(map.get("email")) != null) {
-			rd = ResponseData.builder().responseCode("NN")
-			            	 .resultMessage("인증번호 발급 실패 (이메일 중복)")
-			            	 .build();
-		} else {
-			rd = ResponseData.builder().responseCode(validateMail(map.get("email"), request))
-							 .resultMessage("인증번호 발급 성공")
-							 .build();
+	public ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request) {
+		try {
+			if(validateMail(map.get("email"), request).equals("YY")) {
+				String message = memberMapper.checkMemberEmail(map.get("email")) == null ? "인증에 성공하였습니다." : "인증에 실패하였습니다.";
+				return responseTemplate.success(message, "YY", null);
+			}
+			
+			return responseTemplate.success("이메일 전송에 실패했습니다.", "NN", null);
+		} catch (Exception e) {
+			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
 	
 	@Override
 	public ResponseEntity<ResponseData> checkAuthCode(Map<String, String> auth) {
-		ResponseData rd = new ResponseData(); 
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		if(auth.get("authCode").equals(memberMapper.checkAuthCode(auth))) {
-			rd = ResponseData.builder().responseCode("YY")
-				        	 .resultMessage("인증에 성공하였습니다.")
-				        	 .build();
-		} else {
-			rd = ResponseData.builder().responseCode("NN")
-						     .resultMessage("인증에 실패하였습니다.")
-						     .build();
+		try {
+			String message = auth.get("authCode").equals(memberMapper.checkAuthCode(auth)) ? "사용 가능한 아이디입니다." : "사용할 수 없는 아이디입니다.(아이디 중복)";
+			return responseTemplate.success(message, "YY", null);
+		} catch (Exception e) {
+			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
 	
 	//인증이메일 전송 메서드
@@ -158,21 +136,12 @@ public class MemberServiceImpl implements MemberService {
 	// 컨트롤러에서 비즈니스 로직 분리
 	@Override
 	public ResponseEntity<ResponseData> checkMemberId(String memberId) {
-		ResponseData rd = new ResponseData();
-		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		
-		if(memberMapper.checkMemberId(memberId) == null) {
-			rd = ResponseData.builder().responseCode("YY")
-			                 .resultMessage("사용 가능한 아이디입니다")
-			                 .build();
-		} else {
-			rd = ResponseData.builder().responseCode("NN")
-			                 .resultMessage("사용할 수 없는 아이디입니다.(아이디 중복)")
-			                 .build();
+		try {
+			String message = memberMapper.checkMemberId(memberId) == null ? "사용 가능한 아이디입니다." : "사용 불가능한 아이디입니다(아이디 중복).";
+			return responseTemplate.success(message, "YY", null);
+		} catch(Exception e) {
+			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		
-		return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	}
 	
 	@Override
