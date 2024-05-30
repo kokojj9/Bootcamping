@@ -23,6 +23,13 @@ memberIdTag.onkeyup = () => {
                     } else {
                         checkInfo('id' , 'crimson', result.resultMessage)
                     };
+                },
+                error: (request, status) => {
+                    if (status === 400) {
+                        alert('잘못된 요청입니다.');
+                    } else if (status === 500) {
+                        alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
+                    }
                 }
             });
         };
@@ -81,6 +88,13 @@ document.getElementById('checkEmailBtn').onclick = () => {
                 else {
                     alert(result.resultMessage);
                 }
+            },
+            error: (request, status) => {
+                if (status === 400) {
+                    alert('잘못된 요청입니다.');
+                } else if (status === 500) {
+                    alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
+                }
             }
         });
     }
@@ -108,6 +122,13 @@ document.getElementById('checkAuthCode').onclick = () => {
             }
             
             document.getElementById('timer').textContent = result.resultMessage;
+        },
+        error: (request, status) => {
+            if (status === 400) {
+                alert('잘못된 요청입니다.');
+            } else if (status === 500) {
+                alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
+            }
         }
     });
 };
