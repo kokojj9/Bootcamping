@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kh.bootcamping.common.template.ResponseTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.ResponseData;
 
@@ -25,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class MailCheckController {
 	
 	private final MemberService memberService;
-	
+	private final ResponseTemplate responseTemplate;
 	/**
 	 * 인증코드 전송 메서드
 	 * @param email 사용자가 입력한 이메일
@@ -36,6 +38,12 @@ public class MailCheckController {
 	@PostMapping
 	public ResponseEntity<ResponseData> sendMail(@RequestBody Map<String, String> map
 												 , HttpServletRequest request) throws MessagingException {
+		String email = map.get("email");
+		
+		if(email == null || email.trim().isEmpty()) {
+			return responseTemplate.fail("이메일을 확인해주세요", HttpStatus.NOT_FOUND);
+		}
+		
 		return memberService.checkMemberEmail(map, request);
 	}
 	

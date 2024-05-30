@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.bootcamping.common.template.ResponseTemplate;
 import com.kh.bootcamping.member.model.service.MemberService;
 import com.kh.bootcamping.member.model.vo.Member;
 import com.kh.bootcamping.member.model.vo.ResponseData;
@@ -29,6 +31,7 @@ public class MemberController {
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	private final MemberService memberService;
+	private final ResponseTemplate responseTemplate;
 	
 	/**
 	 * 로그인 메서드 내부에서 쿠키저장 메서드를 호출함
@@ -60,6 +63,10 @@ public class MemberController {
 	@ResponseBody
 	@GetMapping("/check-id/{memberId}")
 	public ResponseEntity<ResponseData> checkMemberId(@PathVariable String memberId) {
+		if (memberId == null || memberId.trim().isEmpty()) {
+			return responseTemplate.fail("잘못된 요청", HttpStatus.NOT_FOUND);
+		}
+		
 		return memberService.checkMemberId(memberId);
 	}
 	
@@ -111,6 +118,7 @@ public class MemberController {
 		if(member != null) {
 			result = memberService.editMember(member) > 0 ? "YY" : "NN";
 		}
+		
 		session.setAttribute("loginMember", memberService.login(member));
 		
 		return result;
