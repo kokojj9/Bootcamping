@@ -38,6 +38,7 @@ public class MailCheckController {
 												 , HttpServletRequest request) throws MessagingException {
 		return memberService.checkMemberEmail(map, request);
 	}
+	
 	/***
 	 * 비밀번호 찾기 메일 인증 메서드
 	 * @param email

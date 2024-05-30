@@ -1,7 +1,10 @@
 package com.kh.bootcamping.common.template;
 
+import org.springframework.stereotype.Component;
+
 import com.kh.bootcamping.common.model.vo.PageInfo;
 
+@Component
 public class Pagination {
 	
 	public PageInfo getPageInfo(int listCount,

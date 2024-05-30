@@ -107,6 +107,7 @@ public class MemberController {
 	@PostMapping("/edit")
 	public String editMember(Member member, HttpSession session) {
 		String result = "NN";
+		
 		if(member != null) {
 			result = memberService.editMember(member) > 0 ? "YY" : "NN";
 		}
