@@ -64,7 +64,7 @@ public class MemberController {
 	@GetMapping("/check-id/{memberId}")
 	public ResponseEntity<ResponseData> checkMemberId(@PathVariable String memberId) {
 		if (memberId == null || memberId.trim().isEmpty()) {
-			return responseTemplate.fail("잘못된 요청", HttpStatus.NOT_FOUND);
+			return responseTemplate.fail("잘못된 요청", HttpStatus.BAD_REQUEST);
 		}
 		
 		return memberService.checkMemberId(memberId);

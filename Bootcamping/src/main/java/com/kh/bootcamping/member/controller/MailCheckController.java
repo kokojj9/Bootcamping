@@ -41,7 +41,7 @@ public class MailCheckController {
 		String email = map.get("email");
 		
 		if(email == null || email.trim().isEmpty()) {
-			return responseTemplate.fail("이메일을 확인해주세요", HttpStatus.NOT_FOUND);
+			return responseTemplate.fail("이메일을 확인해주세요", HttpStatus.BAD_REQUEST);
 		}
 		
 		return memberService.checkMemberEmail(map, request);
