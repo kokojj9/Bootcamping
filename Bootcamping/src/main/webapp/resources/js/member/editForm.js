@@ -9,7 +9,7 @@ document.getElementById('checkPwdBtn').onclick = () => {
     };
 
     $.ajax({
-        url : 'members/edit-Password',
+        url : 'members/edit-password',
         type : 'post',
         contentType: 'application/json; charset=UTF-8',
         data : JSON.stringify(data),

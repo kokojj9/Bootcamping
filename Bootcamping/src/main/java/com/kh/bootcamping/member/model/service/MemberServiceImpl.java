@@ -124,10 +124,6 @@ public class MemberServiceImpl implements MemberService {
 		mailSender.setJavaMailProperties(prop);
 	}
 	
-	/**
-	 * 인증코드 생성 메서드
-	 * @return
-	 */
 	private String getAuthCode() {
 		Random r = new Random();
 		int i = r.nextInt(100000);

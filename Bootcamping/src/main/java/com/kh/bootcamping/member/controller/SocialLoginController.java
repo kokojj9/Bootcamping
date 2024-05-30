@@ -29,10 +29,6 @@ public class SocialLoginController {
 	private final MemberService memberService;
 	private final PropertyTemplate pt;
 	
-	/**
-	 * 카카오 로그인 버튼 포워딩메서드
-	 * @return
-	 */
 	@GetMapping("kakaoLoginForm")
 	public String forwardKakao() {
 		String client_id = pt.getProperties().getProperty("client_id");
@@ -44,14 +40,6 @@ public class SocialLoginController {
 		return "redirect:" + sb.toString();
 	}
 	
-	/**
-	 * 카카오 로그인 메서드 / 회원가입여부 확인 후 session에 set
-	 * @param code
-	 * @param session
-	 * @return
-	 * @throws IOException
-	 * @throws ParseException
-	 */
 	@GetMapping("kakaoLogin")
 	public String kakaoLogin(String code, HttpSession session) throws IOException, ParseException {
 		String accessToken = getToken(code);
@@ -72,13 +60,6 @@ public class SocialLoginController {
 		return "redirect:/";
 	}
 	
-	/**
-	 * 클라이언트 코드로 토큰을 얻는 메서드 -> 토큰은 회원정보를 얻는 요청에 사용됨
-	 * @param code
-	 * @return
-	 * @throws IOException
-	 * @throws ParseException
-	 */
 	public String getToken(String code) throws IOException, ParseException {
 		String client_id = pt.getProperties().getProperty("client_id");
 		String tokenUrl = "https://kauth.kakao.com/oauth/token?";
@@ -120,13 +101,6 @@ public class SocialLoginController {
 		return accessToken;
 	}
 	
-	/**
-	 * 토큰을 이용하여 로그인유저의 정보를 얻는 메서드
-	 * @param accessToken
-	 * @return
-	 * @throws IOException
-	 * @throws ParseException
-	 */
 	public Member getUserInfo(String accessToken) throws IOException, ParseException {
 		String userInfoUrl = "https://kapi.kakao.com/v2/user/me";
 		

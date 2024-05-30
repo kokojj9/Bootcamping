@@ -34,15 +34,6 @@ public class MemberController {
 	private final MemberService memberService;
 	private final ResponseTemplate responseTemplate;
 	
-	/**
-	 * 로그인 메서드 내부에서 쿠키저장 메서드를 호출함
-	 * @param member 아이디, 비밀번호 필드에 로그인정보가 들어있음
-	 * @param rememberId 쿠키에 저장할 아이디
-	 * @param session
-	 * @param mv
-	 * @param response
-	 * @return
-	 */
 	@PostMapping("/login")
 	public ModelAndView login(Member member, @RequestParam(defaultValue = "false")String rememberId,
 				              HttpSession session, ModelAndView mv,
@@ -60,7 +51,6 @@ public class MemberController {
 		return mv;
 	}
 	
-	//아이디 중복체크
 	@ResponseBody
 	@GetMapping("/check-id/{memberId}")
 	public ResponseEntity<ResponseData> checkMemberId(@PathVariable String memberId) {
@@ -71,7 +61,6 @@ public class MemberController {
 		return memberService.checkMemberId(memberId);
 	}
 	
-	//회원 가입 메서드
 	@PostMapping("/register")
 	public ModelAndView insertMember(@Valid Member member, BindingResult br
 			                         ,HttpSession session, ModelAndView mv) {
@@ -91,9 +80,8 @@ public class MemberController {
 		return mv; 
 	}
 	
-	// 회원정보 수정 로그인 메서드 활용
 	@ResponseBody
-	@PostMapping(value = "/edit-Password", produces = "application/json; charset=UTF-8")
+	@PostMapping(value = "/edit-password", produces = "application/json; charset=UTF-8")
 	public ResponseEntity<ResponseData> editPassword(@RequestBody Member member) {
 		if(member != null) {
 			Member loginMember = memberService.login(member);
@@ -108,14 +96,6 @@ public class MemberController {
 		}
 	}
 	
-	/**
-	 * 회원 정보 수정 메서드
-	 * @param member
-	 * @param postcode
-	 * @param roadAddress
-	 * @param detailAddress
-	 * @return
-	 */
 	@ResponseBody
 	@PostMapping("/edit")
 	public String editMember(Member member, HttpSession session) {
