@@ -80,7 +80,7 @@ public class MemberForwardController {
 	public String forwardMyReservations(Model model, String memberId, int page) {
 		
 		PageInfo pi = reservationService.getReservationPageInfo(memberId, page, 10, 5);
-		
+
 		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
 		model.addAttribute("pageInfo", pi);
 		return "member/myReservations";

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,7 +50,7 @@ public class MemberController {
 		
 		Member loginMember = memberService.login(member);
 		
-		if (loginMember != null) {
+		if (loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			mv.setViewName("redirect:/");
 		} else {
@@ -92,14 +93,19 @@ public class MemberController {
 	
 	// 회원정보 수정 로그인 메서드 활용
 	@ResponseBody
-	@PostMapping("/edit-Password")
-	public String editPassword(Member member) {
-		Member loginMember = memberService.login(member);
-		
-		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			return "YY";
+	@PostMapping(value = "/edit-Password", produces = "application/json; charset=UTF-8")
+	public ResponseEntity<ResponseData> editPassword(@RequestBody Member member) {
+		if(member != null) {
+			Member loginMember = memberService.login(member);
+			
+			if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+				return responseTemplate.success("비밀번호 인증 성공", "YY", null);
+			} else {
+				return responseTemplate.success("비밀번호 인증 실패", "NN", null);
+			}
+		} else {
+			return responseTemplate.fail("비밀번호 인증오류", HttpStatus.BAD_REQUEST);
 		}
-			return "NN";
 	}
 	
 	/**
@@ -114,13 +120,11 @@ public class MemberController {
 	@PostMapping("/edit")
 	public String editMember(Member member, HttpSession session) {
 		String result = "NN";
-		
 		if(member != null) {
 			result = memberService.editMember(member) > 0 ? "YY" : "NN";
 		}
-		
 		session.setAttribute("loginMember", memberService.login(member));
-		
+	
 		return result;
 	}
 	

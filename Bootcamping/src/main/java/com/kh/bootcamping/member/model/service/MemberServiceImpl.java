@@ -39,13 +39,7 @@ public class MemberServiceImpl implements MemberService {
 	
 	@Override
 	public Member login(Member member) {
-		Member loginMember = memberMapper.login(member);
-		
-		if (loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			return loginMember;
-		} else {
-			return null;
-		}
+		return memberMapper.login(member);
 	}
 	
 	@Override

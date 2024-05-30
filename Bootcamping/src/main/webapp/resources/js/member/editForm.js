@@ -11,6 +11,7 @@ document.getElementById('checkPwdBtn').onclick = () => {
     $.ajax({
         url : 'members/edit-Password',
         type : 'post',
+        contentType: 'application/json; charset=UTF-8',
         data : JSON.stringify(data),
         success : result => {
             if(result.responseCode === 'YY') {
@@ -40,8 +41,13 @@ document.getElementById('editBtn').onclick = () => {
             changePwdType : changePwdType
         },
         success : result => {
-            if(result === 'YYYYY') location.href = 'editForm';
-            else alert('정보 수정 실패'); location.href = 'editForm';
+            if(result === 'YY') {
+                alert('정보 수정 완료'); 
+                location.href = 'editForm';
+            }
+            else {
+                alert('정보 수정 실패');
+            }
         }
     });
 };
