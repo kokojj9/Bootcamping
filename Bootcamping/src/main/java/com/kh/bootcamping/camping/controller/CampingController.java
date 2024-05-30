@@ -51,17 +51,18 @@ public class CampingController {
 	 * 캠핑장 전체 조회 + 페이징처리
 	 */
 	@GetMapping
-	public ModelAndView camping(@RequestParam(value="page", defaultValue="1") int page,  ModelAndView mv) throws IOException {
+	public ModelAndView camping(@RequestParam(value="page", defaultValue="1") int page,  
+								ModelAndView mv) throws IOException {
 		
 		PageInfo pi = pagination.getPageInfo(3825, page, 8, 3);
 		
 		String url = "http://apis.data.go.kr/B551011/GoCamping/basedList";
-		   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
-		   url += "&MobileOS=ETC";
-		   url += "&MobileApp=TestApp";
-		   url += "&numOfRows=8";
-		   url += "&pageNo=" + page;
-		   url += "&_type=json";
+	           url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
+		       url += "&MobileOS=ETC";
+		       url += "&MobileApp=TestApp";
+			   url += "&numOfRows=8";
+			   url += "&pageNo=" + page;
+			   url += "&_type=json";
 		   
 		   URL requestUrl = new URL(url);
 		   HttpURLConnection urlConnection = (HttpURLConnection)requestUrl.openConnection();
@@ -69,9 +70,7 @@ public class CampingController {
 		   String responseJson = br.readLine();
 		   
 		   mv.addObject("json", responseJson);
-		   
-		   
-		   
+
 		   mv.addObject("pageInfo", pi);
 		   
 		   mv.setViewName("camping/campingList");
