@@ -9,7 +9,7 @@ document.getElementById('checkPwdBtn').onclick = () => {
     };
 
     $.ajax({
-        url : 'members/edit-Password',
+        url : 'members/edit-password',
         type : 'post',
         contentType: 'application/json; charset=UTF-8',
         data : JSON.stringify(data),
@@ -23,6 +23,13 @@ document.getElementById('checkPwdBtn').onclick = () => {
                 memberPwdtag.style.display = 'none';
                 changePwdType = 'N';
             };
+        },
+        error: (request, status) => {
+            if (status === 400) {
+                alert('잘못된 요청입니다.');
+            } else if (status === 500) {
+                alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
+            }
         }
     });
 };
@@ -47,6 +54,13 @@ document.getElementById('editBtn').onclick = () => {
             }
             else {
                 alert('정보 수정 실패');
+            }
+        },
+        error: (request, status) => {
+            if (status === 400) {
+                alert('잘못된 요청입니다.');
+            } else if (status === 500) {
+                alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
             }
         }
     });

@@ -47,7 +47,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.insertAuthCode(auth);
 	}
 	
-	// 컨트롤러에서 비즈니스 로직 분리
 	@Override
 	public int insertMember(Member member) {
 		member.setMemberPwd(bcryptPasswordEncoder.encode(member.getMemberPwd()));
@@ -59,11 +58,13 @@ public class MemberServiceImpl implements MemberService {
 	public ResponseEntity<ResponseData> checkMemberEmail(Map<String, String> map, HttpServletRequest request) {
 		try {
 			if(validateMail(map.get("email"), request).equals("YY")) {
-				String message = memberMapper.checkMemberEmail(map.get("email")) == null ? "인증에 성공하였습니다." : "인증에 실패하였습니다.";
-				return responseTemplate.success(message, "YY", null);
+				if(memberMapper.checkMemberEmail(map.get("email")) == null) {
+					return responseTemplate.success("인증코드를 전송했습니다.", "YY", null);
+				}
+				return responseTemplate.success("중복된 이메일입니다.", "NN", null);
 			}
 			
-			return responseTemplate.success("이메일 전송에 실패했습니다.", "NN", null);
+			return responseTemplate.success("인증코드 전송에 실패했습니다.", "NN", null);
 		} catch (Exception e) {
 			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
@@ -72,14 +73,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ResponseEntity<ResponseData> checkAuthCode(Map<String, String> auth) {
 		try {
-			String message = auth.get("authCode").equals(memberMapper.checkAuthCode(auth)) ? "사용 가능한 아이디입니다." : "사용할 수 없는 아이디입니다.(아이디 중복)";
-			return responseTemplate.success(message, "YY", null);
+			if(auth.get("authCode").equals(memberMapper.checkAuthCode(auth))) {
+				return responseTemplate.success("이메일 인증에 성공했습니다.", "YY", null);
+			}
+			
+			return responseTemplate.success("이메일 인증에 실패했습니다.", "NN", null);
 		} catch (Exception e) {
 			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	//인증이메일 전송 메서드
 	@Override
 	public String validateMail(String email, HttpServletRequest request) throws MessagingException {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
@@ -121,10 +124,6 @@ public class MemberServiceImpl implements MemberService {
 		mailSender.setJavaMailProperties(prop);
 	}
 	
-	/**
-	 * 인증코드 생성 메서드
-	 * @return
-	 */
 	private String getAuthCode() {
 		Random r = new Random();
 		int i = r.nextInt(100000);
@@ -133,12 +132,14 @@ public class MemberServiceImpl implements MemberService {
 		return f.format(i);
 	}
 	
-	// 컨트롤러에서 비즈니스 로직 분리
 	@Override
 	public ResponseEntity<ResponseData> checkMemberId(String memberId) {
 		try {
-			String message = memberMapper.checkMemberId(memberId) == null ? "사용 가능한 아이디입니다." : "사용 불가능한 아이디입니다(아이디 중복).";
-			return responseTemplate.success(message, "YY", null);
+			if(memberMapper.checkMemberId(memberId) == null) { 
+				return responseTemplate.success("사용 가능한 아이디입니다.", "YY", null);
+			} 
+			
+			return responseTemplate.success("사용 불가능한 아이디입니다(아이디 중복).", "NN", null);
 		} catch(Exception e) {
 			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}

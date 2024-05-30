@@ -44,6 +44,13 @@ let searchPwdSubmit = document.getElementById('searchPwd');
                         else {
                             alert('인증번호발급에 실패하였습니다. 이메일을 확인해주세요');
                         }
+                    },
+                    error: (request, status) => {
+                        if (status === 400) {
+                            alert('잘못된 요청입니다.');
+                        } else if (status === 500) {
+                            alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
+                        }
                     }
                 });
             }
@@ -68,6 +75,13 @@ let searchPwdSubmit = document.getElementById('searchPwd');
                         document.getElementById('email').setAttribute('readonly', false);
                         document.getElementById('timer').textContent = '인증에 실패하였습니다. 다시 입력해주세요';
                         document.getElementById('timer').style.color = 'crimson';
+                    }
+                },
+                error: (request, status) => {
+                    if (status === 400) {
+                        alert('잘못된 요청입니다.');
+                    } else if (status === 500) {
+                        alert('서버 오류입니다. 잠시 후 다시 시도해 주십시오');
                     }
                 }
             });
