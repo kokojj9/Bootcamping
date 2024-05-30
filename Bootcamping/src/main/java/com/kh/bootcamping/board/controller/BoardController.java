@@ -22,6 +22,11 @@ public class BoardController {
 	private BoardService boardService;
 	
 	
+	@Autowired
+	private Pagination pagination;
+	
+	
+	
 	//header.jsp에서 클릭시 => 1 =>list.board(처음 게시판 들어갈 때)
 	// 페이징바에서 눌렀다 => list.board?page=요청페이지
 	@RequestMapping("list.board")
@@ -33,7 +38,7 @@ public class BoardController {
 		// 한페이지에 몇개 ==5
 		// 페이징 바 몇개 ==5
 		
-		PageInfo pi=Pagination.getPageInfo(boardService.selectListCount() ,
+		PageInfo pi=pagination.getPageInfo(boardService.selectListCount() ,
 											page, 
 											5, 
 											5);

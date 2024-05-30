@@ -42,6 +42,9 @@ public class CampingController {
 	private CampingService campingService;
 	
 	@Autowired
+	private Pagination pagination;
+	
+	@Autowired
 	private PropertyTemplate pt;
 
 	/**
@@ -50,7 +53,7 @@ public class CampingController {
 	@GetMapping
 	public ModelAndView camping(@RequestParam(value="page", defaultValue="1") int page,  ModelAndView mv) throws IOException {
 		
-		PageInfo pi = Pagination.getPageInfo(3825, page, 8, 3);
+		PageInfo pi = pagination.getPageInfo(3825, page, 8, 3);
 		
 		String url = "http://apis.data.go.kr/B551011/GoCamping/basedList";
 		   url += "?serviceKey=" + pt.getProperties().getProperty("service_key");
@@ -134,7 +137,7 @@ public class CampingController {
 	@GetMapping(value="searchCamping")
 	public ResponseEntity<ResponseData> searchCamping(@RequestParam(value="page", defaultValue="1") int page, String keyword) {
 		
-		 PageInfo pi = Pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 3);
+		 PageInfo pi = pagination.getPageInfo(campingService.selectSearchCount(keyword), page, 8, 3);
 		
 		 HashMap<String, Object> map = new HashMap();
 		 
@@ -161,7 +164,7 @@ public class CampingController {
 	@GetMapping(value="checkedCamping", produces="application/json; charset=UTF-8")
 	public ResponseEntity<ResponseData> checkedCamping(@RequestParam(value="page", defaultValue="1") int page, CampingCheck campingCheck) {
 		
-		PageInfo pi = Pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 3);
+		PageInfo pi = pagination.getPageInfo(campingService.checkCampingCount(campingCheck), page, 8, 3);
 		
 		HashMap<String, Object> map = new HashMap();
 		
