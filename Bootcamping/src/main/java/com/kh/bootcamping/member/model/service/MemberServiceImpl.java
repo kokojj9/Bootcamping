@@ -14,8 +14,12 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+<<<<<<< Updated upstream
 	//private final MemberRepository memberRepository;
 	//private final SqlSessionTemplate sqlSession;
+=======
+	private final BCryptPasswordEncoder bcryptPasswordEncoder;
+>>>>>>> Stashed changes
 	private final MemberMapper memberMapper;
 	
 	@Override
@@ -39,8 +43,34 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.checkAuthCode(auth);
 	}
 	@Override
+<<<<<<< Updated upstream
 	public String checkMemberId(String memberId) {
 		return memberMapper.checkMemberId(memberId);
+=======
+	public String validateMail(String email, HttpServletRequest request) throws MessagingException {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		Map<String, String> auth = new HashMap<String, String>();
+		setupMailSender();
+
+		String code = getAuthCode();
+		String remoteAddr = request.getRemoteAddr();
+
+		auth.put("remoteAddr", remoteAddr);
+		auth.put("email", email);
+		auth.put("code", code);
+
+		if (memberMapper.insertAuthCode(auth) == 0) return "NN";
+
+		MimeMessage message = mailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+
+		helper.setTo(email);
+		helper.setSubject("인증번호 전송");
+		helper.setText("인증번호 : " + code);
+		mailSender.send(message);
+
+		return "YY";
+>>>>>>> Stashed changes
 	}
 	@Override
 	public MyPageInfo searchMyPage(String memberId) {
