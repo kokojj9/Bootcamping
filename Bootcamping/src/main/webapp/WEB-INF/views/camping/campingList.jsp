@@ -258,13 +258,7 @@
             <div id="content_4">
 
                 <div id="total"><h3>전체 <sapn id="totalCamp"></sapn>개</h3></div>
-                <div id="select_box">
-                    <select name="" id="" class="btn">
-                        <option value="">추천순</option>
-                        <option value="">거리순</option>
-                    </select>
-                </div>
-	
+
 			
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
