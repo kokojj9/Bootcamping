@@ -50,7 +50,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int insertMember(Member member) {
 		member.setMemberPwd(bcryptPasswordEncoder.encode(member.getMemberPwd()));
-		
 		return memberMapper.insertMember(member);
 	}
 	
@@ -63,7 +62,6 @@ public class MemberServiceImpl implements MemberService {
 				}
 				return responseTemplate.success("중복된 이메일입니다.", "NN", null);
 			}
-			
 			return responseTemplate.success("인증코드 전송에 실패했습니다.", "NN", null);
 		} catch (Exception e) {
 			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -76,7 +74,6 @@ public class MemberServiceImpl implements MemberService {
 			if(auth.get("authCode").equals(memberMapper.checkAuthCode(auth))) {
 				return responseTemplate.success("이메일 인증에 성공했습니다.", "YY", null);
 			}
-			
 			return responseTemplate.success("이메일 인증에 실패했습니다.", "NN", null);
 		} catch (Exception e) {
 			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -96,7 +93,7 @@ public class MemberServiceImpl implements MemberService {
 		auth.put("email", email);
 		auth.put("code", code);
 
-		if (memberMapper.insertAuthCode(auth) == 0) return "NN";
+		if(memberMapper.insertAuthCode(auth) == 0) return "NN";
 
 		MimeMessage message = mailSender.createMimeMessage();
 		MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
@@ -138,7 +135,6 @@ public class MemberServiceImpl implements MemberService {
 			if(memberMapper.checkMemberId(memberId) == null) { 
 				return responseTemplate.success("사용 가능한 아이디입니다.", "YY", null);
 			} 
-			
 			return responseTemplate.success("사용 불가능한 아이디입니다(아이디 중복).", "NN", null);
 		} catch(Exception e) {
 			return responseTemplate.fail("서버 오류가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -161,6 +157,7 @@ public class MemberServiceImpl implements MemberService {
 		if(member.getChangePwdType().equals("Y")) {
 			member.setMemberPwd(bcryptPasswordEncoder.encode(member.getMemberPwd()));
 		}
+		
 		return memberMapper.editMember(member);
 	}
 	

@@ -65,7 +65,7 @@ public class MemberController {
 	public ModelAndView insertMember(@Valid Member member, BindingResult br
 			                         ,HttpSession session, ModelAndView mv) {
 		
-		if(member.getMemberId() == null || member.getMemberPwd() == null || member.getEmail() == null) {
+		if(br.hasErrors()) {
             mv.addObject("alertMsg", "유효성 검사 실패").setViewName("redirect:/enrollForm");
 		} else {
 			
@@ -82,8 +82,12 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping(value = "/edit-password", produces = "application/json; charset=UTF-8")
-	public ResponseEntity<ResponseData> editPassword(@RequestBody Member member) {
-		if(member != null) {
+	public ResponseEntity<ResponseData> editPassword(@RequestBody @Valid Member member, BindingResult br) {
+		if(br.hasErrors() || member == null) {
+			return responseTemplate.fail("비밀번호 인증오류", HttpStatus.BAD_REQUEST);
+		}
+		
+		try {
 			Member loginMember = memberService.login(member);
 			
 			if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
@@ -91,8 +95,8 @@ public class MemberController {
 			} else {
 				return responseTemplate.success("비밀번호 인증 실패", "NN", null);
 			}
-		} else {
-			return responseTemplate.fail("비밀번호 인증오류", HttpStatus.BAD_REQUEST);
+		} catch(Exception e) {
+			return responseTemplate.fail("서버 오류 : 다시 시도해주세요.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
