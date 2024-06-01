@@ -10,6 +10,14 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 	
+	<!-- alert -->
+	<!-- CSS -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+	<!-- Default theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+	<!-- Semantic UI theme -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+	
     <!-- jQuery -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <!-- iamport.payment.js -->
@@ -240,7 +248,7 @@
 		IMP.init("imp60634072"); 
 	
         var campName = document.getElementById('campName').value;
-        var checkIdDate = document.getElementById('checkInDate').value;
+        var checkInDate = document.getElementById('checkInDate').value;
         var checkOutDate = document.getElementById('checkOutDate').value;
         var people = document.getElementById('people').value;
         var memberNo = document.getElementById('memberNo').value;
@@ -276,7 +284,7 @@
  			    buyer_name: reservationName,
  			    buyer_tel: reservationPhone
  					
- 			  }, rsp => { // callback
+ 			  }, function (rsp) { // callback
  					if (rsp.success) {
  			          
  						$.ajax({
@@ -298,7 +306,7 @@
  								if(result.message == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			            location.href='/bootcamping/myPage';
+ 	 		 			         	location.href='/bootcamping/myPage';
  									
  								}
  		   			            
