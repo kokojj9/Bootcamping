@@ -43,9 +43,16 @@ public class MemberForwardController {
 	}
 
 	@GetMapping("myPage")
-	public String forwardMyPage(String memberId, Model model) {
-		model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
-		return "member/myPage";
+	public String forwardMyPage(String memberId, Model model, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		if(loginMember.getMemberId().equals(memberId)) {
+			model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
+			return "member/myPage";
+		} else {
+			return "common/errorPage";
+		}
+		
 	}
 	
 	@GetMapping("editForm")

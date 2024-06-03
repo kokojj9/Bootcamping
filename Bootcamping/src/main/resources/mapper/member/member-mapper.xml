@@ -21,10 +21,8 @@
 	</resultMap>
 	
 	<resultMap id="myPageResultSet" type="myPageInfo">
-	    <association property="member" javaType="Member">
-	        <result column="MEMBER_NO" property="memberNo"/>
-	        <result column="MEMBER_ID" property="memberId"/>
-	    </association>
+    	<result column="MEMBER_NO" property="memberNo"/>
+        <result column="MEMBER_ID" property="memberId"/>
 	    <collection property="boardList" ofType="Board">
 	        <result column="BOARD_NO"      property="boardNo"/>            
 	        <result column="BOARD_TITLE"   property="boardTitle"/>            

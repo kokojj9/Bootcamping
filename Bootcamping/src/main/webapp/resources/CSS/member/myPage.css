@@ -1,8 +1,9 @@
 .wrap{
     width: 1200px;
-    height: 800px;
+    height: auto;
     margin: auto;
     margin-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .wrap > h2{
