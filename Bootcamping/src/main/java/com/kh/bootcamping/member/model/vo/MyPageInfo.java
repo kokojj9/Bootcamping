@@ -21,6 +21,8 @@ import lombok.ToString;
 public class MyPageInfo {
 	
 	private Member member;
+	private String memberNo;
+	private String memberId;
 	private List<Reservation> reservationList; 
 	private List<TradeBoard> tradeBoardList;
 	private List<Camping> wishList;
