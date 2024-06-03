@@ -17,7 +17,9 @@ public class BoardRepository {
 	}
 
 	public List<Board> selectList(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
-		return null;
+		return sqlSession.selectList("boardMapper.viewList",null,rowBounds);
+		
+		
 	}
 
 	public int selectBoardListCount(SqlSessionTemplate sqlSession, String memberId) {

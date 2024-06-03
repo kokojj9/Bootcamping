@@ -13,6 +13,7 @@
 	    <result column="UPDATE_DATE"   property="updateDate"/>
 	    <result column="STATUS"        property="status"/>
 	    <result column="COUNT"         property="count"/>
+	    <result column="MEMBER_NO"     property="memberNo"/>
 	</resultMap>
 	    
  	<select id="selectListCount" resultType="_int">
@@ -25,21 +26,22 @@
 
 	</select>
   	
-  	<select id="selectList" resultMap="boardResultSet">
+  	<select id="selectList" resultMap="boardResultSet" resultType="ArrayList">
   		SELECT
-  				CATEGORY_CODE,
-  				BOARD_WRITER,
-  				BOARD_TITLE,
-  				BOARD_CONTENT,
-  				BOARD_CREATEDATE,
-  				COUNT
-  		FROM
-  				TB_BOARD	
-  		WHERE			
-  				STATUS='Y'
-  		ORDER
-  			BY
-  				BOARD_NO DESC		
+		    B.CATEGORY_CODE,
+		    B.BOARD_TITLE,
+		    B.BOARD_CONTENT,
+		    B.CREATE_DATE,
+		    B.COUNT,
+		    M.MEMBER_ID
+		FROM
+		    TB_BOARD B
+		JOIN
+		    TB_MEMBER M ON B.MEMBER_NO = M.MEMBER_NO
+		WHERE
+		    B.STATUS = 'Y'
+		ORDER BY
+		    B.BOARD_NO DESC	
   	</select>
 
 	<select id="selectBoardListCount" parameterType="string" resultType="_int">

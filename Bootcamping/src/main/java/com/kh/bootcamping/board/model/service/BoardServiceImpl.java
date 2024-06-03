@@ -3,9 +3,12 @@ package com.kh.bootcamping.board.model.service;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.bootcamping.board.model.dao.BoardMapper;
+import com.kh.bootcamping.board.model.dao.BoardRepository;
 import com.kh.bootcamping.board.model.vo.Board;
 import com.kh.bootcamping.board.model.vo.Reply;
 import com.kh.bootcamping.common.model.vo.PageInfo;
@@ -19,6 +22,12 @@ public class BoardServiceImpl implements BoardService {
 
 	private final BoardMapper boardMapper;
 	private final Pagination pagination;
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private BoardRepository repository;
 	
 	@Override
 	public int selectListCount() {

@@ -28,6 +28,7 @@ public class CampingForwardController {
 	/**
 	 * 캠핑장 상세조회
 	 */
+	/*
 	@GetMapping("detailCamping")
 	public String detailCamping(@RequestParam("contentId") String campNo, Model model) throws IOException {
 		
@@ -65,6 +66,7 @@ public class CampingForwardController {
 
 		
 	}
+	*/
 	
 	/**
 	 * 

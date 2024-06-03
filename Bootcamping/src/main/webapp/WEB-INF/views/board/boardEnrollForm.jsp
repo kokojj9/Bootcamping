@@ -52,7 +52,7 @@
 		
 		
 		<div id=wrap>
-			<form action="insert.board">
+			<form method="Post" action="insert.board">
 				
 				카테고리<p id="c1">
 							<select name="category">

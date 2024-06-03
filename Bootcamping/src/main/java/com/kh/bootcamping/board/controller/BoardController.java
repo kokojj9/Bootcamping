@@ -3,7 +3,7 @@ package com.kh.bootcamping.board.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,7 +24,7 @@ public class BoardController {
 	
 	//header.jsp에서 클릭시 => 1 =>list.board(처음 게시판 들어갈 때)
 	// 페이징바에서 눌렀다 => list.board?page=요청페이지
-	@RequestMapping("list.board")
+	@RequestMapping("boardList")
 	public String selectAll(@RequestParam(value="page",defaultValue="1")
 							int page,
 								Model model) {
@@ -37,20 +37,26 @@ public class BoardController {
 											page, 
 											5, 
 											5);
+		model.addAttribute("list", boardService.selectList(pi));
+		model.addAttribute("pageInfo",pi);
 		
-		//System.out.println("페이징 인포:"+pi);
+		System.out.println(boardService.selectList(pi));
+		
+		System.out.println("페이징 인포:"+pi);
 		
 		//log.info("페이지인포={}",pi);
 		
-		boardService.selectList(pi);
+	//	boardService.selectList(pi);
 		
 		return "board/boardList";
 	}
 	
 	
 	
-	@RequestMapping("insert.board")
+	@PostMapping("add.board")
 	public String insert(Model model) {
+		
+		
 		
 		return "board/boardEnrollForm";
 	}
