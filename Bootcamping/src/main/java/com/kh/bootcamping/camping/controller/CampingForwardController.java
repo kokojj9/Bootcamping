@@ -70,7 +70,7 @@ public class CampingForwardController {
 	 * 
 	 */
 	@GetMapping("reservation")
-	public String campingReservation(@RequestParam("siteNo") int siteNo, String startDate, String endDate, int countPeople, int sitePrice, Model model) {
+	public String campingReservation(int siteNo, String startDate, String endDate, int countPeople, int sitePrice, Model model) {
 		
 		if(campingService.campingReservation(siteNo) != null) {
 			  
