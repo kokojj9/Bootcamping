@@ -3,7 +3,6 @@
     height: auto;
     margin: auto;
     margin-bottom: 50px;
-    padding-bottom: 50px;
 }
 
 .wrap > h2{
@@ -90,7 +89,7 @@
 .tradeArea{
     margin: auto;
     width: 950px;
-    height: 130px;
+    height: 250px;
 }
 
 .tradeInfo{

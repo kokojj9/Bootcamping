@@ -1,9 +1,9 @@
 let urlList = [
     'editForm',
-    'myWishList?memberId=' + memberId + '&page=1',
-    'myReservations?memberId=' + memberId + '&page=1',
-    'myBoards?memberId=' + memberId + '&page=1',
-    'myTradeList?memberId=' + memberId + '&page=1'
+    'myWishList?page=1',
+    'myReservations?page=1',
+    'myBoards?page=1',
+    'myTradeList?page=1'
 ];
 
 let btn = document.querySelectorAll('.btn');
