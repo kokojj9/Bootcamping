@@ -43,16 +43,11 @@ public class MemberForwardController {
 	}
 
 	@GetMapping("myPage")
-	public String forwardMyPage(String memberId, Model model, HttpSession session) {
+	public String forwardMyPage(Model model, HttpSession session) {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 		
-		if(loginMember.getMemberId().equals(memberId)) {
-			model.addAttribute("myPageInfo", memberService.searchMyPage(memberId));
-			return "member/myPage";
-		} else {
-			return "common/errorPage";
-		}
-		
+		model.addAttribute("myPageInfo", memberService.searchMyPage(loginMember.getMemberId()));
+		return "member/myPage";
 	}
 	
 	@GetMapping("editForm")
@@ -78,23 +73,25 @@ public class MemberForwardController {
 	}
 	
 	@GetMapping("myReservations")
-	public String forwardMyReservations(Model model, String memberId, int page) {
+	public String forwardMyReservations(Model model, int page, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		
-		PageInfo pi = reservationService.getReservationPageInfo(memberId, page, 10, 5);
+		PageInfo pi = reservationService.getReservationPageInfo(loginMember.getMemberId(), page, 10, 5);
 
-		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, memberId));
+		model.addAttribute("reservationlist", reservationService.selectReservationList(pi, loginMember.getMemberId()));
 		model.addAttribute("pageInfo", pi);
 		return "member/myReservations";
 	}
 	
 	@GetMapping("myBoards")
-	public String forwardMyBoards(Model model, String memberId, int page) {
+	public String forwardMyBoards(Model model, int page, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
 		
-		PageInfo pi = boardService.getBoardPageInfo(memberId, page, 10, 5);
+		PageInfo pi = boardService.getBoardPageInfo(loginMember.getMemberId(), page, 10, 5);
 
-		model.addAttribute("boardslist", boardService.selectBoardList(pi, memberId));
+		model.addAttribute("boardList", boardService.selectBoardList(pi, loginMember.getMemberId()));
 		model.addAttribute("pageInfo", pi);
-		
+
 		return "member/myBoards";
 	}
 	

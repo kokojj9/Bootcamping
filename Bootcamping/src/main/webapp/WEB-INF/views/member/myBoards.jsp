@@ -43,20 +43,22 @@
                     <th>카테고리</th>
                     <th>제목</th>
                     <th>작성일</th>
+                    <th>조회수</th>
                 </tr>
             </thead>
             <tbody>
                 <c:choose>
                     <c:when test="${ not empty boardList }" >
-                        <c:forEach items="${ boardList }" var="b" varStatus="loop">
-                            <c:if test="${ loop.index < 5 }">
-                                <tr>
-                                    <td>${ b.boardNo }</td>
-                                    <td>${ b.categoryName }</td>
-                                    <td>${ b.boardTitle }</td>
-                                    <td>${ b.createDate }</td>
-                                </tr>
-                            </c:if>    
+                        <c:forEach items="${ boardList }" var="b">
+                          
+                            <tr>
+                                <td>${ b.boardNo }</td>
+                                <td>${ b.categoryName }</td>
+                                <td>${ b.boardTitle }</td>
+                                <td>${ b.createDate }</td>
+                                <td>${ b.count }</td>
+                            </tr>
+                               
                         </c:forEach>
                     </c:when>
                     <c:otherwise>
