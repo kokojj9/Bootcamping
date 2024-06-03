@@ -243,7 +243,7 @@
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
-<script>
+	<script>
 		var IMP = window.IMP;
 		IMP.init("imp60634072"); 
 	
