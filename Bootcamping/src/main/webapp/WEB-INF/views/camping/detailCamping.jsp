@@ -760,12 +760,10 @@
         				console.log(result);
         				
         				if(result.length === 0){
-        					$('#campReserBtn').attr("disabled", false);
-        					$('#campReserBtn').text("예약하기");
+        					$('#campReserBtn').attr("disabled", false).text("예약하기");
         					
         				}else{
-        					$('#campReserBtn').attr("disabled", true);
-        					$('#campReserBtn').text("예약마감");
+        					$('#campReserBtn').attr("disabled", true).text("예약마감");
         				}
         			       
         			}
