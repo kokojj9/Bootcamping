@@ -256,10 +256,6 @@
         var sitePrice = "${sitePrice }";
         var reservationName;
         var reservationPhone;
-
-
-        
-        
         
         var today = new Date();   
         var hours = today.getHours(); // 시
@@ -306,8 +302,7 @@
  								if(result.message == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			         	location.href='/bootcamping/myPage';
- 									
+ 	 		 			         	location.href='/bootcamping/myPage?memberId=${sessionScope.loginMember.memberId}&page=1';
  								}
  		   			            
  							},
