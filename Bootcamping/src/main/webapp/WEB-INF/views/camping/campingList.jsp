@@ -258,7 +258,13 @@
             <div id="content_4">
 
                 <div id="total"><h3>전체 <sapn id="totalCamp"></sapn>개</h3></div>
-
+                <div id="select_box">
+                    <select name="" id="" class="btn">
+                        <option value="">추천순</option>
+                        <option value="">거리순</option>
+                    </select>
+                </div>
+	
 			
 			<div id=itemsList>
                 <div class="items" style="padding:20px;">
@@ -385,7 +391,7 @@
 		$(function(){
 			
 			$.ajax({
-				url : '/bootcamping/camping/mapCamping',
+				url : 'mapCamping',
 				success : result => {
 					//console.log(result.response.body.items);
 					
@@ -415,35 +421,37 @@
 		
 		
 		/*검색*/
+		
 		function searchBtn(num){
 			
 			$.ajax({
-				url : '/bootcamping/camping/searchCamping',
+				url : 'searchCamping',
 				data : {keyword : $('#keyword').val(),
 						page: num },
 				type : 'get',
-				success : result => { 
+				success : result => {
 					console.log(result);
 					
-					$('#totalCamp').text(result.data.pageInfo.listCount);
-					 
-					if(result.data.searchCampingList.length === 0){
-					    alert("해당 캠핑장이 존재하지 않습니다.");
-					    location.href = '/bootcamping/camping';
+					$('#totalCamp').text(result.pageInfo.listCount);
+					
+					if(result.searchCampingList.length === 0){
+						
+						alert("해당 캠핑장이 존재하지 않습니다.");
+						location.href = '/bootcamping/camping';
 						
 					} else {
 						let str = '';
 						
-						for(let i = 0; i <result.data.searchCampingList.length; i++){
+						for(let i = 0; i <result.searchCampingList.length; i++){
 							
 							str += '<div class="card" style="width:250px;">'
-								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.data.searchCampingList[i].campNo +'">'
+								 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.searchCampingList[i].campNo +'">'
 							    
-								 + '<img class="card-img-top" src="'+result.data.searchCampingList[i].campImg+'">'
+								 + '<img class="card-img-top" src="'+result.searchCampingList[i].campImg+'">'
 								 + '<div class="card-body">'
-								 + '<h4 class="card-title">'+result.data.searchCampingList[i].campName+'</h4>'
-							     + '<h5 class="card-text">'+result.data.searchCampingList[i].address+'</h5>'
-						    	 + '<p>'+result.data.searchCampingList[i].type+'</p>'
+								 + '<h4 class="card-title">'+result.searchCampingList[i].campName+'</h4>'
+							     + '<h5 class="card-text">'+result.searchCampingList[i].address+'</h5>'
+						    	 + '<p>'+result.searchCampingList[i].type+'</p>'
 						    	 + '</div>'
 						    	 + '</a>'
 								 + '</div>'
@@ -456,42 +464,38 @@
 
 
 					
-					var pagination = $('#camp_btn');
-		            pagination.empty();
-		
-		            var pageInfo = result.data.pageInfo;
-		
-					if(pageInfo.currentPage === 1){
-		            	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
-		            }
-		            
-					else {
-		                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
-		            }
-		            
-					for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
-		            }
-		            
-		            if (pageInfo.currentPage === pageInfo.maxPage) {
-		            	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
-		            }
-		            	
-		            else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
-		            }
+			var pagination = $('#camp_btn');
+            pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+            var pageInfo = result.pageInfo;
+
+			if(pageInfo.currentPage === 1){
+            	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+            }
+            
+			else {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+            }
+            
+			for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+                pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+            }
+            
+            if (pageInfo.currentPage === pageInfo.maxPage) {
+            	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+            }
+            	
+            else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+            }
 
 					
 				}
 			})
 		}
-
-
-
-
-
+		
 		
 		/*체크박스*/
-		$(() => {
+		$(function() {
 		    $('input[type="checkbox"]').change(function() {
 		        var checkedTypes = $('input:checkbox[name="type"]:checked').map(function() {
 		            return this.value;
@@ -506,35 +510,31 @@
 		    });
 		});
 		
-		
 		function searchCheckedValues(types, addresses, num) {
-			
 		    $.ajax({
-		        url: '/bootcamping/camping/checkedCamping',
+		        url: 'checkedCamping',
 		        data: { 
 		            types: types.join(','),
 		            addresses: addresses.join(','),
 		            page: num
 		        },
 		        type: 'GET',
-		        success: result => {
+		        success: function(result) {
 		        	
-		        	console.log(result);
-		        	
-					$('#totalCamp').text(result.data.pageInfo.listCount);
+					$('#totalCamp').text(result.pageInfo.listCount);
 					
 					let str = '';
 					
-					for(let i = 0; i <result.data.checkCamping.length; i++){
+					for(let i = 0; i <result.checkCamping.length; i++){
 						
 						str += '<div class="card" style="width:250px;">'
-							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.data.checkCamping[i].campNo +'">'
+							 + '<a style="text-decoration:none;" href="/bootcamping/detailCamping?contentId='+ result.checkCamping[i].campNo +'">'
 						    
-							 + '<img class="card-img-top" src="'+result.data.checkCamping[i].campImg+'">'
+							 + '<img class="card-img-top" src="'+result.checkCamping[i].campImg+'">'
 							 + '<div class="card-body">'
-							 + '<h4 class="card-title">'+result.data.checkCamping[i].campName+'</h4>'
-						     + '<h5 class="card-text">'+result.data.checkCamping[i].address+'</h5>'
-					    	 + '<p>'+result.data.checkCamping[i].type+'</p>'					    	 
+							 + '<h4 class="card-title">'+result.checkCamping[i].campName+'</h4>'
+						     + '<h5 class="card-text">'+result.checkCamping[i].address+'</h5>'
+					    	 + '<p>'+result.checkCamping[i].type+'</p>'					    	 
 					    	 + '</div>'
 					    	 + '</a>'
 							 + '</div>'
@@ -546,41 +546,39 @@
 				
 
 
-						
-				var pagination = $('#camp_btn');
 				
-		        pagination.empty();
+		var pagination = $('#camp_btn');
 		
-		        var pageInfo = result.data.pageInfo;
-		        
-		        console.log(pageInfo);
-		        
-		        if(pageInfo.currentPage === 1){
-		        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
-		        }
-		        
-		        else {
-		            pagination.append('<a class="btn btn-sm" href="#" onclick="searchCheckedValues(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
-		        }
-		        
-		        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
-		            pagination.append('<a class="btn btn-sm" href="#" onclick="searchCheckedValues(' + i + '); return false;">' + i + '</a>');
-		        }
-		       
-		        if (pageInfo.currentPage === pageInfo.maxPage) {
-		        	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
-		        }
-		        	
-		        else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchCheckedValues(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
-		        }
-			            
-		            		            
-			            
+        pagination.empty(); // 기존의 페이지 버튼을 모두 삭제
+
+        var pageInfo = result.pageInfo;
+        
+        if(pageInfo.currentPage === 1){
+        	 pagination.append('<a class="btn btn-sm disabled" href="#"><</a>');
+        }
+        
+        else {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage - 1) + '); return false;"><</a>');
+        }
+        
+        for (var i = pageInfo.startPage; i <= pageInfo.endPage; i++) {
+            pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + i + '); return false;">' + i + '</a>');
+        }
+       
+        if (pageInfo.currentPage === pageInfo.maxPage) {
+        	pagination.append('<a class="btn btn-sm disabled" href="#">></a>');
+        }
+        	
+        else {pagination.append('<a class="btn btn-sm" href="#" onclick="searchBtn(' + (pageInfo.currentPage + 1) + '); return false;">></a>');
+        }
 	            
-	        }
-	    });
-	}
-		
+	            		            
+		            
+		            
+		        }
+		    });
+		}
+	
 		
 		
 				

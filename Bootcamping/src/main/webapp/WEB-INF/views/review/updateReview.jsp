@@ -231,7 +231,7 @@
 
     
     <script>
-        $(() => {
+        $(function(){
 
             $('#reviewMessage').keyup(function(){
 
@@ -242,7 +242,7 @@
 
         })
 
-        $(() => {
+        $(function(){
             $('input[type="radio"]').click(function(){
                 var index = $(this).index('input[type="radio"]');
                 var $labels = $(this).parent().find('label');

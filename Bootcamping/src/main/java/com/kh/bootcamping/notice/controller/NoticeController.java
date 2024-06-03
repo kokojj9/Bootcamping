@@ -23,11 +23,18 @@ public class NoticeController {
 	@GetMapping("list.notice")
 	public String selectAll(Model model) {
 		
-		//model.addAttribute("list",noticeService.selectList());
+		model.addAttribute("list",noticeService.selectList());
 		
 		return "notice/notice";
 	}
 	
+	@GetMpping("caution.notice")
+	public String selectAll(Model model) {
+		
+		model.addAttribute("list",noticeService.selectList());
+		
+		return "notice/notice";
+	}
 
 	
 }

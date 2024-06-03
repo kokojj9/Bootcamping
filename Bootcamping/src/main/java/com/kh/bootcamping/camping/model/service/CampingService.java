@@ -28,9 +28,4 @@ public interface CampingService {
 	List<Camping> checkCamping (PageInfo pi, CampingCheck campingCheck);
 	
 	int insertHeart (WishList wishList);
-	
-	int deleteHeart (WishList wishList);
-	
-	List<Camping> selectMainCamping();
-	
 }

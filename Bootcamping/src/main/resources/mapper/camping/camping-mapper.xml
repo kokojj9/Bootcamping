@@ -219,51 +219,6 @@
 		 		)
 		
 	</insert>
-	
-	<delete id="deleteHeart">
-		DELETE
-		  FROM
-		  		TB_WISHLIST
-		 WHERE
-		 		MEMBER_NO = #{memberNo}
-		   AND
-		   		CAMP_NO = #{campNo}
-	</delete>
 		
-	<select id="selectMainCamping" resultMap="campingResultMap">
-		SELECT
-				CAMP_NO,
-		        CAMP_IMG,
-		        CAMP_NAME,
-		        ADDRESS,
-		        TYPE
-		        
-		  FROM
-				  (
-				SELECT
-				        COUNT(*),
-				        CAMP_NO,
-						CAMP_IMG,
-				        CAMP_NAME,
-				        ADDRESS,
-				        TYPE
-				  FROM
-				        TB_RESERVATION
-				JOIN
-				        TB_SITE USING(SITE_NO)
-				JOIN
-				        TB_CAMP USING(CAMP_NO)
-				GROUP
-				   BY
-				        CAMP_NO, CAMP_IMG, CAMP_NAME, ADDRESS, TYPE
-				ORDER
-              	   BY
-                    	COUNT(*) DESC)
-    <![CDATA[WHERE ROWNUM <= 3]]>  
-    ORDER
-       BY
-            CAMP_NO ASC 
-    
-	</select>
 	
 </mapper>

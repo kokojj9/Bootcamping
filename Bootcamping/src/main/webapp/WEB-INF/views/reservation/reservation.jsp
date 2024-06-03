@@ -243,12 +243,12 @@
 	<br>
 	<jsp:include page="../common/footer.jsp"/>
 	
-	<script>
+<script>
 		var IMP = window.IMP;
 		IMP.init("imp60634072"); 
 	
         var campName = document.getElementById('campName').value;
-        var checkInDate = document.getElementById('checkInDate').value;
+        var checkIdDate = document.getElementById('checkInDate').value;
         var checkOutDate = document.getElementById('checkOutDate').value;
         var people = document.getElementById('people').value;
         var memberNo = document.getElementById('memberNo').value;
@@ -256,6 +256,10 @@
         var sitePrice = "${sitePrice }";
         var reservationName;
         var reservationPhone;
+
+
+        
+        
         
         var today = new Date();   
         var hours = today.getHours(); // 시
@@ -290,7 +294,7 @@
  								priceNo : rsp.merchant_uid,
  								reserName : reservationName,
  								reserPhone : reservationPhone,
- 								checkInDate : checkInDate,
+ 								checkInDate : checkIdDate,
  								checkOutDate : checkOutDate,
  								people : people,
  								memberNo : memberNo,
@@ -299,10 +303,11 @@
  							},
  							success : result => {
  								console.log(result);
- 								if(result.message == 'success'){
+ 								if(result == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			         	location.href='/bootcamping/myPage?memberId=${sessionScope.loginMember.memberId}&page=1';
+ 	 		 			            location.href='/bootcamping/';
+ 									
  								}
  		   			            
  							},

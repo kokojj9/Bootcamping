@@ -301,10 +301,12 @@
 
         <!-- 날짜 인원 -->
         <div id="date_people">
+	       <!--<form action="select" Method="get">-->
 	            <div id="checkIn"><input id="startDate" width="200" name="checkInDate" value="" placeholder="체크인"/></div>
 	            <div id="checkOut"><input id="endDate" width="200" name="checkOutDate"  value="" placeholder="체크아웃"/></div>
 	            <div id="selectPeople"><input id="countPeople" name="people" value="" type="number" placeholder="인원 수" min="1" max="8" size="40"/></div>
 				<div id="selectDate"><input id="selectDateBtn" class="btn" type="button" onclick="AllReser();" value="선택"/></div>
+			<!--</form>-->
         </div>
 
         <!-- 캠핑장 사진 -->
@@ -493,17 +495,17 @@
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
                 minDate: today,
-                maxDate:  () => {
+                maxDate: function () {
                     return $('#endDate').val();
                 },
-                onSelect:  date => {
+                onSelect: function (date) {
                     // 체크인 날짜를 startDate의 값으로 설정
                     $('#startDate').val(date); // 수정된 부분
                     let selectedDate = $('#startDate').val(); // 수정된 부분
                     console.log("체크인 날짜:", selectedDate); // 수정된 부분
                 },
                 defaultDate: today, // 오늘 날짜로 기본값 설정
-                onClose: selectedDate => {
+                onClose: function (selectedDate) {
                     // 체크인을 선택하지 않았을 때, 오늘 날짜로 설정
                     if (selectedDate === "") {
                         $('#startDate').datepicker('setDate', today);
@@ -515,13 +517,13 @@
             $('#endDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 iconsLibrary: 'fontawesome',
-                minDate:  () => {
+                minDate: function () {
                     return $('#startDate').val();
                 },
-                onSelect: date => {
+                onSelect: function (date) {
                     console.log("체크아웃 날짜:", date);
                 },
-                onClose: selectedDate => {
+                onClose: function (selectedDate) {
                     // 체크아웃을 선택하지 않았을 때, 다음 날짜로 설정
                     if (selectedDate === "") {
                         let tomorrow = new Date();
@@ -531,6 +533,21 @@
                 }
             });
 
+
+            /*하트*/
+            const dislikeBtn = document.querySelector('.white');
+            const likeBtn = document.querySelector('.hide');
+
+            dislikeBtn.onclick = function () {    // 빈하트 클릭했을 때 
+                dislikeBtn.classList.add('hide');  // 빈하트에 .hide 적용
+                likeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
+            }
+
+            likeBtn.onclick = function () {    // 빈하트 클릭했을 때 
+                likeBtn.classList.add('hide');  // 빈하트에 .hide 적용
+                dislikeBtn.classList.remove('hide');   // 빨간하트에 적용되어 있던 .hide 삭제
+            }
+            
             
             /*지도*/
             var mapX = ${camping.mapX}
@@ -630,22 +647,21 @@
 	                type : 'get',
 	                data : {campNo : campNo},
 	                success : result => {
-	                	console.log(result);
 	                    
 	                    let reviewResult = '';
 	                    
-	                    if(result.data.length === 0) {
+	                    if(result.length === 0) {
 	                    	reviewResult += '<div><br><br><h5 style="text-align:center;">리뷰가 존재하지 않습니다<h5></div>'
 	               		} else {
 	                    
-	               			for(let i = 0; i <result.data.length; i++){
+	                    for(let i in result){
 	                    
 	                    reviewResult += '<div class="review_list">'
-	                    			  + '<h4 class="memberName">'+ result.data[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result.data[i].reviewScore + '</span>' + '</h4>'
-	                    			  + '<div class=review_date><p>'+ result.data[i].createDate +'</p></div>'
+	                    			  + '<h4 class="memberName">'+ result[i].memberId + '&nbsp;&nbsp;&nbsp;'+ '<span id="reviewScoreColor">' + result[i].reviewScore + '</span>' + '</h4>'
+	                    			  + '<div class=review_date><p>'+ result[i].createDate +'</p></div>'
 	                    			  + '<div class="review_stroy">'
-	                    			  + '<div class="story_text"><p>'+result.data[i].reviewContent+'</p></div>'                    			  
-	                    			  + '<div class="review_img"><img src="'+ result.data[i].reviewPath+'"></div>'
+	                    			  + '<div class="story_text"><p>'+result[i].reviewContent+'</p></div>'                    			  
+	                    			  + '<div class="review_img"><img src="'+ result[i].reviewPath+'"></div>'
 	                    			  + '</div>'
 	                    			  + '</div>'
 	                    	}
@@ -659,7 +675,7 @@
 	            });
         }
         
-        $(() => {
+        $(function(){
             selectReview();
         });
         
@@ -754,14 +770,14 @@
 	        				
         				},
         			success : result => {
-        				
         				console.log(result);
-        				
         				if(result.length === 0){
-        					$('#campReserBtn').attr("disabled", false).text("예약하기");
+        					$('#campReserBtn').attr("disabled", false);
+        					$('#campReserBtn').text("예약하기");
         					
         				}else{
-        					$('#campReserBtn').attr("disabled", true).text("예약마감");
+        					$('#campReserBtn').attr("disabled", true);
+        					$('#campReserBtn').text("예약마감");
         				}
         			       
         			}
@@ -771,7 +787,7 @@
         	}  
         	
         	
-        	$(() => {
+        	$(document).ready(function() {
         	    $('.campingReserBtn').click(function(event) {
         	        var startDate = $('.startDateInput').val();
         	        var endDate = $('.endDateInput').val();
@@ -779,7 +795,7 @@
         	        
         	        if (!startDate || !endDate || !countPeople) {
         	            event.preventDefault();
-        	            alertify.alert('알림', '일정과 인원수를 선택해주세요');
+        	            alert('일정과 인원수를 선택해주세요');
         	        }
         	    });
         	});
@@ -789,43 +805,25 @@
         	
         	/*찜하기*/
         	
+        	
         	let memberNo = "${sessionScope.loginMember.memberNo}";
+	
+        	console.log(memberNo);
+        	console.log(campNo);
         	
-        	let wishList = window.localStorage.getItem(memberNo + '/' + campNo);
-			
-        	$(() => {
-			    if(wishList === 'red') {
-			        $('#white').addClass('hide');
-			        $('#red').removeClass('hide');
-			    } else{
-			    	$('#red').addClass('hide');
-			    	$('#white').removeClass('hide');
-			    }
-			});		
-        	
-        	
-        	
-        	$('#white').click(() => {
+        	$('#white').click(function(){
         		
         		if (memberNo === null || memberNo === '') {
         			alertify.alert('실패','로그인이 필요합니다!');
         		} else {
         			$.ajax({
-	       	            url : '/bootcamping/camping/insert.heart',
+	       	            url : 'insert.heart',
 	       	            type : 'post',
 	       	            data : { memberNo : memberNo, 
 	       	            		campNo : campNo },
 	       	            success : result => {
-	       	            	
 	       	            	console.log(result);
-	       	            	
-		       	             $('#white').addClass('hide'); 
-			       	         $('#red').removeClass('hide');
-			       	         
-			       	         alertify.alert('성공', '찜 완료!');
-			       	          
-			       	       	 window.localStorage.setItem(memberNo + '/' + campNo, 'red');
-			       	          
+	       	            	alertify.alert('성공', '찜 완료!');
 	       	            }
         			
         			});        		
@@ -836,28 +834,6 @@
         	})
         	
         	/*찜하기 취소*/
-        	
-        	$('#red').click(() => {
-        		
-        		$.ajax({
-        			url : '/bootcamping/camping/delete.heart',
-        			type : 'post',
-        			data : {memberNo : memberNo,
-        					campNo : campNo},
-        			success : result => {
-        				
-        				console.log(result); 
-        				
-        				$('#red').addClass('hide');
-        				$('#white').removeClass('hide'); 
-        				
-        				alertify.alert('성공', '찜 삭제!');
-        				
-        				window.localStorage.setItem(memberNo + '/' + campNo, 'white');
-        			}
-        		})
-        		
-        	})
         	
         	
         </script>

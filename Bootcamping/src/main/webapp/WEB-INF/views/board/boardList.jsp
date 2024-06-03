@@ -77,24 +77,6 @@
 					</tbody>	
 				</table>
 				
-				<script>
-					$(function(){
-						
-						
-					});
-					
-				
-				
-				
-				
-				
-				
-				
-				</script>
-				
-				
-				
-				
 				
 				
 				

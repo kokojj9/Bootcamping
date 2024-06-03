@@ -7,7 +7,7 @@ import com.kh.bootcamping.common.model.vo.PageInfo;
 @Component
 public class Pagination {
 	
-	public PageInfo getPageInfo(int listCount,
+	public static PageInfo getPageInfo(int listCount,
 							    int currentPage,
 							    int boardLimit,
 							    int pageLimit) {
