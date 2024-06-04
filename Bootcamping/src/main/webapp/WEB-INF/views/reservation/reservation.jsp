@@ -302,7 +302,7 @@
  								if(result.message == 'success'){
  									alert('결제가 성공했습니다.');
  	 		 			            console.log(rsp);
- 	 		 			         	location.href='/bootcamping/myPage?memberId=${sessionScope.loginMember.memberId}&page=1';
+ 	 		 			         	location.href='/bootcamping/myReservations?memberId=${sessionScope.loginMember.memberId}&page=1';
  								}
  		   			            
  							},
