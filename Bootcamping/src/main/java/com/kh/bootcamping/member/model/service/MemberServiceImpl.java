@@ -33,9 +33,9 @@ import lombok.RequiredArgsConstructor;
 public class MemberServiceImpl implements MemberService {
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
+	private final ResponseTemplate responseTemplate;
 	private final MemberMapper memberMapper;
 	private final PropertyTemplate pt;
-	private final ResponseTemplate responseTemplate;
 	
 	@Override
 	public Member login(Member member) {

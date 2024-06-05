@@ -61,7 +61,7 @@ public class MemberController {
 		return memberService.checkMemberId(memberId);
 	}
 	
-	@PostMapping("/register")
+	@PostMapping(value = "/register", produces = "application/json; charset=UTF-8")
 	public ModelAndView insertMember(@Valid Member member, BindingResult br
 			                         ,HttpSession session, ModelAndView mv) {
 		
