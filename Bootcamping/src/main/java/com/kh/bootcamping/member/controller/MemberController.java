@@ -31,8 +31,8 @@ import lombok.RequiredArgsConstructor;
 public class MemberController {
 
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
-	private final MemberService memberService;
 	private final ResponseTemplate responseTemplate;
+	private final MemberService memberService;
 	
 	@PostMapping("/login")
 	public ModelAndView login(Member member, @RequestParam(defaultValue = "false")String rememberId,
@@ -61,14 +61,13 @@ public class MemberController {
 		return memberService.checkMemberId(memberId);
 	}
 	
-	@PostMapping("/register")
+	@PostMapping(value = "/register", produces = "application/json; charset=UTF-8")
 	public ModelAndView insertMember(@Valid Member member, BindingResult br
 			                         ,HttpSession session, ModelAndView mv) {
 		
 		if(br.hasErrors()) {
             mv.addObject("alertMsg", "유효성 검사 실패").setViewName("redirect:/enrollForm");
 		} else {
-			
 			if(memberService.insertMember(member) > 0) {
 				session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
 				mv.setViewName("redirect:/");
@@ -82,8 +81,8 @@ public class MemberController {
 	
 	@ResponseBody
 	@PostMapping(value = "/edit-password", produces = "application/json; charset=UTF-8")
-	public ResponseEntity<ResponseData> editPassword(@RequestBody @Valid Member member, BindingResult br) {
-		if(br.hasErrors() || member == null) {
+	public ResponseEntity<ResponseData> editPassword(@RequestBody Member member, BindingResult br) {
+		if(member == null) {
 			return responseTemplate.fail("비밀번호 인증오류", HttpStatus.BAD_REQUEST);
 		}
 		

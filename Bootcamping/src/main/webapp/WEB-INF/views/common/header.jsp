@@ -180,7 +180,7 @@ div {
 	
 	 <div id="header_wrap">
         <div id="header_status">
-            날씨 api로 표시할거임~
+           
         </div>
         <div id="header_content">
             <div id="header_left">

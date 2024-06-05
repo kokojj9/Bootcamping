@@ -32,7 +32,6 @@ public class ResponseTemplateImpl implements ResponseTemplate {
 	public ResponseEntity<ResponseData> fail(String message, HttpStatus status) {
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-	    System.out.println(message);
 	    
 	    return new ResponseEntity<ResponseData>(headers, status);
 	}
