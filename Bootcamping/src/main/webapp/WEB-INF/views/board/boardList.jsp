@@ -56,27 +56,27 @@
 			</c:if>
 				<table id="boardList" class="table table-hover" align="center">				<thead>
 					<thead>	
-						<tr>
-							<th>카테고리</th>	
-							<th>작성자</th>	
-							<th>제목</th>	
-							<th>본문내용</th>	
-							<th>작성일</th>	
-							<th>조회수</th>	
-						</tr>
-					</thead>
-					
-					<tbody>
-						<tr>
-							<td>${ board.baordNo}</td>
-							<td>${ board.boardWriter }</td>
-							<td>${ board.boardTitle }</td>
-							<td>${ board.boarContent }</td>
-							<td>${ board.boardCreatedate }</td>
-						</tr>
-					</tbody>	
-				</table>
+				    <tr>
+				        <th>카테고리</th>	
+				        <th>작성자</th>	
+				        <th>제목</th>	
+				        <th>본문내용</th>	
+				        <th>작성일</th>	
+				        <th>조회수</th>	
+				    </tr>
+				</thead>
 				
+				<tbody>
+				    <tr>
+				        <td>${ board.boardNo }</td> 
+				        <td>${ board.boardWriter }</td>
+				        <td>${ board.boardTitle }</td>
+				        <td>${ board.boardContent }</td> 
+				        <td>${ board.boardCreatedate }</td>
+				        <td>${ board.boardCount }</td> 
+				    </tr>
+				</tbody>
+
 				
 				
 				
