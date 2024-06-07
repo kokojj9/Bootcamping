@@ -676,41 +676,21 @@
         		let end = $('#endDate').val();
         		let countPeople = $('#countPeople').val();
         		
-        		/*checkInDate*/
-        		var start2 = start.split("/");
-
-
-        		var year = parseInt(start2[2]);
-        		var month = parseInt(start2[0]) - 1;
-        		var day = parseInt(start2[1]);
-
-        		var date = new Date(year, month, day);
+        		// CheckInDate
+        		let startDate = new Date(start);
+        		let startYear = startDate.getFullYear().toString().slice(-2); 
+        		let startMonth = ('0' + (startDate.getMonth() + 1)).slice(-2); 
+        		let startDay = ('0' + startDate.getDate()).slice(-2); 
         		
-        		var date = new Date(year, month, day);
-        		var yearString = date.getFullYear().toString().slice(-2);
-        		var monthString = (date.getMonth() + 1).toString().padStart(2, '0');
-        		var dayString = date.getDate().toString().padStart(2, '0');
+        		var dateString = startYear + '/' + startMonth + '/' + startDay;
 
-        		var dateString = yearString + '/' + monthString + '/' + dayString;
-        		console.log(dateString);
+        		//CheckOutDate
+        		let endDate = new Date(end);
+        		let endYear = endDate.getFullYear().toString().slice(-2); 
+        		let endMonth = ('0' + (endDate.getMonth() + 1)).slice(-2); 
+        		let endDay = ('0' + endDate.getDate()).slice(-2);
         		
-        		
-        		/*checkOutDate*/
-        		var end2 = end.split("/");
-
-        		var year2 = parseInt(end2[2]);
-        		var month2 = parseInt(end2[0]) - 1;
-        		var day2 = parseInt(end2[1]);
-
-        		var date2 = new Date(year2, month2, day2);
-        		
-        		var date2 = new Date(year2, month2, day2);
-        		var yearString2 = date2.getFullYear().toString().slice(-2);
-        		var monthString2 = (date2.getMonth() + 1).toString().padStart(2, '0');
-        		var dayString2 = date2.getDate().toString().padStart(2, '0');
-
-        		var dateString2 = yearString2 + '/' + monthString2 + '/' + dayString2;
-        		console.log(dateString2);
+        		var dateString2 = endYear + '/' + endMonth + '/' + endDay;
         		
         		/*checkOutDate에서 CheckInDate 뺀 거 계산*/
         		var checkInDate = new Date(document.getElementById('startDate').value);
