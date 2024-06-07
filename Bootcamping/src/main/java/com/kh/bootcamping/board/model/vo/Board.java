@@ -24,7 +24,7 @@ public class Board {
 	private Date createDate;
 	private Date updateDate;
 	private String status;
-	private int memberNo;
+	private String memberNo;
 	private String categoryCode;
 	private String categoryName;
 	private int count;

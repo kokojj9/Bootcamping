@@ -55,7 +55,7 @@
 		       MEMBER_ID = #{ memberId }
 	</select>
 
-	<select id="seleBoardList" parameterType="string" resultMap="boardResultSet">
+	<select id="selectBoardList" parameterType="string" resultMap="boardResultSet">
 		SELECT
 		       BOARD_NO,
 		       BOARD_TITLE,
@@ -75,6 +75,35 @@
 		 WHERE
 		       MEMBER_ID = #{ memberId }
 	</select>
-
+	<insert id="select">
+			INSERT 
+			  INTO 
+					TB_BOARD
+							(
+								BOARD_NO,
+								TITLE,
+								CONTENT,
+								CREATE_DATE,
+								UPDATE_DATE,
+								STATUS,
+								MEMBER_NO,
+								CATEGORY_CODE,
+								COUNT
+								
+							)
+					VALUES 
+							(
+								SEQ_BOARDNO.NEXTVAL,
+								#{boardNo},
+								#{boardContent},
+								DEFAULT,
+								NULL,
+								#{memberNo},
+								#{categoryCode}
+								DEFAULT
+							)
+									
+							
+	</insert>
 
 </mapper>

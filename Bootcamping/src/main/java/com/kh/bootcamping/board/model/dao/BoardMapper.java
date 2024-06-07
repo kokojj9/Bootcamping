@@ -17,5 +17,9 @@ public interface BoardMapper {
 	int selectBoardListCount(String memberId);
 
 	List<Board> seleBoardList(String memberId, RowBounds rowBounds);
+	
+	int select(Board board);
+
+	
 
 }

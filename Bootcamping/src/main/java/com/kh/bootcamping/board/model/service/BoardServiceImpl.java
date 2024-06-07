@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int select(Board board) {
-		return 0;
+		return boardMapper.select(board);
 	}
 
 	@Override

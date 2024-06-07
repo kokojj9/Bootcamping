@@ -52,10 +52,10 @@
 		
 		
 		<div id=wrap>
-			<form method="Post" action="insert.board">
+			<form method="Post" action="insert.board" enctype="multipart/form-data">
 				
 				카테고리<p id="c1">
-							<select name="category">
+							<select name="categoryName">
 								<option>자유</option>
 								<option>후기</option>
 								<option>꿀팁</option>
@@ -64,17 +64,19 @@
 						</p>
 						
 				글제목 <p >
-						 <input type="text" id="c2"/>
+						 <input type="text" name="title" id="c2"/>
 					 </p>		
 						
 				글내용 <p> 
-						 <input type="text" id="c3"/>
+						 <input type="text" name="content" id="c3"/>
 					  </p>		
 					  
 					  <p>
+					  
 					  		첨부파일
-					  		
+					  		<input type="file" name="upfile"/>	
 					  </p>
+					  
 					  
 				<button type="reset" id="c4"/>이전으로</button>
 				<button type="submit" id="c5"/>등록하기</button>
